@@ -1,0 +1,22 @@
+﻿<Application x:Class="wrcaysalesinventory.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:wrcaysalesinventory"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:vms="clr-namespace:wrcaysalesinventory.ViewModels"
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
+             StartupUri="Forms/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <hc:ThemeResources RequestedTheme="Dark"/>
+                <hc:Theme/>
+                <!-- Other merged dictionaries here -->
+                <ResourceDictionary Source="/Resources/Images/Images.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/SplitButtonCustom.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <vms:ViewModelLocator x:Key="Locator"/>
+            <!-- Other app resources here -->
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
