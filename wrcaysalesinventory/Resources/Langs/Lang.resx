@@ -117,67 +117,85 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
-  </data>
   <data name="AppName" xml:space="preserve">
     <value>WRCay Hardware</value>
-  </data>
-  <data name="Categories" xml:space="preserve">
-    <value>Categories</value>
-  </data>
-  <data name="Close" xml:space="preserve">
-    <value>Close</value>
   </data>
   <data name="DarkTheme" xml:space="preserve">
     <value>Dark Mode</value>
   </data>
-  <data name="Dashboard" xml:space="preserve">
+  <data name="LabelAuditTrail" xml:space="preserve">
+    <value>Audit Trail</value>
+  </data>
+  <data name="LabelCategories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="LabelClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="LabelDashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
-  <data name="DBSettings" xml:space="preserve">
-    <value>Database &amp; Back up</value>
+  <data name="LabelDatabaseBackup" xml:space="preserve">
+    <value>Backup &amp; Restore</value>
   </data>
-  <data name="Delete" xml:space="preserve">
+  <data name="LabelDelete" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="Delivery" xml:space="preserve">
-    <value>Delivery</value>
+  <data name="LabelDeliveries" xml:space="preserve">
+    <value>Deliveries</value>
   </data>
-  <data name="Expenses" xml:space="preserve">
-    <value>Expenses</value>
+  <data name="LabelExpensesReport" xml:space="preserve">
+    <value>Expenses Report</value>
   </data>
-  <data name="GenSettings" xml:space="preserve">
+  <data name="LabelGenSettings" xml:space="preserve">
     <value>General Settings</value>
   </data>
-  <data name="Inventory" xml:space="preserve">
+  <data name="LabelInventory" xml:space="preserve">
     <value>Inventory</value>
   </data>
-  <data name="Maintenance" xml:space="preserve">
+  <data name="LabelMaintenance" xml:space="preserve">
     <value>Maintenance</value>
   </data>
-  <data name="POS" xml:space="preserve">
-    <value>POS</value>
+  <data name="LabelPOS" xml:space="preserve">
+    <value>Point Of Sale</value>
   </data>
-  <data name="POSSettings" xml:space="preserve">
+  <data name="LabelPOSSettings" xml:space="preserve">
     <value>POS Settings</value>
   </data>
-  <data name="Products" xml:space="preserve">
+  <data name="LabelProducts" xml:space="preserve">
     <value>Products</value>
   </data>
-  <data name="Settings" xml:space="preserve">
+  <data name="LabelReports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="LabelSettings" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="Stocks" xml:space="preserve">
+  <data name="LabelStocks" xml:space="preserve">
     <value>Stocks</value>
   </data>
-  <data name="Suppliers" xml:space="preserve">
+  <data name="LabelSuppliers" xml:space="preserve">
     <value>Suppliers</value>
   </data>
-  <data name="TransactionReport" xml:space="preserve">
+  <data name="LabelTransactionReport" xml:space="preserve">
     <value>Transaction Report</value>
   </data>
-  <data name="Update" xml:space="preserve">
+  <data name="LabelTransactions" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="LabelTransactonHistory" xml:space="preserve">
+    <value>Transaction History</value>
+  </data>
+  <data name="LabelUpdate" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="LableAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="LableDelivery" xml:space="preserve">
+    <value>Deliveries</value>
+  </data>
+  <data name="LableExpenses" xml:space="preserve">
+    <value>Expenses</value>
   </data>
 </root>

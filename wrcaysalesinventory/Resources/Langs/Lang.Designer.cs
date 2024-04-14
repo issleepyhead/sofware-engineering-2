@@ -61,38 +61,11 @@ namespace wrcaysalesinventory.Resources.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add.
-        /// </summary>
-        public static string Add {
-            get {
-                return ResourceManager.GetString("Add", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to WRCay Hardware.
         /// </summary>
         public static string AppName {
             get {
                 return ResourceManager.GetString("AppName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Categories.
-        /// </summary>
-        public static string Categories {
-            get {
-                return ResourceManager.GetString("Categories", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Close.
-        /// </summary>
-        public static string Close {
-            get {
-                return ResourceManager.GetString("Close", resourceCulture);
             }
         }
         
@@ -106,146 +79,227 @@ namespace wrcaysalesinventory.Resources.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dashboard.
+        ///   Looks up a localized string similar to Audit Trail.
         /// </summary>
-        public static string Dashboard {
+        public static string LabelAuditTrail {
             get {
-                return ResourceManager.GetString("Dashboard", resourceCulture);
+                return ResourceManager.GetString("LabelAuditTrail", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Database &amp; Back up.
+        ///   Looks up a localized string similar to Categories.
         /// </summary>
-        public static string DBSettings {
+        public static string LabelCategories {
             get {
-                return ResourceManager.GetString("DBSettings", resourceCulture);
+                return ResourceManager.GetString("LabelCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string LabelClose {
+            get {
+                return ResourceManager.GetString("LabelClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        public static string LabelDashboard {
+            get {
+                return ResourceManager.GetString("LabelDashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup &amp; Restore.
+        /// </summary>
+        public static string LabelDatabaseBackup {
+            get {
+                return ResourceManager.GetString("LabelDatabaseBackup", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
-        public static string Delete {
+        public static string LabelDelete {
             get {
-                return ResourceManager.GetString("Delete", resourceCulture);
+                return ResourceManager.GetString("LabelDelete", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delivery.
+        ///   Looks up a localized string similar to Deliveries.
         /// </summary>
-        public static string Delivery {
+        public static string LabelDeliveries {
             get {
-                return ResourceManager.GetString("Delivery", resourceCulture);
+                return ResourceManager.GetString("LabelDeliveries", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expenses.
+        ///   Looks up a localized string similar to Expenses Report.
         /// </summary>
-        public static string Expenses {
+        public static string LabelExpensesReport {
             get {
-                return ResourceManager.GetString("Expenses", resourceCulture);
+                return ResourceManager.GetString("LabelExpensesReport", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to General Settings.
         /// </summary>
-        public static string GenSettings {
+        public static string LabelGenSettings {
             get {
-                return ResourceManager.GetString("GenSettings", resourceCulture);
+                return ResourceManager.GetString("LabelGenSettings", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Inventory.
         /// </summary>
-        public static string Inventory {
+        public static string LabelInventory {
             get {
-                return ResourceManager.GetString("Inventory", resourceCulture);
+                return ResourceManager.GetString("LabelInventory", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Maintenance.
         /// </summary>
-        public static string Maintenance {
+        public static string LabelMaintenance {
             get {
-                return ResourceManager.GetString("Maintenance", resourceCulture);
+                return ResourceManager.GetString("LabelMaintenance", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to POS.
+        ///   Looks up a localized string similar to Point Of Sale.
         /// </summary>
-        public static string POS {
+        public static string LabelPOS {
             get {
-                return ResourceManager.GetString("POS", resourceCulture);
+                return ResourceManager.GetString("LabelPOS", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to POS Settings.
         /// </summary>
-        public static string POSSettings {
+        public static string LabelPOSSettings {
             get {
-                return ResourceManager.GetString("POSSettings", resourceCulture);
+                return ResourceManager.GetString("LabelPOSSettings", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Products.
         /// </summary>
-        public static string Products {
+        public static string LabelProducts {
             get {
-                return ResourceManager.GetString("Products", resourceCulture);
+                return ResourceManager.GetString("LabelProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reports.
+        /// </summary>
+        public static string LabelReports {
+            get {
+                return ResourceManager.GetString("LabelReports", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        public static string Settings {
+        public static string LabelSettings {
             get {
-                return ResourceManager.GetString("Settings", resourceCulture);
+                return ResourceManager.GetString("LabelSettings", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Stocks.
         /// </summary>
-        public static string Stocks {
+        public static string LabelStocks {
             get {
-                return ResourceManager.GetString("Stocks", resourceCulture);
+                return ResourceManager.GetString("LabelStocks", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Suppliers.
         /// </summary>
-        public static string Suppliers {
+        public static string LabelSuppliers {
             get {
-                return ResourceManager.GetString("Suppliers", resourceCulture);
+                return ResourceManager.GetString("LabelSuppliers", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Transaction Report.
         /// </summary>
-        public static string TransactionReport {
+        public static string LabelTransactionReport {
             get {
-                return ResourceManager.GetString("TransactionReport", resourceCulture);
+                return ResourceManager.GetString("LabelTransactionReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transactions.
+        /// </summary>
+        public static string LabelTransactions {
+            get {
+                return ResourceManager.GetString("LabelTransactions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction History.
+        /// </summary>
+        public static string LabelTransactonHistory {
+            get {
+                return ResourceManager.GetString("LabelTransactonHistory", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
-        public static string Update {
+        public static string LabelUpdate {
             get {
-                return ResourceManager.GetString("Update", resourceCulture);
+                return ResourceManager.GetString("LabelUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string LableAdd {
+            get {
+                return ResourceManager.GetString("LableAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deliveries.
+        /// </summary>
+        public static string LableDelivery {
+            get {
+                return ResourceManager.GetString("LableDelivery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expenses.
+        /// </summary>
+        public static string LableExpenses {
+            get {
+                return ResourceManager.GetString("LableExpenses", resourceCulture);
             }
         }
     }

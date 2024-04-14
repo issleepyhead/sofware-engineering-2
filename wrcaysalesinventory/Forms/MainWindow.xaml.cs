@@ -48,9 +48,9 @@ namespace wrcaysalesinventory
             switch (header.ToLower())
             {
                 case "dashboard":
-
+                    DashboardPanel.Visibility = Visibility.Visible;
                     break;
-                case "pos":
+                case "point of sale":
                     //POSPanel.Visibility = Visibility.Visible;
                     break;
                 case "products":
@@ -77,6 +77,8 @@ namespace wrcaysalesinventory
                     //AccountPanel.Visibility = Visibility.Visible;
                     break;
                 case "general settings":
+                    break;
+                case "audit trail":
                     break;
             }
         }
