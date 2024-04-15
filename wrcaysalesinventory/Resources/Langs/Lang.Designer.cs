@@ -97,6 +97,15 @@ namespace wrcaysalesinventory.Resources.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string LabelCategory {
+            get {
+                return ResourceManager.GetString("LabelCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string LabelClose {
@@ -196,6 +205,15 @@ namespace wrcaysalesinventory.Resources.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Product.
+        /// </summary>
+        public static string LabelProduct {
+            get {
+                return ResourceManager.GetString("LabelProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Products.
         /// </summary>
         public static string LabelProducts {
@@ -228,6 +246,15 @@ namespace wrcaysalesinventory.Resources.Langs {
         public static string LabelStocks {
             get {
                 return ResourceManager.GetString("LabelStocks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supplier.
+        /// </summary>
+        public static string LabelSupplier {
+            get {
+                return ResourceManager.GetString("LabelSupplier", resourceCulture);
             }
         }
         

@@ -18,7 +18,7 @@ namespace wrcaysalesinventory.Customs.Dialogs
     /// <summary>
     /// Interaction logic for SupplierDialog.xaml
     /// </summary>
-    public partial class SupplierDialog : UserControl
+    public partial class SupplierDialog : Border
     {
         public SupplierDialog()
         {

@@ -9,7 +9,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <hc:ThemeResources/>
+                <hc:ThemeResources RequestedTheme="Light"/>
                 <hc:Theme/>
                 <!-- Other merged dictionaries here -->
                 <ResourceDictionary Source="/Resources/Images/Images.xaml"/>

@@ -129,6 +129,9 @@
   <data name="LabelCategories" xml:space="preserve">
     <value>Categories</value>
   </data>
+  <data name="LabelCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="LabelClose" xml:space="preserve">
     <value>Close</value>
   </data>
@@ -162,6 +165,9 @@
   <data name="LabelPOSSettings" xml:space="preserve">
     <value>POS Settings</value>
   </data>
+  <data name="LabelProduct" xml:space="preserve">
+    <value>Product</value>
+  </data>
   <data name="LabelProducts" xml:space="preserve">
     <value>Products</value>
   </data>
@@ -173,6 +179,9 @@
   </data>
   <data name="LabelStocks" xml:space="preserve">
     <value>Stocks</value>
+  </data>
+  <data name="LabelSupplier" xml:space="preserve">
+    <value>Supplier</value>
   </data>
   <data name="LabelSuppliers" xml:space="preserve">
     <value>Suppliers</value>

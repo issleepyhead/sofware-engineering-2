@@ -18,7 +18,7 @@ namespace wrcaysalesinventory.Customs.Dialogs
     /// <summary>
     /// Interaction logic for ProductDialog.xaml
     /// </summary>
-    public partial class ProductDialog : UserControl
+    public partial class ProductDialog : Border
     {
         public ProductDialog()
         {

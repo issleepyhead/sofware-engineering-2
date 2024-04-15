@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Customs.Panels;
 using Window = HandyControl.Controls.Window;
 
@@ -49,6 +50,7 @@ namespace wrcaysalesinventory
             {
                 case "dashboard":
                     DashboardPanel.Visibility = Visibility.Visible;
+                    Dialog.Show(new ProductDialog());
                     break;
                 case "point of sale":
                     //POSPanel.Visibility = Visibility.Visible;
