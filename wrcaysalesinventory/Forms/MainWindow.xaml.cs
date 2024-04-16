@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Customs.Panels;
+using wrcaysalesinventory.Data.Models;
 using Window = HandyControl.Controls.Window;
 
 namespace wrcaysalesinventory
@@ -50,7 +51,8 @@ namespace wrcaysalesinventory
             {
                 case "dashboard":
                     DashboardPanel.Visibility = Visibility.Visible;
-                    Dialog.Show(new ProductDialog());
+                    CategoryModel x = new() { CategoryName = "Hello, World!" };
+                    Dialog.Show(new CategoryDialog(x));
                     break;
                 case "point of sale":
                     //POSPanel.Visibility = Visibility.Visible;

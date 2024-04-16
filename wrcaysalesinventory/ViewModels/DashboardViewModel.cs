@@ -1,7 +1,5 @@
-﻿using LiveChartsCore.SkiaSharpView.Painting;
-using LiveChartsCore.SkiaSharpView;
+﻿using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore;
-using SkiaSharp;
 using GalaSoft.MvvmLight;
 using LiveChartsCore.SkiaSharpView.VisualElements;
 
@@ -9,6 +7,11 @@ namespace wrcaysalesinventory.ViewModels
 {
     public class DashboardViewModel : ViewModelBase
     {
+        public DashboardViewModel()
+        {
+
+        }
+
         public ISeries[] Series { get; set; } =
             {
             new LineSeries<double>
@@ -24,7 +27,7 @@ namespace wrcaysalesinventory.ViewModels
             Text = "My chart title",
             TextSize = 25,
             Padding = new LiveChartsCore.Drawing.Padding(15),
-            Paint = new SolidColorPaint(SKColors.DarkSlateGray)
+
         };
     }
 }

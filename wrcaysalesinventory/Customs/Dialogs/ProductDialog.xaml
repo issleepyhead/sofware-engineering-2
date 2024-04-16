@@ -57,6 +57,7 @@
                             hc:BorderElement.CornerRadius="0"
                             hc:InfoElement.Placeholder="Enter product name"
                             Text="{Binding CategoryName}"
+                            Style="{StaticResource TextBoxExtend}"
                             Height="40"
                             Background="{StaticResource RegionBrush}"/>
                 <TextBlock Name="CategoryNameError"
@@ -115,16 +116,6 @@
                                Foreground="Red"/>
                 </StackPanel>
             </Grid>
-            <StackPanel Margin="0 15 0 0">
-                <TextBlock Text="Product Margin:" Padding="0 5" FontSize="14"/>
-                <hc:TextBox Name="ProductMargin"
-                         Text=""
-                         HorizontalAlignment="Stretch"
-                         hc:BorderElement.CornerRadius="0"
-                         hc:InfoElement.Placeholder="Margin (%)"
-                         Height="40"
-                         IsEnabled="False"/>
-            </StackPanel>
             <StackPanel Margin="0 15 0 0">
                 <TextBlock Text="Description:" Padding="0 5" FontSize="14"/>
                 <hc:TextBox Name="ProductDescription"

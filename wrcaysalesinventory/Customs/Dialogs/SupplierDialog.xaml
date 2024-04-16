@@ -98,11 +98,11 @@
                            Padding="0 5"
                            FontSize="14"/>
                 <hc:TextBox Name="SupplierAddressTextBox"
-                         HorizontalAlignment="Stretch"
-                         hc:BorderElement.CornerRadius="0"
-                         hc:InfoElement.Placeholder="Enter supplier's address"
-                         Height="40"
-                          Text="{Binding SupplierAddress}" />
+                            HorizontalAlignment="Stretch"
+                            hc:BorderElement.CornerRadius="0"
+                            hc:InfoElement.Placeholder="Enter supplier's address"
+                            Height="40"
+                            Text="{Binding SupplierAddress}" />
                 <TextBlock x:Name="AddressError"
                            FontSize="12"
                            Visibility="Collapsed"
@@ -146,13 +146,12 @@
                 </StackPanel>
             </Grid>
             <StackPanel Margin="0 15 0 0">
-                <TextBlock Text="Contact Number:"
+                <TextBlock Text="Phone Number:"
                            Padding="0 5"
                            FontSize="14"/>
-
                 <hc:TextBox Name="SupplierContactTextBox"
                             HorizontalAlignment="Stretch"
-                            hc:InfoElement.Placeholder="Enter contact number"
+                            hc:InfoElement.Placeholder="Enter phone number"
                             hc:BorderElement.CornerRadius="0"
                             Height="40"
                             Text="{Binding SupplierPhone}"/>

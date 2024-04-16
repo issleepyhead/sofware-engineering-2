@@ -9,7 +9,8 @@
              mc:Ignorable="d" 
              Width="550"
              CornerRadius="5"
-             Background="{StaticResource DefaultBrush}">
+             Background="{StaticResource DefaultBrush}"
+             DataContext="{Binding Path=CategoryDialogView, Source={StaticResource Locator}}">
     <Grid hc:BorderElement.CornerRadius="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -56,10 +57,11 @@
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             hc:InfoElement.Placeholder="Enter category name"
-                            Text="{Binding CategoryName}"
+                            Text="{Binding Model.CategoryName,UpdateSourceTrigger=PropertyChanged}"
                             Height="40"/>
                 <TextBlock Name="CategoryNameError"
                            FontSize="13"
+                           Text="{Binding CategoryNameError, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="Red"/>
             </StackPanel>
             <StackPanel Margin="0 8 0 0">
@@ -71,11 +73,12 @@
                             hc:BorderElement.CornerRadius="0"
                             MinHeight="40"
                             Height="Auto"
-                            Text="{Binding CategoryDescription}"
+                            Text="{Binding Model.CategoryDescription, UpdateSourceTrigger=PropertyChanged}"
                             hc:InfoElement.Placeholder="Enter description"
                             AcceptsReturn="True"/>
                 <TextBlock Name="DescriptionError"
                            FontSize="13"
+                           Text="{Binding DescriptionError, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="Red"/>
             </StackPanel>
         </StackPanel>
@@ -96,15 +99,19 @@
                         Content="{x:Static langs:Lang.LabelDelete}"
                         Height="35"
                         Width="130"
-                        Grid.Column="0"/>
+                        Grid.Column="0"
+                        VerticalAlignment="Top"/>
                 <Button Name="AddButton"
                         FontSize="16"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
+                        Command="{Binding ValidateCategory}"
                         Content="{x:Static langs:Lang.LableAdd}"
                         Height="35"
                         Width="130"
+                        CommandParameter="{Binding}"
+                        VerticalAlignment="Top"
                         Grid.Column="1"/>
             </Grid>
         </hc:FlexPanel>

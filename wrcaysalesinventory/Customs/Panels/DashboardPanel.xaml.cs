@@ -1,4 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using GalaSoft.MvvmLight.Ioc;
+using HandyControl.Controls;
+using HandyControl.Themes;
+using System.Windows.Controls;
+using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.ViewModels;
 
 namespace wrcaysalesinventory.Customs.Panels
@@ -11,7 +15,21 @@ namespace wrcaysalesinventory.Customs.Panels
         public DashboardPanel()
         {
             InitializeComponent();
-            DataContext = new DashboardViewModel();
+            SimpleIoc.Default.Register<DashboardViewModel>();
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if(ThemeManager.Current.ApplicationTheme == ApplicationTheme.Dark)
+            {
+                GlobalData.Config.Theme = ApplicationTheme.Light;
+            } else
+            {
+                GlobalData.Config.Theme = ApplicationTheme.Dark;
+            }
+            ThemeManager.Current.ApplicationTheme = GlobalData.Config.Theme;
+            GlobalData.Save();
+            MessageBox.Show(ThemeManager.Current.ApplicationTheme.ToString());
         }
     }
 }

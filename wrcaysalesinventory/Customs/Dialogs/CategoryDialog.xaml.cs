@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using wrcaysalesinventory.Data.Models;
+using wrcaysalesinventory.Resources.Langs;
+using wrcaysalesinventory.ViewModels;
 
 namespace wrcaysalesinventory.Customs.Dialogs
 {
@@ -20,9 +11,21 @@ namespace wrcaysalesinventory.Customs.Dialogs
     /// </summary>
     public partial class CategoryDialog : Border
     {
-        public CategoryDialog()
+        private CategoryModel _categoryModel;
+        public CategoryDialog(CategoryModel category = null)
         {
             InitializeComponent();
+            if (category != null)
+            {
+                _categoryModel = category;
+                AddButton.Content = Lang.LabelUpdate;
+            }
+            else
+            {
+                _categoryModel = new();
+                DeleteButton.Visibility = Visibility.Collapsed;
+            }
+            ((CategoryDialogViewModel)DataContext).Model = _categoryModel;
         }
     }
 }
