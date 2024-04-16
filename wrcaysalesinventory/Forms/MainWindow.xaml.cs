@@ -51,7 +51,7 @@ namespace wrcaysalesinventory
             {
                 case "dashboard":
                     DashboardPanel.Visibility = Visibility.Visible;
-                    CategoryModel x = new() { CategoryName = "Hello, World!" };
+                    CategoryModel x = new() { ID = "1", CategoryName = "Hello, World!" };
                     Dialog.Show(new CategoryDialog(x));
                     break;
                 case "point of sale":

@@ -11,7 +11,7 @@ namespace wrcaysalesinventory.Customs.Dialogs
     /// </summary>
     public partial class CategoryDialog : Border
     {
-        private CategoryModel _categoryModel;
+        private readonly CategoryModel _categoryModel;
         public CategoryDialog(CategoryModel category = null)
         {
             InitializeComponent();

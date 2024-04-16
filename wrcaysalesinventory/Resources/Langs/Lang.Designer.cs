@@ -250,6 +250,15 @@ namespace wrcaysalesinventory.Resources.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sub Category.
+        /// </summary>
+        public static string LabelSubCategory {
+            get {
+                return ResourceManager.GetString("LabelSubCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Supplier.
         /// </summary>
         public static string LabelSupplier {

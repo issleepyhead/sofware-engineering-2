@@ -59,7 +59,6 @@
                             Height="40"
                             Text="{Binding SupplierName}"/>
                 <TextBlock x:Name="CompanyError"
-                           Visibility="Collapsed"
                            FontSize="12"
                            Foreground="Red"/>
             </StackPanel>
@@ -74,7 +73,6 @@
                             Height="40"
                             Text="{Binding SupplierFirstName}"/>
                 <TextBlock x:Name="FirstNameError"
-                           Visibility="Collapsed"
                            FontSize="12"
                            Foreground="Red"/>
             </StackPanel>
@@ -90,7 +88,6 @@
                             Text="{Binding SupplierLastName}"/>
                 <TextBlock x:Name="LastError"
                            FontSize="12"
-                           Visibility="Collapsed"
                            Foreground="Red"/>
             </StackPanel>
             <StackPanel Margin="0 8 0 0">
@@ -105,7 +102,6 @@
                             Text="{Binding SupplierAddress}" />
                 <TextBlock x:Name="AddressError"
                            FontSize="12"
-                           Visibility="Collapsed"
                            Foreground="Red"/>
             </StackPanel>
             <Grid>
@@ -125,7 +121,6 @@
                                 Text="{Binding SupplierCountry}"/>
                     <TextBlock x:Name="CountryError"
                                FontSize="12"
-                               Visibility="Collapsed"
                                Foreground="Red"/>
                 </StackPanel>
                 <StackPanel Margin="0 15 0 0"
@@ -141,7 +136,6 @@
                                 Text="{Binding SupplierCity}"/>
                     <TextBlock x:Name="CityError"
                                FontSize="12"
-                               Visibility="Collapsed"
                                Foreground="Red"/>
                 </StackPanel>
             </Grid>
@@ -156,7 +150,6 @@
                             Height="40"
                             Text="{Binding SupplierPhone}"/>
                 <TextBlock x:Name="ContactError"
-                           Visibility="Collapsed"
                            FontSize="12"
                            Foreground="Red"/>
             </StackPanel>
@@ -178,7 +171,8 @@
                         Content="{x:Static langs:Lang.LabelDelete}"
                         Height="35"
                         Width="130"
-                        Grid.Column="0"/>
+                        Grid.Column="0"
+                        VerticalAlignment="Top"/>
                 <Button Name="AddButton"
                         FontSize="16"
                         hc:BorderElement.CornerRadius="0"
@@ -187,6 +181,7 @@
                         Content="{x:Static langs:Lang.LableAdd}"
                         Height="35"
                         Width="130"
+                        VerticalAlignment="Top"
                         Grid.Column="1"/>
             </Grid>
         </hc:FlexPanel>

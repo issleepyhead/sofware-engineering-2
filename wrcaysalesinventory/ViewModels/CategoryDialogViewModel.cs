@@ -54,7 +54,8 @@ namespace wrcaysalesinventory.ViewModels
                         sqlCommand = new("INSERT INTO tblcategories (category_name, category_description) VALUES (@cname, @cdescript)", sqlConnection);
                     } else
                     {
-                        sqlCommand = new("UPDATE tblcategories SET category_name = @cname, category_description = @cdescript WHERE id = @id");
+                        sqlCommand = new("UPDATE tblcategories SET category_name = @cname, category_description = @cdescript WHERE id = @id", sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@id", Model.ID);
                     }
                     sqlCommand.Parameters.AddWithValue("@cname", Model.CategoryName);
                     sqlCommand.Parameters.AddWithValue("@cdescript", string.IsNullOrEmpty(Model.CategoryDescription) ? DBNull.Value : Model.CategoryDescription);

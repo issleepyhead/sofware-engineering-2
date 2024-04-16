@@ -11,7 +11,9 @@ namespace wrcaysalesinventory.Data.Models.Validations
                 .NotEmpty()
                 .WithMessage("Please enter a valid category name.")
                 .MinimumLength(3)
-                .WithMessage("Category name must be at least 3 or less than 50 characters.");
+                .WithMessage("Category name must be at least 3 or less than 100 characters.")
+                .MaximumLength(100)
+                .WithMessage("Category name must be at least 3 o less than 100 characters. ");
                 
             RuleFor(categoryModel => categoryModel.CategoryDescription)
                 .Cascade(CascadeMode.Stop)

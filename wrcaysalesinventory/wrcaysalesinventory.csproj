@@ -55,8 +55,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    <Reference Include="CommonServiceLocator, Version=2.0.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.7\lib\net48\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.11.9.0\lib\netstandard2.0\FluentValidation.dll</HintPath>
@@ -163,6 +163,9 @@
     <Compile Include="Customs\Dialogs\ProductDialog.xaml.cs">
       <DependentUpon>ProductDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Customs\Dialogs\SubcategoryDialog.xaml.cs">
+      <DependentUpon>SubcategoryDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Customs\Dialogs\SupplierDialog.xaml.cs">
       <DependentUpon>SupplierDialog.xaml</DependentUpon>
     </Compile>
@@ -210,12 +213,15 @@
     </Compile>
     <Compile Include="Data\Classes\AppConfig.cs" />
     <Compile Include="Data\Classes\GlobalData.cs" />
+    <Compile Include="Data\Classes\SqlBaseConnection.cs" />
     <Compile Include="Data\Classes\WinHelper.cs" />
     <Compile Include="Data\Interfaces\ICommandViewModel.cs" />
     <Compile Include="Data\Models\CategoryModel.cs" />
     <Compile Include="Data\Models\ProductModel.cs" />
     <Compile Include="Data\Models\SupplierModel.cs" />
     <Compile Include="Data\Models\Validations\CategoryValidator.cs" />
+    <Compile Include="Data\Models\Validations\ProductValidator.cs" />
+    <Compile Include="Data\Models\Validations\SupplierValidator.cs" />
     <Compile Include="Resources\Langs\Lang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -227,6 +233,13 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ProductDialogViewModel.cs" />
+    <Compile Include="ViewModels\ProductDialogViewModel.xaml.cs">
+      <DependentUpon>ProductDialogViewModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SupplierDialogViewModel.xaml.cs">
+      <DependentUpon>SupplierDialogViewModel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Page Include="Customs\Dialogs\CategoryDialog.xaml">
       <SubType>Designer</SubType>
@@ -241,6 +254,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customs\Dialogs\ProductDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\SubcategoryDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -325,6 +342,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\SplitButtonCustom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\ProductDialogViewModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\SupplierDialogViewModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

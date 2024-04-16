@@ -9,7 +9,6 @@ C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\arm
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\wrcaysalesinventory.exe.config
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\wrcaysalesinventory.exe
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\wrcaysalesinventory.pdb
-C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\CommonServiceLocator.dll
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\GalaSoft.MvvmLight.dll
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\GalaSoft.MvvmLight.Extras.dll
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\GalaSoft.MvvmLight.Platform.dll
@@ -124,3 +123,6 @@ C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\Flu
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\FluentValidation.xml
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\System.Drawing.Common.pdb
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\System.Drawing.Common.xml
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Customs\Dialogs\SubcategoryDialog.g.cs
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\bin\Debug\CommonServiceLocator.dll
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Customs\Dialogs\SubcategoryDialog.baml

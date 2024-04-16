@@ -12,5 +12,6 @@
         public string DateAdded { get; set; }
         public string DateUpdated { get; set; }
         public bool   AllowDecimal { get; set; }
+        public bool   IsActive { get; set; }
     }
 }

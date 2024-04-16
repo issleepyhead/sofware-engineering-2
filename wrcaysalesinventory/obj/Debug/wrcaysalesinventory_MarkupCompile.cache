@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\App.xaml
-231624508515
+242038409392
 10-1489569772
-40-1368836889
-144-416356090
-Customs\Dialogs\CategoryDialog.xaml;Customs\Dialogs\DeliveryCartDialog.xaml;Customs\Dialogs\DeliveryDetailsDialog.xaml;Customs\Dialogs\ProductDialog.xaml;Customs\Dialogs\SupplierDialog.xaml;Customs\Dialogs\TransactionDetailsDialog.xaml;Customs\NonClientArea\NonClientArea.xaml;Customs\Panels\AuditTrailPanel.xaml;Customs\Panels\CategoriesPanel.xaml;Customs\Panels\DashboardPanel.xaml;Customs\Panels\DeliveryPanel.xaml;Customs\Panels\ExpensesPanel.xaml;Customs\Panels\GeneralSettingsPanel.xaml;Customs\Panels\POSPanel.xaml;Customs\Panels\POSSettingsPanel.xaml;Customs\Panels\ProductPanel.xaml;Customs\Panels\StocksPanel.xaml;Customs\Panels\SupplierPanel.xaml;Customs\Panels\TransactionPanel.xaml;Forms\MainWindow.xaml;Resources\Images\Images.xaml;Resources\Styles\Fonts.xaml;Resources\Styles\SplitButtonCustom.xaml;
+45-1058269350
+1441492669976
+Customs\Dialogs\CategoryDialog.xaml;Customs\Dialogs\DeliveryCartDialog.xaml;Customs\Dialogs\DeliveryDetailsDialog.xaml;Customs\Dialogs\ProductDialog.xaml;Customs\Dialogs\SubcategoryDialog.xaml;Customs\Dialogs\SupplierDialog.xaml;Customs\Dialogs\TransactionDetailsDialog.xaml;Customs\NonClientArea\NonClientArea.xaml;Customs\Panels\AuditTrailPanel.xaml;Customs\Panels\CategoriesPanel.xaml;Customs\Panels\DashboardPanel.xaml;Customs\Panels\DeliveryPanel.xaml;Customs\Panels\ExpensesPanel.xaml;Customs\Panels\GeneralSettingsPanel.xaml;Customs\Panels\POSPanel.xaml;Customs\Panels\POSSettingsPanel.xaml;Customs\Panels\ProductPanel.xaml;Customs\Panels\StocksPanel.xaml;Customs\Panels\SupplierPanel.xaml;Customs\Panels\TransactionPanel.xaml;Forms\MainWindow.xaml;Resources\Images\Images.xaml;Resources\Styles\Fonts.xaml;Resources\Styles\SplitButtonCustom.xaml;
 
 False
 
