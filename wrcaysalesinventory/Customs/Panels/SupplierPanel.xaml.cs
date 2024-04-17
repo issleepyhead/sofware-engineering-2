@@ -18,7 +18,7 @@ namespace wrcaysalesinventory.Customs.Panels
     /// <summary>
     /// Interaction logic for SupplierPanel.xaml
     /// </summary>
-    public partial class SupplierPanel : UserControl
+    public partial class SupplierPanel : Grid
     {
         public SupplierPanel()
         {

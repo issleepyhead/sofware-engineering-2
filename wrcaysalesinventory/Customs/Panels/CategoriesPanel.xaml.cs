@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,17 +13,106 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wrcaysalesinventory.Data.Models;
 
 namespace wrcaysalesinventory.Customs.Panels
 {
     /// <summary>
     /// Interaction logic for CategoriesPanel.xaml
     /// </summary>
-    public partial class CategoriesPanel : UserControl
+    public partial class CategoriesPanel : Grid
     {
         public CategoriesPanel()
         {
             InitializeComponent();
+
+            ObservableCollection<CategoryModel> cat = new()
+            {
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() },
+                new CategoryModel() { CategoryName = "Hello", CategoryDescription = "World!", DateAdded = DateTime.Now.ToShortDateString(), DateUpdated = DateTime.Now.ToShortDateString() }
+            };
+            CategoriesDataGridView.ItemsSource = cat;
         }
     }
 }

@@ -134,6 +134,7 @@
         <Grid Grid.Column="1">
             <panels:DashboardPanel x:Name="DashboardPanel" Visibility="Collapsed"/>
             <panels:ProductPanel x:Name="ProductPanel" Visibility="Collapsed"/>
+            <panels:CategoriesPanel x:Name="CategoryPanel" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </hc:Window>

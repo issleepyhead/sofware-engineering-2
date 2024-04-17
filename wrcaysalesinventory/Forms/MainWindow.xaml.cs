@@ -1,20 +1,8 @@
 ﻿using HandyControl.Controls;
 using HandyControl.Data;
 using HandyControl.Tools.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Customs.Panels;
 using wrcaysalesinventory.Data.Models;
@@ -36,7 +24,7 @@ namespace wrcaysalesinventory
 
         private void SwitchItem(FunctionEventArgs<object> info)
         {
-            Grid[] panels = { ProductPanel };
+            Grid[] panels = { ProductPanel, CategoryPanel, DashboardPanel};
             foreach(Grid panel in panels)
             {
                 panel.Visibility = Visibility.Collapsed;
@@ -61,7 +49,7 @@ namespace wrcaysalesinventory
                     ProductPanel.Visibility = Visibility.Visible;
                     break;
                 case "categories":
-                    //CategoriesPanel.Visibility = Visibility.Visible;
+                    CategoryPanel.Visibility = Visibility.Visible;
                     break;
                 case "suppliers":
                     //SupplierPanel.Visibility = Visibility.Visible;

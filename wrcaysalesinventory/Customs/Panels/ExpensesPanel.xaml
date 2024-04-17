@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="wrcaysalesinventory.Customs.Panels.ExpensesPanel"
+﻿<Grid x:Class="wrcaysalesinventory.Customs.Panels.ExpensesPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,4 +9,4 @@
     <Grid>
             
     </Grid>
-</UserControl>
+</Grid>

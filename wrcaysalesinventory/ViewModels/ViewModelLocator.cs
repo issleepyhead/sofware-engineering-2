@@ -15,6 +15,8 @@ namespace wrcaysalesinventory.ViewModels
             SimpleIoc.Default.Register<MainWindowViewModel>();
             SimpleIoc.Default.Register<CategoryViewModel>();
             SimpleIoc.Default.Register<CategoryDialogViewModel>();
+            SimpleIoc.Default.Register<ProductDialogViewModel>();
+            
         }
 
         public static ViewModelLocator Instance = new Lazy<ViewModelLocator>(() =>
@@ -24,6 +26,7 @@ namespace wrcaysalesinventory.ViewModels
         public CategoryViewModel CategoryView => SimpleIoc.Default.GetInstance<CategoryViewModel>();
         public MainWindowViewModel MainWindowView => SimpleIoc.Default.GetInstance<MainWindowViewModel>();
         public CategoryDialogViewModel CategoryDialogView => SimpleIoc.Default.GetInstance<CategoryDialogViewModel>();
+        public ProductDialogViewModel ProductDialogView => SimpleIoc.Default.GetInstance<ProductDialogViewModel>();
 
     }
 }

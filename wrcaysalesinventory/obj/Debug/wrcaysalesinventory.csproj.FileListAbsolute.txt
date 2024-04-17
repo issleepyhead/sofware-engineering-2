@@ -64,7 +64,6 @@ C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\wrc
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.exe.config
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Resources\Images\Images.baml
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Resources\Styles\Fonts.baml
-C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Resources\Styles\SplitButtonCustom.baml
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Customs\Dialogs\CategoryDialog.g.cs
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Customs\Dialogs\DeliveryCartDialog.g.cs
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Customs\Dialogs\DeliveryDetailsDialog.g.cs

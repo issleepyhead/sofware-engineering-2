@@ -18,7 +18,7 @@ namespace wrcaysalesinventory.Customs.Panels
     /// <summary>
     /// Interaction logic for DeliveryPanel.xaml
     /// </summary>
-    public partial class DeliveryPanel : UserControl
+    public partial class DeliveryPanel : Grid
     {
         public DeliveryPanel()
         {

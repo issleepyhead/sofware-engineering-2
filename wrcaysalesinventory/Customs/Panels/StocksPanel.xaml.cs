@@ -18,7 +18,7 @@ namespace wrcaysalesinventory.Customs.Panels
     /// <summary>
     /// Interaction logic for StocksPanel.xaml
     /// </summary>
-    public partial class StocksPanel : UserControl
+    public partial class StocksPanel : Grid
     {
         public StocksPanel()
         {

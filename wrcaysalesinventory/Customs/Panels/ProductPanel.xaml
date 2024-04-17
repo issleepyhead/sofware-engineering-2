@@ -7,10 +7,96 @@
              xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
-             d:DesignHeight="450"
-             d:DesignWidth="800"
-      Background="RED">
-    <Grid>
-            
+             d:DesignHeight="500"
+             d:DesignWidth="1000"
+             Margin="30 10">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="65"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid Grid.Row="0">
+        <TextBlock Text="Products"
+                    FontSize="32"
+                    FontWeight="Light"
+                    VerticalAlignment="Center"/>
+        <Border BorderThickness="0 0 0 1"
+                BorderBrush="{StaticResource BorderBrush}"/>
+    </Grid>
+    <Grid Grid.Row="1"
+          Margin="0 10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0 0 0 1">
+            <hc:FlexPanel 
+                          JustifyContent="SpaceBetween">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Total Products: "
+                               VerticalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="Light"/>
+                    <TextBlock Text="100"
+                               VerticalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="Light"/>
+                </StackPanel>
+                <Button Name="AddButton"
+                        hc:BorderElement.CornerRadius="0"
+                        BorderThickness="1"
+                        BorderBrush="{StaticResource DarkMaskBrush}"
+                        Content="{x:Static langs:Lang.LableAdd}"
+                        Height="32"
+                        Width="130"
+                        CommandParameter="{Binding}"
+                        VerticalAlignment="Center"/>
+
+            </hc:FlexPanel>
+        </Border>
+        <DataGrid x:Name="ProductsDataGridView"
+                  hc:Empty.ShowEmpty="True"
+                  BorderThickness="0"
+                  BorderBrush="{x:Null}"
+                  IsReadOnly="True"
+                  CanUserResizeColumns="False"
+                  AutoGenerateColumns="False"
+                  Grid.Row="1"
+                  Padding="0"
+                  hc:DataGridAttach.ApplyDefaultStyle="True"
+                  Margin="0 15 0 0">
+            <DataGrid.Columns>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Product Name"
+                                    Binding="{Binding ProductName}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Status"
+                                    Binding="{Binding ProductDescription}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Description"
+                                    Binding="{Binding ProductStatus}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Selling Price"
+                                    Binding="{Binding ProductPrice}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Purchase Cost"
+                                    Binding="{Binding ProductCost}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Added Date"
+                                    Binding="{Binding DateAdded}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Last Updated"
+                                    Binding="{Binding DateUpdated}"
+                                    Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Grid>

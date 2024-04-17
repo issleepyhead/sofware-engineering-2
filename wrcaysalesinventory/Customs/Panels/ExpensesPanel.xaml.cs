@@ -18,7 +18,7 @@ namespace wrcaysalesinventory.Customs.Panels
     /// <summary>
     /// Interaction logic for ExpensesPanel.xaml
     /// </summary>
-    public partial class ExpensesPanel : UserControl
+    public partial class ExpensesPanel : Grid
     {
         public ExpensesPanel()
         {

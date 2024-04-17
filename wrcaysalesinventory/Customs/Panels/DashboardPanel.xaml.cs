@@ -10,7 +10,7 @@ namespace wrcaysalesinventory.Customs.Panels
     /// <summary>
     /// Interaction logic for DashboardPanel.xaml
     /// </summary>
-    public partial class DashboardPanel : UserControl
+    public partial class DashboardPanel : Grid
     {
         public DashboardPanel()
         {

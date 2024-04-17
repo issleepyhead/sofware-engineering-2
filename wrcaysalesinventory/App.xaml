@@ -16,7 +16,6 @@
                 <hc:Theme/>
                 <!-- Other merged dictionaries here -->
                 <ResourceDictionary Source="/Resources/Images/Images.xaml"/>
-                <ResourceDictionary Source="/Resources/Styles/SplitButtonCustom.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <vms:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
             <!-- Other app resources here -->

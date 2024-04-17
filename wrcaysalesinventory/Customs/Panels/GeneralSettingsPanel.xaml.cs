@@ -18,7 +18,7 @@ namespace wrcaysalesinventory.Customs.Panels
     /// <summary>
     /// Interaction logic for GeneralSettingsPanel.xaml
     /// </summary>
-    public partial class GeneralSettingsPanel : UserControl
+    public partial class GeneralSettingsPanel : Grid
     {
         public GeneralSettingsPanel()
         {

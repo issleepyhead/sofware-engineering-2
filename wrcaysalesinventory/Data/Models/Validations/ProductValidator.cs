@@ -20,15 +20,16 @@ namespace wrcaysalesinventory.Data.Models.Validations
                 .MinimumLength(3)
                 .WithMessage("Product name must be at least 3 characters long.");
 
-            // TODO Create a validation for price.
             RuleFor(productModel => productModel.ProductPrice)
-                .Cascade(CascadeMode.Stop);
+                .Cascade(CascadeMode.Stop)
+                .Matches(@"^^(?!(\d+)?\.?(\d+)$).*$")
+                .WithMessage("Please enter a valid product price.");
 
-            // TODO Create a validation for cost.
             RuleFor(productModel => productModel.ProductCost)
                 .Cascade(CascadeMode.Stop)
-                .Matches(@"^(\d+)?\.?(\d+)$");
-            // TO-DO Create a validation for unit.
+                .Matches(@"^(?!(\d+)?\.?(\d+)$).*$")
+                .WithMessage("Please enter a valid product cost.");
+
             RuleFor(productModel => productModel.ProductUnit)
                 .Cascade(CascadeMode.Stop);
             RuleFor(productModel => productModel.ProductDescription)

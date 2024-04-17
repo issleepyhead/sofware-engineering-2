@@ -18,7 +18,7 @@ namespace wrcaysalesinventory.Customs.Panels
     /// <summary>
     /// Interaction logic for POSSettingsPanel.xaml
     /// </summary>
-    public partial class POSSettingsPanel : UserControl
+    public partial class POSSettingsPanel : Grid
     {
         public POSSettingsPanel()
         {
