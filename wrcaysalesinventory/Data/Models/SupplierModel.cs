@@ -11,6 +11,7 @@
         public string Address { get; set; }
         public string PhoneNumbebr { get; set; }
         public string DateAdded { get; set; }
+        public string Status { get; set; }
         public string DateUpdated { get; set; }
     }
 }

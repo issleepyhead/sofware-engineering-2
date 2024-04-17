@@ -15,6 +15,7 @@
            MinWidth="1200"
            MinHeight="800"
            ShowIcon="False"
+           ShowMaxButton="False"
            ShowTitle="False"
            Width="1000"
            Height="800"
@@ -135,6 +136,9 @@
             <panels:DashboardPanel x:Name="DashboardPanel" Visibility="Collapsed"/>
             <panels:ProductPanel x:Name="ProductPanel" Visibility="Collapsed"/>
             <panels:CategoriesPanel x:Name="CategoryPanel" Visibility="Collapsed"/>
+            <panels:SupplierPanel x:Name="SupplierPanel" Visibility="Collapsed"/>
+            <panels:StocksPanel x:Name="StockPanel" Visibility="Collapsed"/>
+            <panels:DeliveryPanel x:Name="DeliveryPanel" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </hc:Window>

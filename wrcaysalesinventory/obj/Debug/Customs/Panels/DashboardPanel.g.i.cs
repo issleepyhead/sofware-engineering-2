@@ -86,7 +86,7 @@ namespace wrcaysalesinventory.Customs.Panels {
             {
             case 1:
             
-            #line 54 "..\..\..\..\Customs\Panels\DashboardPanel.xaml"
+            #line 53 "..\..\..\..\Customs\Panels\DashboardPanel.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Button_Click);
             
             #line default
