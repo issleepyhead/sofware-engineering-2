@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using wrcaysalesinventory.Properties;
 
 namespace wrcaysalesinventory.Data.Classes
 {
@@ -6,7 +7,7 @@ namespace wrcaysalesinventory.Data.Classes
     {
         public static SqlConnection GetInstance()
         {
-            SqlConnection sqlConnection = new("Data Source=I-AM-ROOT;Initial Catalog=wrcaydb;Persist Security Info=True;User ID=clancy;Password=0x0305");
+            SqlConnection sqlConnection = new(Settings.Default.connStr);
             if (sqlConnection.State == System.Data.ConnectionState.Closed)
                 sqlConnection.Open();
             return sqlConnection;

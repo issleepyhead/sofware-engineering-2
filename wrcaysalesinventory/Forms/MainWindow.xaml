@@ -139,6 +139,8 @@
             <panels:SupplierPanel x:Name="SupplierPanel" Visibility="Collapsed"/>
             <panels:StocksPanel x:Name="StockPanel" Visibility="Collapsed"/>
             <panels:DeliveryPanel x:Name="DeliveryPanel" Visibility="Collapsed"/>
+            <panels:ExpensesPanel x:Name="ExpensesPanel" Visibility="Collapsed"/>
+            <panels:AuditTrailPanel x:Name="AuditPanel" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </hc:Window>

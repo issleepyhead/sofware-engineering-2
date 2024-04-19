@@ -59,7 +59,16 @@ namespace wrcaysalesinventory.ViewModels
                     }
                     sqlCommand.Parameters.AddWithValue("@cname", Model.CategoryName);
                     sqlCommand.Parameters.AddWithValue("@cdescript", string.IsNullOrEmpty(Model.CategoryDescription) ? DBNull.Value : Model.CategoryDescription);
-                    sqlCommand.ExecuteNonQuery();
+                    if (sqlCommand.ExecuteNonQuery() > 0)
+                    {
+                        if (string.IsNullOrEmpty(Model.ID))
+                            Growl.Success("Product has been added successfully!");
+                        else
+                            Growl.Success("Product has been updated succesfully!");
+                    } else
+                    {
+                        Growl.Warning("An error occured while performing an action.");
+                    }
                 } catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);

@@ -7,6 +7,7 @@
              xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
+             DataContext="{Binding Path=ProductPanelView, Source={StaticResource Locator}}"
              d:DesignHeight="500"
              d:DesignWidth="1000"
              Margin="30 10">
@@ -51,7 +52,7 @@
                         Content="{x:Static langs:Lang.LableAdd}"
                         Height="32"
                         Width="130"
-                        CommandParameter="{Binding}"
+                        Command="{Binding OpenDialog}"
                         VerticalAlignment="Center"/>
 
             </hc:FlexPanel>
@@ -65,6 +66,7 @@
                   AutoGenerateColumns="False"
                   Grid.Row="1"
                   Padding="0"
+                  ItemsSource="{Binding DataList, UpdateSourceTrigger=PropertyChanged}"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
                   Margin="0 15 0 0">
             <DataGrid.Columns>

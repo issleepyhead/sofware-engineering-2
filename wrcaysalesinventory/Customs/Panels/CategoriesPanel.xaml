@@ -7,6 +7,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
              mc:Ignorable="d" 
+             DataContext="{Binding CategoryPanelView, Source={StaticResource Locator}}"
              d:DesignHeight="450"
              d:DesignWidth="800"
              Margin="30 10">
@@ -51,13 +52,12 @@
                         Content="{x:Static langs:Lang.LableAdd}"
                         Height="32"
                         Width="130"
-                        CommandParameter="{Binding}"
+                        Command="{Binding OpenCategory}"
                         VerticalAlignment="Center"/>
             
             </hc:FlexPanel>
         </Border>
-        <DataGrid x:Name="CategoriesDataGridView"
-                  hc:Empty.ShowEmpty="True"
+        <DataGrid hc:Empty.ShowEmpty="True"
                   BorderThickness="0"
                   BorderBrush="{x:Null}"
                   IsReadOnly="True"
@@ -65,6 +65,7 @@
                   AutoGenerateColumns="False"
                   Grid.Row="1"
                   Padding="0"
+                  ItemsSource="{Binding DataList}"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
                   Margin="0 15 0 0">
             <DataGrid.Columns>

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="connStr" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Data Source=I-AM-ROOT;Initial Catalog=wrcaydb;Persist Security Info=True;User ID=clancy;Password=0x0305</Value>
     </Setting>
   </Settings>
 </SettingsFile>

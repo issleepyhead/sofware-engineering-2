@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace wrcaysalesinventory.Data.Models.Validations
 {
@@ -14,24 +9,30 @@ namespace wrcaysalesinventory.Data.Models.Validations
             RuleFor(productModel => productModel.ProductName)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
-                .WithMessage("Product name cannot be empty.")
+                .WithMessage("Please provide a product name.")
                 .MaximumLength(100)
                 .WithMessage("Product name must be at least less than 100 characters.")
                 .MinimumLength(3)
                 .WithMessage("Product name must be at least 3 characters long.");
 
             RuleFor(productModel => productModel.ProductPrice)
-                .Cascade(CascadeMode.Stop)
-                .Matches(@"^^(?!(\d+)?\.?(\d+)$).*$")
+                .NotEmpty()
+                .WithMessage("Please provide a selling price.")
+                .Matches(@"^(\d+)?\.?(\d+)$")
                 .WithMessage("Please enter a valid product price.");
 
             RuleFor(productModel => productModel.ProductCost)
                 .Cascade(CascadeMode.Stop)
-                .Matches(@"^(?!(\d+)?\.?(\d+)$).*$")
+                .NotEmpty()
+                .WithMessage("Please provide a cost price.")
+                .Matches(@"^(\d+)?\.?(\d+)$")
                 .WithMessage("Please enter a valid product cost.");
 
             RuleFor(productModel => productModel.ProductUnit)
-                .Cascade(CascadeMode.Stop);
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty()
+                .WithErrorCode("Please provide a product unit");
+
             RuleFor(productModel => productModel.ProductDescription)
                 .Cascade(CascadeMode.Stop)
                 .MaximumLength(300)

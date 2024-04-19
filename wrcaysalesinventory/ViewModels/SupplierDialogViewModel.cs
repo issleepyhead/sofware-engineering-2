@@ -8,5 +8,6 @@ namespace wrcaysalesinventory.ViewModels
 {
     public class SupplierDialogViewModel
     {
+
     }
 }

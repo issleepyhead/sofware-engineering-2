@@ -7,6 +7,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
              mc:Ignorable="d" 
+             DataContext="{Binding SupplierPanelView, Source={StaticResource Locator}}"
              d:DesignHeight="450"
              d:DesignWidth="800"
              Margin="30 10">
@@ -51,7 +52,7 @@
                         Content="{x:Static langs:Lang.LableAdd}"
                         Height="32"
                         Width="130"
-                        CommandParameter="{Binding}"
+                        Command="{Binding OpenSupplier}"
                         VerticalAlignment="Center"/>
 
             </hc:FlexPanel>

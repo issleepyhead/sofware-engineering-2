@@ -231,9 +231,11 @@
     <Compile Include="Services\DataService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CategoryDialogViewModel.cs" />
-    <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\PanelViewModes\CategoryPanelViewModel.cs" />
+    <Compile Include="ViewModels\PanelViewModes\ProductPanelViewModel.cs" />
+    <Compile Include="ViewModels\PanelViewModes\SupplierPanelViewModel.cs" />
     <Compile Include="ViewModels\ProductDialogViewModel.cs" />
     <Compile Include="ViewModels\SupplierDialogViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />

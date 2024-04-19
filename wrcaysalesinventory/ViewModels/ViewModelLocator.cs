@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using wrcaysalesinventory.Services;
+using wrcaysalesinventory.ViewModels.PanelViewModes;
 
 namespace wrcaysalesinventory.ViewModels
 {
@@ -13,20 +14,23 @@ namespace wrcaysalesinventory.ViewModels
             SimpleIoc.Default.Register<DataService>();
             SimpleIoc.Default.Register<DashboardViewModel>();
             SimpleIoc.Default.Register<MainWindowViewModel>();
-            SimpleIoc.Default.Register<CategoryViewModel>();
             SimpleIoc.Default.Register<CategoryDialogViewModel>();
             SimpleIoc.Default.Register<ProductDialogViewModel>();
-            
+            SimpleIoc.Default.Register<ProductPanelViewModel>();
+            SimpleIoc.Default.Register<CategoryPanelViewModel>();
+            SimpleIoc.Default.Register<SupplierPanelViewModel>();
         }
 
         public static ViewModelLocator Instance = new Lazy<ViewModelLocator>(() =>
                  Application.Current.TryFindResource("Locator") as ViewModelLocator).Value;
 
         public DashboardViewModel DashboardView => SimpleIoc.Default.GetInstance<DashboardViewModel>();
-        public CategoryViewModel CategoryView => SimpleIoc.Default.GetInstance<CategoryViewModel>();
         public MainWindowViewModel MainWindowView => SimpleIoc.Default.GetInstance<MainWindowViewModel>();
         public CategoryDialogViewModel CategoryDialogView => SimpleIoc.Default.GetInstance<CategoryDialogViewModel>();
-        public ProductDialogViewModel ProductDialogView => SimpleIoc.Default.GetInstance<ProductDialogViewModel>();
-
+        public ProductDialogViewModel ProductDialogView => new(SimpleIoc.Default.GetInstance<DataService>());
+        public ProductPanelViewModel ProductPanelView => SimpleIoc.Default.GetInstance<ProductPanelViewModel>();
+        public CategoryPanelViewModel CategoryPanelView => SimpleIoc.Default.GetInstance<CategoryPanelViewModel>();
+        public SupplierPanelViewModel SupplierPanelView => SimpleIoc.Default.GetInstance<SupplierPanelViewModel>();
+        
     }
 }
