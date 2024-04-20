@@ -123,6 +123,9 @@
   <data name="DarkTheme" xml:space="preserve">
     <value>Dark Mode</value>
   </data>
+  <data name="LabelAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="LabelAuditTrail" xml:space="preserve">
     <value>Audit Trail</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="LabelDeliveries" xml:space="preserve">
     <value>Deliveries</value>
+  </data>
+  <data name="LabelExpenses" xml:space="preserve">
+    <value>Expenses</value>
   </data>
   <data name="LabelExpensesReport" xml:space="preserve">
     <value>Expenses Report</value>
@@ -201,13 +207,10 @@
   <data name="LabelUpdate" xml:space="preserve">
     <value>Update</value>
   </data>
-  <data name="LableAdd" xml:space="preserve">
-    <value>Add</value>
+  <data name="LabelUsers" xml:space="preserve">
+    <value>Users</value>
   </data>
   <data name="LableDelivery" xml:space="preserve">
     <value>Deliveries</value>
-  </data>
-  <data name="LableExpenses" xml:space="preserve">
-    <value>Expenses</value>
   </data>
 </root>

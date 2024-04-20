@@ -59,6 +59,11 @@
                         <TextBlock Text="&#xEEBD;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
+                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelUsers}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                    <hc:SideMenuItem.Icon>
+                        <TextBlock Text="&#xE77B;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
             </hc:SideMenuItem>
             <hc:SideMenuItem Padding="15 25" FontSize="14" Header="{x:Static langs:Lang.LabelTransactions}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                 <hc:SideMenuItem.Icon>

@@ -19,6 +19,9 @@ namespace wrcaysalesinventory.ViewModels
             SimpleIoc.Default.Register<ProductPanelViewModel>();
             SimpleIoc.Default.Register<CategoryPanelViewModel>();
             SimpleIoc.Default.Register<SupplierPanelViewModel>();
+            SimpleIoc.Default.Register<SupplierDialogViewModel>();
+            SimpleIoc.Default.Register<UsersDialogViewModel>();
+
         }
 
         public static ViewModelLocator Instance = new Lazy<ViewModelLocator>(() =>
@@ -31,6 +34,8 @@ namespace wrcaysalesinventory.ViewModels
         public ProductPanelViewModel ProductPanelView => SimpleIoc.Default.GetInstance<ProductPanelViewModel>();
         public CategoryPanelViewModel CategoryPanelView => SimpleIoc.Default.GetInstance<CategoryPanelViewModel>();
         public SupplierPanelViewModel SupplierPanelView => SimpleIoc.Default.GetInstance<SupplierPanelViewModel>();
+        public SupplierDialogViewModel SupplierDialoglView => SimpleIoc.Default.GetInstance<SupplierDialogViewModel>();
+        public UsersDialogViewModel UsersDialoglView => SimpleIoc.Default.GetInstance<UsersDialogViewModel>();
         
     }
 }

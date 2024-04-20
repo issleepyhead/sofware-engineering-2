@@ -107,7 +107,7 @@
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
                         Command="{Binding ValidateCategory}"
-                        Content="{x:Static langs:Lang.LableAdd}"
+                        Content="{x:Static langs:Lang.LabelAdd}"
                         Height="35"
                         Width="130"
                         CommandParameter="{Binding}"

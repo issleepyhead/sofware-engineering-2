@@ -79,6 +79,15 @@ namespace wrcaysalesinventory.Resources.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string LabelAdd {
+            get {
+                return ResourceManager.GetString("LabelAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Audit Trail.
         /// </summary>
         public static string LabelAuditTrail {
@@ -147,6 +156,15 @@ namespace wrcaysalesinventory.Resources.Langs {
         public static string LabelDeliveries {
             get {
                 return ResourceManager.GetString("LabelDeliveries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expenses.
+        /// </summary>
+        public static string LabelExpenses {
+            get {
+                return ResourceManager.GetString("LabelExpenses", resourceCulture);
             }
         }
         
@@ -313,11 +331,11 @@ namespace wrcaysalesinventory.Resources.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add.
+        ///   Looks up a localized string similar to Users.
         /// </summary>
-        public static string LableAdd {
+        public static string LabelUsers {
             get {
-                return ResourceManager.GetString("LableAdd", resourceCulture);
+                return ResourceManager.GetString("LabelUsers", resourceCulture);
             }
         }
         
@@ -327,15 +345,6 @@ namespace wrcaysalesinventory.Resources.Langs {
         public static string LableDelivery {
             get {
                 return ResourceManager.GetString("LableDelivery", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Expenses.
-        /// </summary>
-        public static string LableExpenses {
-            get {
-                return ResourceManager.GetString("LableExpenses", resourceCulture);
             }
         }
     }

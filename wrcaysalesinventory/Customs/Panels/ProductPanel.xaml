@@ -49,7 +49,7 @@
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
-                        Content="{x:Static langs:Lang.LableAdd}"
+                        Content="{x:Static langs:Lang.LabelAdd}"
                         Height="32"
                         Width="130"
                         Command="{Binding OpenDialog}"

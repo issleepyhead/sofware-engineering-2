@@ -8,8 +8,10 @@ namespace wrcaysalesinventory.Data.Models.Validations
         {
             RuleFor(sModel => sModel.SupplierName)
                 .Cascade(CascadeMode.Stop)
-                .Empty()
-                .WithMessage("Supplier Name can't be empty.");
+                .NotEmpty()
+                .WithMessage("Supplier name can't be empty.")
+                .MaximumLength(100)
+                .WithMessage("Supplier name must be at least less than 100 characters.");
 
             RuleFor(sModel => sModel.City)
                 .Cascade(CascadeMode.Stop)
@@ -23,27 +25,29 @@ namespace wrcaysalesinventory.Data.Models.Validations
 
             RuleFor(sModel => sModel.Address)
                 .Cascade(CascadeMode.Stop)
-                .Empty()
+                .NotEmpty()
                 .WithMessage("Address can't be empty.")
                 .MaximumLength(300)
                 .WithMessage("Address must be at least less than 300 characters."); ;
 
-            RuleFor(sModel => sModel.PhoneNumbebr)
+            RuleFor(sModel => sModel.PhoneNumber)
                 .Cascade(CascadeMode.Stop)
-                .Empty()
-                .WithMessage("Phone Number can't be empty.")
+                .NotEmpty()
+                .WithMessage("Contact can't be empty.")
                 .MaximumLength(50)
-                .WithMessage("Phone Number must be at least less than 50 characters.");
+                .WithMessage("Phone Number must be at least less than 50 characters.")
+                .Matches(@"^(\+639|09)\d{2}[-\s]?\d{3}[-\s]?\d{4}$")
+                .WithMessage("Please provide a valid contact information.");
 
             RuleFor(sModel => sModel.FirstName)
                 .Cascade(CascadeMode.Stop)
                 .MaximumLength(100)
-                .WithMessage("First Name must be at least less than 100 characters."); ;
+                .WithMessage("First name must be at least less than 100 characters."); ;
 
             RuleFor(sModel => sModel.FirstName)
                 .Cascade(CascadeMode.Stop)
                 .MaximumLength(100)
-                .WithMessage("Last Name must be at least less than 100 characters."); ;
+                .WithMessage("Last name must be at least less than 100 characters."); ;
 
         }
     }

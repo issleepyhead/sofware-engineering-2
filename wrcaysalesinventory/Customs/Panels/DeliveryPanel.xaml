@@ -15,7 +15,7 @@
         <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <Grid Grid.Row="0">
-        <TextBlock Text="Categories"
+        <TextBlock Text="{x:Static langs:Lang.LabelDeliveries}"
                     FontSize="32"
                     FontWeight="Light"
                     VerticalAlignment="Center"/>
@@ -48,7 +48,7 @@
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
-                        Content="{x:Static langs:Lang.LableAdd}"
+                        Content="{x:Static langs:Lang.LabelAdd}"
                         Height="32"
                         Width="130"
                         CommandParameter="{Binding}"
@@ -69,19 +69,19 @@
                   Margin="0 15 0 0">
             <DataGrid.Columns>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Category Name"
+                                    Header="Reference Number"
                                     Binding="{Binding CategoryName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Description"
+                                    Header="Supplier"
                                     Binding="{Binding CategoryDescription}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Added Date"
+                                    Header="Total Items"
                                     Binding="{Binding DateAdded}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Last Updated"
+                                    Header="Amount Due"
                                     Binding="{Binding DateUpdated}"
                                     Width="*"/>
             </DataGrid.Columns>

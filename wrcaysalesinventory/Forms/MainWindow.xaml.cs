@@ -24,7 +24,7 @@ namespace wrcaysalesinventory
 
         private void SwitchItem(FunctionEventArgs<object> info)
         {
-            Grid[] panels = { ProductPanel, CategoryPanel, DashboardPanel, SupplierPanel, StockPanel};
+            Grid[] panels = { ProductPanel, CategoryPanel, DashboardPanel, SupplierPanel, StockPanel, DeliveryPanel};
             foreach(Grid panel in panels)
             {
                 panel.Visibility = Visibility.Collapsed;
@@ -57,7 +57,7 @@ namespace wrcaysalesinventory
                 case "stocks":
                     StockPanel.Visibility = Visibility.Visible;
                     break;
-                case "delivery":
+                case "deliveries":
                     DeliveryPanel.Visibility = Visibility.Visible;
                     break;
                 case "transaction report":
