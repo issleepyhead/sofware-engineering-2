@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight;
-using HandyControl.Controls;
+﻿using HandyControl.Controls;
 using HandyControl.Tools.Command;
 using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Services;
+using System.Windows.Controls;
 
 namespace wrcaysalesinventory.ViewModels.PanelViewModes
 {
@@ -18,5 +18,20 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         public RelayCommand<object> OpenDialog => new(OpenProductDialog);
 
         private void OpenProductDialog(object obj) => Dialog.Show(new ProductDialog());
+
+        public RelayCommand<object> SelectedCommand => new(SelectionChanged);
+        private void SelectionChanged(object obj)
+        {
+            DataGrid pdataGrid;
+            if (obj.GetType() == typeof(DataGrid))
+            {
+                 pdataGrid = (DataGrid)obj;
+                if(pdataGrid.SelectedItems.Count > 0)
+                {
+                    ProductModel model = (ProductModel)pdataGrid.SelectedItem;
+                    Dialog.Show(new ProductDialog(model));
+                }
+            }
+        }
     }
 }

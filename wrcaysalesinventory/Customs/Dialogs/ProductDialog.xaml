@@ -153,7 +153,7 @@
                 <TextBlock FontSize="11"
                            Foreground="Red"/>
             </StackPanel>
-            <StackPanel Margin="0 15 0 0">
+            <StackPanel Margin="0 8 0 0">
                 <TextBlock Text="Selling Unit:"
                            Padding="0 5"
                            FontSize="14"/>

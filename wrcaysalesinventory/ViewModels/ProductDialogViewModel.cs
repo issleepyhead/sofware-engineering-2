@@ -32,7 +32,8 @@ namespace wrcaysalesinventory.ViewModels
         private Visibility _statusVisibility = Visibility.Collapsed;
         public Visibility StatusVisibility { get => string.IsNullOrEmpty(Model.ID) ? Visibility.Collapsed : Visibility.Collapsed; set => Set(ref _statusVisibility, value); }
 
-        public ProductModel Model { get; set; } = new();
+        private ProductModel _productModel = new();
+        public ProductModel Model { get => _productModel; set => Set(ref _productModel, value); }
 
         private bool _allowedDecimal = false;
         public bool IsDecimalAllowed { get => !Model.AllowDecimal; set { Model.AllowDecimal = !_allowedDecimal; Set(ref _allowedDecimal, value); } }
