@@ -16,7 +16,7 @@
         <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <Grid Grid.Row="0">
-        <TextBlock Text="Categories"
+        <TextBlock Text="{x:Static langs:Lang.LabelUsers}"
                     FontSize="32"
                     FontWeight="Light"
                     VerticalAlignment="Center"/>
@@ -71,11 +71,11 @@
             <DataGrid.Columns>
                 <DataGridTextColumn FontSize="13"
                                     Header="Category Name"
-                                    Binding="{Binding CategoryName}"
+                                    Binding="{Binding FirstName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Description"
-                                    Binding="{Binding CategoryDescription}"
+                                    Binding="{Binding LastName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Added Date"

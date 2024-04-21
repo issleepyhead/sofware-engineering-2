@@ -33,27 +33,32 @@
                 BorderThickness="0 0 0 1">
             <hc:FlexPanel 
                           JustifyContent="SpaceBetween">
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <TextBlock Text="Total Deliveries: "
-                               VerticalAlignment="Center"
-                               FontSize="18"
-                               FontWeight="Light"/>
-                    <TextBlock Text="100"
-                               VerticalAlignment="Center"
-                               FontSize="18"
-                               FontWeight="Light"/>
+                <hc:SearchBar IsRealTime="True"
+                              hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
+                              Width="280"
+                              Height="35"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left"
+                              Style="{StaticResource SearchBarExtend}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox Height="35">
+                        <hc:Pagination MaxPageCount="10"
+                                       PageIndex="1"
+                                       MaxPageInterval="3"
+                                       DataCountPerPage="15"
+                                       VerticalAlignment="Center"
+                                       hc:BorderElement.CornerRadius="0"
+                                       Margin="0 0 12 0"/>
+                    </Viewbox>
+                    <Button hc:BorderElement.CornerRadius="0"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource DarkMaskBrush}"
+                            Content="{x:Static langs:Lang.LabelAdd}"
+                            Height="32"
+                            Width="130"
+                            CommandParameter="{Binding}"
+                            VerticalAlignment="Center"/>
                 </StackPanel>
-                <Button Name="AddButton"
-                        hc:BorderElement.CornerRadius="0"
-                        BorderThickness="1"
-                        BorderBrush="{StaticResource DarkMaskBrush}"
-                        Content="{x:Static langs:Lang.LabelAdd}"
-                        Height="32"
-                        Width="130"
-                        CommandParameter="{Binding}"
-                        VerticalAlignment="Center"/>
-
             </hc:FlexPanel>
         </Border>
         <DataGrid x:Name="CategoriesDataGridView"

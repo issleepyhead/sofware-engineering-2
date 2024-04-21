@@ -24,7 +24,8 @@ namespace wrcaysalesinventory
 
         private void SwitchItem(FunctionEventArgs<object> info)
         {
-            Grid[] panels = { ProductPanel, CategoryPanel, DashboardPanel, SupplierPanel, StockPanel, DeliveryPanel};
+            Grid[] panels = { ProductPanel, CategoryPanel, DashboardPanel, SupplierPanel, StockPanel, DeliveryPanel, AuditPanel,
+                            ExpensesPanel, POSPanel, TransactionPanel, UsersPanel, GenSettingsPanel, POSSettingsPanel, AuditTrailPanel };
             foreach(Grid panel in panels)
             {
                 panel.Visibility = Visibility.Collapsed;
@@ -39,11 +40,9 @@ namespace wrcaysalesinventory
             {
                 case "dashboard":
                     DashboardPanel.Visibility = Visibility.Visible;
-                    CategoryModel x = new() { ID = "1", CategoryName = "Hello, World!" };
-                    Dialog.Show(new CategoryDialog(x));
                     break;
                 case "point of sale":
-                    //POSPanel.Visibility = Visibility.Visible;
+                    POSPanel.Visibility = Visibility.Visible;
                     break;
                 case "products":
                     ProductPanel.Visibility = Visibility.Visible;
@@ -61,16 +60,22 @@ namespace wrcaysalesinventory
                     DeliveryPanel.Visibility = Visibility.Visible;
                     break;
                 case "transaction report":
-                    //TransactionPanel.Visibility = Visibility.Visible;
+                    TransactionPanel.Visibility = Visibility.Visible;
                     break;
-                case "expenses":
+                case "expenses report":
+                    ExpensesPanel.Visibility = Visibility.Visible;
                     break;
                 case "users":
-                    //AccountPanel.Visibility = Visibility.Visible;
+                    UsersPanel.Visibility = Visibility.Visible;
                     break;
                 case "general settings":
+                    GenSettingsPanel.Visibility = Visibility.Visible;
+                    break;
+                case "pos settings":
+                    POSPanel.Visibility = Visibility.Visible;
                     break;
                 case "audit trail":
+                    AuditTrailPanel.Visibility = Visibility.Visible;
                     break;
             }
         }

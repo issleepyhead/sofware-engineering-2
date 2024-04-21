@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Web;
+using System.Windows;
 using System.Windows.Documents;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.Models;
@@ -26,11 +27,16 @@ namespace wrcaysalesinventory.ViewModels
         }
 
         public ObservableCollection<CategoryModel> CategoryDataList => _dataService.GetGategoryList();
+        public ObservableCollection<StatusModel> StatusDataList => _dataService.GetStatusList();
+
+        private Visibility _statusVisibility = Visibility.Collapsed;
+        public Visibility StatusVisibility { get => string.IsNullOrEmpty(Model.ID) ? Visibility.Collapsed : Visibility.Collapsed; set => Set(ref _statusVisibility, value); }
 
         public ProductModel Model { get; set; } = new();
 
-        private bool _isAllowed;
-        public bool IsDecimalAllowed { get => _isAllowed; set { Model.AllowDecimal = _isAllowed; Set(ref _isAllowed, value); } }
+        private bool _allowedDecimal = false;
+        public bool IsDecimalAllowed { get => !Model.AllowDecimal; set { Model.AllowDecimal = !_allowedDecimal; Set(ref _allowedDecimal, value); } }
+        public bool IsNotDecimalAllowed { get => Model.AllowDecimal; set { Model.AllowDecimal = _allowedDecimal; Set(ref _allowedDecimal, value); } }
 
         private string _pNameError;
         public string ProductNameError { get => _pNameError; set => Set(ref _pNameError, value); }
@@ -123,13 +129,13 @@ namespace wrcaysalesinventory.ViewModels
                     {
                         sqlCommand = new(@"INSERT INTO tblproducts (product_name, product_description, product_price, product_cost, product_unit, selling_unit, category_id)
                                             VALUES (@pname, @pdesc, @pprice, @pcost, @punit, @sunit, @cid)", sqlConnection);
-
                     }
                     else
                     {
                         sqlCommand = new(@"UPDATE tblproducts SET product_name = @pname, product_description = @pdesc, product_price = @pprice, product_cost = @pcost,
                                                product_unit = @punit, product_status = @pstatus, selling_unit = @sunit WHERE id = @id", sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                        sqlCommand.Parameters.AddWithValue("@pstatus", vm.Model.StatusID);
                     }
                     sqlCommand.Parameters.AddWithValue("@pname", vm.Model.ProductName);
                     sqlCommand.Parameters.AddWithValue("@pdesc", string.IsNullOrEmpty(vm.Model.ProductDescription) ? DBNull.Value : vm.Model.ProductDescription);

@@ -4,9 +4,86 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Panels"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             DataContext="{Binding CategoryPanelView, Source={StaticResource Locator}}"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             Margin="30 10">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="65"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid Grid.Row="0">
+        <TextBlock Text="{x:Static langs:Lang.LabelTransactions}"
+                    FontSize="32"
+                    FontWeight="Light"
+                    VerticalAlignment="Center"/>
+        <Border BorderThickness="0 0 0 1"
+                BorderBrush="{StaticResource BorderBrush}"/>
+    </Grid>
+    <Grid Grid.Row="1"
+          Margin="0 10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0 0 0 1">
+            <hc:FlexPanel JustifyContent="SpaceBetween">
+                <hc:SearchBar x:Name="ProductSearch"
+                              IsRealTime="True"
+                              hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
+                              Width="280"
+                              Height="35"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left"
+                              Style="{StaticResource SearchBarExtend}"/>
+                <Viewbox Height="35">
+                    <hc:Pagination Name="Pagination"
+                                   MaxPageCount="50"
+                                   PageIndex="1"
+                                   MaxPageInterval="3"
+                                   DataCountPerPage="50"
+                                   VerticalAlignment="Center"
+                                   hc:BorderElement.CornerRadius="0"/>
+                </Viewbox>
+            </hc:FlexPanel>
+        </Border>
+        <DataGrid hc:Empty.ShowEmpty="True"
+                  BorderThickness="0"
+                  BorderBrush="{x:Null}"
+                  IsReadOnly="True"
+                  CanUserResizeColumns="False"
+                  AutoGenerateColumns="False"
+                  Grid.Row="1"
+                  Padding="0"
+                  hc:DataGridAttach.ApplyDefaultStyle="True"
+                  Margin="0 15 0 0">
+            <DataGrid.Columns>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Reference Number"
+                                    Binding="{Binding CategoryName}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Cashier"
+                                    Binding="{Binding CategoryDescription}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Total Items"
+                                    Binding="{Binding DateAdded}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Amount Due"
+                                    Binding="{Binding DateUpdated}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Date Added"
+                                    Binding="{Binding DateUpdated}"
+                                    Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Grid>

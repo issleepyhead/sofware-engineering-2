@@ -76,6 +76,7 @@
                              SelectedValuePath="ID"
                              DisplayMemberPath="CategoryName"
                              hc:InfoElement.Placeholder="Select Category"
+                             SelectedIndex="0"
                              SelectedValue="{Binding Model.CategoryID,UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Visibility="Collapsed"
                            FontSize="11"
@@ -136,8 +137,26 @@
                            Foreground="Red"
                            Text="{Binding ProductUnitError, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
+            <StackPanel Visibility="{Binding StatusVisibility}">
+                <TextBlock Text="Product Status:"
+                           Padding="0 5"
+                           FontSize="14"/>
+                <hc:ComboBox HorizontalAlignment="Stretch"
+                             hc:BorderElement.CornerRadius="0"
+                             MinHeight="40"
+                             ItemsSource="{Binding StatusDataList}"
+                             SelectedValuePath="ID"
+                             DisplayMemberPath="StatusName"
+                             hc:InfoElement.Placeholder="Select product status"
+                             SelectedIndex="0"
+                             SelectedValue="{Binding Model.StatusID,UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock FontSize="11"
+                           Foreground="Red"/>
+            </StackPanel>
             <StackPanel Margin="0 15 0 0">
-                <TextBlock Text="Selling Unit:" Padding="0 5"/>
+                <TextBlock Text="Selling Unit:"
+                           Padding="0 5"
+                           FontSize="14"/>
                 <hc:ButtonGroup Style="{StaticResource ButtonGroupSolid}"
                             hc:BorderElement.CornerRadius="0">
                     <RadioButton x:Name="ByUnit"
@@ -150,7 +169,8 @@
                              hc:BorderElement.CornerRadius="0"
                              Height="60"
                              FontSize="10"
-                             Content="Sell By Fraction"/>
+                             Content="Sell By Fraction"
+                             IsChecked="{Binding IsNotDecimalAllowed, UpdateSourceTrigger=PropertyChanged}"/>
                 </hc:ButtonGroup>
             </StackPanel>
         </StackPanel>

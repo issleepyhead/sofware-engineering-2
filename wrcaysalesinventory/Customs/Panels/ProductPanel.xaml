@@ -76,11 +76,7 @@
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Status"
-                                    Binding="{Binding ProductDescription}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
-                                    Header="Description"
-                                    Binding="{Binding ProductStatus}"
+                                    Binding="{Binding StatusName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Selling Price"

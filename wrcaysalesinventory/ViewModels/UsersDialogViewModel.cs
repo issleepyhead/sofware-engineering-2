@@ -1,11 +1,15 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Markup;
+using wrcaysalesinventory.Data.Models;
 
 namespace wrcaysalesinventory.ViewModels
 {
     public class UsersDialogViewModel : ViewModelBase
     {
+
+        public UserModel Model { get; set; } = new();
+
         private string _firstNameError;
         public string FirstNameError { get => _firstNameError; set => Set(ref _firstNameError, value); }
 
@@ -19,7 +23,10 @@ namespace wrcaysalesinventory.ViewModels
         public string AddressError { get => _addressError; set => Set(ref _addressError, value);  }
 
         private string _userNameError;
-        public string UserNameErrror { get => _userNameError; set => Set(ref _userNameError, value); }
+        public string UserNameError { get => _userNameError; set => Set(ref _userNameError, value); }
+
+        private string _roleError;
+        public string RoleError { get => _roleError; set => Set(ref _roleError, value); }
 
         private string _passwordError;
         public string PasswordError { get => _passwordError; set => Set(ref _passwordError, value); }

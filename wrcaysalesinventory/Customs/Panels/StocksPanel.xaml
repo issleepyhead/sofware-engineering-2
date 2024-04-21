@@ -34,24 +34,25 @@
             <hc:FlexPanel JustifyContent="SpaceBetween">
                 <hc:SearchBar x:Name="ProductSearch"
                               IsRealTime="True"
-                              hc:InfoElement.Placeholder="Search Product"
+                              hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchProduct}"
                               Width="280"
-                              Height="30"
+                              Height="35"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left"
                               Style="{StaticResource SearchBarExtend}"/>
-                <hc:Pagination Name="Pagination"
-                               MaxPageCount="50"
-                               PageIndex="1"
-                               MaxPageInterval="3"
-                               DataCountPerPage="50"
-                               VerticalAlignment="Center"
-                               hc:BorderElement.CornerRadius="0"/>
+                <Viewbox Height="35">
+                    <hc:Pagination Name="Pagination"
+                                   MaxPageCount="50"
+                                   PageIndex="1"
+                                   MaxPageInterval="3"
+                                   DataCountPerPage="50"
+                                   VerticalAlignment="Center"
+                                   hc:BorderElement.CornerRadius="0"/>
+                </Viewbox>
 
             </hc:FlexPanel>
         </Border>
-        <DataGrid x:Name="CategoriesDataGridView"
-                  hc:Empty.ShowEmpty="True"
+        <DataGrid hc:Empty.ShowEmpty="True"
                   BorderThickness="0"
                   BorderBrush="{x:Null}"
                   IsReadOnly="True"
@@ -63,19 +64,19 @@
                   Margin="0 15 0 0">
             <DataGrid.Columns>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Category Name"
+                                    Header="Product Name"
                                     Binding="{Binding CategoryName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Description"
+                                    Header="Stocks"
                                     Binding="{Binding CategoryDescription}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Added Date"
+                                    Header="Sold"
                                     Binding="{Binding DateAdded}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Last Updated"
+                                    Header="Defective"
                                     Binding="{Binding DateUpdated}"
                                     Width="*"/>
             </DataGrid.Columns>

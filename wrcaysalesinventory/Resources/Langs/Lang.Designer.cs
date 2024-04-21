@@ -250,6 +250,24 @@ namespace wrcaysalesinventory.Resources.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search Product.
+        /// </summary>
+        public static string LabelSearchProduct {
+            get {
+                return ResourceManager.GetString("LabelSearchProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Record.
+        /// </summary>
+        public static string LabelSearchRecord {
+            get {
+                return ResourceManager.GetString("LabelSearchRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string LabelSettings {

@@ -58,8 +58,8 @@
                                 hc:BorderElement.CornerRadius="0"
                                 Height="40"
                                 hc:InfoElement.Placeholder="First Name"
-                                Text="{Binding FirstName}"/>
-                <TextBlock Text="{Binding PhoneError, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding Model.FirstName}"/>
+                <TextBlock Text="{Binding FirstNameError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="12"
                            Foreground="Red"/>
             </StackPanel>
@@ -72,8 +72,8 @@
                              HorizontalAlignment="Stretch"
                              hc:BorderElement.CornerRadius="0"
                              Height="40"
-                             Text="{Binding LastName}"/>
-                <TextBlock Text="{Binding PhoneError, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Model.LastName}"/>
+                <TextBlock Text="{Binding LastNameError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="12"
                            Foreground="Red"/>
             </StackPanel>
@@ -88,7 +88,7 @@
                              Height="40"
                              SelectedValue="{Binding RoleID}"
                              hc:InfoElement.Placeholder="Select Role"/>
-                <TextBlock Text="{Binding PhoneError, UpdateSourceTrigger=PropertyChanged}"
+                <TextBlock Text="{Binding RoleError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="12"
                            Foreground="Red"/>
             </StackPanel>
@@ -101,7 +101,7 @@
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             Height="40"
-                            Text="{Binding Contact}"/>
+                            Text="{Binding Model.Contact}"/>
                 <TextBlock Text="{Binding PhoneError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="12"
                            Foreground="Red"/>
@@ -118,8 +118,8 @@
                           TextWrapping="Wrap"
                           hc:InfoElement.Placeholder="Enter user's address"
                           Height="Auto"
-                          Text="{Binding Address}"/>
-                <TextBlock Text="{Binding PhoneError, UpdateSourceTrigger=PropertyChanged}"
+                          Text="{Binding Model.Address}"/>
+                <TextBlock Text="{Binding AddressError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="12"
                            Foreground="Red"/>
             </StackPanel>
@@ -132,8 +132,8 @@
                             hc:BorderElement.CornerRadius="0"
                             Height="40"
                             hc:InfoElement.Placeholder="Enter username"
-                            Text="{Binding UserName}"/>
-                <TextBlock Text="{Binding PhoneError, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding Model.Username}"/>
+                <TextBlock Text="{Binding UserNameError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="12"
                            Foreground="Red"/>
             </StackPanel>
@@ -147,7 +147,7 @@
                             ShowEyeButton="True"
                             hc:InfoElement.Placeholder="Enter user's password."
                             Height="40"/>
-                <TextBlock Text="{Binding PhoneError, UpdateSourceTrigger=PropertyChanged}"
+                <TextBlock Text="{Binding PasswordError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="12"
                            Foreground="Red"/>
             </StackPanel>

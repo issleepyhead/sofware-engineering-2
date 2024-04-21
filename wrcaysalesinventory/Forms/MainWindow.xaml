@@ -146,6 +146,13 @@
             <panels:DeliveryPanel x:Name="DeliveryPanel" Visibility="Collapsed"/>
             <panels:ExpensesPanel x:Name="ExpensesPanel" Visibility="Collapsed"/>
             <panels:AuditTrailPanel x:Name="AuditPanel" Visibility="Collapsed"/>
+            <panels:POSPanel x:Name="POSPanel" Visibility="Collapsed"/>
+            <panels:TransactionPanel x:Name="TransactionPanel" Visibility="Collapsed"/>
+            <panels:UsersPanel x:Name="UsersPanel" Visibility="Collapsed"/>
+            <panels:GeneralSettingsPanel x:Name="GenSettingsPanel" Visibility="Collapsed"/>
+            <panels:POSSettingsPanel x:Name="POSSettingsPanel" Visibility="Collapsed"/>
+            <panels:AuditTrailPanel x:Name="AuditTrailPanel" Visibility="Collapsed"/>
+            
         </Grid>
     </Grid>
 </hc:Window>

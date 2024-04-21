@@ -21,7 +21,6 @@ namespace wrcaysalesinventory.ViewModels
             SimpleIoc.Default.Register<SupplierPanelViewModel>();
             SimpleIoc.Default.Register<SupplierDialogViewModel>();
             SimpleIoc.Default.Register<UsersDialogViewModel>();
-
         }
 
         public static ViewModelLocator Instance = new Lazy<ViewModelLocator>(() =>

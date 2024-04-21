@@ -180,6 +180,12 @@
   <data name="LabelReports" xml:space="preserve">
     <value>Reports</value>
   </data>
+  <data name="LabelSearchProduct" xml:space="preserve">
+    <value>Search Product</value>
+  </data>
+  <data name="LabelSearchRecord" xml:space="preserve">
+    <value>Search Record</value>
+  </data>
   <data name="LabelSettings" xml:space="preserve">
     <value>Settings</value>
   </data>

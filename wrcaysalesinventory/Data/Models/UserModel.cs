@@ -1,10 +1,9 @@
-﻿using System.Security.Policy;
-
-namespace wrcaysalesinventory.Data.Models
+﻿namespace wrcaysalesinventory.Data.Models
 {
     public class UserModel
     {
         public string ID { get; set; }
+        public string RoleID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }

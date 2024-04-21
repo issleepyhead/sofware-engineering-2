@@ -227,12 +227,17 @@
     <Compile Include="Data\Models\DeliveryModel.cs" />
     <Compile Include="Data\Models\POSCartModel.cs" />
     <Compile Include="Data\Models\ProductModel.cs" />
+    <Compile Include="Data\Models\StatusModel.cs" />
+    <Compile Include="Data\Models\StocksModel.cs" />
     <Compile Include="Data\Models\SupplierModel.cs" />
     <Compile Include="Data\Models\TransactionModel.cs" />
     <Compile Include="Data\Models\UserModel.cs" />
     <Compile Include="Data\Models\Validations\CategoryValidator.cs" />
+    <Compile Include="Data\Models\Validations\DelivieryValidator.cs" />
     <Compile Include="Data\Models\Validations\ProductValidator.cs" />
     <Compile Include="Data\Models\Validations\SupplierValidator.cs" />
+    <Compile Include="Data\Models\Validations\TransactionValidator.cs" />
+    <Compile Include="Data\Models\Validations\UserValidator.cs" />
     <Compile Include="Resources\Langs\Lang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -247,6 +252,7 @@
     <Compile Include="ViewModels\PanelViewModes\DeliveryPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\ProductPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\SupplierPanelViewModel.cs" />
+    <Compile Include="ViewModels\PanelViewModes\TransactionPanelViewPanel.cs" />
     <Compile Include="ViewModels\PanelViewModes\UsersPanelViewModel.cs" />
     <Compile Include="ViewModels\ProductDialogViewModel.cs" />
     <Compile Include="ViewModels\SupplierDialogViewModel.cs" />
