@@ -5,7 +5,7 @@ namespace wrcaysalesinventory.Customs.Dialogs
     /// <summary>
     /// Interaction logic for ProductCartItem.xaml
     /// </summary>
-    public partial class ProductCartItem : Grid
+    public partial class ProductCartItem : Border
     {
         public ProductCartItem()
         {

@@ -1,18 +1,21 @@
 ﻿<Border x:Class="wrcaysalesinventory.Customs.Dialogs.DeliveryCartDialog"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
-      xmlns:hc="https://handyorg.github.io/handycontrol"
-      xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
-      mc:Ignorable="d" 
-      Height="900"
-      Width="1400"
-      Background="{StaticResource RegionBrush}"
-      CornerRadius="10"
-      BorderBrush="{StaticResource RegionBrush}"
-      BorderThickness="1" Loaded="Border_Loaded">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:pitem="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
+        mc:Ignorable="d" 
+        Height="900"
+        Width="1400"
+        DataContext="{Binding DeliveryCartDialoglView, Source={StaticResource Locator}}"
+        Background="{StaticResource RegionBrush}"
+        CornerRadius="10"
+        BorderBrush="{StaticResource SecondaryBorderBrush}"
+        BorderThickness="1.5">
     <Grid hc:BorderElement.CornerRadius="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -69,8 +72,10 @@
                               Height="35"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left"
-                              Name="SearchTextBox"
-                              Style="{StaticResource SearchBarExtend}" SearchStarted="SearchTextBox_SearchStarted"/>
+                              Text="{Binding SearchQuery}"
+                              Command="{Binding SearchCommand}"
+                              CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                              Style="{StaticResource SearchBarExtend}"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Ref #: "
                                VerticalAlignment="Center"
@@ -82,8 +87,7 @@
                                 Height="35"
                                 Width="280"
                                 hc:BorderElement.CornerRadius="0"
-                                hc:InfoElement.Placeholder="Enter category name"
-                                Text="{Binding Model.CategoryName,UpdateSourceTrigger=PropertyChanged}"/>
+                                hc:InfoElement.Placeholder="Enter category name"/>
                 </StackPanel>
             </hc:FlexPanel>
             <hc:FlexPanel JustifyContent="FlexEnd"
@@ -116,14 +120,19 @@
                           AutoGenerateColumns="False"
                           Grid.Row="1"
                           Padding="0"
-                          x:Name="ProductDataGridView"
                           ItemsSource="{Binding DataList}"
+                          x:Name="ProductDataGridView"
                           hc:DataGridAttach.ApplyDefaultStyle="True"
-                          Margin="18 20" SelectionChanged="DataGrid_SelectionChanged">
+                          Margin="18 20">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <DataGrid.Columns>
                         <DataGridTextColumn FontSize="13"
                                             Header="Product Name"
-                                            Binding="{Binding ProdutName}"
+                                            Binding="{Binding ProductName}"
                                             Width="*"/>
                         <DataGridTextColumn FontSize="13"
                                             Header="Category"
@@ -132,6 +141,10 @@
                         <DataGridTextColumn FontSize="13"
                                             Header="Product Cost"
                                             Binding="{Binding ProductCost}"
+                                            Width="*"/>
+                        <DataGridTextColumn FontSize="13"
+                                            Header="Measurement"
+                                            Binding="{Binding ProductUnit}"
                                             Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -149,14 +162,23 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border BorderThickness="0 0 0 1">
+                <Border BorderThickness="0 0 0 1"
+                        BorderBrush="{StaticResource SecondaryBorderBrush}">
                     <TextBlock Text="Delivery Cart"
                                VerticalAlignment="Center"
                                Margin="10 0 0 0"
                                FontSize="18"
                                FontWeight="Light"/>
                 </Border>
-                <Grid Grid.Row="2" Margin="0 0 0 20">
+                <hc:ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                 VerticalScrollBarVisibility="Hidden"
+                                 IsInertiaEnabled="True"
+                                 Grid.Row="1">
+                    <StackPanel Orientation="Vertical">
+                        <pitem:ProductCartItem/>
+                    </StackPanel>
+                </hc:ScrollViewer>
+                    <Grid Grid.Row="2" Margin="0 0 0 20">
                     <Button x:Name="AddButton"
                             Content="Add Delivery"
                             Background="{StaticResource PrimaryBrush}"

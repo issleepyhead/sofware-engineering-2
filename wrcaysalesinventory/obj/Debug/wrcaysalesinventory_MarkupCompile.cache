@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\
 wrcaysalesinventory
 none
 false
 DEBUG;TRACE
-C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\App.xaml
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\App.xaml
 29-2026291674
-10-1489569772
+101546454780
 681905029293
-146-1742416331
+146981731589
 Customs\Dialogs\CategoryDialog.xaml;Customs\Dialogs\DeliveryCartDialog.xaml;Customs\Dialogs\DeliveryDetailsDialog.xaml;Customs\Dialogs\ProductCartItem.xaml;Customs\Dialogs\ProductDialog.xaml;Customs\Dialogs\SubcategoryDialog.xaml;Customs\Dialogs\SupplierDialog.xaml;Customs\Dialogs\TransactionDetailsDialog.xaml;Customs\Dialogs\UserDialog.xaml;Customs\NonClientArea\NonClientArea.xaml;Customs\Panels\AuditTrailPanel.xaml;Customs\Panels\CategoriesPanel.xaml;Customs\Panels\DashboardPanel.xaml;Customs\Panels\DeliveryPanel.xaml;Customs\Panels\ExpensesPanel.xaml;Customs\Panels\GeneralSettingsPanel.xaml;Customs\Panels\POSPanel.xaml;Customs\Panels\POSSettingsPanel.xaml;Customs\Panels\ProductPanel.xaml;Customs\Panels\StocksPanel.xaml;Customs\Panels\SupplierPanel.xaml;Customs\Panels\TransactionPanel.xaml;Customs\Panels\UsersPanel.xaml;Forms\LogInWindow.xaml;Forms\MainWindow.xaml;Forms\PrintBrowser.xaml;Forms\ServerWindow.xaml;Resources\Images\Images.xaml;Resources\Styles\Fonts.xaml;
 
 False
