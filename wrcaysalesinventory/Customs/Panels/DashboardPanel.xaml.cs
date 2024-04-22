@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using HandyControl.Controls;
 using HandyControl.Themes;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.ViewModels;
@@ -29,7 +31,6 @@ namespace wrcaysalesinventory.Customs.Panels
             }
             ThemeManager.Current.ApplicationTheme = GlobalData.Config.Theme;
             GlobalData.Save();
-            MessageBox.Show(ThemeManager.Current.ApplicationTheme.ToString());
         }
     }
 }

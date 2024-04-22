@@ -35,7 +35,8 @@
                            VerticalAlignment="Center"
                            FontWeight="SemiBold"/>
             </StackPanel>
-            <Button Height="22"
+            <Button Name="Closebtn"
+                    Height="22"
                     Width="22"
                     Style="{StaticResource ButtonIcon}"
                     hc:IconElement.Geometry="{StaticResource ErrorGeometry}"
@@ -114,7 +115,7 @@
                                 hc:BorderElement.CornerRadius="0"
                                 hc:InfoElement.Placeholder="Enter supplier's country (Optional)"
                                 Height="40"
-                                Text="{Binding CountryError, UpdateSourceTrigger=PropertyChanged}"/>
+                                Text="{Binding Model.Country, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding CountryError, UpdateSourceTrigger=PropertyChanged}"
                                FontSize="12"
                                Foreground="Red"/>
@@ -165,7 +166,8 @@
                         Height="35"
                         Width="130"
                         Grid.Column="0"
-                        VerticalAlignment="Top"/>
+                        VerticalAlignment="Top"
+                        Name="DeleteButton"/>
                 <Button FontSize="16"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
@@ -176,6 +178,7 @@
                         CommandParameter="{Binding}"
                         Width="130"
                         VerticalAlignment="Top"
+                        Name="AddButton"
                         Grid.Column="1"/>
             </Grid>
         </hc:FlexPanel>

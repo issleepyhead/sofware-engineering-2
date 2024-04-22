@@ -1,5 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using wrcaysalesinventory.Data.Models;
+using wrcaysalesinventory.Resources.Langs;
 using wrcaysalesinventory.ViewModels;
 
 namespace wrcaysalesinventory.Customs.Dialogs
@@ -10,10 +12,16 @@ namespace wrcaysalesinventory.Customs.Dialogs
         public ProductDialog(ProductModel model = null)
         {
             InitializeComponent();
-            if(model != null)
+            if (model != null)
             {
                 ((ProductDialogViewModel)DataContext).Model = model;
+                AddButton.Content = Lang.LabelUpdate;
             }
+            else
+            {
+                DeleteButton.Visibility = Visibility.Collapsed;
+            }
+            
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using FluentValidation.Results;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using HandyControl.Controls;
 using HandyControl.Tools.Command;
 using System;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Data.Models.Validations;
@@ -13,6 +15,8 @@ namespace wrcaysalesinventory.ViewModels
 {
     public class CategoryDialogViewModel : ViewModelBase
     {
+        public Button BTN { get; set; }
+
         private CategoryModel _model;
         public CategoryModel Model { get => _model; set => Set(ref _model, value); }
 
@@ -22,11 +26,36 @@ namespace wrcaysalesinventory.ViewModels
         private string _errDescription;
         public string DescriptionError { get => _errDescription; set => Set(ref _errDescription, value); }
 
+        public RelayCommand<CategoryDialogViewModel> DeleteCmd => new(DeleteCommand);
+        private void DeleteCommand(CategoryDialogViewModel vm)
+        {
+            try
+            {
+                SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
+                SqlCommand sqlCommand = new("DELETE FROM tblcategories WHERE id = @id", sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                {
+                    Growl.Success("Category has been deleted successfully!");
+                    WinHelper.CloseDialog(BTN);
+                    MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                    mw?.UpdateAll();
+                }
+                else
+                {
+                    Growl.Info("Failed deleting the category.");
+                }
+            } catch
+            {
+                Growl.Warning("An error occured while performing the action.");
+            }
+        }
+
         public RelayCommand<CategoryDialogViewModel> ValidateCategory => new(ValidateModel);
         private void ValidateModel(CategoryDialogViewModel categoryModel)
         {
             CategoryValidator validator = new();
-            ValidationResult result = validator.Validate(categoryModel.Model);
+            FluentValidation.Results.ValidationResult result = validator.Validate(categoryModel.Model);
             if (!result.IsValid)
             {
                 foreach (var failure in result.Errors)
@@ -45,9 +74,9 @@ namespace wrcaysalesinventory.ViewModels
             {
                 CategoryNameError = null;
                 DescriptionError = null;
-                SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
                 try
                 {
+                    SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
                     SqlCommand sqlCommand;
                     if (string.IsNullOrEmpty(Model.ID))
                     {
@@ -61,10 +90,14 @@ namespace wrcaysalesinventory.ViewModels
                     sqlCommand.Parameters.AddWithValue("@cdescript", string.IsNullOrEmpty(Model.CategoryDescription) ? DBNull.Value : Model.CategoryDescription);
                     if (sqlCommand.ExecuteNonQuery() > 0)
                     {
+                        
                         if (string.IsNullOrEmpty(Model.ID))
-                            Growl.Success("Product has been added successfully!");
+                            Growl.Success("Category has been added successfully!");
                         else
-                            Growl.Success("Product has been updated succesfully!");
+                            Growl.Success("Category has been updated succesfully!");
+                        WinHelper.CloseDialog(BTN);
+                        MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                        mw?.UpdateAll();
                     } else
                     {
                         Growl.Warning("An error occured while performing an action.");

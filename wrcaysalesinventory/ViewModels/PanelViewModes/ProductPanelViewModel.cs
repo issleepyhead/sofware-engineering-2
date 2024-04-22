@@ -29,7 +29,10 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                 if(pdataGrid.SelectedItems.Count > 0)
                 {
                     ProductModel model = (ProductModel)pdataGrid.SelectedItem;
-                    Dialog.Show(new ProductDialog(model));
+                    var d = new ProductDialog(model);
+                    ((ProductDialogViewModel)d.DataContext).BTN = d.CloseBtn;
+                    Dialog.Show(d);
+                    pdataGrid.ItemsSource = pdataGrid.ItemsSource;
                 }
             }
         }

@@ -9,9 +9,10 @@
       mc:Ignorable="d" 
       Height="900"
       Width="1400"
-      BorderBrush="{StaticResource BackgroundBrush}"
+      Background="{StaticResource RegionBrush}"
       CornerRadius="10"
-      BorderThickness="1">
+      BorderBrush="{StaticResource RegionBrush}"
+      BorderThickness="1" Loaded="Border_Loaded">
     <Grid hc:BorderElement.CornerRadius="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -30,13 +31,13 @@
                           AlignContent="Center">
                 <StackPanel Orientation="Horizontal"
                             Margin="18 0">
-                    <TextBlock Text="&#xECDC;"
+                    <TextBlock Text="&#xEBF4;"
                                Style="{StaticResource TextBlockFabricIcons}"
                                FontSize="28"
                                Padding="0"
                                VerticalAlignment="Center"
                                TextAlignment="Center"/>
-                    <TextBlock Text="{x:Static langs:Lang.LabelProduct}"
+                    <TextBlock Text="{x:Static langs:Lang.LabelDeliveries}"
                                FontSize="18"
                                Padding="4 0 0 0"
                                VerticalAlignment="Center"
@@ -55,26 +56,118 @@
                         VerticalAlignment="Center"/>
             </hc:FlexPanel>
         </Border>
-        <Grid Grid.Row="1"
-          Background="Gray">
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <hc:FlexPanel JustifyContent="SpaceBetween"
+                          Margin="18 0"
+                          Grid.Row="0">
+                <hc:SearchBar hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchProduct}"
+                              Width="280"
+                              Height="35"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left"
+                              Name="SearchTextBox"
+                              Style="{StaticResource SearchBarExtend}" SearchStarted="SearchTextBox_SearchStarted"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Ref #: "
+                               VerticalAlignment="Center"
+                               Margin="0 0 12 0"
+                               FontSize="15"
+                               FontWeight="Light"
+                               Name="ReferenceTextBox"/>
+                    <hc:TextBox HorizontalAlignment="Stretch"
+                                Height="35"
+                                Width="280"
+                                hc:BorderElement.CornerRadius="0"
+                                hc:InfoElement.Placeholder="Enter category name"
+                                Text="{Binding Model.CategoryName,UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </hc:FlexPanel>
+            <hc:FlexPanel JustifyContent="FlexEnd"
+                          Margin="18 0"
+                          Grid.Row="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Supplier:"
+                               VerticalAlignment="Center"
+                               Margin="0 0 12 0"
+                               FontSize="15"
+                               FontWeight="Light"/>
+                    <hc:ComboBox HorizontalAlignment="Stretch"
+                                 x:Name="SupplierNameComboBox"
+                                 Height="35"
+                                 Width="280"
+                                 SelectedValuePath="ID"
+                                 DisplayMemberPath="CategoryName"
+                                 hc:InfoElement.Placeholder="Select Supplier"
+                                 SelectedIndex="0"/>
+                </StackPanel>
 
+            </hc:FlexPanel>
         </Grid>
         <Border Grid.Row="2"
-                Background="DimGray"
                 CornerRadius="0 0 0 10">
-            <Grid 
-                  >
-
+            <Grid>
+                <DataGrid hc:Empty.ShowEmpty="True"
+                          IsReadOnly="True"
+                          CanUserResizeColumns="False"
+                          AutoGenerateColumns="False"
+                          Grid.Row="1"
+                          Padding="0"
+                          x:Name="ProductDataGridView"
+                          ItemsSource="{Binding DataList}"
+                          hc:DataGridAttach.ApplyDefaultStyle="True"
+                          Margin="18 20" SelectionChanged="DataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn FontSize="13"
+                                            Header="Product Name"
+                                            Binding="{Binding ProdutName}"
+                                            Width="*"/>
+                        <DataGridTextColumn FontSize="13"
+                                            Header="Category"
+                                            Binding="{Binding CategoryName}"
+                                            Width="*"/>
+                        <DataGridTextColumn FontSize="13"
+                                            Header="Product Cost"
+                                            Binding="{Binding ProductCost}"
+                                            Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </Border>
         <Border Grid.Column="2"
                 Grid.RowSpan="3"
                 Grid.Row="1"
-                Background="{StaticResource RegionBrush}"
-                CornerRadius="0 0 10 0">
+                CornerRadius="0 0 10 0"
+                BorderThickness="1 0 0 0"
+                BorderBrush="Gray">
             <Grid>
-
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border BorderThickness="0 0 0 1">
+                    <TextBlock Text="Delivery Cart"
+                               VerticalAlignment="Center"
+                               Margin="10 0 0 0"
+                               FontSize="18"
+                               FontWeight="Light"/>
+                </Border>
+                <Grid Grid.Row="2" Margin="0 0 0 20">
+                    <Button x:Name="AddButton"
+                            Content="Add Delivery"
+                            Background="{StaticResource PrimaryBrush}"
+                            BorderThickness="0"
+                            Height="40"
+                            Margin="18 20 18 0"
+                            hc:BorderElement.CornerRadius="0"
+                            HorizontalAlignment="Stretch"/>
+                </Grid>
             </Grid>
+            
         </Border>
     </Grid>
 </Border>

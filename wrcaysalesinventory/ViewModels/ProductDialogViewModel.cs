@@ -8,8 +8,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Linq;
 using System.Web;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.Models;
@@ -26,6 +28,8 @@ namespace wrcaysalesinventory.ViewModels
             _dataService = dataService;
         }
 
+        public Button BTN { get; set; }
+
         public ObservableCollection<CategoryModel> CategoryDataList => _dataService.GetGategoryList();
         public ObservableCollection<StatusModel> StatusDataList => _dataService.GetStatusList();
 
@@ -36,8 +40,8 @@ namespace wrcaysalesinventory.ViewModels
         public ProductModel Model { get => _productModel; set => Set(ref _productModel, value); }
 
         private bool _allowedDecimal = false;
-        public bool IsDecimalAllowed { get => !Model.AllowDecimal; set { Model.AllowDecimal = !_allowedDecimal; Set(ref _allowedDecimal, value); } }
-        public bool IsNotDecimalAllowed { get => Model.AllowDecimal; set { Model.AllowDecimal = _allowedDecimal; Set(ref _allowedDecimal, value); } }
+        public bool AllowedDecimal { get => !Model.AllowDecimal; set { Model.AllowDecimal = _allowedDecimal; Set(ref _allowedDecimal, value); } }
+        public bool NotAllowedDecimal { get => Model.AllowDecimal; set { Model.AllowDecimal = !_allowedDecimal; Set(ref _allowedDecimal, value); } }
 
         private string _pNameError;
         public string ProductNameError { get => _pNameError; set => Set(ref _pNameError, value); }
@@ -54,11 +58,33 @@ namespace wrcaysalesinventory.ViewModels
         private string _pUnitError;
         public string ProductUnitError { get => _pUnitError; set => Set(ref _pUnitError, value); }
 
+        public RelayCommand<ProductDialogViewModel> DeleteCmd => new(DeleteCommand);
+        private void DeleteCommand(ProductDialogViewModel vm)
+        {
+            try
+            {
+                SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
+                SqlCommand sqlCommand = new("DELETE FROM tblproducts WHERE id = @id", sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                    Growl.Success("Product has been deleted successfully!");
+                else
+                    Growl.Info("Failed deleting the product.");
+                WinHelper.CloseDialog(BTN);
+                MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                mw?.UpdateAll();
+            }
+            catch
+            {
+                Growl.Warning("An error occured while performing the action.");
+            }
+        }
+
         public RelayCommand<ProductDialogViewModel> ValidateProduct => new(ValidateModel);
         private void ValidateModel(ProductDialogViewModel vm)
         {
             ProductValidator validator = new();
-            ValidationResult result = validator.Validate(vm.Model);
+            FluentValidation.Results.ValidationResult result = validator.Validate(vm.Model);
             if (!result.IsValid)
             {
                 foreach (var failure in result.Errors)
@@ -151,6 +177,10 @@ namespace wrcaysalesinventory.ViewModels
                             Growl.Success("Product has been added successfully!");
                         else
                             Growl.Success("Product has been updated successfully!");
+                        WinHelper.CloseDialog(BTN);
+                        MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                        mw?.UpdateAll();
+                       
                     }
                     else
                     {

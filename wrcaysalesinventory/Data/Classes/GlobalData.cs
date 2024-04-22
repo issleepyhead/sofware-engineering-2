@@ -1,10 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace wrcaysalesinventory.Data.Classes
 {
@@ -39,5 +34,12 @@ namespace wrcaysalesinventory.Data.Classes
         public static AppConfig Config { get; set; }
 
         public static bool NotifyIconIsShow { get; set; }
+    };
+
+    public enum UserPreviledges
+    {
+        SUPER_ADMIN,
+        ADMIN,
+        CASHIER
     }
 }

@@ -1,11 +1,14 @@
 ﻿using HandyControl.Controls;
 using HandyControl.Data;
 using HandyControl.Tools.Command;
+using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Customs.Panels;
 using wrcaysalesinventory.Data.Models;
+using wrcaysalesinventory.ViewModels;
+using wrcaysalesinventory.ViewModels.PanelViewModes;
 using Window = HandyControl.Controls.Window;
 
 namespace wrcaysalesinventory
@@ -78,6 +81,14 @@ namespace wrcaysalesinventory
                     AuditTrailPanel.Visibility = Visibility.Visible;
                     break;
             }
+        }
+
+        public void UpdateAll()
+        {
+            ViewModelLocator loc = new();
+            ((CategoryPanelViewModel)CategoryPanel.DataContext).DataList = loc.DService.GetGategoryPanelList();
+            ((ProductPanelViewModel)ProductPanel.DataContext).DataList = loc.DService.GetProductList();
+            ((SupplierPanelViewModel)SupplierPanel.DataContext).DataList = loc.DService.GetSupplierList();
         }
     }
 }

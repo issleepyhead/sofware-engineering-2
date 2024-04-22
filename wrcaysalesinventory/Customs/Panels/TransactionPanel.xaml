@@ -41,7 +41,7 @@
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left"
                               Style="{StaticResource SearchBarExtend}"/>
-                <Viewbox Height="35">
+                <!--<Viewbox Height="35">
                     <hc:Pagination Name="Pagination"
                                    MaxPageCount="50"
                                    PageIndex="1"
@@ -49,7 +49,7 @@
                                    DataCountPerPage="50"
                                    VerticalAlignment="Center"
                                    hc:BorderElement.CornerRadius="0"/>
-                </Viewbox>
+                </Viewbox>-->
             </hc:FlexPanel>
         </Border>
         <DataGrid hc:Empty.ShowEmpty="True"

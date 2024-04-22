@@ -10,12 +10,17 @@ using wrcaysalesinventory.Data.Models.Validations;
 using FluentValidation.Results;
 using System.Collections.Generic;
 using System.Windows.Documents;
+using System.Windows.Controls;
+using System.Windows;
+using System.Linq;
 
 namespace wrcaysalesinventory.ViewModels
 {
     public class SupplierDialogViewModel : ViewModelBase
     {
         public SupplierModel Model { get; set; } = new();
+
+        public Button BTN { get; set; }
 
         private string _supplierNameError;
         public string SupplierNameError { get => _supplierNameError; set => Set(ref _supplierNameError, value); }
@@ -38,11 +43,33 @@ namespace wrcaysalesinventory.ViewModels
         private string _phoneError;
         public string PhoneError { get => _phoneError; set => Set(ref _phoneError, value); }
 
+        public RelayCommand<SupplierDialogViewModel> DeleteCmd => new(DeleteCommand);
+        private void DeleteCommand(SupplierDialogViewModel vm)
+        {
+            try
+            {
+                SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
+                SqlCommand sqlCommand = new("DELETE FROM tblsuppliers WHERE id = @id", sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                    Growl.Success("Supplier has been deleted successfully!");
+                else
+                    Growl.Info("Failed deleting the supplier.");
+                WinHelper.CloseDialog(BTN);
+                MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                mw?.UpdateAll();
+            }
+            catch
+            {
+                Growl.Warning("An error occured while performing the action.");
+            }
+        }
+
         public RelayCommand<SupplierDialogViewModel> ValidateVM => new(ValidateModel);
         private void ValidateModel(SupplierDialogViewModel vm)
         {
             SupplierValidator validator = new();
-            ValidationResult result = validator.Validate(vm.Model);
+            FluentValidation.Results.ValidationResult result = validator.Validate(vm.Model);
             if (!result.IsValid)
             {
                 foreach (var failure in result.Errors)
@@ -133,7 +160,15 @@ namespace wrcaysalesinventory.ViewModels
                     }
                     else
                     {
-                        sqlCommand = new("UPDATE tblcategories SET category_name = @cname, category_description = @cdescript WHERE id = @id", sqlConnection);
+                        sqlCommand = new(@"UPDATE tblsuppliers SET
+                                                supplier_name = @sname,
+                                                last_name = @lname,
+                                                first_name = @fname,
+                                                city = @scity,
+                                                country = @scountry,
+                                                address = @saddress,
+                                                phone_number = @sphone
+                                        WHERE id = @id", sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@id", Model.ID);
                     }
                     sqlCommand.Parameters.AddWithValue("@sname", Model.SupplierName);
@@ -149,6 +184,9 @@ namespace wrcaysalesinventory.ViewModels
                             Growl.Success("Supplier has been added successfully!");
                         else
                             Growl.Success("Supplier has been updated succesfully!");
+                        WinHelper.CloseDialog(BTN);
+                        MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                        mw?.UpdateAll();
                     }
                     else
                     {

@@ -105,7 +105,7 @@ namespace wrcaysalesinventory.Services
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
-                _sqlCmd = new("SELECT * FROM tblcategories WHERE parent_id IS NULL", _sqlConn);
+                _sqlCmd = new("SELECT id,  category_name, category_description, FORMAT(date_added, 'dd/MM/yyyy') date_added, FORMAT(date_updated, 'dd/MM/yyyy') date_updated FROM tblcategories WHERE parent_id IS NULL", _sqlConn);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
                 _sqlAdapter.Fill(_dataTable);

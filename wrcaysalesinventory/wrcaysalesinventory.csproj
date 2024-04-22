@@ -143,6 +143,7 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -160,6 +161,9 @@
     </Compile>
     <Compile Include="Customs\Dialogs\DeliveryDetailsDialog.xaml.cs">
       <DependentUpon>DeliveryDetailsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customs\Dialogs\ProductCartItem.xaml.cs">
+      <DependentUpon>ProductCartItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Customs\Dialogs\ProductDialog.xaml.cs">
       <DependentUpon>ProductDialog.xaml</DependentUpon>
@@ -238,6 +242,15 @@
     <Compile Include="Data\Models\Validations\SupplierValidator.cs" />
     <Compile Include="Data\Models\Validations\TransactionValidator.cs" />
     <Compile Include="Data\Models\Validations\UserValidator.cs" />
+    <Compile Include="Forms\LogInWindow.xaml.cs">
+      <DependentUpon>LogInWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PrintBrowser.xaml.cs">
+      <DependentUpon>PrintBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ServerWindow.xaml.cs">
+      <DependentUpon>ServerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Langs\Lang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -247,6 +260,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CategoryDialogViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\DeliveryCartDialogViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\CategoryPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\DeliveryPanelViewModel.cs" />
@@ -267,6 +281,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customs\Dialogs\DeliveryDetailsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\ProductCartItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -346,6 +364,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\LogInWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -358,6 +380,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Forms\PrintBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\ServerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Images\Images.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

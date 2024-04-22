@@ -35,8 +35,11 @@ namespace wrcaysalesinventory.ViewModels
         public CategoryPanelViewModel CategoryPanelView => SimpleIoc.Default.GetInstance<CategoryPanelViewModel>();
         public SupplierPanelViewModel SupplierPanelView => SimpleIoc.Default.GetInstance<SupplierPanelViewModel>();
         public SupplierDialogViewModel SupplierDialoglView => SimpleIoc.Default.GetInstance<SupplierDialogViewModel>();
-        public UsersDialogViewModel UsersDialoglView => SimpleIoc.Default.GetInstance<UsersDialogViewModel>();
+        public UsersDialogViewModel UsersDialoglView => new(SimpleIoc.Default.GetInstance<DataService>());
         public DeliveryPanelViewModel DeliveryPanellView => SimpleIoc.Default.GetInstance<DeliveryPanelViewModel>();
+        public UsersPanelViewModel UserPanellView => SimpleIoc.Default.GetInstance<UsersPanelViewModel>();
+        public DataService DService => SimpleIoc.Default.GetInstance<DataService>();
+
         
     }
 }

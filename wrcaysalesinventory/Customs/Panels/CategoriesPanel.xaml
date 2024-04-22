@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Panels"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
-             mc:Ignorable="d" 
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      mc:Ignorable="d" 
              DataContext="{Binding CategoryPanelView, Source={StaticResource Locator}}"
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -32,29 +32,34 @@
         <Border Grid.Row="0"
                 BorderBrush="{StaticResource BorderBrush}"
                 BorderThickness="0 0 0 1">
-            <hc:FlexPanel 
-                          JustifyContent="SpaceBetween">
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <TextBlock Text="Total Categories: "
-                               VerticalAlignment="Center"
-                               FontSize="18"
-                               FontWeight="Light"/>
-                    <TextBlock Text="100"
-                               VerticalAlignment="Center"
-                               FontSize="18"
-                               FontWeight="Light"/>
+            <hc:FlexPanel JustifyContent="SpaceBetween">
+                <hc:SearchBar IsRealTime="True"
+                              hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
+                              Width="280"
+                              Height="35"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left"
+                              Style="{StaticResource SearchBarExtend}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox Height="35">
+                        <hc:Pagination MaxPageCount="10"
+                                       PageIndex="1"
+                                       MaxPageInterval="3"
+                                       DataCountPerPage="15"
+                                       VerticalAlignment="Center"
+                                       hc:BorderElement.CornerRadius="0"
+                                       Margin="0 0 12 0"/>
+                    </Viewbox>
+                    <Button hc:BorderElement.CornerRadius="0"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource DarkMaskBrush}"
+                            Content="{x:Static langs:Lang.LabelAdd}"
+                            Height="32"
+                            Width="130"
+                            Command="{Binding OpenCategory}"
+                            VerticalAlignment="Center"/>
                 </StackPanel>
-                <Button Name="AddButton"
-                        hc:BorderElement.CornerRadius="0"
-                        BorderThickness="1"
-                        BorderBrush="{StaticResource DarkMaskBrush}"
-                        Content="{x:Static langs:Lang.LabelAdd}"
-                        Height="32"
-                        Width="130"
-                        Command="{Binding OpenCategory}"
-                        VerticalAlignment="Center"/>
-            
+
             </hc:FlexPanel>
         </Border>
         <DataGrid hc:Empty.ShowEmpty="True"
@@ -65,17 +70,18 @@
                   AutoGenerateColumns="False"
                   Grid.Row="1"
                   Padding="0"
-                  ItemsSource="{Binding DataList}"
+                  ItemsSource="{Binding DataList, UpdateSourceTrigger=PropertyChanged}"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
                   Margin="0 15 0 0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <DataGrid.Columns>
                 <DataGridTextColumn FontSize="13"
                                     Header="Category Name"
                                     Binding="{Binding CategoryName}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
-                                    Header="Description"
-                                    Binding="{Binding CategoryDescription}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Added Date"

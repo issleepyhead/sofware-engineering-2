@@ -84,7 +84,10 @@
                 <hc:ComboBox Name="RoleComboBox"
                              HorizontalAlignment="Stretch"
                              hc:BorderElement.CornerRadius="0"
-                             IsEnabled="False"
+                             ItemsSource="{Binding StatusList}"
+                             DisplayMemberPath="ID"
+                             SelectedValuePath="StatusName"
+                             SelectedIndex="0"
                              Height="40"
                              SelectedValue="{Binding RoleID}"
                              hc:InfoElement.Placeholder="Select Role"/>

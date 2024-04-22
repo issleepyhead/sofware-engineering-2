@@ -8,7 +8,7 @@
              xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
              mc:Ignorable="d" 
              d:DesignHeight="450"
-             DataContext="{Binding CategoryPanelView, Source={StaticResource Locator}}"
+             DataContext="{Binding UserPanellView, Source={StaticResource Locator}}"
              d:DesignWidth="800"
              Margin="30 10">
     <Grid.RowDefinitions>
@@ -34,26 +34,32 @@
                 BorderThickness="0 0 0 1">
             <hc:FlexPanel 
                           JustifyContent="SpaceBetween">
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <TextBlock Text="Total Categories: "
-                               VerticalAlignment="Center"
-                               FontSize="18"
-                               FontWeight="Light"/>
-                    <TextBlock Text="100"
-                               VerticalAlignment="Center"
-                               FontSize="18"
-                               FontWeight="Light"/>
+                <hc:SearchBar IsRealTime="True"
+                              hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
+                              Width="280"
+                              Height="35"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left"
+                              Style="{StaticResource SearchBarExtend}"/>
+                <StackPanel Orientation="Horizontal">
+                    <!--<Viewbox Height="35">
+                        <hc:Pagination MaxPageCount="10"
+                                       PageIndex="1"
+                                       MaxPageInterval="3"
+                                       DataCountPerPage="15"
+                                       VerticalAlignment="Center"
+                                       hc:BorderElement.CornerRadius="0"
+                                       Margin="0 0 12 0"/>
+                    </Viewbox>-->
+                    <Button hc:BorderElement.CornerRadius="0"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource DarkMaskBrush}"
+                            Content="{x:Static langs:Lang.LabelAdd}"
+                            Height="35"
+                            Width="130"
+                            Command="{Binding OpenUser}"
+                            VerticalAlignment="Center"/>
                 </StackPanel>
-                <Button Name="AddButton"
-                        hc:BorderElement.CornerRadius="0"
-                        BorderThickness="1"
-                        BorderBrush="{StaticResource DarkMaskBrush}"
-                        Content="{x:Static langs:Lang.LabelAdd}"
-                        Height="32"
-                        Width="130"
-                        Command="{Binding OpenCategory}"
-                        VerticalAlignment="Center"/>
 
             </hc:FlexPanel>
         </Border>
@@ -70,19 +76,23 @@
                   Margin="0 15 0 0">
             <DataGrid.Columns>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Category Name"
+                                    Header="First Name"
                                     Binding="{Binding FirstName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Description"
+                                    Header="Last Name"
                                     Binding="{Binding LastName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Added Date"
+                                    Header="Phone"
                                     Binding="{Binding DateAdded}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Last Updated"
+                                    Header="Role"
+                                    Binding="{Binding DateUpdated}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Date Added"
                                     Binding="{Binding DateUpdated}"
                                     Width="*"/>
             </DataGrid.Columns>

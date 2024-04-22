@@ -129,3 +129,11 @@ C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\wrc
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.csproj.GenerateResource.cache
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.csproj.CoreCompileInputs.cache
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.csproj.CopyComplete
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Forms\LogInWindow.g.cs
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Forms\ServerWindow.g.cs
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Forms\LogInWindow.baml
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Forms\ServerWindow.baml
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Forms\PrintBrowser.g.cs
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Forms\PrintBrowser.baml
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Customs\Dialogs\ProductCartItem.g.cs
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Customs\Dialogs\ProductCartItem.baml

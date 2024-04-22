@@ -12,9 +12,5 @@ namespace wrcaysalesinventory.Customs.Panels
             InitializeComponent();
         }
 
-        private void ProductsDataGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }
