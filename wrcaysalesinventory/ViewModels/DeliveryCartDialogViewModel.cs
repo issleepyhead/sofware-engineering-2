@@ -2,6 +2,7 @@
 using HandyControl.Controls;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Services;
 
@@ -14,10 +15,14 @@ namespace wrcaysalesinventory.ViewModels
         {
             _dataService = dataService;
             DataList = _dataService.GetProductList();
+            SupplierList = _dataService.GetSupplierList();
         }
 
-        private ObservableCollection<DeliveryCartModel> deliveryCartModels = new();
-        public ObservableCollection<DeliveryCartModel> DeliveryCartList { get => deliveryCartModels; set => Set(ref deliveryCartModels, value);}
+        private ObservableCollection<ProductCartItem> deliveryCartModels = [];
+        public ObservableCollection<ProductCartItem> DeliveryCartList { get => deliveryCartModels; set => Set(ref deliveryCartModels, value);}
+
+        public ObservableCollection<SupplierModel> supplierList = [];
+        public ObservableCollection<SupplierModel> SupplierList { get => supplierList; set => Set(ref supplierList, value);}    
 
         private string _searchQuery;
         public string SearchQuery { get => _searchQuery; set => Set(ref _searchQuery, value); }
@@ -37,7 +42,8 @@ namespace wrcaysalesinventory.ViewModels
                 bool pexists = false;
                 for(int i = 0; i < deliveryCartModels.Count; i++)
                 {
-                    if (deliveryCartModels[i].ID == pModel.ID)
+                    DeliveryCartModel pCartModel = (DeliveryCartModel)deliveryCartModels[i].DataContext;
+                    if (pCartModel.ID == pModel.ID)
                     {
                         pexists = true;
                         break;
@@ -53,8 +59,10 @@ namespace wrcaysalesinventory.ViewModels
                         ProductName = pModel.ProductName,
                         Quantity = "1"
                     };
+                    ProductCartItem pitem = new(deliveryCartModel);
+                    pitem.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
                     deliveryCartModel.Total = (double.Parse(deliveryCartModel.Quantity) * double.Parse(deliveryCartModel.Cost)).ToString();
-                    deliveryCartModels.Add(deliveryCartModel);
+                    deliveryCartModels.Add(pitem);
                 }
             }
         }

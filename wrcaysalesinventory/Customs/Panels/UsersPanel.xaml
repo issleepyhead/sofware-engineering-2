@@ -92,7 +92,7 @@
                                     Binding="{Binding DateUpdated}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Date Added"
+                                    Header="Date Created"
                                     Binding="{Binding DateUpdated}"
                                     Width="*"/>
             </DataGrid.Columns>

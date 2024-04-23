@@ -29,6 +29,8 @@
         <Border Grid.Row="0"
                 Grid.ColumnSpan="2"
                 CornerRadius="10 10 0 0"
+                BorderBrush="{StaticResource SecondaryBorderBrush}"
+                BorderThickness="0 0 0 1"
                 Background="{StaticResource DarkDefaultBrush}">
             <hc:FlexPanel JustifyContent="SpaceBetween"
                           AlignContent="Center">
@@ -90,9 +92,21 @@
                                 hc:InfoElement.Placeholder="Enter category name"/>
                 </StackPanel>
             </hc:FlexPanel>
-            <hc:FlexPanel JustifyContent="FlexEnd"
+            <hc:FlexPanel JustifyContent="SpaceBetween"
                           Margin="18 0"
                           Grid.Row="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="User:"
+                               VerticalAlignment="Center"
+                               Margin="0 0 12 0"
+                               FontSize="15"
+                               FontWeight="Light"/>
+                    <TextBlock Text="John Doe"
+                               VerticalAlignment="Center"
+                               Margin="0 0 12 0"
+                               FontSize="15"
+                               FontWeight="Light"/>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Supplier:"
                                VerticalAlignment="Center"
@@ -103,52 +117,49 @@
                                  x:Name="SupplierNameComboBox"
                                  Height="35"
                                  Width="280"
+                                 ItemsSource="{Binding SupplierList}"
                                  SelectedValuePath="ID"
-                                 DisplayMemberPath="CategoryName"
-                                 hc:InfoElement.Placeholder="Select Supplier"
-                                 SelectedIndex="0"/>
+                                 DisplayMemberPath="SupplierName"
+                                 SelectedIndex="0"
+                                 hc:InfoElement.Placeholder="Select Supplier"/>
                 </StackPanel>
-
             </hc:FlexPanel>
         </Grid>
         <Border Grid.Row="2"
                 CornerRadius="0 0 0 10">
-            <Grid>
-                <DataGrid hc:Empty.ShowEmpty="True"
-                          IsReadOnly="True"
-                          CanUserResizeColumns="False"
-                          AutoGenerateColumns="False"
-                          Grid.Row="1"
-                          Padding="0"
-                          ItemsSource="{Binding DataList}"
-                          x:Name="ProductDataGridView"
-                          hc:DataGridAttach.ApplyDefaultStyle="True"
-                          Margin="18 20">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn FontSize="13"
-                                            Header="Product Name"
-                                            Binding="{Binding ProductName}"
-                                            Width="*"/>
-                        <DataGridTextColumn FontSize="13"
-                                            Header="Category"
-                                            Binding="{Binding CategoryName}"
-                                            Width="*"/>
-                        <DataGridTextColumn FontSize="13"
-                                            Header="Product Cost"
-                                            Binding="{Binding ProductCost}"
-                                            Width="*"/>
-                        <DataGridTextColumn FontSize="13"
-                                            Header="Measurement"
-                                            Binding="{Binding ProductUnit}"
-                                            Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
+            <DataGrid hc:Empty.ShowEmpty="True"
+                      IsReadOnly="True"
+                      CanUserResizeColumns="False"
+                      AutoGenerateColumns="False"
+                      Grid.Row="1"
+                      Padding="0"
+                      ItemsSource="{Binding DataList}"
+                      hc:DataGridAttach.ApplyDefaultStyle="True"
+                      Margin="18 20">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <DataGrid.Columns>
+                    <DataGridTextColumn FontSize="13"
+                                        Header="Product Name"
+                                        Binding="{Binding ProductName}"
+                                        Width="*"/>
+                    <DataGridTextColumn FontSize="13"
+                                        Header="Category"
+                                        Binding="{Binding CategoryName}"
+                                        Width="*"/>
+                    <DataGridTextColumn FontSize="13"
+                                        Header="Product Cost"
+                                        Binding="{Binding ProductCost}"
+                                        Width="*"/>
+                    <DataGridTextColumn FontSize="13"
+                                        Header="Measurement"
+                                        Binding="{Binding ProductUnit}"
+                                        Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Border>
         <Border Grid.Column="2"
                 Grid.RowSpan="3"
@@ -164,7 +175,7 @@
                 </Grid.RowDefinitions>
                 <Border BorderThickness="0 0 0 1"
                         BorderBrush="{StaticResource SecondaryBorderBrush}">
-                    <TextBlock Text="Delivery Cart"
+                    <TextBlock Text="Product List"
                                VerticalAlignment="Center"
                                Margin="10 0 0 0"
                                FontSize="18"
@@ -174,9 +185,8 @@
                                  VerticalScrollBarVisibility="Hidden"
                                  IsInertiaEnabled="True"
                                  Grid.Row="1">
-                    <StackPanel Orientation="Vertical">
-                        <pitem:ProductCartItem/>
-                    </StackPanel>
+                    <ListBox HorizontalContentAlignment="Center"
+                             ItemsSource="{Binding DeliveryCartList}"/>
                 </hc:ScrollViewer>
                     <Grid Grid.Row="2" Margin="0 0 0 20">
                     <Button x:Name="AddButton"

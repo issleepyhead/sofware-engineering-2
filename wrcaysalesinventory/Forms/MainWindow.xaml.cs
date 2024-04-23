@@ -1,12 +1,8 @@
-﻿using HandyControl.Controls;
-using HandyControl.Data;
+﻿using HandyControl.Data;
 using HandyControl.Tools.Command;
-using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
-using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Customs.Panels;
-using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.ViewModels;
 using wrcaysalesinventory.ViewModels.PanelViewModes;
 using Window = HandyControl.Controls.Window;
@@ -75,7 +71,7 @@ namespace wrcaysalesinventory
                     GenSettingsPanel.Visibility = Visibility.Visible;
                     break;
                 case "pos settings":
-                    POSPanel.Visibility = Visibility.Visible;
+                    POSSettingsPanel.Visibility = Visibility.Visible;
                     break;
                 case "audit trail":
                     AuditTrailPanel.Visibility = Visibility.Visible;

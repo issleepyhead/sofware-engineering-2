@@ -98,11 +98,11 @@
                                     Binding="{Binding ProductCost}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Added Date"
+                                    Header="Date Created"
                                     Binding="{Binding DateAdded}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Last Updated"
+                                    Header="Date Updated"
                                     Binding="{Binding DateUpdated}"
                                     Width="*"/>
             </DataGrid.Columns>
