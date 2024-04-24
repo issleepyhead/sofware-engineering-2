@@ -23,13 +23,13 @@
                       Background="{StaticResource DarkMaskBrush}">
             <StackPanel Orientation="Horizontal"
                         Margin="18 0">
-                <TextBlock Text="&#xF2C7;"
+                <TextBlock Text="&#xE77B;"
                            Style="{StaticResource TextBlockFabricIcons}"
                            FontSize="22"
                            Padding="0"
                            VerticalAlignment="Center"
                            TextAlignment="Center"/>
-                <TextBlock Text="{x:Static langs:Lang.LabelCategory}"
+                <TextBlock Text="{x:Static langs:Lang.LabelUsers}"
                            FontSize="18"
                            Padding="5 0 0 0"
                            VerticalAlignment="Center"
@@ -53,12 +53,11 @@
                 <TextBlock Text="First Name:"
                            Padding="0 5"
                            FontSize="14"/>
-                <hc:TextBox Name="FirstNameTextBox"
-                                HorizontalAlignment="Stretch"
-                                hc:BorderElement.CornerRadius="0"
-                                Height="40"
-                                hc:InfoElement.Placeholder="First Name"
-                                Text="{Binding Model.FirstName}"/>
+                <hc:TextBox HorizontalAlignment="Stretch"
+                            hc:BorderElement.CornerRadius="0"
+                            Height="40"
+                            hc:InfoElement.Placeholder="First Name"
+                            Text="{Binding Model.FirstName}"/>
                 <TextBlock Text="{Binding FirstNameError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="12"
                            Foreground="Red"/>
@@ -81,15 +80,14 @@
                 <TextBlock Text="Role: "
                            Padding="0 5"
                            FontSize="14"/>
-                <hc:ComboBox Name="RoleComboBox"
-                             HorizontalAlignment="Stretch"
+                <hc:ComboBox HorizontalAlignment="Stretch"
                              hc:BorderElement.CornerRadius="0"
-                             ItemsSource="{Binding StatusList}"
-                             DisplayMemberPath="ID"
-                             SelectedValuePath="StatusName"
+                             ItemsSource="{Binding RoleList}"
+                             DisplayMemberPath="RoleName"
+                             SelectedValuePath="ID"
                              SelectedIndex="0"
                              Height="40"
-                             SelectedValue="{Binding RoleID}"
+                             SelectedValue="{Binding Model.RoleID}"
                              hc:InfoElement.Placeholder="Select Role"/>
                 <TextBlock Text="{Binding RoleError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="12"
@@ -99,8 +97,7 @@
                 <TextBlock Text="Phone Number:"
                            Padding="0 5"
                            FontSize="14"/>
-                <hc:TextBox Name="ContactTextBox"
-                            hc:InfoElement.Placeholder="Enter mobile number (e.g 09XX XXX XXXX)"
+                <hc:TextBox hc:InfoElement.Placeholder="Enter mobile number (e.g 09XX XXX XXXX)"
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             Height="40"
@@ -113,15 +110,14 @@
                 <TextBlock Text="Address:"
                            Padding="0 5"
                            FontSize="14"/>
-                <hc:TextBox Name="AddressTextBox"
-                          HorizontalAlignment="Stretch"
-                          hc:BorderElement.CornerRadius="0"
-                          MinHeight="40"
-                          MaxHeight="60"
-                          TextWrapping="Wrap"
-                          hc:InfoElement.Placeholder="Enter user's address"
-                          Height="Auto"
-                          Text="{Binding Model.Address}"/>
+                <hc:TextBox HorizontalAlignment="Stretch"
+                            hc:BorderElement.CornerRadius="0"
+                            MinHeight="40"
+                            MaxHeight="60"
+                            TextWrapping="Wrap"
+                            hc:InfoElement.Placeholder="Enter user's address"
+                            Height="Auto"
+                            Text="{Binding Model.Address}"/>
                 <TextBlock Text="{Binding AddressError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="12"
                            Foreground="Red"/>
@@ -144,12 +140,12 @@
                 <TextBlock Text="Password:"
                            Padding="0 5"
                            FontSize="14"/>
-                <hc:PasswordBox Name="PasswordTextBox"
-                            HorizontalAlignment="Stretch"
-                            hc:BorderElement.CornerRadius="0"
-                            ShowEyeButton="True"
-                            hc:InfoElement.Placeholder="Enter user's password."
-                            Height="40"/>
+                <hc:PasswordBox HorizontalAlignment="Stretch"
+                                hc:BorderElement.CornerRadius="0"
+                                ShowEyeButton="True"
+                                hc:InfoElement.Placeholder="Enter password."
+                                Height="40" IsSafeEnabled="False"
+                                UnsafePassword="{Binding Model.Password}"/>
                 <TextBlock Text="{Binding PasswordError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="12"
                            Foreground="Red"/>
@@ -173,6 +169,7 @@
                         Height="35"
                         Width="130"
                         Grid.Column="0"
+                        Visibility="Collapsed"
                         VerticalAlignment="Top"/>
                 <Button Name="AddButton"
                         FontSize="16"

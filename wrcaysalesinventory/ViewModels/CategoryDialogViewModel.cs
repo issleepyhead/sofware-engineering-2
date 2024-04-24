@@ -15,7 +15,14 @@ namespace wrcaysalesinventory.ViewModels
 {
     public class CategoryDialogViewModel : ViewModelBase
     {
-        public Button BTN { get; set; }
+        private readonly MainWindow mw;
+        public CategoryDialogViewModel()
+        {
+            mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+        }
+
+        private Button _btn;
+        public Button BTN { get => _btn; set => Set(ref _btn, value ); }
 
         private CategoryModel _model;
         public CategoryModel Model { get => _model; set => Set(ref _model, value); }
@@ -37,9 +44,8 @@ namespace wrcaysalesinventory.ViewModels
                 if (sqlCommand.ExecuteNonQuery() > 0)
                 {
                     Growl.Success("Category has been deleted successfully!");
-                    WinHelper.CloseDialog(BTN);
-                    MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-                    mw?.UpdateAll();
+                    mw.UpdateAll();
+                    WinHelper.CloseDialog(ref _btn);
                 }
                 else
                 {
@@ -95,9 +101,8 @@ namespace wrcaysalesinventory.ViewModels
                             Growl.Success("Category has been added successfully!");
                         else
                             Growl.Success("Category has been updated succesfully!");
-                        WinHelper.CloseDialog(BTN);
-                        MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                         mw?.UpdateAll();
+                        WinHelper.CloseDialog(ref _btn);
                     } else
                     {
                         Growl.Warning("An error occured while performing an action.");

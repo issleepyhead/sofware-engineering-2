@@ -23,12 +23,15 @@ namespace wrcaysalesinventory.ViewModels
     public class ProductDialogViewModel : BaseViewModel<ProductModel>
     {
         private DataService _dataService;
+        private readonly MainWindow mw;
         public ProductDialogViewModel(DataService dataService)
         {
             _dataService = dataService;
+            mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         }
 
-        public Button BTN { get; set; }
+        private Button _btn;
+        public Button BTN { get => _btn; set => Set(ref _btn, value); }
 
         public ObservableCollection<CategoryModel> CategoryDataList => _dataService.GetGategoryList();
         public ObservableCollection<StatusModel> StatusDataList => _dataService.GetStatusList();
@@ -70,9 +73,8 @@ namespace wrcaysalesinventory.ViewModels
                     Growl.Success("Product has been deleted successfully!");
                 else
                     Growl.Info("Failed deleting the product.");
-                WinHelper.CloseDialog(BTN);
-                MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 mw?.UpdateAll();
+                WinHelper.CloseDialog(ref _btn);
             }
             catch
             {
@@ -177,10 +179,8 @@ namespace wrcaysalesinventory.ViewModels
                             Growl.Success("Product has been added successfully!");
                         else
                             Growl.Success("Product has been updated successfully!");
-                        WinHelper.CloseDialog(BTN);
-                        MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                         mw?.UpdateAll();
-                       
+                        WinHelper.CloseDialog(ref _btn);
                     }
                     else
                     {

@@ -21,15 +21,21 @@ namespace wrcaysalesinventory.ViewModels
     public class UsersDialogViewModel : ViewModelBase
     {
         private DataService _dataService;
+        private MainWindow mw;
         public UsersDialogViewModel(DataService dataService)
         {
             _dataService = dataService;
+            mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         }
 
         public ObservableCollection<StatusModel> StatusList { get => _dataService.GetStatusList(); }
-        public UserModel Model { get; set; } = new();
+        public ObservableCollection<RoleModel> RoleList { get => _dataService.GetRoleList(); }
 
-        public Button BTN { get; set; }
+        private UserModel _userModel = new();
+        public UserModel Model { get => _userModel; set => Set(ref _userModel, value); }
+
+        private Button _btn;
+        public Button BTN { get => _btn; set => Set(ref _btn, value); }
 
         private string _firstNameError;
         public string FirstNameError { get => _firstNameError; set => Set(ref _firstNameError, value); }
@@ -143,8 +149,8 @@ namespace wrcaysalesinventory.ViewModels
                                                product_unit = @punit, product_status = @pstatus, selling_unit = @sunit WHERE id = @id", sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                     }
-                    sqlCommand.Parameters.AddWithValue("@lname", vm.Model.FirstName);
-                    sqlCommand.Parameters.AddWithValue("@fname", vm.Model.LastName);
+                    sqlCommand.Parameters.AddWithValue("@lname", vm.Model.LastName);
+                    sqlCommand.Parameters.AddWithValue("@fname", vm.Model.FirstName);
                     sqlCommand.Parameters.AddWithValue("@address", vm.Model.Address);
                     sqlCommand.Parameters.AddWithValue("@contact", vm.Model.Contact);
                     sqlCommand.Parameters.AddWithValue("@username", vm.Model.Username);
@@ -153,12 +159,11 @@ namespace wrcaysalesinventory.ViewModels
                     if (sqlCommand.ExecuteNonQuery() > 0)
                     {
                         if (string.IsNullOrEmpty(Model.ID))
-                            Growl.Success("Product has been added successfully!");
+                            Growl.Success("Account has been added successfully!");
                         else
-                            Growl.Success("Product has been updated successfully!");
-                        MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                            Growl.Success("Account has been updated successfully!");
                         mw?.UpdateAll();
-                        WinHelper.CloseDialog(BTN);
+                        WinHelper.CloseDialog(ref _btn);
                     }
                     else
                     {

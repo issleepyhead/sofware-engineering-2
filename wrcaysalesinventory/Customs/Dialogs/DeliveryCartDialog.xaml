@@ -89,7 +89,7 @@
                                 Height="35"
                                 Width="280"
                                 hc:BorderElement.CornerRadius="0"
-                                hc:InfoElement.Placeholder="Enter category name"/>
+                                hc:InfoElement.Placeholder="Enter reference"/>
                 </StackPanel>
             </hc:FlexPanel>
             <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -186,7 +186,8 @@
                                  IsInertiaEnabled="True"
                                  Grid.Row="1">
                     <ListBox HorizontalContentAlignment="Center"
-                             ItemsSource="{Binding DeliveryCartList}"/>
+                             ItemsSource="{Binding DeliveryCartList}"
+                             />
                 </hc:ScrollViewer>
                     <Grid Grid.Row="2" Margin="0 0 0 20">
                     <Button x:Name="AddButton"

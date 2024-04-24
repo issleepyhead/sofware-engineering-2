@@ -37,6 +37,8 @@
                               hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
                               Width="280"
                               Height="35"
+                              Command="{Binding SearchCmd}"
+                              CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left"
                               Style="{StaticResource SearchBarExtend}"/>

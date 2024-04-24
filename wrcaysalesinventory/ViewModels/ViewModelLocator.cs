@@ -39,7 +39,7 @@ namespace wrcaysalesinventory.ViewModels
         public SupplierDialogViewModel SupplierDialoglView => SimpleIoc.Default.GetInstance<SupplierDialogViewModel>();
         public UsersDialogViewModel UsersDialoglView => new(SimpleIoc.Default.GetInstance<DataService>());
         public DeliveryPanelViewModel DeliveryPanellView => SimpleIoc.Default.GetInstance<DeliveryPanelViewModel>();
-        public UsersPanelViewModel UserPanellView => SimpleIoc.Default.GetInstance<UsersPanelViewModel>();
+        public UsersPanelViewModel UserPanelView => SimpleIoc.Default.GetInstance<UsersPanelViewModel>();
         public DeliveryCartDialogViewModel DeliveryCartDialoglView => SimpleIoc.Default.GetInstance<DeliveryCartDialogViewModel>();
         public DataService DService => SimpleIoc.Default.GetInstance<DataService>();
 

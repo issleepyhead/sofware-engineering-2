@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Panels"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
-             mc:Ignorable="d" 
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      mc:Ignorable="d" 
              d:DesignHeight="450"
-             DataContext="{Binding UserPanellView, Source={StaticResource Locator}}"
+             DataContext="{Binding Path=UserPanelView, Source={StaticResource Locator}}"
              d:DesignWidth="800"
              Margin="30 10">
     <Grid.RowDefinitions>
@@ -42,7 +42,7 @@
                               HorizontalAlignment="Left"
                               Style="{StaticResource SearchBarExtend}"/>
                 <StackPanel Orientation="Horizontal">
-                    <!--<Viewbox Height="35">
+                    <Viewbox Height="35">
                         <hc:Pagination MaxPageCount="10"
                                        PageIndex="1"
                                        MaxPageInterval="3"
@@ -50,7 +50,7 @@
                                        VerticalAlignment="Center"
                                        hc:BorderElement.CornerRadius="0"
                                        Margin="0 0 12 0"/>
-                    </Viewbox>-->
+                    </Viewbox>
                     <Button hc:BorderElement.CornerRadius="0"
                             BorderThickness="1"
                             BorderBrush="{StaticResource DarkMaskBrush}"
@@ -74,6 +74,11 @@
                   ItemsSource="{Binding DataList}"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
                   Margin="0 15 0 0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <DataGrid.Columns>
                 <DataGridTextColumn FontSize="13"
                                     Header="First Name"
@@ -85,15 +90,19 @@
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Phone"
-                                    Binding="{Binding DateAdded}"
+                                    Binding="{Binding Contact}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Role"
-                                    Binding="{Binding DateUpdated}"
+                                    Binding="{Binding RoleName}"
+                                    Width="*"/>
+                <DataGridTextColumn FontSize="13"
+                                    Header="Role"
+                                    Binding="{Binding StatusName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Date Created"
-                                    Binding="{Binding DateUpdated}"
+                                    Binding="{Binding DateAdded}"
                                     Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

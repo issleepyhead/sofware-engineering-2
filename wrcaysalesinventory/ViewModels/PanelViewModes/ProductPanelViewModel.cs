@@ -12,12 +12,18 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         private DataService _dataService;
         public ProductPanelViewModel(DataService dataService)
         {
-            DataList = dataService.GetProductList();
+            _dataService = dataService;
+            DataList = _dataService.GetProductList();
         }
 
         public RelayCommand<object> OpenDialog => new(OpenProductDialog);
 
-        private void OpenProductDialog(object obj) => Dialog.Show(new ProductDialog());
+        private void OpenProductDialog(object obj)
+        {
+            var d = new ProductDialog();
+            ((ProductDialogViewModel)d.DataContext).BTN = d.CloseBtn;
+            Dialog.Show(d);
+        }
 
         public RelayCommand<object> SelectedCommand => new(SelectionChanged);
         private void SelectionChanged(object obj)
@@ -32,9 +38,14 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                     var d = new ProductDialog(model);
                     ((ProductDialogViewModel)d.DataContext).BTN = d.CloseBtn;
                     Dialog.Show(d);
-                    pdataGrid.ItemsSource = pdataGrid.ItemsSource;
                 }
             }
+        }
+
+        public RelayCommand<SearchBar> SearchCmd => new(SearchCommand);
+        public void SearchCommand(SearchBar searchBar)
+        {
+            DataList = _dataService.SearchProductList(string.IsNullOrEmpty(searchBar.Text) ? "%" : searchBar.Text);
         }
     }
 }

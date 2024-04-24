@@ -3,13 +3,16 @@ using wrcaysalesinventory.Data.Models;
 
 namespace wrcaysalesinventory.Customs.Dialogs
 {
+    /// <summary>
+    /// Interaction logic for ProductCartItem.xaml
+    /// </summary>
     public partial class ProductCartItem : Border
     {
-        public ProductCartItem(DeliveryCartModel cartModel = null)
-        { 
+        public ProductCartItem(DeliveryCartModel dmodel = null)
+        {
             InitializeComponent();
-            if(cartModel != null)
-                DataContext = cartModel;
+            if(dmodel != null)
+                DataContext = dmodel;
         }
     }
 }

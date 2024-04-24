@@ -240,6 +240,7 @@
     <Compile Include="Data\Models\DeliveryModel.cs" />
     <Compile Include="Data\Models\POSCartModel.cs" />
     <Compile Include="Data\Models\ProductModel.cs" />
+    <Compile Include="Data\Models\RoleModel.cs" />
     <Compile Include="Data\Models\StatusModel.cs" />
     <Compile Include="Data\Models\StocksModel.cs" />
     <Compile Include="Data\Models\SupplierModel.cs" />

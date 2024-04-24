@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Properties;
@@ -19,7 +18,7 @@ namespace wrcaysalesinventory.Services
 
         internal ObservableCollection<ProductModel> GetProductList()
         {
-            ObservableCollection<ProductModel> pList = new();
+            ObservableCollection<ProductModel> pList = [];
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -72,7 +71,7 @@ namespace wrcaysalesinventory.Services
 
         internal ObservableCollection<ProductModel> SearchProductList(string query)
         {
-            ObservableCollection<ProductModel> pList = new();
+            ObservableCollection<ProductModel> pList = [];
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -127,7 +126,7 @@ namespace wrcaysalesinventory.Services
 
         internal ObservableCollection<CategoryModel> GetGategoryList()
         {
-            ObservableCollection<CategoryModel> cList = new();
+            ObservableCollection<CategoryModel> cList = [];
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
@@ -156,7 +155,7 @@ namespace wrcaysalesinventory.Services
 
         internal ObservableCollection<CategoryModel> GetGategoryPanelList()
         {
-            ObservableCollection<CategoryModel> cList = new();
+            ObservableCollection<CategoryModel> cList = [];
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
@@ -185,9 +184,41 @@ namespace wrcaysalesinventory.Services
             return cList;
         }
 
+        internal ObservableCollection<CategoryModel> SearchGategoryPanelList(string query)
+        {
+            ObservableCollection<CategoryModel> cList = [];
+            try
+            {
+                _sqlConn = SqlBaseConnection.GetInstance();
+                _sqlCmd = new("SELECT id,  category_name, category_description, FORMAT(date_added, 'dd/MM/yyyy') date_added, FORMAT(date_updated, 'dd/MM/yyyy') date_updated FROM tblcategories WHERE parent_id IS NULL AND category_name LIKE @cname", _sqlConn);
+                _sqlCmd.Parameters.AddWithValue("@cname", query);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    CategoryModel model = new()
+                    {
+                        ID = row["id"].ToString(),
+                        CategoryName = row["category_name"].ToString(),
+                        CategoryDescription = row["category_description"].ToString(),
+                        DateAdded = row["date_added"].ToString(),
+                        DateUpdated = row["date_updated"].ToString()
+                    };
+                    cList.Add(model);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching category list");
+            }
+            return cList;
+        }
+
         internal ObservableCollection<SupplierModel> GetSupplierList()
         {
-            ObservableCollection<SupplierModel> sList = new();
+            ObservableCollection<SupplierModel> sList = [];
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -235,7 +266,7 @@ namespace wrcaysalesinventory.Services
 
         internal ObservableCollection<StatusModel> GetStatusList()
         {
-            ObservableCollection<StatusModel> sList = new();
+            ObservableCollection<StatusModel> sList = [];
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -257,6 +288,89 @@ namespace wrcaysalesinventory.Services
             catch
             {
                 Growl.Warning("An error occured while fetching suppliers.");
+            }
+            return sList;
+        }
+
+        internal ObservableCollection<RoleModel> GetRoleList()
+        {
+            ObservableCollection<RoleModel> sList = [];
+            try
+            {
+                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlCmd = new(@"SELECT id, role_name FROM tblroles", _sqlConn);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    RoleModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        RoleName = row["role_name"].ToString()
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching suppliers.");
+            }
+            return sList;
+        }
+
+        internal ObservableCollection<UserModel> GetUsersList()
+        {
+            ObservableCollection<UserModel> sList = [];
+            try
+            {
+                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlCmd = new(@"SELECT a.id,
+	                                   s.id status_id,
+	                                   s.status_name,
+	                                   r.id role_id,
+	                                   r.role_name,
+	                                   first_name,
+	                                   last_name,
+	                                   address,
+	                                   contact,
+	                                   username,
+	                                   password,
+	                                   FORMAT(date_added, 'dd/MM/yyyy') date_added
+                                FROM
+	                                tblusers a
+                                JOIN
+	                                tblstatus s ON a.status_id = s.id
+                                JOIN
+	                                tblroles r ON a.role_id = r.id", _sqlConn);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    UserModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        StatusName = row["status_name"].ToString(),
+                        StatusID = row["status_id"].ToString(),
+                        RoleID = row["role_id"].ToString(),
+                        RoleName = row["role_name"].ToString(),
+                        FirstName = row["first_name"].ToString(),
+                        LastName = row["last_name"].ToString(),
+                        Address = row["address"].ToString(),
+                        Contact = row["contact"].ToString(),
+                        Username = row["username"].ToString(),
+                        Password = row["password"].ToString(),
+                        DateAdded = row["date_added"].ToString()
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching users.");
             }
             return sList;
         }

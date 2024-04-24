@@ -1,26 +1,32 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using HandyControl.Controls;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Data.Models.Validations;
-using FluentValidation.Results;
-using System.Collections.Generic;
-using System.Windows.Documents;
-using System.Windows.Controls;
-using System.Windows;
-using System.Linq;
 
 namespace wrcaysalesinventory.ViewModels
 {
     public class SupplierDialogViewModel : ViewModelBase
     {
-        public SupplierModel Model { get; set; } = new();
+        private readonly MainWindow mw;
+        public SupplierDialogViewModel()
+        {
+            mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+        }
 
-        public Button BTN { get; set; }
+        private SupplierModel _model;
+        public SupplierModel Model { get => _model; set => Set(ref _model, value); }
+
+        private Button _btn;
+        public Button BTN { get => _btn; set => Set(ref _btn, value); }
 
         private string _supplierNameError;
         public string SupplierNameError { get => _supplierNameError; set => Set(ref _supplierNameError, value); }
@@ -55,9 +61,8 @@ namespace wrcaysalesinventory.ViewModels
                     Growl.Success("Supplier has been deleted successfully!");
                 else
                     Growl.Info("Failed deleting the supplier.");
-                WinHelper.CloseDialog(BTN);
-                MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 mw?.UpdateAll();
+                WinHelper.CloseDialog(ref _btn);
             }
             catch
             {
@@ -184,9 +189,8 @@ namespace wrcaysalesinventory.ViewModels
                             Growl.Success("Supplier has been added successfully!");
                         else
                             Growl.Success("Supplier has been updated succesfully!");
-                        WinHelper.CloseDialog(BTN);
-                        MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                         mw?.UpdateAll();
+                        WinHelper.CloseDialog(ref _btn);
                     }
                     else
                     {

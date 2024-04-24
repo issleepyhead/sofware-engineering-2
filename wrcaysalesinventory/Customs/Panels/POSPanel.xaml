@@ -9,7 +9,7 @@
       xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
       mc:Ignorable="d" 
       d:DesignHeight="800"
-      d:DesignWidth="1200"
+      d:DesignWidth="1400"
       Margin="30 10">
     <Grid.RowDefinitions>
         <RowDefinition Height="100"/>
@@ -94,14 +94,33 @@
             Margin="15 10">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-
+            <Grid Grid.Row="0"
+                  Margin="16 0">
+                <hc:FlexPanel JustifyContent="SpaceBetween">
+                    <TextBlock Text="5, 600 Results"
+                               VerticalAlignment="Center"
+                               FontSize="22"
+                               FontWeight="Light"/>
+                    <Viewbox Height="35">
+                        <hc:Pagination MaxPageCount="10"
+                                   PageIndex="1"
+                                   MaxPageInterval="3"
+                                   DataCountPerPage="15"
+                                   VerticalAlignment="Center"
+                                   hc:BorderElement.CornerRadius="0"/>
+                    </Viewbox>
+                </hc:FlexPanel>
+                <Border BorderBrush="{DynamicResource BorderBrush}"
+                        BorderThickness="0 0 0 1"/>
             </Grid>
-            <Grid Grid.Row="1">
-
+            <Grid Grid.Row="1"
+                  Margin="16 8 16 15">
+                <hc:ScrollViewer>
+                    <ListBox/>
+                </hc:ScrollViewer>
             </Grid>
         </Grid>
     </Border>
@@ -130,7 +149,7 @@
             </Grid>
             <hc:ScrollViewer Grid.Row="1">
                 <ListBox>
-                    
+                    <!--<pitem:ProductCartItem/>-->
                 </ListBox>
             </hc:ScrollViewer>
             <Grid Grid.Row="2">
@@ -142,6 +161,49 @@
                         BorderBrush="{DynamicResource BorderBrush}"
                         Margin="8 0"
                         VerticalAlignment="Top"/>
+                <StackPanel Grid.Row="0"
+                            Margin="12">
+                    <hc:FlexPanel JustifyContent="SpaceBetween"
+                                  Margin="0 0 0 8">
+                        <TextBlock Text="Sub Total"
+                                   FontSize="22"
+                                   FontWeight="Light"/>
+                        <TextBlock Text="0"
+                                   FontSize="22"/>
+                    </hc:FlexPanel>
+                    <hc:FlexPanel JustifyContent="SpaceBetween"
+                                  Margin="0 0 0 8">
+                        <TextBlock Text="Discount"
+                                   FontSize="22"
+                                   FontWeight="Light"/>
+                        <TextBlock Text="0"
+                                   FontSize="22"/>
+                    </hc:FlexPanel>
+                    <hc:FlexPanel JustifyContent="SpaceBetween"
+                                  Margin="0 0 0 8">
+                        <TextBlock Text="Vat"
+                                   FontSize="22"
+                                   FontWeight="Light"/>
+                        <TextBlock Text="0"
+                                   FontSize="22"/>
+                    </hc:FlexPanel>
+                    <hc:FlexPanel JustifyContent="SpaceBetween"
+                                  Margin="0 0 0 8">
+                        <TextBlock Text="Additional Fee"
+                                   FontSize="22"
+                                   FontWeight="Light"/>
+                        <TextBlock Text="0"
+                                   FontSize="22"/>
+                    </hc:FlexPanel>
+                    <hc:FlexPanel JustifyContent="SpaceBetween"
+                                  Margin="0 0 0 8">
+                        <TextBlock Text="Total"
+                                   FontSize="22"
+                                   FontWeight="Light"/>
+                        <TextBlock Text="0"
+                                   FontSize="22"/>
+                    </hc:FlexPanel>
+                </StackPanel>
                 <hc:FlexPanel Grid.Row="1"
                               AlignContent="Center"
                               JustifyContent="SpaceBetween"

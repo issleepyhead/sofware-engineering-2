@@ -16,7 +16,12 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         }
         
         public RelayCommand<object> OpenSupplier => new(OpenSupplierDialog);
-        private void OpenSupplierDialog(object obj) => Dialog.Show(new SupplierDialog());
+        private void OpenSupplierDialog(object obj)
+        {
+            var d = new SupplierDialog();
+            ((SupplierDialogViewModel)d.DataContext).BTN = d.Closebtn;
+            Dialog.Show(d);
+        }
 
         public RelayCommand<object> SelectedCommand => new(SelectionChanged);
         private void SelectionChanged(object obj)
@@ -28,10 +33,10 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                 if (pdataGrid.SelectedItems.Count > 0)
                 {
                     SupplierModel model = (SupplierModel)pdataGrid.SelectedItem;
-                    var d = new SupplierDialog(model);
+                    var d = new SupplierDialog();
                     ((SupplierDialogViewModel)d.DataContext).BTN = d.Closebtn;
+                    ((SupplierDialogViewModel)d.DataContext).Model = model;
                     Dialog.Show(d);
-                    pdataGrid.ItemsSource = pdataGrid.ItemsSource;
                 }
             }
         }

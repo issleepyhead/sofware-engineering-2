@@ -124,11 +124,11 @@
                         <TextBlock Text="&#xF7C1;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelDatabaseBackup}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <!--<hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelDatabaseBackup}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xF34E;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
+                </hc:SideMenuItem>-->
                 <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelAuditTrail}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xE3B6;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>

@@ -62,20 +62,16 @@
                   Margin="0 15 0 0">
             <DataGrid.Columns>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Category Name"
+                                    Header="User"
                                     Binding="{Binding CategoryName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Description"
+                                    Header="Action"
                                     Binding="{Binding CategoryDescription}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Added Date"
+                                    Header="Date Performed"
                                     Binding="{Binding DateAdded}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
-                                    Header="Last Updated"
-                                    Binding="{Binding DateUpdated}"
                                     Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

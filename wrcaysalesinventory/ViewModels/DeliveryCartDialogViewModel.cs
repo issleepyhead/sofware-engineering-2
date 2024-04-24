@@ -1,8 +1,11 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using HandyControl.Controls;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Controls;
 using wrcaysalesinventory.Customs.Dialogs;
+using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Services;
 
@@ -60,11 +63,20 @@ namespace wrcaysalesinventory.ViewModels
                         Quantity = "1"
                     };
                     ProductCartItem pitem = new(deliveryCartModel);
+                    pitem.Padding = new Thickness(0);
                     pitem.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
                     deliveryCartModel.Total = (double.Parse(deliveryCartModel.Quantity) * double.Parse(deliveryCartModel.Cost)).ToString();
                     deliveryCartModels.Add(pitem);
                 }
             }
+        }
+
+        public RelayCommand AddInventory => new(InsertInventory);
+        private void InsertInventory()
+        {
+            SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
+            SqlTransaction sqlTransaction = sqlConnection.BeginTransaction();
+
         }
     }
 }
