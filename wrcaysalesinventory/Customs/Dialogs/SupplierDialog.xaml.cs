@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
+using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Resources.Langs;
-using wrcaysalesinventory.ViewModels;
 
 namespace wrcaysalesinventory.Customs.Dialogs
 {
@@ -9,7 +9,7 @@ namespace wrcaysalesinventory.Customs.Dialogs
     /// </summary>
     public partial class SupplierDialog : Border
     {
-        public SupplierDialog(SupplierDialogViewModel model = null)
+        public SupplierDialog(SupplierModel model = null)
         {
             InitializeComponent();
             if(model != null)

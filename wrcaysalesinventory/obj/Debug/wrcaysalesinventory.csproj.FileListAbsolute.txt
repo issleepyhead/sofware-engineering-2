@@ -204,8 +204,6 @@ C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\bin\Debug\S
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.csproj.AssemblyReference.cache
-C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.csproj.SuggestedBindingRedirects.cache
-C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.exe.config
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Resources\Images\Images.baml
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Resources\Styles\Fonts.baml
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\CategoryDialog.g.cs
@@ -233,7 +231,6 @@ C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\C
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Panels\UsersPanel.g.cs
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Forms\LogInWindow.g.cs
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Forms\MainWindow.g.cs
-C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Forms\PrintBrowser.g.cs
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Forms\ServerWindow.g.cs
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\App.g.cs
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\wrcaysalesinventory_Content.g.cs
@@ -266,7 +263,6 @@ C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\C
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Panels\UsersPanel.baml
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Forms\LogInWindow.baml
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Forms\MainWindow.baml
-C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Forms\PrintBrowser.baml
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Forms\ServerWindow.baml
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.g.resources
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.Properties.Resources.resources
@@ -276,4 +272,20 @@ C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\w
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\wrcaysal.E6B0F7A1.Up2Date
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.exe
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.pdb
-C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\bin\Debug\stdole.dll
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\AdditionalFeeDialog.g.cs
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\DiscountDialog.g.cs
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\AdditionalFeeDialog.baml
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\DiscountDialog.baml
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\POSProductItem.g.cs
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\POSProductItem.baml
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\CustomerDialog.g.cs
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\DraftDialog.g.cs
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\FreebieDialog.g.cs
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\NoteDialog.g.cs
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\CustomerDialog.baml
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\DraftDialog.baml
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\FreebieDialog.baml
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\NoteDialog.baml
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Forms\ReportPreview.g.cs
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Forms\ReportPreview.baml

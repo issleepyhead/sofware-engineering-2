@@ -10,8 +10,10 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
 {
     public class SupplierPanelViewModel : BaseViewModel<SupplierModel>
     {
+        private readonly DataService _dataService;
         public SupplierPanelViewModel(DataService dataService)
         {
+            _dataService = dataService; 
             DataList = dataService.GetSupplierList();
         }
         
@@ -33,12 +35,18 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                 if (pdataGrid.SelectedItems.Count > 0)
                 {
                     SupplierModel model = (SupplierModel)pdataGrid.SelectedItem;
-                    var d = new SupplierDialog();
+                    var d = new SupplierDialog(model);
                     ((SupplierDialogViewModel)d.DataContext).BTN = d.Closebtn;
                     ((SupplierDialogViewModel)d.DataContext).Model = model;
                     Dialog.Show(d);
                 }
             }
+        }
+
+        public RelayCommand<SearchBar> SearchCmd => new(SearchCommand);
+        public void SearchCommand(SearchBar searchBar)
+        {
+            DataList = _dataService.SearchSupplierList(string.IsNullOrEmpty(searchBar.Text) ? "%" : searchBar.Text);
         }
     }
 }

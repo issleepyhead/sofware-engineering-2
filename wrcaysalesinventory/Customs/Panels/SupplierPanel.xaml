@@ -40,7 +40,9 @@
                               Height="35"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left"
-                              Style="{StaticResource SearchBarExtend}"/>
+                              Style="{StaticResource SearchBarExtend}"
+                              Command="{Binding SearchCmd}"
+                              CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
                 <StackPanel Orientation="Horizontal">
                     <Viewbox Height="35">
                         <hc:Pagination MaxPageCount="10"

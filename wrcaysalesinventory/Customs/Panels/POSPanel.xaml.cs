@@ -23,6 +23,10 @@ namespace wrcaysalesinventory.Customs.Panels
         public POSPanel()
         {
             InitializeComponent();
+
         }
+
     }
+
+
 }

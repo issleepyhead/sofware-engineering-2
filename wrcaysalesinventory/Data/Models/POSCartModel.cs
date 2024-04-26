@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace wrcaysalesinventory.Data.Models
 {
-    internal class POSCartModel
+    public class POSCartModel
     {
+        public string ID { get; set; } 
+        public string ProductName { get; set; }
+        public string Quantity { get; set; }
+        public string Cost { get; set; }
+        public string Total { get; set; }
     }
 }

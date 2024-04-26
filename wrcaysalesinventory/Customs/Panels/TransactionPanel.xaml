@@ -41,15 +41,26 @@
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left"
                               Style="{StaticResource SearchBarExtend}"/>
-                <!--<Viewbox Height="35">
-                    <hc:Pagination Name="Pagination"
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox Height="35">
+                        <hc:Pagination Name="Pagination"
                                    MaxPageCount="50"
                                    PageIndex="1"
                                    MaxPageInterval="3"
                                    DataCountPerPage="50"
                                    VerticalAlignment="Center"
-                                   hc:BorderElement.CornerRadius="0"/>
-                </Viewbox>-->
+                                   hc:BorderElement.CornerRadius="0"
+                                   Margin="0 0 10 0"/>
+                    </Viewbox>
+                    <Button hc:BorderElement.CornerRadius="0"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource DarkMaskBrush}"
+                            Content="View Report"
+                            Height="32"
+                            Width="130"
+                            Command="{Binding OpenCategory}"
+                            VerticalAlignment="Center"/>
+                </StackPanel>
             </hc:FlexPanel>
         </Border>
         <DataGrid hc:Empty.ShowEmpty="True"

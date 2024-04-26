@@ -1,8 +1,15 @@
 ﻿
 FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\App.xaml;;
+FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\AdditionalFeeDialog.xaml;;
 FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\CategoryDialog.xaml;;
+FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\CustomerDialog.xaml;;
 FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\DeliveryCartDialog.xaml;;
 FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\DeliveryDetailsDialog.xaml;;
+FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\DiscountDialog.xaml;;
+FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\DraftDialog.xaml;;
+FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\FreebieDialog.xaml;;
+FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\NoteDialog.xaml;;
+FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\POSProductItem.xaml;;
 FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\ProductCartItem.xaml;;
 FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\ProductDialog.xaml;;
 FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Dialogs\SubcategoryDialog.xaml;;
@@ -25,6 +32,6 @@ FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Pa
 FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Customs\Panels\UsersPanel.xaml;;
 FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Forms\LogInWindow.xaml;;
 FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Forms\MainWindow.xaml;;
-FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Forms\PrintBrowser.xaml;;
+FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Forms\ReportPreview.xaml;;
 FC:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\Forms\ServerWindow.xaml;;
 

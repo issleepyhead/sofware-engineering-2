@@ -1,7 +1,10 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using HandyControl.Controls;
+using System;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using wrcaysalesinventory.Customs.Dialogs;
@@ -14,12 +17,20 @@ namespace wrcaysalesinventory.ViewModels
     public class DeliveryCartDialogViewModel : BaseViewModel<ProductModel>
     {
         private DataService _dataService;
+        private MainWindow mw;
         public DeliveryCartDialogViewModel(DataService dataService)
         {
             _dataService = dataService;
             DataList = _dataService.GetProductList();
             SupplierList = _dataService.GetSupplierList();
+            mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         }
+
+        private Button _btn;
+        public Button BTN { get => _btn; set=> Set(ref _btn, value); }
+
+        private DeliveryModel _model = new();
+        public DeliveryModel Model { get => _model; set => Set(ref _model, value); }
 
         private ObservableCollection<ProductCartItem> deliveryCartModels = [];
         public ObservableCollection<ProductCartItem> DeliveryCartList { get => deliveryCartModels; set => Set(ref deliveryCartModels, value);}
@@ -46,7 +57,7 @@ namespace wrcaysalesinventory.ViewModels
                 for(int i = 0; i < deliveryCartModels.Count; i++)
                 {
                     DeliveryCartModel pCartModel = (DeliveryCartModel)deliveryCartModels[i].DataContext;
-                    if (pCartModel.ID == pModel.ID)
+                    if (pCartModel.ProductID == pModel.ID)
                     {
                         pexists = true;
                         break;
@@ -57,7 +68,7 @@ namespace wrcaysalesinventory.ViewModels
                 {
                     DeliveryCartModel deliveryCartModel = new DeliveryCartModel
                     {
-                        ID = pModel.ID,
+                        ProductID = pModel.ID,
                         Cost = pModel.ProductCost,
                         ProductName = pModel.ProductName,
                         Quantity = "1"
@@ -65,7 +76,6 @@ namespace wrcaysalesinventory.ViewModels
                     ProductCartItem pitem = new(deliveryCartModel);
                     pitem.Padding = new Thickness(0);
                     pitem.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-                    deliveryCartModel.Total = (double.Parse(deliveryCartModel.Quantity) * double.Parse(deliveryCartModel.Cost)).ToString();
                     deliveryCartModels.Add(pitem);
                 }
             }
@@ -76,6 +86,90 @@ namespace wrcaysalesinventory.ViewModels
         {
             SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
             SqlTransaction sqlTransaction = sqlConnection.BeginTransaction();
+            SqlCommand sqlCommand;
+            try
+            {
+                double totalItems = 0d;
+                double totalCost = 0d;
+
+                foreach (ProductCartItem pitem in deliveryCartModels)
+                {
+                    DeliveryCartModel dModel = ((DeliveryCartModel)pitem.DataContext);
+                    totalCost += double.Parse(dModel.Total);
+                    totalItems += double.Parse(dModel.Quantity);
+                }
+                Model.TotalItems = totalItems.ToString();
+                Model.DueTotal = (totalCost + double.Parse(Model.AdditionalFee)).ToString();
+
+
+                sqlCommand = new(@"INSERT INTO tbldeliveryheaders (
+                                       supplier_id, user_id, invoice_number, additional_fee,
+                                       total_items, due_total, note
+                                    ) VALUES (
+                                        @supid, @uid, @in, @af, @ti, @dt, @n
+                                    )", sqlConnection, sqlTransaction);
+                sqlCommand.Parameters.AddWithValue("@supid", Model.SupplierID);
+                sqlCommand.Parameters.AddWithValue("@uid", 1);
+                sqlCommand.Parameters.AddWithValue("@in", Model.ReferenceNumber);
+                sqlCommand.Parameters.AddWithValue("@af", Model.AdditionalFee);
+                sqlCommand.Parameters.AddWithValue("@ti", Model.TotalItems);
+                sqlCommand.Parameters.AddWithValue("@dt", Model.DueTotal);
+                sqlCommand.Parameters.AddWithValue("@n", string.IsNullOrEmpty(Model.Note) ? DBNull.Value : Model.Note);
+                if(sqlCommand.ExecuteNonQuery() > 0)
+                {
+                    foreach(ProductCartItem pitem in deliveryCartModels)
+                    {
+                        DeliveryCartModel dModel = ((DeliveryCartModel)pitem.DataContext);
+                        sqlCommand = new(@"INSERT INTO tbldeliveryproducts VALUES (
+                                            (SELECT TOP 1 id FROM tbldeliveryheaders ORDER BY id DESC), 
+                                            @pid,
+                                            @quantity
+                                         )", sqlConnection, sqlTransaction);
+                        sqlCommand.Parameters.AddWithValue("@pid", dModel.ProductID);
+                        sqlCommand.Parameters.AddWithValue("@quantity", dModel.Quantity);
+                        if(sqlCommand.ExecuteNonQuery() == 0)
+                        {
+                            throw new Exception();
+                        }
+                    }
+
+                    foreach(ProductCartItem pitem in deliveryCartModels)
+                    {
+                        DeliveryCartModel dModel = ((DeliveryCartModel)pitem.DataContext);
+                        sqlCommand = new(@"SELECT COUNT(*) FROM tblinventory WHERE product_id = @pid", sqlConnection, sqlTransaction);
+                        sqlCommand.Parameters.AddWithValue("@pid", dModel.ProductID);
+                        if((int)sqlCommand.ExecuteScalar() > 0)
+                        {
+                            sqlCommand = new("UPDATE tblinventory SET stocks = stocks + @q WHERE product_id = @pid",sqlConnection, sqlTransaction);
+                        } else
+                        {
+                            sqlCommand = new("INSERT INTO tblinventory (product_id, stocks) VALUES(@pid, @q)", sqlConnection, sqlTransaction);
+                        }
+                        sqlCommand.Parameters.AddWithValue("@q", dModel.Quantity);
+                        sqlCommand.Parameters.AddWithValue("@pid", dModel.ProductID);
+                        if(sqlCommand.ExecuteNonQuery() == 0)
+                        {
+                            throw new Exception();
+                        }
+                    }
+
+                    sqlTransaction.Commit();
+                    Growl.Success("Delivery has been added to the inventory.");
+                    mw.UpdateAll();
+                    WinHelper.CloseDialog(ref _btn);
+                } else
+                {
+                    throw new Exception();
+                }
+
+                
+            } catch
+            {
+                sqlTransaction.Rollback();
+                Growl.Warning("An error occured while performing the action");
+            } 
+
+            
 
         }
     }

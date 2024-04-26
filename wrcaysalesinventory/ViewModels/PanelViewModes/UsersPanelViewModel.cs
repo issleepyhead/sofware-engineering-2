@@ -36,5 +36,11 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                 Dialog.Show(d);
             }
         }
+
+        public RelayCommand<SearchBar> SearchCmd => new(SearchCommand);
+        public void SearchCommand(SearchBar searchBar)
+        {
+            DataList = _dataService.SearchUsersList(string.IsNullOrEmpty(searchBar.Text) ? "%" : searchBar.Text);
+        }
     }
 }

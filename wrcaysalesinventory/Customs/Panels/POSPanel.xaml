@@ -7,6 +7,8 @@
       xmlns:pitem="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
       xmlns:hc="https://handyorg.github.io/handycontrol"
       xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
+      xmlns:positem="clr-namespace:wrcaysalesinventory.Customs.Dialogs" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      DataContext="{Binding POSPanelView, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="800"
       d:DesignWidth="1400"
@@ -41,7 +43,9 @@
                               Margin="4 0"
                               FontSize="14"
                               HorizontalAlignment="Stretch"
-                              Style="{StaticResource SearchBarExtend}"/>
+                              Style="{StaticResource SearchBarExtend}"
+                              Command="{Binding SearchCommand}"
+                              CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
                 <hc:ComboBox HorizontalAlignment="Stretch"
                              Grid.Column="1"
                              Height="48"
@@ -118,9 +122,35 @@
             </Grid>
             <Grid Grid.Row="1"
                   Margin="16 8 16 15">
-                <hc:ScrollViewer>
-                    <ListBox/>
-                </hc:ScrollViewer>
+                <DataGrid hc:Empty.ShowEmpty="True"
+                      IsReadOnly="True"
+                      CanUserResizeColumns="False"
+                      AutoGenerateColumns="False"
+                      Grid.Row="1"
+                      Padding="0"
+                      ItemsSource="{Binding DataList}"
+                      hc:DataGridAttach.ApplyDefaultStyle="True"
+>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn FontSize="13"
+                                        Header="Product Name"
+                                        Binding="{Binding ProductName}"
+                                        Width="*"/>
+                        <DataGridTextColumn FontSize="13"
+                                        Header="Stocks Available"
+                                        Binding="{Binding StoksUnit}"
+                                        Width="*"/>
+                        <!--<DataGridTextColumn FontSize="13"
+                                        Header="Unit"
+                                        Binding="{Binding Unit}"
+                                        Width="*"/>-->
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </Grid>
     </Border>
@@ -129,7 +159,7 @@
             Grid.Row="0"
             Grid.Column="1"
             Grid.RowSpan="2"
-            Margin="8 14 8 8">
+            Margin="16 14 8 8">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
@@ -145,10 +175,10 @@
                        FontSize="22"/>
                 <Border BorderThickness="0 0 0 1"
                         BorderBrush="{DynamicResource BorderBrush}"
-                        Margin="8 0"/>
+                        Margin="12 0"/>
             </Grid>
             <hc:ScrollViewer Grid.Row="1">
-                <ListBox>
+                <ListBox BorderThickness="0" ItemsSource="{Binding CartList}">
                     <!--<pitem:ProductCartItem/>-->
                 </ListBox>
             </hc:ScrollViewer>
@@ -159,23 +189,34 @@
                 </Grid.RowDefinitions>
                 <Border BorderThickness="0 0 0 1"
                         BorderBrush="{DynamicResource BorderBrush}"
-                        Margin="8 0"
+                        Margin="12 0"
                         VerticalAlignment="Top"/>
                 <StackPanel Grid.Row="0"
-                            Margin="12">
+                            Margin="16 12">
                     <hc:FlexPanel JustifyContent="SpaceBetween"
                                   Margin="0 0 0 8">
                         <TextBlock Text="Sub Total"
                                    FontSize="22"
                                    FontWeight="Light"/>
-                        <TextBlock Text="0"
+                        <TextBlock Text="1000"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
                                   Margin="0 0 0 8">
-                        <TextBlock Text="Discount"
-                                   FontSize="22"
-                                   FontWeight="Light"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Discount"
+                                       FontSize="22"
+                                       FontWeight="Light"/>
+                            <Button Content="&#xF2E3;"
+                                    Padding="0"
+                                    Height="20"
+                                    Width="20"
+                                    BorderThickness="0"
+                                    Margin="8 0 0 0"
+                                    FontSize="20"
+                                    VerticalAlignment="Center"
+                                    FontFamily="{StaticResource FabricIcons}"/>
+                        </StackPanel>
                         <TextBlock Text="0"
                                    FontSize="22"/>
                     </hc:FlexPanel>
@@ -189,9 +230,20 @@
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
                                   Margin="0 0 0 8">
-                        <TextBlock Text="Additional Fee"
-                                   FontSize="22"
-                                   FontWeight="Light"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Additional Fee"
+                                       FontSize="22"
+                                       FontWeight="Light"/>
+                            <Button Content="&#xF2E3;"
+                                    Padding="0"
+                                    BorderThickness="0"
+                                    Margin="8 0 0 0"
+                                    FontSize="20"
+                                    Height="20"
+                                    Width="20"
+                                    VerticalAlignment="Center"
+                                    FontFamily="{StaticResource FabricIcons}"/>
+                        </StackPanel>
                         <TextBlock Text="0"
                                    FontSize="22"/>
                     </hc:FlexPanel>
@@ -207,7 +259,7 @@
                 <hc:FlexPanel Grid.Row="1"
                               AlignContent="Center"
                               JustifyContent="SpaceBetween"
-                              Margin="12 0">
+                              Margin="16 0">
                     <Button FontSize="16"
                             BorderThickness="1"
                             BorderBrush="{DynamicResource DarkMaskBrush}"

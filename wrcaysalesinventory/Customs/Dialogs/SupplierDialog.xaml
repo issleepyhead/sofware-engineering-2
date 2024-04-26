@@ -167,7 +167,9 @@
                         Width="130"
                         Grid.Column="0"
                         VerticalAlignment="Top"
-                        Name="DeleteButton"/>
+                        Name="DeleteButton"
+                        Command="{Binding DeleteCmd}"
+                        CommandParameter="{Binding }"/>
                 <Button FontSize="16"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"

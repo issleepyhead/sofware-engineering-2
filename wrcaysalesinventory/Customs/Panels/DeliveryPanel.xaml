@@ -71,28 +71,33 @@
                   AutoGenerateColumns="False"
                   Grid.Row="1"
                   Padding="0"
+                  ItemsSource="{Binding DataList}"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
                   Margin="0 15 0 0">
             <DataGrid.Columns>
                 <DataGridTextColumn FontSize="13"
                                     Header="Reference Number"
-                                    Binding="{Binding CategoryName}"
+                                    Binding="{Binding ReferenceNumber}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
+                                    Header="Processed By"
+                                    Binding="{Binding FullName}"
+                                    Width="*"/> 
+                <DataGridTextColumn FontSize="13"
                                     Header="Supplier"
-                                    Binding="{Binding CategoryDescription}"
+                                    Binding="{Binding SupplierName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Total Items"
-                                    Binding="{Binding DateAdded}"
+                                    Binding="{Binding TotalItems}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Amount Due"
-                                    Binding="{Binding DateUpdated}"
+                                    Binding="{Binding DueTotal}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Delivery Date"
-                                    Binding="{Binding DateUpdated}"
+                                    Binding="{Binding DeliveryDate}"
                                     Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

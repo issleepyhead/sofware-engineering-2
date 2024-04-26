@@ -14,8 +14,6 @@ namespace wrcaysalesinventory.Services
         private SqlCommand _sqlCmd;
         private SqlDataAdapter _sqlAdapter;
         private DataTable _dataTable;
-
-
         internal ObservableCollection<ProductModel> GetProductList()
         {
             ObservableCollection<ProductModel> pList = [];
@@ -68,7 +66,6 @@ namespace wrcaysalesinventory.Services
             }
             return pList;
         }
-
         internal ObservableCollection<ProductModel> SearchProductList(string query)
         {
             ObservableCollection<ProductModel> pList = [];
@@ -123,7 +120,6 @@ namespace wrcaysalesinventory.Services
             }
             return pList;
         }
-
         internal ObservableCollection<CategoryModel> GetGategoryList()
         {
             ObservableCollection<CategoryModel> cList = [];
@@ -152,7 +148,6 @@ namespace wrcaysalesinventory.Services
             }
             return cList;
         }
-
         internal ObservableCollection<CategoryModel> GetGategoryPanelList()
         {
             ObservableCollection<CategoryModel> cList = [];
@@ -183,7 +178,6 @@ namespace wrcaysalesinventory.Services
             }
             return cList;
         }
-
         internal ObservableCollection<CategoryModel> SearchGategoryPanelList(string query)
         {
             ObservableCollection<CategoryModel> cList = [];
@@ -215,7 +209,6 @@ namespace wrcaysalesinventory.Services
             }
             return cList;
         }
-
         internal ObservableCollection<SupplierModel> GetSupplierList()
         {
             ObservableCollection<SupplierModel> sList = [];
@@ -263,7 +256,6 @@ namespace wrcaysalesinventory.Services
             }
             return sList;
         }
-
         internal ObservableCollection<StatusModel> GetStatusList()
         {
             ObservableCollection<StatusModel> sList = [];
@@ -291,7 +283,6 @@ namespace wrcaysalesinventory.Services
             }
             return sList;
         }
-
         internal ObservableCollection<RoleModel> GetRoleList()
         {
             ObservableCollection<RoleModel> sList = [];
@@ -319,7 +310,6 @@ namespace wrcaysalesinventory.Services
             }
             return sList;
         }
-
         internal ObservableCollection<UserModel> GetUsersList()
         {
             ObservableCollection<UserModel> sList = [];
@@ -344,6 +334,262 @@ namespace wrcaysalesinventory.Services
 	                                tblstatus s ON a.status_id = s.id
                                 JOIN
 	                                tblroles r ON a.role_id = r.id", _sqlConn);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    UserModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        StatusName = row["status_name"].ToString(),
+                        StatusID = row["status_id"].ToString(),
+                        RoleID = row["role_id"].ToString(),
+                        RoleName = row["role_name"].ToString(),
+                        FirstName = row["first_name"].ToString(),
+                        LastName = row["last_name"].ToString(),
+                        Address = row["address"].ToString(),
+                        Contact = row["contact"].ToString(),
+                        Username = row["username"].ToString(),
+                        Password = row["password"].ToString(),
+                        DateAdded = row["date_added"].ToString()
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching users.");
+            }
+            return sList;
+        }
+        internal ObservableCollection<DeliveryModel> GetDeliveryList()
+        {
+            ObservableCollection<DeliveryModel> sList = [];
+            try
+            {
+                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlCmd = new(@"SELECT dh.id,
+	                                   dh.supplier_id,
+	                                   dh.user_id,
+	                                   u.first_name,
+	                                   u.last_name,
+                                       s.supplier_name,
+	                                   invoice_number,
+	                                   additional_fee,
+	                                   total_items,
+	                                   due_total,
+	                                   note,
+	                                   FORMAT(delivery_date, 'dd/MM/yyyy') delivery_date
+		
+                                FROM
+	                                tbldeliveryheaders dh
+                                JOIN
+	                                tblsuppliers s
+	                                ON dh.supplier_id = s.id
+                                JOIN
+	                                tblusers u
+	                                ON dh.user_id = u.id", _sqlConn);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    DeliveryModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        UserID = row["user_id"].ToString(),
+                        SupplierID = row["supplier_id"].ToString(),
+                        FullName = row["first_name"].ToString() + " " + row["last_name"].ToString(),
+                        AdditionalFee = row["additional_fee"].ToString(),
+                        DueTotal = row["due_total"].ToString(),
+                        TotalItems = row["total_items"].ToString(),
+                        Note = row["note"].ToString(),
+                        DeliveryDate = row["delivery_date"].ToString(),
+                        SupplierName = row["supplier_name"].ToString(),
+                        ReferenceNumber = row["invoice_number"].ToString(),
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching deliveries.");
+            }
+            return sList;
+        }
+        internal ObservableCollection<StocksModel> GetStocksList()
+        {
+            ObservableCollection<StocksModel> sList = [];
+            try
+            {
+                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlCmd = new(@"SELECT i.id,
+	                                   p.product_name,
+	                                   st.status_name,
+	                                   stocks,
+	                                   sold,
+	                                   defective,
+                                       p.product_unit,
+                                       p.product_cost
+                                FROM
+	                                tblinventory i
+                                JOIN
+	                                tblproducts p ON i.product_id = p.id
+                                JOIN
+	                                tblstatus st ON p.product_status = st.id", _sqlConn);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    StocksModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        StatusName = row["status_name"].ToString(),
+                        ProductName = row["product_name"].ToString(),
+                        Stocks = row["stocks"].ToString(),
+                        Sold = row["sold"].ToString(),
+                        Defective = row["defective"].ToString(),
+                        StoksUnit = row["stocks"].ToString() +" "+ row["product_unit"].ToString(),
+                        Cost = row["product_cost"].ToString()
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching stocks");
+            }
+            return sList;
+        }
+        internal ObservableCollection<StocksModel> SearchStocksList(string query)
+        {
+            ObservableCollection<StocksModel> sList = [];
+            try
+            {
+                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlCmd = new(@"SELECT i.id,
+	                                   p.product_name,
+	                                   st.status_name,
+                                       p.product_unit,s
+	                                   stocks,
+	                                   sold,
+	                                   defective,
+                                       p.product_cost
+                                FROM
+	                                tblinventory i
+                                JOIN
+	                                tblproducts p ON i.product_id = p.id
+                                JOIN
+	                                tblstatus st ON p.product_status = st.id
+                                WHERE product_name LIKE @pname", _sqlConn);
+                _sqlCmd.Parameters.AddWithValue("@pname", string.IsNullOrEmpty(query) ? "%" : query);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    StocksModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        StatusName = row["status_name"].ToString(),
+                        ProductName = row["product_name"].ToString(),
+                        Stocks = row["stocks"].ToString(),
+                        Sold = row["sold"].ToString(),
+                        Defective = row["defective"].ToString(),
+                        StoksUnit = row["stocks"].ToString() + " " + row["product_unit"].ToString(),
+                        Cost = row["product_cost"].ToString()
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching stocks");
+            }
+            return sList;
+        }
+        internal ObservableCollection<SupplierModel> SearchSupplierList(string query)
+        {
+            ObservableCollection<SupplierModel> sList = [];
+            try
+            {
+                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlCmd = new(@"SELECT s.id,
+                                   supplier_name,
+                                   first_name,
+                                   last_name,
+                                   city,
+                                   country,
+                                   address,
+                                   phone_number,
+                                   FORMAT(s.date_added, 'dd/MM/yyyy') date_added,
+                                   FORMAT(s.date_updated, 'dd/MM/yyyy') date_updated,
+                                   status_name
+                            FROM tblsuppliers s
+                            JOIN tblstatus st ON s.status_id = st.id
+                            WHERE supplier_name LIKE @query", _sqlConn);
+                _sqlCmd.Parameters.AddWithValue("@query", string.IsNullOrEmpty(query) ? "%" : query);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    SupplierModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        SupplierName = row["supplier_name"].ToString(),
+                        FirstName = row["first_name"].ToString(),
+                        LastName = row["last_name"].ToString(),
+                        City = row["city"].ToString(),
+                        Country = row["country"].ToString(),
+                        Address = row["address"].ToString(),
+                        PhoneNumber = row["phone_number"].ToString(),
+                        DateAdded = row["date_added"].ToString(),
+                        DateUpdated = row["date_updated"].ToString(),
+                        Status = row["status_name"].ToString()
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching suppliers.");
+            }
+            return sList;
+        }
+        internal ObservableCollection<UserModel> SearchUsersList(string query)
+        {
+            ObservableCollection<UserModel> sList = [];
+            try
+            {
+                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlCmd = new(@"SELECT a.id,
+	                                   s.id status_id,
+	                                   s.status_name,
+	                                   r.id role_id,
+	                                   r.role_name,
+	                                   first_name,
+	                                   last_name,
+	                                   address,
+	                                   contact,
+	                                   username,
+	                                   password,
+	                                   FORMAT(date_added, 'dd/MM/yyyy') date_added
+                                FROM
+	                                tblusers a
+                                JOIN
+	                                tblstatus s ON a.status_id = s.id
+                                JOIN
+	                                tblroles r ON a.role_id = r.id
+                                WHERE username LIKE @query OR first_name LIKE @query OR last_name LIKE @query", _sqlConn);
+                _sqlCmd.Parameters.AddWithValue("@query", query);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
                 _sqlAdapter.Fill(_dataTable);

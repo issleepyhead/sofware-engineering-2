@@ -58,15 +58,6 @@
     <Reference Include="CommonServiceLocator, Version=2.0.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.7\lib\net48\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Data.AdoDotNetInterop, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.11.9.0\lib\netstandard2.0\FluentValidation.dll</HintPath>
     </Reference>
@@ -96,6 +87,9 @@
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WinForms.10.0.40219.1\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -162,14 +156,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Customs\Dialogs\AdditionalFeeDialog.xaml.cs">
+      <DependentUpon>AdditionalFeeDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Customs\Dialogs\CategoryDialog.xaml.cs">
       <DependentUpon>CategoryDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customs\Dialogs\CustomerDialog.xaml.cs">
+      <DependentUpon>CustomerDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Customs\Dialogs\DeliveryCartDialog.xaml.cs">
       <DependentUpon>DeliveryCartDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Customs\Dialogs\DeliveryDetailsDialog.xaml.cs">
       <DependentUpon>DeliveryDetailsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customs\Dialogs\DiscountDialog.xaml.cs">
+      <DependentUpon>DiscountDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customs\Dialogs\DraftDialog.xaml.cs">
+      <DependentUpon>DraftDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customs\Dialogs\FreebieDialog.xaml.cs">
+      <DependentUpon>FreebieDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customs\Dialogs\NoteDialog.xaml.cs">
+      <DependentUpon>NoteDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customs\Dialogs\POSProductItem.xaml.cs">
+      <DependentUpon>POSProductItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Customs\Dialogs\ProductCartItem.xaml.cs">
       <DependentUpon>ProductCartItem.xaml</DependentUpon>
@@ -235,6 +250,11 @@
     <Compile Include="Data\Classes\GlobalData.cs" />
     <Compile Include="Data\Classes\SqlBaseConnection.cs" />
     <Compile Include="Data\Classes\WinHelper.cs" />
+    <Compile Include="Data\DataSet\ReportsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportsDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Data\Models\CategoryModel.cs" />
     <Compile Include="Data\Models\DeliveryCartModel.cs" />
     <Compile Include="Data\Models\DeliveryModel.cs" />
@@ -255,8 +275,8 @@
     <Compile Include="Forms\LogInWindow.xaml.cs">
       <DependentUpon>LogInWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PrintBrowser.xaml.cs">
-      <DependentUpon>PrintBrowser.xaml</DependentUpon>
+    <Compile Include="Forms\ReportPreview.xaml.cs">
+      <DependentUpon>ReportPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\ServerWindow.xaml.cs">
       <DependentUpon>ServerWindow.xaml</DependentUpon>
@@ -274,15 +294,26 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\CategoryPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\DeliveryPanelViewModel.cs" />
+    <Compile Include="ViewModels\PanelViewModes\POSPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\ProductPanelViewModel.cs" />
+    <Compile Include="ViewModels\PanelViewModes\StocksPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\SupplierPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\TransactionPanelViewPanel.cs" />
     <Compile Include="ViewModels\PanelViewModes\UsersPanelViewModel.cs" />
     <Compile Include="ViewModels\ProductDialogViewModel.cs" />
     <Compile Include="ViewModels\SupplierDialogViewModel.cs" />
+    <Compile Include="ViewModels\TransactionPanelViewModel.cs" />
     <Compile Include="ViewModels\UsersDialogViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Page Include="Customs\Dialogs\AdditionalFeeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Customs\Dialogs\CategoryDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\CustomerDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -291,6 +322,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customs\Dialogs\DeliveryDetailsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\DiscountDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\DraftDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\FreebieDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\NoteDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\POSProductItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -390,7 +441,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Forms\PrintBrowser.xaml">
+    <Page Include="Forms\ReportPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -421,6 +472,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Forms\Report1.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -429,6 +481,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Lang.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\DataSet\ReportsDataSet.xsc">
+      <DependentUpon>ReportsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Data\DataSet\ReportsDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportsDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\DataSet\ReportsDataSet.xss">
+      <DependentUpon>ReportsDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

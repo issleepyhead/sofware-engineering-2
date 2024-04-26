@@ -22,7 +22,7 @@ namespace wrcaysalesinventory.ViewModels
             mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         }
 
-        private SupplierModel _model;
+        private SupplierModel _model = new();
         public SupplierModel Model { get => _model; set => Set(ref _model, value); }
 
         private Button _btn;
@@ -54,6 +54,7 @@ namespace wrcaysalesinventory.ViewModels
         {
             try
             {
+
                 SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
                 SqlCommand sqlCommand = new("DELETE FROM tblsuppliers WHERE id = @id", sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
@@ -155,6 +156,23 @@ namespace wrcaysalesinventory.ViewModels
                 {
                     SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
                     SqlCommand sqlCommand;
+
+                    if (string.IsNullOrEmpty(vm.Model.ID))
+                    {
+                        sqlCommand = new("SELECT COUNT(*) FROM tblsuppliers WHERE supplier_name LIKE @suppliername OR phone_number LIKE @phone", sqlConnection);
+                    }
+                    else
+                    {
+                        sqlCommand = new("SELECT COUNT(*) FROM tblsuppliers WHERE supplier_name LIKE @suppliername OR phone_number LIKE @phone AND id != @id", sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                    }
+                    sqlCommand.Parameters.AddWithValue("@suppliername", vm.Model.SupplierName);
+                    sqlCommand.Parameters.AddWithValue("@phone", vm.Model.PhoneNumber);
+                    if ((int)sqlCommand.ExecuteScalar() > 0)
+                    {
+                        Growl.Info("Supplier exists!");
+                        return;
+                    }
                     if (string.IsNullOrEmpty(Model.ID))
                     {
                         sqlCommand = new(@"INSERT INTO tblsuppliers (

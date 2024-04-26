@@ -140,13 +140,30 @@ namespace wrcaysalesinventory.ViewModels
                 {
                     if (string.IsNullOrEmpty(vm.Model.ID))
                     {
+                        sqlCommand = new("SELECT COUNT(*) FROM tblusers WHERE username LIKE @usrname", sqlConnection);
+                    }
+                    else
+                    {
+                        sqlCommand = new("SELECT COUNT(*) FROM tblusers WHERE username LIKE @usrname AND id != @id", sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                    }
+                    sqlCommand.Parameters.AddWithValue("@usrname", vm.Model.Username);
+                    if ((int)sqlCommand.ExecuteScalar() > 0)
+                    {
+                        Growl.Info("Username exists!");
+                        return;
+                    }
+
+
+                    if (string.IsNullOrEmpty(vm.Model.ID))
+                    {
                         sqlCommand = new(@"INSERT INTO tblusers (first_name,last_name,address,contact,username, password, role_id)
                                             VALUES (@fname, @lname, @address, @contact, @username, @password, @roleid)", sqlConnection);
                     }
                     else
                     {
-                        sqlCommand = new(@"UPDATE tblproducts SET product_name = @pname, product_description = @pdesc, product_price = @pprice, product_cost = @pcost,
-                                               product_unit = @punit, product_status = @pstatus, selling_unit = @sunit WHERE id = @id", sqlConnection);
+                        sqlCommand = new(@"UPDATE tblusers SET first_name = @fname, last_name = @lname, address = @address, contact = @contact,
+                                               username = @username, password = @password, role_id = @roleid WHERE id = @id", sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                     }
                     sqlCommand.Parameters.AddWithValue("@lname", vm.Model.LastName);
