@@ -1,6 +1,7 @@
 ﻿using HandyControl.Controls;
 using HandyControl.Tools.Command;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using wrcaysalesinventory.Customs.Dialogs;
@@ -28,12 +29,36 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         private string _totalAmount = "0";
 
         private string _discount = "0";
-        public string Discount { get => _discount; set => Set(ref _discount, value); }
+
+        public string Discount { get {
+                if (Regex.IsMatch(_discount, "^(\\d+)?\\.?(\\d+)$"))
+                {
+                    return _discount;
+                }
+                else
+                {
+                    return null;
+                }
+            } set {  Set(ref _discount, value); ValueChanged(); } }
         private string _additional = "0";
-        public string AdditionalFee { get => _additional; set => Set(ref _additional, value); }
+        public string AdditionalFee { get
+            {
+                if (Regex.IsMatch(_additional, "^(\\d+)?\\.?(\\d+)$"))
+                {
+                    return _additional;
+                } else
+                {
+                    return null;
+                }
+            } set
+            {
+                Set(ref _additional, value);
+                ValueChanged();
+            }
+        }
         private string _vat = "0";
         public string VAT { get => _vat; set => Set(ref _vat, value); }
-        public string TotalAmount { get => (double.Parse(_totalAmount) + double.Parse(Header.AdditionalFee) + double.Parse(Header.Discount) + double.Parse(Header.VAT)).ToString(); set => Set(ref _totalAmount, value); }
+        public string TotalAmount { get => _totalAmount; set { Set(ref _totalAmount, value); } }
 
 
         public RelayCommand<SearchBar> SearchCommand => new(SearchProduct);
@@ -50,7 +75,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                 total += double.Parse(model.Total);
             }
             SubTotal = total.ToString();
-            TotalAmount = total.ToString();
+            TotalAmount = (total + double.Parse(AdditionalFee) - (total * (double.Parse(Discount ?? "0") / 100)) + double.Parse(VAT)).ToString();
         }
 
         public RelayCommand<DataGrid> SelectedCommand => new(AddToCart);
@@ -90,7 +115,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                     total += double.Parse(model.Total);
                 }
                 SubTotal = total.ToString();
-                TotalAmount = total.ToString();
+                TotalAmount = (total + double.Parse(AdditionalFee) - (total * (double.Parse(Discount ?? "0") / 100)) + double.Parse(VAT)).ToString();
             }
         }
 
@@ -99,6 +124,14 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         private void OpenDiscount(object obj)
         {
             DiscountDialog d = new(this);
+            Dialog.Show(d);
+        }
+
+        public RelayCommand<object> OpenAFeeCmd => new(OpenAFee);
+
+        private void OpenAFee(object obj)
+        {
+            AdditionalFeeDialog d = new(this);
             Dialog.Show(d);
         }
     }

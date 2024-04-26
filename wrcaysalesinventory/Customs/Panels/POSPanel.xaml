@@ -302,6 +302,7 @@
                                     Margin="8 0 0 0"
                                     FontSize="20"
                                     Height="20"
+                                    Command="{Binding OpenAFeeCmd}"
                                     Width="20"
                                     VerticalAlignment="Center"
                                     FontFamily="{StaticResource FabricIcons}"/>

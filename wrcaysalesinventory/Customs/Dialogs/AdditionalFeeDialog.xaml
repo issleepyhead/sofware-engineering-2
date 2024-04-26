@@ -56,12 +56,8 @@
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             hc:InfoElement.Placeholder="Enter additional fee"
-                            Text="{Binding Model.CategoryName,UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding AdditionalFee,UpdateSourceTrigger=PropertyChanged}"
                             Height="40"/>
-                <TextBlock Name="CategoryNameError"
-                           FontSize="13"
-                           Text="{Binding CategoryNameError, UpdateSourceTrigger=PropertyChanged}"
-                           Foreground="Red"/>
             </StackPanel>
             <!--<StackPanel Margin="0 8 0 0">
                 <TextBlock Text="Description:"
@@ -89,7 +85,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="DeleteButton"
+                <!--<Button Name="DeleteButton"
                         Margin="0 0 14 0"
                         FontSize="16"
                         hc:BorderElement.CornerRadius="0"
@@ -101,19 +97,17 @@
                         CommandParameter="{Binding}"
                         Width="130"
                         Grid.Column="0"
-                        VerticalAlignment="Top"/>
-                <Button Name="AddButton"
-                        FontSize="16"
+                        VerticalAlignment="Top"/>-->
+                <Button FontSize="16"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{DynamicResource DarkMaskBrush}"
-                        Command="{Binding ValidateCategory}"
-                        Content="{x:Static langs:Lang.LabelAdd}"
+                        Content="Save"
                         Height="35"
                         Width="130"
                         CommandParameter="{Binding}"
                         VerticalAlignment="Top"
-                        Grid.Column="1"/>
+                        Grid.Column="1" Click="Button_Click"/>
             </Grid>
         </hc:FlexPanel>
     </Grid>
