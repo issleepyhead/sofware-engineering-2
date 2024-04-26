@@ -15,7 +15,7 @@ namespace wrcaysalesinventory.Customs.Dialogs
     /// </summary>
     public partial class DeliveryCartDialog : Border
     {
-        private ObservableCollection<DeliveryCartModel> _cartModel;
+        //private ObservableCollection<DeliveryCartModel> _cartModel;
         public DeliveryCartDialog()
         {
             InitializeComponent();

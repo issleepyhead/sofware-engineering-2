@@ -18,7 +18,7 @@ namespace wrcaysalesinventory.Customs.Dialogs
     /// <summary>
     /// Interaction logic for AdditionalFeeDialog.xaml
     /// </summary>
-    public partial class AdditionalFeeDialog : UserControl
+    public partial class AdditionalFeeDialog : Border
     {
         public AdditionalFeeDialog()
         {

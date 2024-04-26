@@ -7,7 +7,8 @@
       xmlns:pitem="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
       xmlns:hc="https://handyorg.github.io/handycontrol"
       xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
-      xmlns:positem="clr-namespace:wrcaysalesinventory.Customs.Dialogs" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:data="clr-namespace:wrcaysalesinventory.Data.Models"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       DataContext="{Binding POSPanelView, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="800"
@@ -178,8 +179,68 @@
                         Margin="12 0"/>
             </Grid>
             <hc:ScrollViewer Grid.Row="1">
-                <ListBox BorderThickness="0" ItemsSource="{Binding CartList}">
-                    <!--<pitem:ProductCartItem/>-->
+                <ListBox BorderThickness="0" ItemsSource="{Binding CartList}"
+                         Margin="10 0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type data:POSCartModel}">
+                            <Border BorderBrush="Gray" BorderThickness="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Vertical"
+                                                        VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding ProductName}"
+                                                    VerticalAlignment="Center"
+                                                    Margin="10 0"
+                                                    FontSize="15"
+                                                    FontWeight="Medium"
+                                                    x:Name="ProductName"/>
+                                        <TextBlock Text="{Binding Cost}"
+                                                    VerticalAlignment="Center"
+                                                    Margin="10 0"
+                                                    FontSize="15"
+                                                    FontWeight="Medium"
+                                                    x:Name="ProductPrice"/>
+                                    </StackPanel>
+                                    <hc:NumericUpDown Grid.Column="1"
+                                                    Height="40"
+                                                    hc:BorderElement.CornerRadius="0"
+                                                    Value="{Binding Quantity}"
+                                                    Margin="10 0"
+                                                    Minimum="1"
+                                                      ValueChanged="NumericUpDown_ValueChanged"/>
+                                    <Grid Grid.Column="2">
+                                        <Button x:Name="DeleteProduct"
+                                                hc:BorderElement.CornerRadius="0"
+                                                hc:IconElement.Height="20"
+                                                hc:IconElement.Width="20"
+                                                hc:IconElement.Geometry="{StaticResource ic_delete}"
+                                                Height="80"
+                                                BorderThickness="0"
+                                                Background="#FFFF0808"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="0 8"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{x:Null}"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{x:Null}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                 </ListBox>
             </hc:ScrollViewer>
             <Grid Grid.Row="2">
@@ -198,13 +259,13 @@
                         <TextBlock Text="Sub Total"
                                    FontSize="22"
                                    FontWeight="Light"/>
-                        <TextBlock Text="1000"
+                        <TextBlock Text="{Binding SubTotal}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
                                   Margin="0 0 0 8">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Discount"
+                            <TextBlock Text="Discount(%)"
                                        FontSize="22"
                                        FontWeight="Light"/>
                             <Button Content="&#xF2E3;"
@@ -214,18 +275,19 @@
                                     BorderThickness="0"
                                     Margin="8 0 0 0"
                                     FontSize="20"
+                                    Command="{Binding OpenDiscountCmd}"
                                     VerticalAlignment="Center"
                                     FontFamily="{StaticResource FabricIcons}"/>
                         </StackPanel>
-                        <TextBlock Text="0"
+                        <TextBlock Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
                                   Margin="0 0 0 8">
-                        <TextBlock Text="Vat"
+                        <TextBlock Text="Vat(%)"
                                    FontSize="22"
                                    FontWeight="Light"/>
-                        <TextBlock Text="0"
+                        <TextBlock Text="{Binding Vat, UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -244,7 +306,7 @@
                                     VerticalAlignment="Center"
                                     FontFamily="{StaticResource FabricIcons}"/>
                         </StackPanel>
-                        <TextBlock Text="0"
+                        <TextBlock Text="{Binding AdditionalFee, UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -252,7 +314,7 @@
                         <TextBlock Text="Total"
                                    FontSize="22"
                                    FontWeight="Light"/>
-                        <TextBlock Text="0"
+                        <TextBlock Text="{Binding TotalAmount, UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                 </StackPanel>

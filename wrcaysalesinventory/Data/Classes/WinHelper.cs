@@ -18,7 +18,7 @@ namespace wrcaysalesinventory.Data.Classes
         [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
         public static extern int MciSendString(string lpstrCommand, string lpstrReturnString, int uReturnLength, int hwndCallback);
 
-        public static void CloseDialog(ref Button btn)
+        public static void CloseDialog(Button btn)
         {
             ButtonAutomationPeer btnPeer = (ButtonAutomationPeer)UIElementAutomationPeer.CreatePeerForElement(btn);
             if (btnPeer != null)

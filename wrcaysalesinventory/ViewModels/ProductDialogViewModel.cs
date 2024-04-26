@@ -74,7 +74,7 @@ namespace wrcaysalesinventory.ViewModels
                 else
                     Growl.Info("Failed deleting the product.");
                 mw?.UpdateAll();
-                WinHelper.CloseDialog(ref _btn);
+                WinHelper.CloseDialog(_btn);
             }
             catch
             {
@@ -180,7 +180,7 @@ namespace wrcaysalesinventory.ViewModels
                         else
                             Growl.Success("Product has been updated successfully!");
                         mw?.UpdateAll();
-                        WinHelper.CloseDialog(ref _btn);
+                        WinHelper.CloseDialog(_btn);
                     }
                     else
                     {

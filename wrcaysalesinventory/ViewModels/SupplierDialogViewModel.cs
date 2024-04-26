@@ -63,7 +63,7 @@ namespace wrcaysalesinventory.ViewModels
                 else
                     Growl.Info("Failed deleting the supplier.");
                 mw?.UpdateAll();
-                WinHelper.CloseDialog(ref _btn);
+                WinHelper.CloseDialog(_btn);
             }
             catch
             {
@@ -208,7 +208,7 @@ namespace wrcaysalesinventory.ViewModels
                         else
                             Growl.Success("Supplier has been updated succesfully!");
                         mw?.UpdateAll();
-                        WinHelper.CloseDialog(ref _btn);
+                        WinHelper.CloseDialog(_btn);
                     }
                     else
                     {

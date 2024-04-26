@@ -10,7 +10,7 @@
         Width="550"
         CornerRadius="5"
         x:Name="Categ"
-        Background="{StaticResource DefaultBrush}"
+        Background="{DynamicResource DefaultBrush}"
         DataContext="{Binding Path=CategoryDialogView, Source={StaticResource Locator}}">
     <Grid hc:BorderElement.CornerRadius="5">
         <Grid.RowDefinitions>
@@ -21,7 +21,7 @@
         <hc:FlexPanel JustifyContent="SpaceBetween"
                       AlignContent="Center"
                       Grid.Row="0"
-                      Background="{StaticResource DarkMaskBrush}">
+                      Background="{DynamicResource DarkMaskBrush}">
             <StackPanel Orientation="Horizontal"
                         Margin="18 0">
                 <TextBlock Text="&#xF2C7;"
@@ -108,7 +108,7 @@
                         FontSize="16"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
-                        BorderBrush="{StaticResource DarkMaskBrush}"
+                        BorderBrush="{DynamicResource DarkMaskBrush}"
                         Command="{Binding ValidateCategory}"
                         Content="{x:Static langs:Lang.LabelAdd}"
                         Height="35"

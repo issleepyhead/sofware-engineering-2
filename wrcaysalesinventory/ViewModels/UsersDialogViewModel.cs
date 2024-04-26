@@ -180,7 +180,7 @@ namespace wrcaysalesinventory.ViewModels
                         else
                             Growl.Success("Account has been updated successfully!");
                         mw?.UpdateAll();
-                        WinHelper.CloseDialog(ref _btn);
+                        WinHelper.CloseDialog(_btn);
                     }
                     else
                     {

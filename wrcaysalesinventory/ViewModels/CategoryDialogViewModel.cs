@@ -45,7 +45,7 @@ namespace wrcaysalesinventory.ViewModels
                 {
                     Growl.Success("Category has been deleted successfully!");
                     mw.UpdateAll();
-                    WinHelper.CloseDialog(ref _btn);
+                    WinHelper.CloseDialog(_btn);
                 }
                 else
                 {
@@ -102,7 +102,7 @@ namespace wrcaysalesinventory.ViewModels
                         else
                             Growl.Success("Category has been updated succesfully!");
                         mw?.UpdateAll();
-                        WinHelper.CloseDialog(ref _btn);
+                        WinHelper.CloseDialog(_btn);
                     } else
                     {
                         Growl.Warning("An error occured while performing an action.");

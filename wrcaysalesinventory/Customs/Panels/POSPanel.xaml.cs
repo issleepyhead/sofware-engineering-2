@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wrcaysalesinventory.ViewModels.PanelViewModes;
 
 namespace wrcaysalesinventory.Customs.Panels
 {
@@ -26,6 +27,11 @@ namespace wrcaysalesinventory.Customs.Panels
 
         }
 
+        private void NumericUpDown_ValueChanged(object sender, HandyControl.Data.FunctionEventArgs<double> e)
+        {
+            POSPanelViewModel pmodel = (POSPanelViewModel)DataContext;
+            pmodel.ValueChanged();
+        }
     }
 
 

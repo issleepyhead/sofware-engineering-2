@@ -10,8 +10,8 @@ namespace wrcaysalesinventory.Data.Models
     {
         public string ID { get; set; } 
         public string ProductName { get; set; }
-        public string Quantity { get; set; }
-        public string Cost { get; set; }
-        public string Total { get; set; }
+        public string Quantity { get; set; } = "0";
+        public string Cost { get; set; } = "0";
+        public string Total { get => (double.Parse(Quantity ?? "0") * double.Parse(Cost ?? "0")).ToString() ; }
     }
 }

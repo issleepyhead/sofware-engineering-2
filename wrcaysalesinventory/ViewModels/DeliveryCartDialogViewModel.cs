@@ -24,6 +24,7 @@ namespace wrcaysalesinventory.ViewModels
             DataList = _dataService.GetProductList();
             SupplierList = _dataService.GetSupplierList();
             mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            deliveryCartModels = [];
         }
 
         private Button _btn;
@@ -156,7 +157,7 @@ namespace wrcaysalesinventory.ViewModels
                     sqlTransaction.Commit();
                     Growl.Success("Delivery has been added to the inventory.");
                     mw.UpdateAll();
-                    WinHelper.CloseDialog(ref _btn);
+                    WinHelper.CloseDialog(_btn);
                 } else
                 {
                     throw new Exception();

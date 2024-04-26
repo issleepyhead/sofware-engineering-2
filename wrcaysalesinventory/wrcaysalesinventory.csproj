@@ -264,6 +264,7 @@
     <Compile Include="Data\Models\StatusModel.cs" />
     <Compile Include="Data\Models\StocksModel.cs" />
     <Compile Include="Data\Models\SupplierModel.cs" />
+    <Compile Include="Data\Models\TransactionHeaderModel.cs" />
     <Compile Include="Data\Models\TransactionModel.cs" />
     <Compile Include="Data\Models\UserModel.cs" />
     <Compile Include="Data\Models\Validations\CategoryValidator.cs" />

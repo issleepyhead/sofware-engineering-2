@@ -519,7 +519,7 @@ namespace wrcaysalesinventory.Services
             ObservableCollection<SupplierModel> sList = [];
             try
             {
-                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlConn = SqlBaseConnection.GetInstance();
                 _sqlCmd = new(@"SELECT s.id,
                                    supplier_name,
                                    first_name,
@@ -569,7 +569,7 @@ namespace wrcaysalesinventory.Services
             ObservableCollection<UserModel> sList = [];
             try
             {
-                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlConn = SqlBaseConnection.GetInstance();
                 _sqlCmd = new(@"SELECT a.id,
 	                                   s.id status_id,
 	                                   s.status_name,
@@ -617,6 +617,58 @@ namespace wrcaysalesinventory.Services
             catch
             {
                 Growl.Warning("An error occured while fetching users.");
+            }
+            return sList;
+        }
+        internal ObservableCollection<TransactionModel> GetTransactionList()
+        {
+            ObservableCollection<TransactionModel> sList = [];
+            try
+            {
+                _sqlConn = SqlBaseConnection.GetInstance();
+                _sqlCmd = new(@"SELECT t.id,
+	                                   customer_id,
+	                                   user_id,
+	                                   reference_number,
+	                                   total_amount,
+	                                   additional_fee,
+	                                   discount,
+	                                   vat,
+	                                   total_items,
+                                       FORMAT(t.date_added, 'dd/MM/yyyy') date_added,
+                                       CONCAT(u.first_name, ' ', u.last_name) FullName
+                                FROM 
+	                                tbltransactionheaders t
+                                LEFT JOIN
+	                                tblusers u ON t.user_id = u.id
+                                LEFT JOIN
+	                                tblcustomers c ON t.customer_id = c.id", _sqlConn);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    TransactionModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        CustomerID = row["customer_id"].ToString(),
+                        UserID = row["user_id"].ToString(),
+                        ReferenceNumber = row["reference_number"].ToString(),
+                        TotalCost = row["total_amount"].ToString(),
+                        TotalItems = row["total_items"].ToString(),
+                        Discount = row["discount"].ToString(),
+                        VAT = row["vat"].ToString(),
+                        DateAdded = row["date_added"].ToString(),
+                        CashierName = row["FullName"].ToString()
+                        
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching transactions.");
             }
             return sList;
         }
