@@ -42,15 +42,15 @@
                               HorizontalAlignment="Left"
                               Style="{StaticResource SearchBarExtend}"/>
                 <StackPanel Orientation="Horizontal">
-                    <!--<Viewbox Height="35">
+                    <Viewbox Height="35">
                         <hc:Pagination MaxPageCount="10"
                                        PageIndex="1"
                                        MaxPageInterval="3"
                                        DataCountPerPage="15"
                                        VerticalAlignment="Center"
                                        hc:BorderElement.CornerRadius="0"
-                                       Margin="0 0 12 0"/>
-                    </Viewbox>-->
+                                       Margin="0 0 10 0"/>
+                    </Viewbox>
                     <Button hc:BorderElement.CornerRadius="0"
                             BorderThickness="1"
                             BorderBrush="{StaticResource DarkMaskBrush}"

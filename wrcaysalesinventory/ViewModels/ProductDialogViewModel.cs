@@ -1,22 +1,18 @@
-﻿using FluentValidation.Results;
-using HandyControl.Controls;
-using HandyControl.Data;
+﻿using HandyControl.Controls;
 using HandyControl.Tools.Command;
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Data.Models.Validations;
 using wrcaysalesinventory.Services;
+using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace wrcaysalesinventory.ViewModels
 {
@@ -76,9 +72,12 @@ namespace wrcaysalesinventory.ViewModels
                 mw?.UpdateAll();
                 WinHelper.CloseDialog(_btn);
             }
-            catch
+            catch(SqlException ex)
             {
-                Growl.Warning("An error occured while performing the action.");
+                if (ex.Message.Contains("DELETE"))
+                    MessageBox.Warning(@"This action cannot be completed because the record is referenced by other data in the system. Please remove associated references or contact your system administrator for assistance.", "Unable to delete record.");
+                else
+                    Growl.Warning("An error occured while performing the action.");
             }
         }
 

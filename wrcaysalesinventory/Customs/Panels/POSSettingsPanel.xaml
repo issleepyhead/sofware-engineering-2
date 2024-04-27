@@ -16,76 +16,54 @@
         <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <Grid Grid.Row="0">
-        <TextBlock Text="Categories"
+        <TextBlock Text="General Settings"
                     FontSize="32"
                     FontWeight="Light"
                     VerticalAlignment="Center"/>
         <Border BorderThickness="0 0 0 1"
-                BorderBrush="{StaticResource BorderBrush}"/>
+                BorderBrush="{DynamicResource BorderBrush}"/>
     </Grid>
-    <Grid Grid.Row="1"
-          Margin="0 10">
-        <Grid.RowDefinitions>
+    <StackPanel Grid.Row="1"
+                Margin="0 10">
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0"
-                BorderBrush="{StaticResource BorderBrush}"
-                BorderThickness="0 0 0 1">
-            <hc:FlexPanel 
-                          JustifyContent="SpaceBetween">
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <TextBlock Text="Total Categories: "
-                               VerticalAlignment="Center"
-                               FontSize="18"
-                               FontWeight="Light"/>
-                    <TextBlock Text="100"
-                               VerticalAlignment="Center"
-                               FontSize="18"
-                               FontWeight="Light"/>
-                </StackPanel>
-                <Button Name="AddButton"
+        </Grid.RowDefinitions>-->
+        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+            <hc:FlexPanel JustifyContent="SpaceBetween"
+                          AlignItems="Center"
+                          AlignContent="Center"
+                          Margin="10 0"
+                          VerticalAlignment="Center">
+                <TextBlock Text="Key Bindings"
+                           FontSize="18"
+                           VerticalAlignment="Center"/>
+                <Button FontSize="16"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
-                        Content="{x:Static langs:Lang.LabelAdd}"
-                        Height="32"
-                        Width="130"
-                        Command="{Binding OpenCategory}"
-                        VerticalAlignment="Center"/>
-
+                        Content="Change"
+                        Height="35"
+                        Width="130"/>
             </hc:FlexPanel>
         </Border>
-        <DataGrid hc:Empty.ShowEmpty="True"
-                  BorderThickness="0"
-                  BorderBrush="{x:Null}"
-                  IsReadOnly="True"
-                  CanUserResizeColumns="False"
-                  AutoGenerateColumns="False"
-                  Grid.Row="1"
-                  Padding="0"
-                  ItemsSource="{Binding DataList}"
-                  hc:DataGridAttach.ApplyDefaultStyle="True"
-                  Margin="0 15 0 0">
-            <DataGrid.Columns>
-                <DataGridTextColumn FontSize="13"
-                                    Header="Category Name"
-                                    Binding="{Binding CategoryName}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
-                                    Header="Description"
-                                    Binding="{Binding CategoryDescription}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
-                                    Header="Added Date"
-                                    Binding="{Binding DateAdded}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
-                                    Header="Last Updated"
-                                    Binding="{Binding DateUpdated}"
-                                    Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+            <hc:FlexPanel JustifyContent="SpaceBetween"
+                          AlignItems="Center"
+                          AlignContent="Center"
+                          Margin="10 0"
+                          VerticalAlignment="Center">
+                <TextBlock Text="Receipt Format"
+                           FontSize="18"
+                           VerticalAlignment="Center"/>
+                <Button FontSize="16"
+                        hc:BorderElement.CornerRadius="0"
+                        BorderThickness="1"
+                        BorderBrush="{StaticResource DarkMaskBrush}"
+                        Content="Change"
+                        Height="35"
+                        Width="130"/>
+            </hc:FlexPanel>
+        </Border>
+    </StackPanel>
 </Grid>

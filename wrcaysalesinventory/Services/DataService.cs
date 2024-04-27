@@ -288,7 +288,7 @@ namespace wrcaysalesinventory.Services
             ObservableCollection<RoleModel> sList = [];
             try
             {
-                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlConn = SqlBaseConnection.GetInstance();
                 _sqlCmd = new(@"SELECT id, role_name FROM tblroles", _sqlConn);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
@@ -669,6 +669,35 @@ namespace wrcaysalesinventory.Services
             catch
             {
                 Growl.Warning("An error occured while fetching transactions.");
+            }
+            return sList;
+        }
+        internal ObservableCollection<CustomerModel> GetCustomerList()
+        {
+            ObservableCollection<CustomerModel> sList = [];
+            try
+            {
+                _sqlConn = SqlBaseConnection.GetInstance();
+                _sqlCmd = new(@"SELECT id, full_name, phone, email FROM tblcustomers", _sqlConn);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    CustomerModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        FullName = row["full_name"].ToString(),
+                        Phone = row["phone"].ToString(),
+                        Email = row["email"].ToString()
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching customers.");
             }
             return sList;
         }

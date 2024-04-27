@@ -17,10 +17,13 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         {
             _dataService = dataService;
             DataList = _dataService.GetStocksList();
+            CustomerList = _dataService.GetCustomerList();
         }
 
         private ObservableCollection<POSCartModel> _data = [];
         public ObservableCollection<POSCartModel> CartList { get => _data; set => Set(ref _data, value); }
+        private ObservableCollection<CustomerModel> _customerList;
+        public ObservableCollection<CustomerModel> CustomerList { get => _customerList; set => Set(ref _customerList, value); }
         private TransactionHeaderModel _header = new();
         public TransactionHeaderModel Header { get => _header; set => Set(ref _header, value); }
 
@@ -75,7 +78,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                 total += double.Parse(model.Total);
             }
             SubTotal = total.ToString();
-            TotalAmount = (total + double.Parse(AdditionalFee) - (total * (double.Parse(Discount ?? "0") / 100)) + double.Parse(VAT)).ToString();
+            TotalAmount = (total + double.Parse(AdditionalFee ?? "0") - (total * (double.Parse(Discount ?? "0") / 100)) + double.Parse(VAT)).ToString();
         }
 
         public RelayCommand<DataGrid> SelectedCommand => new(AddToCart);
@@ -115,7 +118,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                     total += double.Parse(model.Total);
                 }
                 SubTotal = total.ToString();
-                TotalAmount = (total + double.Parse(AdditionalFee) - (total * (double.Parse(Discount ?? "0") / 100)) + double.Parse(VAT)).ToString();
+                TotalAmount = (total + double.Parse(AdditionalFee ?? "0") - (total * (double.Parse(Discount ?? "0") / 100)) + double.Parse(VAT)).ToString();
             }
         }
 
@@ -132,6 +135,22 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         private void OpenAFee(object obj)
         {
             AdditionalFeeDialog d = new(this);
+            Dialog.Show(d);
+        }
+
+        public RelayCommand<object> OpenCustomerCmd => new(OpenCustomer);
+
+        private void OpenCustomer(object obj)
+        {
+            CustomerDialog d = new(this);
+            Dialog.Show(d);
+        }
+
+        public RelayCommand<object> OpenNoteCmd => new(OpenNote);
+
+        private void OpenNote(object obj)
+        {
+            NoteDialog d = new(this);
             Dialog.Show(d);
         }
     }

@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="60"/>
+
                 </Grid.ColumnDefinitions>
                 <hc:SearchBar IsRealTime="True"
                               Grid.Column="0"
@@ -52,9 +52,20 @@
                              Height="48"
                              Width="250"
                              FontSize="14"
+                             ItemsSource="{Binding CustomerList}"
+                             SelectedValue="{Binding ID}"
+                             DisplayMemberPath="FullName"
+                             SelectedValuePath="ID"
+                             SelectedIndex="-1"
                              Margin="4 0"
-                             hc:InfoElement.Placeholder="Select Customer"
-                             SelectedIndex="0"/>
+                             hc:InfoElement.Placeholder="Select Customer"/>
+                <!--<Button Content="&#xF2B6;"
+                        Grid.Column="2"
+                        FontFamily="{StaticResource FabricIcons}"
+                        Height="48"
+                        Width="48"
+                        Padding="0"
+                        FontSize="22"/>-->
                 <Button Content="&#xF2B6;"
                         Grid.Column="2"
                         FontFamily="{StaticResource FabricIcons}"
@@ -62,33 +73,28 @@
                         Width="48"
                         Padding="0"
                         FontSize="22"/>
-                <Button Content="&#xEF95;"
+                <Button Content="&#xE616;"
                         Grid.Column="3"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
                         Padding="0"
+                        Command="{Binding OpenNoteCmd}"
                         FontSize="22"/>
-                <Button Content="&#xE616;"
+                <Button Content="&#xE749;"
                         Grid.Column="4"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
                         Padding="0"
                         FontSize="22"/>
-                <Button Content="&#xE749;"
+                <Button Content="&#xE8FA;"
                         Grid.Column="5"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
                         Padding="0"
-                        FontSize="22"/>
-                <Button Content="&#xE8FA;"
-                        Grid.Column="6"
-                        FontFamily="{StaticResource FabricIcons}"
-                        Height="48"
-                        Width="48"
-                        Padding="0"
+                        Command="{Binding OpenCustomerCmd}"
                         FontSize="22"/>
             </Grid>
         </Border>
@@ -104,11 +110,11 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0"
                   Margin="16 0">
-                <hc:FlexPanel JustifyContent="SpaceBetween">
-                    <TextBlock Text="5, 600 Results"
+                <hc:FlexPanel JustifyContent="FlexEnd">
+                    <!--<TextBlock Text="5, 600 Results"
                                VerticalAlignment="Center"
                                FontSize="22"
-                               FontWeight="Light"/>
+                               FontWeight="Light"/>-->
                     <Viewbox Height="35">
                         <hc:Pagination MaxPageCount="10"
                                    PageIndex="1"

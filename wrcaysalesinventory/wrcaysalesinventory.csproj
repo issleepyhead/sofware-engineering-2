@@ -256,6 +256,7 @@
       <DependentUpon>ReportsDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Data\Models\CategoryModel.cs" />
+    <Compile Include="Data\Models\CustomerModel.cs" />
     <Compile Include="Data\Models\DeliveryCartModel.cs" />
     <Compile Include="Data\Models\DeliveryModel.cs" />
     <Compile Include="Data\Models\POSCartModel.cs" />

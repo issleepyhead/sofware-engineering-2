@@ -15,6 +15,7 @@ using System.Linq;
 using System.Windows.Controls;
 using wrcaysalesinventory.Services;
 using System.Collections.ObjectModel;
+using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace wrcaysalesinventory.ViewModels
 {
@@ -57,6 +58,31 @@ namespace wrcaysalesinventory.ViewModels
 
         private string _passwordError;
         public string PasswordError { get => _passwordError; set => Set(ref _passwordError, value); }
+
+        public RelayCommand<UsersDialogViewModel> DeleteCmd => new(DeleteCommand);
+        private void DeleteCommand(UsersDialogViewModel vm)
+        {
+            try
+            {
+
+                SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
+                SqlCommand sqlCommand = new("DELETE FROM tblusers WHERE id = @id", sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                    Growl.Success("Account has been deleted successfully!");
+                else
+                    Growl.Info("Failed deleting the supplier.");
+                mw?.UpdateAll();
+                WinHelper.CloseDialog(_btn);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Message.Contains("DELETE"))
+                    MessageBox.Warning(@"This action cannot be completed because the record is referenced by other data in the system. Please remove associated references or contact your system administrator for assistance.", "Unable to delete record.");
+                else
+                    Growl.Warning("An error occured while performing the action.");
+            }
+        }
 
         public RelayCommand<UsersDialogViewModel> ValidateVM => new(ValidateModel);
 
@@ -140,11 +166,11 @@ namespace wrcaysalesinventory.ViewModels
                 {
                     if (string.IsNullOrEmpty(vm.Model.ID))
                     {
-                        sqlCommand = new("SELECT COUNT(*) FROM tblusers WHERE username LIKE @usrname", sqlConnection);
+                        sqlCommand = new("SELECT COUNT(*) FROM tblusers WHERE username = @usrname", sqlConnection);
                     }
                     else
                     {
-                        sqlCommand = new("SELECT COUNT(*) FROM tblusers WHERE username LIKE @usrname AND id != @id", sqlConnection);
+                        sqlCommand = new("SELECT COUNT(*) FROM tblusers WHERE username = @usrname AND id != @id", sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                     }
                     sqlCommand.Parameters.AddWithValue("@usrname", vm.Model.Username);

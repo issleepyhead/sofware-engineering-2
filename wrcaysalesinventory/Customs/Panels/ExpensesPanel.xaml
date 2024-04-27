@@ -32,8 +32,8 @@
                 BorderBrush="{StaticResource BorderBrush}"
                 BorderThickness="0 0 0 1">
             <hc:FlexPanel 
-                          JustifyContent="SpaceBetween">
-                <StackPanel Orientation="Horizontal"
+                          JustifyContent="FlexEnd">
+                <!--<StackPanel Orientation="Horizontal"
                             VerticalAlignment="Center">
                     <TextBlock Text="Total Categories: "
                                VerticalAlignment="Center"
@@ -43,8 +43,8 @@
                                VerticalAlignment="Center"
                                FontSize="18"
                                FontWeight="Light"/>
-                </StackPanel>
-                <Button Name="AddButton"
+                </StackPanel>-->
+                <!--<Button Name="AddButton"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
@@ -52,8 +52,26 @@
                         Height="32"
                         Width="130"
                         CommandParameter="{Binding}"
-                        VerticalAlignment="Center"/>
-
+                        VerticalAlignment="Center"/>-->
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox Height="35">
+                        <hc:Pagination MaxPageCount="10"
+                                       PageIndex="1"
+                                       MaxPageInterval="3"
+                                       DataCountPerPage="15"
+                                       VerticalAlignment="Center"
+                                       hc:BorderElement.CornerRadius="0"
+                                       Margin="0 0 12 0"/>
+                    </Viewbox>
+                    <Button hc:BorderElement.CornerRadius="0"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource DarkMaskBrush}"
+                            Content="View Report"
+                            Height="32"
+                            Width="130"
+                            Command="{Binding OpenCategory}"
+                            VerticalAlignment="Center"/>
+                </StackPanel>
             </hc:FlexPanel>
         </Border>
         <DataGrid x:Name="CategoriesDataGridView"
@@ -69,20 +87,20 @@
                   Margin="0 15 0 0">
             <DataGrid.Columns>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Category Name"
+                                    Header="Reference Number"
                                     Binding="{Binding CategoryName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Description"
+                                    Header="Items"
                                     Binding="{Binding CategoryDescription}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Added Date"
-                                    Binding="{Binding DateAdded}"
+                                    Header="Cost"
+                                    Binding="{Binding CategoryDescription}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Last Updated"
-                                    Binding="{Binding DateUpdated}"
+                                    Header="Date"
+                                    Binding="{Binding CategoryDescription}"
                                     Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

@@ -4,10 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:wrcaysalesinventory.Customs.NonClientArea"
+      DataContext="{Binding RelativeSource={RelativeSource Self}}"
       xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
       xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
+      Height="32">
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"/>
         <ColumnDefinition Width="*"/>
@@ -24,5 +25,21 @@
                            FontWeight="DemiBold"
                            Margin="8 0 0 0"/>
     </StackPanel>
-    
+    <Border Grid.Column="2"
+            Margin="10 0"
+            Padding="8 0"
+            CornerRadius="5"
+            Width="100"
+            Background="{DynamicResource RegionBrush}">
+        <hc:FlexPanel JustifyContent="SpaceBetween">
+            <TextBlock Text="&#xE793;"
+                   FontFamily="{StaticResource FabricIcons}"
+                   FontSize="18"
+                   Padding="0"
+                   VerticalAlignment="Center"/>
+            <hc:Divider Orientation="Vertical" Margin="4 8"/>
+            <ToggleButton Style="{StaticResource ToggleButtonSwitch}"
+                      Height="15" Checked="ToggleButton_Checked" IsChecked="{Binding IsDarkTheme, UpdateSourceTrigger=PropertyChanged}"/>
+        </hc:FlexPanel>
+    </Border>
 </Grid>

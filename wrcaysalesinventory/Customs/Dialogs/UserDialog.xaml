@@ -168,6 +168,8 @@
                         Content="{x:Static langs:Lang.LabelDelete}"
                         Height="35"
                         Width="130"
+                        Command="{Binding DeleteCmd}"
+                        CommandParameter="{Binding}"
                         Grid.Column="0"
                         Visibility="Collapsed"
                         VerticalAlignment="Top"/>

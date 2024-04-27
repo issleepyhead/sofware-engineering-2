@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Data.Models.Validations;
+using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace wrcaysalesinventory.ViewModels
 {
@@ -51,9 +52,12 @@ namespace wrcaysalesinventory.ViewModels
                 {
                     Growl.Info("Failed deleting the category.");
                 }
-            } catch
+            } catch(SqlException ex)
             {
-                Growl.Warning("An error occured while performing the action.");
+                if (ex.Message.Contains("DELETE"))
+                    MessageBox.Warning(@"This action cannot be completed because the record is referenced by other data in the system. Please remove associated references or contact your system administrator for assistance.", "Unable to delete record.");
+                else
+                    Growl.Warning("An error occured while performing the action.");
             }
         }
 
