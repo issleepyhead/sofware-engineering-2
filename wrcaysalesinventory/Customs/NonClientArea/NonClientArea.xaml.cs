@@ -27,7 +27,7 @@ namespace wrcaysalesinventory.Customs.NonClientArea
                 GlobalData.Config.Theme = ApplicationTheme.Dark;
                 isDark = true;
             }
-            else if(tbtn.IsChecked == false)
+            else
             {
                 GlobalData.Config.Theme = ApplicationTheme.Light;
                 isDark = false;
@@ -37,7 +37,23 @@ namespace wrcaysalesinventory.Customs.NonClientArea
         }
 
         private bool isDark = GlobalData.Config.Theme == ApplicationTheme.Dark;
-        public bool IsDarkTheme { get => isDark; set => isDark = value;}
+        public bool IsDarkTheme { get => isDark; set { isDark = value; } }
 
+        private void ToggleBtn_Unchecked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ToggleButton tbtn = (ToggleButton)sender;
+            if (tbtn.IsChecked == true)
+            {
+                GlobalData.Config.Theme = ApplicationTheme.Dark;
+                isDark = true;
+            }
+            else
+            {
+                GlobalData.Config.Theme = ApplicationTheme.Light;
+                isDark = false;
+            }
+            ThemeManager.Current.ApplicationTheme = GlobalData.Config.Theme;
+            GlobalData.Save();
+        }
     }
 }

@@ -45,13 +45,16 @@
                               CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
                 <StackPanel Orientation="Horizontal">
                     <Viewbox Height="35">
-                        <hc:Pagination MaxPageCount="10"
+                        <hc:Pagination MaxPageCount="5"
                                        PageIndex="1"
                                        MaxPageInterval="3"
-                                       DataCountPerPage="15"
+                                       DataCountPerPage="30"
                                        VerticalAlignment="Center"
                                        hc:BorderElement.CornerRadius="0"
-                                       Margin="0 0 12 0"/>
+                                       Margin="0 0 12 0"
+                                       AutoHiding="True"
+                                       x:Name="PagerPagination"
+                                       PageUpdated="PagerPagination_PageUpdated"/>
                     </Viewbox>
                     <Button hc:BorderElement.CornerRadius="0"
                             BorderThickness="1"

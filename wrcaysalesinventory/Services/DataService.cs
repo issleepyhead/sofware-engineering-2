@@ -55,7 +55,8 @@ namespace wrcaysalesinventory.Services
                         DateAdded = row["date_added"].ToString(),
                         DateUpdated = row["date_updated"].ToString(),
                         StatusID = row["product_status"].ToString(),
-                        StatusName = row["status_name"].ToString()
+                        StatusName = row["status_name"].ToString(),
+                        AllowDecimal = row["selling_unit"].ToString() == "1",
 
                     };
                     pList.Add(pModel);
@@ -700,6 +701,62 @@ namespace wrcaysalesinventory.Services
                 Growl.Warning("An error occured while fetching customers.");
             }
             return sList;
+        }
+
+        internal ObservableCollection<ProductModel> GetProductByCategoryList(string cid)
+        {
+            ObservableCollection<ProductModel> pList = [];
+            try
+            {
+                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlCmd = new(@"SELECT p.id,
+                                   c.id category_id,
+                                   p.product_status,
+                                   c.category_name,
+                                   product_name,
+                                   product_description,
+                                   product_price,
+                                   product_cost,
+                                   product_unit,
+                                   selling_unit,
+                                   s.status_name,
+                                   FORMAT(p.date_added, 'dd/MM/yyyy') date_added,
+                                   FORMAT(p.date_updated, 'dd/MM/yyyy') date_updated
+                            FROM tblproducts p
+                            JOIN tblstatus s ON p.product_status = s.id
+                            JOIN tblcategories c ON p.category_id = c.id
+                            WHERE c.id = @cid;", _sqlConn);
+                _sqlCmd.Parameters.AddWithValue("@cid", cid);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    ProductModel pModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        CategoryID = row["category_id"].ToString(),
+                        CategoryName = row["category_name"].ToString(),
+                        ProductName = row["product_name"].ToString(),
+                        ProductDescription = row["product_description"].ToString(),
+                        ProductPrice = row["product_price"].ToString(),
+                        ProductCost = row["product_cost"].ToString(),
+                        ProductUnit = row["product_unit"].ToString(),
+                        DateAdded = row["date_added"].ToString(),
+                        DateUpdated = row["date_updated"].ToString(),
+                        StatusID = row["product_status"].ToString(),
+                        StatusName = row["status_name"].ToString()
+
+                    };
+                    pList.Add(pModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching products");
+            }
+            return pList;
         }
     }
 }

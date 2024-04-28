@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using HandyControl.Controls;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using wrcaysalesinventory.Customs.Dialogs;
@@ -13,11 +15,15 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
     public class CategoryPanelViewModel : BaseViewModel<CategoryModel>
     {
         private DataService _dataService;
+        private ObservableCollection<CategoryModel> _allCategories;
         public CategoryPanelViewModel(DataService dataService)
         {
             _dataService = dataService;
-            DataList = _dataService.GetGategoryPanelList();
+            _allCategories = _dataService.GetGategoryPanelList();
+            DataList = new ObservableCollection<CategoryModel>(_allCategories.Take(30).ToList());
         }
+
+        public int TotalData { get => _allCategories.Count; }
 
         public RelayCommand<object> OpenCategory => new(OpenCategoryDialog);
 
@@ -49,6 +55,11 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         public void SearchCommand(SearchBar searchBar)
         {
             DataList = _dataService.SearchGategoryPanelList(string.IsNullOrEmpty(searchBar.Text) ? "%" : searchBar.Text);
+        }
+
+        public void PageUpdated(int offset)
+        {
+            DataList = new ObservableCollection<CategoryModel>(_allCategories.Skip(offset * 30).Take(30).ToList());
         }
     }
 }

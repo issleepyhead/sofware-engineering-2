@@ -36,11 +36,11 @@ namespace wrcaysalesinventory.ViewModels
         public Visibility StatusVisibility { get => string.IsNullOrEmpty(Model.ID) ? Visibility.Collapsed : Visibility.Collapsed; set => Set(ref _statusVisibility, value); }
 
         private ProductModel _productModel = new();
-        public ProductModel Model { get => _productModel; set => Set(ref _productModel, value); }
+        public ProductModel Model { get => _productModel; set { Set(ref _productModel, value); allowDecimal = Model.AllowDecimal; } }
 
-        private bool _allowedDecimal = false;
-        public bool AllowedDecimal { get => !Model.AllowDecimal; set { Model.AllowDecimal = _allowedDecimal; Set(ref _allowedDecimal, value); } }
-        public bool NotAllowedDecimal { get => Model.AllowDecimal; set { Model.AllowDecimal = !_allowedDecimal; Set(ref _allowedDecimal, value); } }
+        private bool allowDecimal = false;
+        public bool AllowDecimal { get => allowDecimal; set => Set(ref allowDecimal, !value); } 
+        public bool NotAllowDecimal { get => allowDecimal; set => Set(ref allowDecimal, value); }
 
         private string _pNameError;
         public string ProductNameError { get => _pNameError; set => Set(ref _pNameError, value); }
@@ -161,7 +161,7 @@ namespace wrcaysalesinventory.ViewModels
                     else
                     {
                         sqlCommand = new(@"UPDATE tblproducts SET product_name = @pname, product_description = @pdesc, product_price = @pprice, product_cost = @pcost,
-                                               product_unit = @punit, product_status = @pstatus, selling_unit = @sunit WHERE id = @id", sqlConnection);
+                                               product_unit = @punit, product_status = @pstatus, selling_unit = @sunit, date_updated = getdate(), category_id = @cid WHERE id = @id", sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                         sqlCommand.Parameters.AddWithValue("@pstatus", vm.Model.StatusID);
                     }
@@ -171,7 +171,7 @@ namespace wrcaysalesinventory.ViewModels
                     sqlCommand.Parameters.AddWithValue("@pcost", vm.Model.ProductCost);
                     sqlCommand.Parameters.AddWithValue("@punit", vm.Model.ProductUnit);
                     sqlCommand.Parameters.AddWithValue("@cid", vm.Model.CategoryID);
-                    sqlCommand.Parameters.AddWithValue("@sunit", vm.Model.AllowDecimal);
+                    sqlCommand.Parameters.AddWithValue("@sunit", AllowDecimal);
                     if (sqlCommand.ExecuteNonQuery() > 0)
                     {
                         if (string.IsNullOrEmpty(Model.ID))

@@ -164,13 +164,13 @@
                              Height="60"
                              FontSize="10"
                              Content="Sell By Unit"
-                             IsChecked="{Binding NotAllowedDecimal, UpdateSourceTrigger=PropertyChanged}"/>
+                             IsChecked="{Binding NotAllowDecimal, UpdateSourceTrigger=PropertyChanged}"/>
                     <RadioButton x:Name="ByFraction"
                              hc:BorderElement.CornerRadius="0"
                              Height="60"
                              FontSize="10"
                              Content="Sell By Fraction"
-                             IsChecked="{Binding AllowedDecimal, UpdateSourceTrigger=PropertyChanged}"/>
+                             IsChecked="{Binding AllowDecimal, UpdateSourceTrigger=PropertyChanged}"/>
                 </hc:ButtonGroup>
             </StackPanel>
         </StackPanel>

@@ -38,8 +38,8 @@
                    Padding="0"
                    VerticalAlignment="Center"/>
             <hc:Divider Orientation="Vertical" Margin="4 8"/>
-            <ToggleButton Style="{StaticResource ToggleButtonSwitch}"
-                      Height="15" Checked="ToggleButton_Checked" IsChecked="{Binding IsDarkTheme, UpdateSourceTrigger=PropertyChanged}"/>
+            <ToggleButton Style="{StaticResource ToggleButtonSwitch}" x:Name="ToggleBtn"
+                      Height="15" Checked="ToggleButton_Checked" IsChecked="{Binding IsDarkTheme, UpdateSourceTrigger=PropertyChanged}" Unchecked="ToggleBtn_Unchecked"/>
         </hc:FlexPanel>
     </Border>
 </Grid>

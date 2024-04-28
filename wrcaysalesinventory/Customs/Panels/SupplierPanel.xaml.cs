@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wrcaysalesinventory.Data.Classes;
+using wrcaysalesinventory.ViewModels.PanelViewModes;
 
 namespace wrcaysalesinventory.Customs.Panels
 {
@@ -23,6 +25,12 @@ namespace wrcaysalesinventory.Customs.Panels
         public SupplierPanel()
         {
             InitializeComponent();
+            WinHelper.PaginationPageCount(PagerPagination, ((SupplierPanelViewModel)DataContext).TotalData);
+        }
+
+        private void PagerPagination_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
+        {
+            ((SupplierPanelViewModel)DataContext).PageUpdated(e.Info);
         }
     }
 }

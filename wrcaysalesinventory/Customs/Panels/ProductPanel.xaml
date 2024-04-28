@@ -34,24 +34,38 @@
                 BorderThickness="0 0 0 1">
             <hc:FlexPanel 
                           JustifyContent="SpaceBetween">
-                <hc:SearchBar IsRealTime="True"
-                              hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
-                              Width="280"
-                              Height="35"
-                              Command="{Binding SearchCmd}"
-                              CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                              VerticalAlignment="Center"
-                              HorizontalAlignment="Left"
-                              Style="{StaticResource SearchBarExtend}"/>
+                <StackPanel Orientation="Horizontal">
+                    <hc:SearchBar IsRealTime="True"
+                                  hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
+                                  Width="280"
+                                  Height="35"
+                                  Command="{Binding SearchCmd}"
+                                  CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Left"
+                                  Style="{StaticResource SearchBarExtend}"/>
+                    <hc:ComboBox HorizontalAlignment="Stretch"
+                                 hc:BorderElement.CornerRadius="0"
+                                 Height="35"
+                                 Width="150"
+                                 ItemsSource="{Binding CategoryDataList}"
+                                 SelectedValuePath="ID"
+                                 DisplayMemberPath="CategoryName"
+                                 hc:InfoElement.Placeholder="Filter by category"
+                                 Margin="10 0 0 0" SelectionChanged="ComboBox_SelectionChanged"/>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Viewbox Height="35">
-                        <hc:Pagination MaxPageCount="10"
+                        <hc:Pagination MaxPageCount="5"
                                        PageIndex="1"
                                        MaxPageInterval="3"
-                                       DataCountPerPage="15"
+                                       DataCountPerPage="30"
                                        VerticalAlignment="Center"
                                        hc:BorderElement.CornerRadius="0"
-                                       Margin="0 0 12 0"/>
+                                       Margin="0 0 12 0"
+                                       AutoHiding="True"
+                                       x:Name="PagerPagination"
+                                       PageUpdated="PagerPagination_PageUpdated"/>
                     </Viewbox>
                     <Button hc:BorderElement.CornerRadius="0"
                             BorderThickness="1"

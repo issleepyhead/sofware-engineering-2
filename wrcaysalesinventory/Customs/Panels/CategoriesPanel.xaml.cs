@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using wrcaysalesinventory.Data.Models;
+﻿using System.Windows.Controls;
+using wrcaysalesinventory.Data.Classes;
+using wrcaysalesinventory.ViewModels.PanelViewModes;
 
 namespace wrcaysalesinventory.Customs.Panels
 {
@@ -25,6 +12,12 @@ namespace wrcaysalesinventory.Customs.Panels
         public CategoriesPanel()
         {
             InitializeComponent();
+            WinHelper.PaginationPageCount(PagerPagination, ((CategoryPanelViewModel)DataContext).TotalData);
+        }
+
+        private void Pagination_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
+        {
+            ((CategoryPanelViewModel)DataContext).PageUpdated(e.Info);
         }
     }
 }

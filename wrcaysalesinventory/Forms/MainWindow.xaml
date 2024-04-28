@@ -138,7 +138,7 @@
         </hc:SideMenu>
 
         <Grid Grid.Column="1">
-            <panels:DashboardPanel x:Name="DashboardPanel" Visibility="Collapsed"/>
+            <panels:DashboardPanel x:Name="DashboardPanel" Visibility="Visible" DataContext="{Binding Path=DashboardView, Source={StaticResource Locator}}"/>
             <panels:ProductPanel x:Name="ProductPanel" Visibility="Collapsed"/>
             <panels:CategoriesPanel x:Name="CategoryPanel" Visibility="Collapsed"/>
             <panels:SupplierPanel x:Name="SupplierPanel" Visibility="Collapsed"/>

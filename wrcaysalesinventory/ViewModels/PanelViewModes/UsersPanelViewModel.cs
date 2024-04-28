@@ -1,5 +1,7 @@
 ﻿using HandyControl.Controls;
 using HandyControl.Tools.Command;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using wrcaysalesinventory.Customs.Dialogs;
@@ -12,11 +14,16 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
     public class UsersPanelViewModel : BaseViewModel<UserModel>
     {
         private DataService _dataService;
+        private ObservableCollection<UserModel> _alldata;
         public UsersPanelViewModel(DataService dataService)
         {
             _dataService = dataService;
-            DataList = _dataService.GetUsersList();
+            _alldata = _dataService.GetUsersList();
+            DataList = new ObservableCollection<UserModel>(_alldata.Take(30).ToList());
         }
+
+        public int TotalData { get => _alldata.Count; }
+
         public RelayCommand<object> OpenUser => new(OpenUserDialog);
         private void OpenUserDialog(object obj)
         {
@@ -41,6 +48,11 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         public void SearchCommand(SearchBar searchBar)
         {
             DataList = _dataService.SearchUsersList(string.IsNullOrEmpty(searchBar.Text) ? "%" : searchBar.Text);
+        }
+
+        public void PageUpdated(int offset)
+        {
+            DataList = new ObservableCollection<UserModel>(_alldata.Skip(offset * 30).Take(30).ToList());
         }
     }
 }

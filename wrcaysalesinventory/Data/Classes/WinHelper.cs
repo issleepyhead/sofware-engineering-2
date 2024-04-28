@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HandyControl.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -26,6 +27,23 @@ namespace wrcaysalesinventory.Data.Classes
                 IInvokeProvider invoke = (IInvokeProvider)btnPeer.GetPattern(PatternInterface.Invoke);
                 invoke?.Invoke();
             }
+        }
+
+        public static void PaginationPageCount(Pagination pagination, int total)
+        {
+            if (total <= 30) {
+                pagination.MaxPageCount = 1;
+                return;
+            }
+
+            if (30 / total > 0 )
+            {
+                pagination.MaxPageCount = total / 30 + 1;
+            } else
+            {
+                pagination.MaxPageCount = total / 30;
+            }
+
         }
     }
 }
