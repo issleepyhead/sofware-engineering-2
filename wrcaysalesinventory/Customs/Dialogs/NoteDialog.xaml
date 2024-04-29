@@ -52,12 +52,11 @@
                 <TextBlock Text="Note:"
                            Padding="0 5"
                            FontSize="14"/>
-                <hc:TextBox Name="CategoryNameTextBox"
-                            HorizontalAlignment="Stretch"
+                <hc:TextBox HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             hc:InfoElement.Placeholder="Enter transaction note"
                             AcceptsReturn="True"
-                            Text=""
+                            Text="{Binding Note}"
                             MinHeight="40"
                             MaxHeight="150"
                             Height="Auto"/>
@@ -74,8 +73,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="AddButton"
-                        FontSize="16"
+                <Button FontSize="16"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{DynamicResource DarkMaskBrush}"
@@ -85,7 +83,7 @@
                         Width="130"
                         CommandParameter="{Binding}"
                         VerticalAlignment="Top"
-                        Grid.Column="1"/>
+                        Grid.Column="1" Click="Button_Click"/>
             </Grid>
         </hc:FlexPanel>
     </Grid>

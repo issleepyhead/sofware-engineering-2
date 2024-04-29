@@ -56,7 +56,7 @@ namespace wrcaysalesinventory.Services
                         DateUpdated = row["date_updated"].ToString(),
                         StatusID = row["product_status"].ToString(),
                         StatusName = row["status_name"].ToString(),
-                        AllowDecimal = row["selling_unit"].ToString() == "1",
+                        NotAllowDecimal = row["selling_unit"].ToString() == "1",
 
                     };
                     pList.Add(pModel);
@@ -434,7 +434,8 @@ namespace wrcaysalesinventory.Services
 	                                   sold,
 	                                   defective,
                                        p.product_unit,
-                                       p.product_cost
+                                       p.product_cost,
+                                       i.product_id
                                 FROM
 	                                tblinventory i
                                 JOIN
@@ -456,7 +457,8 @@ namespace wrcaysalesinventory.Services
                         Sold = row["sold"].ToString(),
                         Defective = row["defective"].ToString(),
                         StoksUnit = row["stocks"].ToString() +" "+ row["product_unit"].ToString(),
-                        Cost = row["product_cost"].ToString()
+                        Cost = row["product_cost"].ToString(),
+                        ProductID = row["product_id"].ToString()
                     };
                     sList.Add(sModel);
                 }
@@ -476,7 +478,7 @@ namespace wrcaysalesinventory.Services
                 _sqlCmd = new(@"SELECT i.id,
 	                                   p.product_name,
 	                                   st.status_name,
-                                       p.product_unit,s
+                                       p.product_unit,
 	                                   stocks,
 	                                   sold,
 	                                   defective,
@@ -635,7 +637,6 @@ namespace wrcaysalesinventory.Services
 	                                   additional_fee,
 	                                   discount,
 	                                   vat,
-	                                   total_items,
                                        FORMAT(t.date_added, 'dd/MM/yyyy') date_added,
                                        CONCAT(u.first_name, ' ', u.last_name) FullName
                                 FROM 
@@ -657,7 +658,6 @@ namespace wrcaysalesinventory.Services
                         UserID = row["user_id"].ToString(),
                         ReferenceNumber = row["reference_number"].ToString(),
                         TotalCost = row["total_amount"].ToString(),
-                        TotalItems = row["total_items"].ToString(),
                         Discount = row["discount"].ToString(),
                         VAT = row["vat"].ToString(),
                         DateAdded = row["date_added"].ToString(),

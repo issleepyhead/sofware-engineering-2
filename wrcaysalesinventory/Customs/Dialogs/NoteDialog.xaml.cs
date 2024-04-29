@@ -1,4 +1,6 @@
 ﻿using System.Windows.Controls;
+using wrcaysalesinventory.Data.Classes;
+using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.ViewModels.PanelViewModes;
 
 namespace wrcaysalesinventory.Customs.Dialogs
@@ -8,10 +10,15 @@ namespace wrcaysalesinventory.Customs.Dialogs
     /// </summary>
     public partial class NoteDialog : Border
     {
-        public NoteDialog(POSPanelViewModel vm = null)
+        public NoteDialog(TransactionHeaderModel vm = null)
         {
             InitializeComponent();
-            DataContext = vm;
+            DataContext = vm ?? new TransactionHeaderModel();
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            WinHelper.CloseDialog(CloseBtn);
         }
     }
 }

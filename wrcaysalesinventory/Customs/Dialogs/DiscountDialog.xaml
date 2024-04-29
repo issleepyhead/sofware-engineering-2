@@ -56,7 +56,7 @@
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             hc:InfoElement.Placeholder="Enter discount percent"
-                            Text="{Binding Discount,UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding Header.Discount,UpdateSourceTrigger=PropertyChanged}"
                             Height="40"/>
                 <TextBlock Name="CategoryNameError"
                            FontSize="13"

@@ -3,36 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|c:\\users\\christian\\desktop\\sofware-engineering-2\\wrcaysalesinventory\\viewmodels\\productdialogviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\viewmodels\\productdialogviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|c:\\users\\christian\\desktop\\sofware-engineering-2\\wrcaysalesinventory\\customs\\panels\\possettingspanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\customs\\panels\\possettingspanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\viewmodels\\panelviewmodes\\productpanelviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\viewmodels\\panelviewmodes\\productpanelviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\customs\\panels\\dashboardpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\customs\\panels\\dashboardpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\customs\\dialogs\\productdialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\customs\\dialogs\\productdialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\customs\\panels\\dashboardpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\customs\\panels\\dashboardpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\data\\models\\productmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\data\\models\\productmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\customs\\panels\\generalsettingspanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\customs\\panels\\generalsettingspanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\customs\\dialogs\\productdialog.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
-      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\customs\\dialogs\\productdialog.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\customs\\panels\\productpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\customs\\panels\\productpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\services\\dataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\services\\dataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\customs\\panels\\productpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\customs\\panels\\productpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\customs\\dialogs\\categorydialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{BE6797A1-1C58-401F-A5A5-05C2C305E264}|wrcaysalesinventory\\wrcaysalesinventory.csproj|solutionrelative:wrcaysalesinventory\\customs\\dialogs\\categorydialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,98 +34,60 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DataService.cs",
-              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Services\\DataService.cs",
-              "RelativeDocumentMoniker": "wrcaysalesinventory\\Services\\DataService.cs",
-              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Services\\DataService.cs",
-              "RelativeToolTip": "wrcaysalesinventory\\Services\\DataService.cs",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAwwDoAAABNAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-28T15:31:08.36Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ProductDialog.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Dialogs\\ProductDialog.xaml.cs",
-              "RelativeDocumentMoniker": "wrcaysalesinventory\\Customs\\Dialogs\\ProductDialog.xaml.cs",
-              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Dialogs\\ProductDialog.xaml.cs",
-              "RelativeToolTip": "wrcaysalesinventory\\Customs\\Dialogs\\ProductDialog.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-28T14:57:40.67Z"
+              "DocumentIndex": 1,
+              "Title": "DashboardPanel.xaml",
+              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\DashboardPanel.xaml",
+              "RelativeDocumentMoniker": "wrcaysalesinventory\\Customs\\Panels\\DashboardPanel.xaml",
+              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\DashboardPanel.xaml",
+              "RelativeToolTip": "wrcaysalesinventory\\Customs\\Panels\\DashboardPanel.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-29T02:50:57.027Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ProductDialog.xaml",
-              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Dialogs\\ProductDialog.xaml",
-              "RelativeDocumentMoniker": "wrcaysalesinventory\\Customs\\Dialogs\\ProductDialog.xaml",
-              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Dialogs\\ProductDialog.xaml",
-              "RelativeToolTip": "wrcaysalesinventory\\Customs\\Dialogs\\ProductDialog.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-28T14:49:59.652Z"
+              "Title": "DashboardPanel.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\DashboardPanel.xaml.cs",
+              "RelativeDocumentMoniker": "wrcaysalesinventory\\Customs\\Panels\\DashboardPanel.xaml.cs",
+              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\DashboardPanel.xaml.cs",
+              "RelativeToolTip": "wrcaysalesinventory\\Customs\\Panels\\DashboardPanel.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T02:50:55.844Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ProductModel.cs",
-              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Data\\Models\\ProductModel.cs",
-              "RelativeDocumentMoniker": "wrcaysalesinventory\\Data\\Models\\ProductModel.cs",
-              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Data\\Models\\ProductModel.cs",
-              "RelativeToolTip": "wrcaysalesinventory\\Data\\Models\\ProductModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-28T14:41:15.511Z"
+              "Title": "GeneralSettingsPanel.xaml",
+              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\GeneralSettingsPanel.xaml",
+              "RelativeDocumentMoniker": "wrcaysalesinventory\\Customs\\Panels\\GeneralSettingsPanel.xaml",
+              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\GeneralSettingsPanel.xaml",
+              "RelativeToolTip": "wrcaysalesinventory\\Customs\\Panels\\GeneralSettingsPanel.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-29T02:37:59.761Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CategoryDialog.xaml",
+              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Dialogs\\CategoryDialog.xaml",
+              "RelativeDocumentMoniker": "wrcaysalesinventory\\Customs\\Dialogs\\CategoryDialog.xaml",
+              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Dialogs\\CategoryDialog.xaml",
+              "RelativeToolTip": "wrcaysalesinventory\\Customs\\Dialogs\\CategoryDialog.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-29T02:33:19.662Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProductDialogViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\ViewModels\\ProductDialogViewModel.cs",
-              "RelativeDocumentMoniker": "wrcaysalesinventory\\ViewModels\\ProductDialogViewModel.cs",
-              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\ViewModels\\ProductDialogViewModel.cs",
-              "RelativeToolTip": "wrcaysalesinventory\\ViewModels\\ProductDialogViewModel.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAlwCkAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-28T14:35:54.581Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductPanelViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\ViewModels\\PanelViewModes\\ProductPanelViewModel.cs",
-              "RelativeDocumentMoniker": "wrcaysalesinventory\\ViewModels\\PanelViewModes\\ProductPanelViewModel.cs",
-              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\ViewModels\\PanelViewModes\\ProductPanelViewModel.cs",
-              "RelativeToolTip": "wrcaysalesinventory\\ViewModels\\PanelViewModes\\ProductPanelViewModel.cs",
-              "ViewState": "AQIAACQAAAAAAAAAAAAAADAAAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-28T14:31:54.681Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ProductPanel.xaml",
-              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\ProductPanel.xaml",
-              "RelativeDocumentMoniker": "wrcaysalesinventory\\Customs\\Panels\\ProductPanel.xaml",
-              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\ProductPanel.xaml",
-              "RelativeToolTip": "wrcaysalesinventory\\Customs\\Panels\\ProductPanel.xaml",
+              "Title": "POSSettingsPanel.xaml",
+              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\POSSettingsPanel.xaml",
+              "RelativeDocumentMoniker": "wrcaysalesinventory\\Customs\\Panels\\POSSettingsPanel.xaml",
+              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\POSSettingsPanel.xaml",
+              "RelativeToolTip": "wrcaysalesinventory\\Customs\\Panels\\POSSettingsPanel.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-28T14:31:32.986Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProductPanel.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\ProductPanel.xaml.cs",
-              "RelativeDocumentMoniker": "wrcaysalesinventory\\Customs\\Panels\\ProductPanel.xaml.cs",
-              "ToolTip": "C:\\Users\\Christian\\Desktop\\sofware-engineering-2\\wrcaysalesinventory\\Customs\\Panels\\ProductPanel.xaml.cs",
-              "RelativeToolTip": "wrcaysalesinventory\\Customs\\Panels\\ProductPanel.xaml.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAACMAAABrAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-28T14:31:28.476Z"
+              "WhenOpened": "2024-04-29T02:32:24.655Z",
+              "EditorCaption": ""
             }
           ]
         }

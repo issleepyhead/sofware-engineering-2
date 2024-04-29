@@ -13,7 +13,7 @@
         public string ProductCost { get; set; }
         public string DateAdded { get; set; }
         public string DateUpdated { get; set; }
-        public bool AllowDecimal { get; set; } = false;
+        public bool NotAllowDecimal { get; set; } = true;
         public string   StatusName { get; set; }
     }
 }

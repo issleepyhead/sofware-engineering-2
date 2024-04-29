@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HandyControl.Controls;
+using HandyControl.Tools.Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wrcaysalesinventory.Data.Models;
+using wrcaysalesinventory.Services;
 using wrcaysalesinventory.ViewModels.PanelViewModes;
 
 namespace wrcaysalesinventory.Customs.Panels
@@ -32,6 +36,9 @@ namespace wrcaysalesinventory.Customs.Panels
             POSPanelViewModel pmodel = (POSPanelViewModel)DataContext;
             pmodel.ValueChanged();
         }
+
+
+
     }
 
 

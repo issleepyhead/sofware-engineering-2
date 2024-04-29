@@ -13,7 +13,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="800"
       d:DesignWidth="1400"
-      Margin="30 10">
+      Margin="30 10"
+      x:Name="PPanel">
     <Grid.RowDefinitions>
         <RowDefinition Height="100"/>
         <RowDefinition Height="*"/>
@@ -36,7 +37,7 @@
                     <ColumnDefinition Width="60"/>
 
                 </Grid.ColumnDefinitions>
-                <hc:SearchBar IsRealTime="True"
+                <hc:SearchBar 
                               Grid.Column="0"
                               hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchProduct}"
                               Height="48"
@@ -53,7 +54,7 @@
                              Width="250"
                              FontSize="14"
                              ItemsSource="{Binding CustomerList}"
-                             SelectedValue="{Binding ID}"
+                             SelectedValue="{Binding Header.CustomerID}"
                              DisplayMemberPath="FullName"
                              SelectedValuePath="ID"
                              SelectedIndex="-1"
@@ -87,7 +88,8 @@
                         Height="48"
                         Width="48"
                         Padding="0"
-                        FontSize="22"/>
+                        FontSize="22"
+                        Command="{Binding PreviewReceiptCommand}"/>
                 <Button Content="&#xE8FA;"
                         Grid.Column="5"
                         FontFamily="{StaticResource FabricIcons}"
@@ -226,7 +228,9 @@
                                                 hc:IconElement.Geometry="{StaticResource ic_delete}"
                                                 Height="80"
                                                 BorderThickness="0"
-                                                Background="#FFFF0808"/>
+                                                Background="#FFFF0808" 
+                                                Command="{Binding ElementName=PPanel, Path=DataContext.RemoveCommand}"
+                                                CommandParameter="{Binding}"/>
                                     </Grid>
                                 </Grid>
                             </Border>
@@ -285,7 +289,7 @@
                                     VerticalAlignment="Center"
                                     FontFamily="{StaticResource FabricIcons}"/>
                         </StackPanel>
-                        <TextBlock Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="{Binding Header.Discount, UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -293,7 +297,7 @@
                         <TextBlock Text="Vat(%)"
                                    FontSize="22"
                                    FontWeight="Light"/>
-                        <TextBlock Text="{Binding Vat, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="{Binding Header.VAT, UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -313,7 +317,7 @@
                                     VerticalAlignment="Center"
                                     FontFamily="{StaticResource FabricIcons}"/>
                         </StackPanel>
-                        <TextBlock Text="{Binding AdditionalFee, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="{Binding Header.AdditionalFee, UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -334,6 +338,8 @@
                             BorderBrush="{DynamicResource DarkMaskBrush}"
                             Content="Discard"
                             Height="48"
+                            Command="{Binding DiscardCmd}"
+                            CommandParameter="{Binding}"
                             Background="{DynamicResource DangerBrush}"
                             Width="170"/>
                     <Button FontSize="16"
@@ -342,6 +348,7 @@
                             Content="Pay"
                             Height="48"
                             Width="170"
+                            Command="{Binding PayCommand}"
                             Background="{DynamicResource SuccessBrush}"/>
                 </hc:FlexPanel>
             </Grid>

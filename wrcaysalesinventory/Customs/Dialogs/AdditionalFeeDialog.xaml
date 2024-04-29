@@ -56,7 +56,7 @@
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             hc:InfoElement.Placeholder="Enter additional fee"
-                            Text="{Binding AdditionalFee,UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding Header.AdditionalFee,UpdateSourceTrigger=PropertyChanged}"
                             Height="40"/>
             </StackPanel>
             <!--<StackPanel Margin="0 8 0 0">

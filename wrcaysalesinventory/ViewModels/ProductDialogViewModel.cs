@@ -36,11 +36,11 @@ namespace wrcaysalesinventory.ViewModels
         public Visibility StatusVisibility { get => string.IsNullOrEmpty(Model.ID) ? Visibility.Collapsed : Visibility.Collapsed; set => Set(ref _statusVisibility, value); }
 
         private ProductModel _productModel = new();
-        public ProductModel Model { get => _productModel; set { Set(ref _productModel, value); allowDecimal = Model.AllowDecimal; } }
+        public ProductModel Model { get => _productModel; set { Set(ref _productModel, value); _notAllowedDecimal = Model.NotAllowDecimal; } }
 
-        private bool allowDecimal = false;
-        public bool AllowDecimal { get => allowDecimal; set => Set(ref allowDecimal, !value); } 
-        public bool NotAllowDecimal { get => allowDecimal; set => Set(ref allowDecimal, value); }
+        private bool _notAllowedDecimal = true;
+        public bool AllowDecimal { get => !_notAllowedDecimal; set => Set(ref _notAllowedDecimal, !value); } 
+        public bool NotAllowDecimal { get => _notAllowedDecimal; set => Set(ref _notAllowedDecimal, value); }
 
         private string _pNameError;
         public string ProductNameError { get => _pNameError; set => Set(ref _pNameError, value); }

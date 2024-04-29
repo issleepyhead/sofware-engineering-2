@@ -16,7 +16,7 @@
         <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <Grid Grid.Row="0">
-        <TextBlock Text="General Settings"
+        <TextBlock Text="POS Settings"
                     FontSize="32"
                     FontWeight="Light"
                     VerticalAlignment="Center"/>
@@ -63,6 +63,55 @@
                         Content="Change"
                         Height="35"
                         Width="130"/>
+            </hc:FlexPanel>
+        </Border>
+        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+            <hc:FlexPanel JustifyContent="SpaceBetween"
+                          AlignItems="Center"
+                          AlignContent="Center"
+                          Margin="10 0"
+                          VerticalAlignment="Center">
+                <TextBlock Text="Transaction VAT"
+                           FontSize="18"
+                           VerticalAlignment="Center"/>
+                <hc:TextBox Name="CategoryDescriptionTextBox"
+                            HorizontalAlignment="Stretch"
+                            hc:BorderElement.CornerRadius="0"
+                            MinHeight="40"
+                            Height="35"
+                            Width="130"
+                            hc:InfoElement.Placeholder="Enter VAT"
+                            AcceptsReturn="True"/>
+            </hc:FlexPanel>
+        </Border>
+        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+            <hc:FlexPanel JustifyContent="SpaceBetween"
+                          AlignItems="Center"
+                          AlignContent="Center"
+                          Margin="10 0"
+                          VerticalAlignment="Center">
+                <TextBlock Text="Store Quota"
+                           FontSize="18"
+                           VerticalAlignment="Center"/>
+                <hc:TextBox HorizontalAlignment="Stretch"
+                            hc:BorderElement.CornerRadius="0"
+                            MinHeight="40"
+                            Height="35"
+                            Width="130"
+                            hc:InfoElement.Placeholder="Enter quota"
+                            AcceptsReturn="True"/>
+            </hc:FlexPanel>
+        </Border>
+        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+            <hc:FlexPanel JustifyContent="SpaceBetween"
+                          AlignItems="Center"
+                          AlignContent="Center"
+                          Margin="10 0"
+                          VerticalAlignment="Center">
+                <TextBlock Text="Auto Print Receipt"
+                           FontSize="18"
+                           VerticalAlignment="Center"/>
+                <ToggleButton Style="{StaticResource ToggleButtonSwitch}"/>
             </hc:FlexPanel>
         </Border>
     </StackPanel>
