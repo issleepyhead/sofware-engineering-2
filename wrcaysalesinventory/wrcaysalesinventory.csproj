@@ -56,6 +56,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Core, Version=1.6.0.0, Culture=neutral, PublicKeyToken=4d63bfbfdfd3c6e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Core.1.6.0\lib\net452\BCrypt.Net-Core.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.7\lib\net48\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -268,6 +271,7 @@
     <Compile Include="Data\Classes\AppConfig.cs" />
     <Compile Include="Data\Classes\GlobalData.cs" />
     <Compile Include="Data\Classes\SqlBaseConnection.cs" />
+    <Compile Include="Data\Classes\UserPreviledges.cs" />
     <Compile Include="Data\Classes\WinHelper.cs" />
     <Compile Include="Data\DataSet\ReportsDataSet.cs">
       <DependentUpon>ReportsDataSet.xsd</DependentUpon>
@@ -321,6 +325,7 @@
     <Compile Include="ViewModels\CategoryDialogViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\DeliveryCartDialogViewModel.cs" />
+    <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\CategoryPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\DeliveryPanelViewModel.cs" />

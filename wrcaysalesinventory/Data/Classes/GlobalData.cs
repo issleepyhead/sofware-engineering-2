@@ -35,11 +35,4 @@ namespace wrcaysalesinventory.Data.Classes
 
          // public static bool NotifyIconIsShow { get; set; }
     };
-
-    public enum UserPreviledges
-    {
-        SUPER_ADMIN,
-        ADMIN,
-        CASHIER
-    }
 }

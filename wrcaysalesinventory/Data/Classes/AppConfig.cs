@@ -11,6 +11,8 @@ namespace wrcaysalesinventory.Data.Classes
 
         public string Lang { get; set; } = "en-US";
 
+        public int UserRole { get; set; } = 3;
+
         public ApplicationTheme Theme { get; set; }
         public string TransactionVAT { get; set; } = "0";
         public string TransactionQuota { get; set; } = "0";
