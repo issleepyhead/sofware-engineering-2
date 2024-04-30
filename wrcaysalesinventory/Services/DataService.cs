@@ -379,7 +379,6 @@ namespace wrcaysalesinventory.Services
                                        s.supplier_name,
 	                                   invoice_number,
 	                                   additional_fee,
-	                                   total_items,
 	                                   due_total,
 	                                   note,
 	                                   FORMAT(delivery_date, 'dd/MM/yyyy') delivery_date
@@ -406,7 +405,6 @@ namespace wrcaysalesinventory.Services
                         FullName = row["first_name"].ToString() + " " + row["last_name"].ToString(),
                         AdditionalFee = row["additional_fee"].ToString(),
                         DueTotal = row["due_total"].ToString(),
-                        TotalItems = row["total_items"].ToString(),
                         Note = row["note"].ToString(),
                         DeliveryDate = row["delivery_date"].ToString(),
                         SupplierName = row["supplier_name"].ToString(),
@@ -702,7 +700,62 @@ namespace wrcaysalesinventory.Services
             }
             return sList;
         }
+        internal ObservableCollection<DeliveryModel> SearchDeliveryList(string query = "%")
+        {
+            ObservableCollection<DeliveryModel> sList = [];
+            try
+            {
+                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlCmd = new(@"SELECT dh.id,
+	                                   dh.supplier_id,
+	                                   dh.user_id,
+	                                   u.first_name,
+	                                   u.last_name,
+                                       s.supplier_name,
+	                                   invoice_number,
+	                                   additional_fee,
+	                                   due_total,
+	                                   note,
+	                                   FORMAT(delivery_date, 'dd/MM/yyyy') delivery_date
+		
+                                FROM
+	                                tbldeliveryheaders dh
+                                JOIN
+	                                tblsuppliers s
+	                                ON dh.supplier_id = s.id
+                                JOIN
+	                                tblusers u
+	                                ON dh.user_id = u.id
+                                WHERE invoice_number LIKE @query", _sqlConn);
+                _sqlCmd.Parameters.AddWithValue("@query", query);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
 
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    DeliveryModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        UserID = row["user_id"].ToString(),
+                        SupplierID = row["supplier_id"].ToString(),
+                        FullName = row["first_name"].ToString() + " " + row["last_name"].ToString(),
+                        AdditionalFee = row["additional_fee"].ToString(),
+                        DueTotal = row["due_total"].ToString(),
+                        Note = row["note"].ToString(),
+                        DeliveryDate = row["delivery_date"].ToString(),
+                        SupplierName = row["supplier_name"].ToString(),
+                        ReferenceNumber = row["invoice_number"].ToString(),
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching deliveries.");
+            }
+            return sList;
+        }
         internal ObservableCollection<ProductModel> GetProductByCategoryList(string cid)
         {
             ObservableCollection<ProductModel> pList = [];

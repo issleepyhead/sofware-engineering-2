@@ -6,7 +6,6 @@
         public string SupplierID { get; set; }
         public string UserID { get; set; }
         public string AdditionalFee { get; set; }
-        public string TotalItems { get; set; }
         public string DueTotal { get; set; }
         public string Note { get; set; }
         public string DateUpdate { get; set; }

@@ -33,7 +33,7 @@ namespace wrcaysalesinventory.Data.Classes
 
         public static AppConfig Config { get; set; }
 
-        public static bool NotifyIconIsShow { get; set; }
+         // public static bool NotifyIconIsShow { get; set; }
     };
 
     public enum UserPreviledges

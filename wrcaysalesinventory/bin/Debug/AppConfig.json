@@ -1,1 +1,1 @@
-{"Lang":"en-US","Theme":0}
+{"Lang":"en-US","Theme":1,"TransactionVAT":"20","TransactionQuota":"30","TransactionPrintReceipt":true,"TransactionReceiptFields":{"store_name":false,"phone":false,"email":false,"address":false,"cashier":false,"note":false},"TransactionReceiptData":{"store_name":"","phone":"","email":"","address":"","cashier":"","note":""}}

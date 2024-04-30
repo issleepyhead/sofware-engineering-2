@@ -40,16 +40,21 @@
                               Height="35"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left"
+                              Command="{Binding SearchCmd}"
+                              CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
                               Style="{StaticResource SearchBarExtend}"/>
                 <StackPanel Orientation="Horizontal">
                     <Viewbox Height="35">
-                        <hc:Pagination MaxPageCount="10"
+                        <hc:Pagination MaxPageCount="5"
                                        PageIndex="1"
                                        MaxPageInterval="3"
-                                       DataCountPerPage="15"
+                                       DataCountPerPage="30"
                                        VerticalAlignment="Center"
                                        hc:BorderElement.CornerRadius="0"
-                                       Margin="0 0 10 0"/>
+                                       Margin="0 0 12 0"
+                                       AutoHiding="True"
+                                       x:Name="PagerPagination"
+                                       PageUpdated="PagerPagination_PageUpdated"/>
                     </Viewbox>
                     <Button hc:BorderElement.CornerRadius="0"
                             BorderThickness="1"
@@ -82,17 +87,13 @@
                 <DataGridTextColumn FontSize="13"
                                     Header="Processed By"
                                     Binding="{Binding FullName}"
-                                    Width="*"/> 
+                                    Width="*"/>
                 <DataGridTextColumn FontSize="13"
                                     Header="Supplier"
                                     Binding="{Binding SupplierName}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"
-                                    Header="Total Items"
-                                    Binding="{Binding TotalItems}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
-                                    Header="Amount Due"
+                                    Header="Total Due"
                                     Binding="{Binding DueTotal}"
                                     Width="*"/>
                 <DataGridTextColumn FontSize="13"

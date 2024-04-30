@@ -309,3 +309,5 @@ C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\bin\Debug\p
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\bin\Debug\ru\Microsoft.SqlServer.Types.resources.dll
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\bin\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll
 C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\POSSettingsReceiptDialog.g.cs
+C:\Users\Christian\Desktop\sofware-engineering-2\wrcaysalesinventory\obj\Debug\Customs\Dialogs\POSSettingsReceiptDialog.baml

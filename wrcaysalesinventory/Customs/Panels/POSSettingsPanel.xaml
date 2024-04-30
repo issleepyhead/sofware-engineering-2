@@ -5,15 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Panels"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
-             mc:Ignorable="d" 
-             DataContext="{Binding CategoryPanelView, Source={StaticResource Locator}}"
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      mc:Ignorable="d" 
+             DataContext="{Binding POSSettingsView, Source={StaticResource Locator}}"
              d:DesignHeight="450"
              d:DesignWidth="800"
              Margin="30 10">
     <Grid.RowDefinitions>
         <RowDefinition Height="65"/>
         <RowDefinition Height="*"/>
+        <RowDefinition Height="70"/>
     </Grid.RowDefinitions>
     <Grid Grid.Row="0">
         <TextBlock Text="POS Settings"
@@ -35,7 +36,7 @@
                           AlignContent="Center"
                           Margin="10 0"
                           VerticalAlignment="Center">
-                <TextBlock Text="Key Bindings"
+                <TextBlock Text="Shortcut Keys"
                            FontSize="18"
                            VerticalAlignment="Center"/>
                 <Button FontSize="16"
@@ -61,6 +62,7 @@
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
                         Content="Change"
+                        Command="{Binding OpenReceiptCmd}"
                         Height="35"
                         Width="130"/>
             </hc:FlexPanel>
@@ -80,6 +82,7 @@
                             MinHeight="40"
                             Height="35"
                             Width="130"
+                            Text="{Binding VAT}"
                             hc:InfoElement.Placeholder="Enter VAT"
                             AcceptsReturn="True"/>
             </hc:FlexPanel>
@@ -96,9 +99,10 @@
                 <hc:TextBox HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             MinHeight="40"
+                            Text="{Binding Quota}"
                             Height="35"
                             Width="130"
-                            hc:InfoElement.Placeholder="Enter quota"
+                            hc:InfoElement.Placeholder="Enter Quota"
                             AcceptsReturn="True"/>
             </hc:FlexPanel>
         </Border>
@@ -111,8 +115,29 @@
                 <TextBlock Text="Auto Print Receipt"
                            FontSize="18"
                            VerticalAlignment="Center"/>
-                <ToggleButton Style="{StaticResource ToggleButtonSwitch}"/>
+                <ToggleButton Style="{StaticResource ToggleButtonSwitch}" IsChecked="{Binding AutoPrintEnable}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding CheckedAutoPrintCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ToggleButton}}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="UnChecked">
+                            <i:InvokeCommandAction Command="{Binding UnCheckedAutoPrintCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ToggleButton}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ToggleButton>
             </hc:FlexPanel>
         </Border>
     </StackPanel>
+    <hc:FlexPanel JustifyContent="FlexEnd"
+                  Grid.Row="2">
+        <Button FontSize="16"
+                hc:BorderElement.CornerRadius="0"
+                BorderThickness="1"
+                Foreground="White"
+                Background="{DynamicResource SuccessBrush}"
+                Content="Save"
+                Command="{Binding SaveCmd}"
+                Height="50"
+                Width="150"/>
+    </hc:FlexPanel>
 </Grid>

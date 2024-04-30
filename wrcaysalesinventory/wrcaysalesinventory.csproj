@@ -202,6 +202,9 @@
     <Compile Include="Customs\Dialogs\POSProductItem.xaml.cs">
       <DependentUpon>POSProductItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Customs\Dialogs\POSSettingsReceiptDialog.xaml.cs">
+      <DependentUpon>POSSettingsReceiptDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Customs\Dialogs\ProductCartItem.xaml.cs">
       <DependentUpon>ProductCartItem.xaml</DependentUpon>
     </Compile>
@@ -326,6 +329,8 @@
     <Compile Include="ViewModels\PanelViewModes\StocksPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\SupplierPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\UsersPanelViewModel.cs" />
+    <Compile Include="ViewModels\PanelViewModes\POSSettingsPanelViewModel.cs" />
+    <Compile Include="ViewModels\POSSettingsReceiptDialogViewModel.cs" />
     <Compile Include="ViewModels\ProductDialogViewModel.cs" />
     <Compile Include="ViewModels\SupplierDialogViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\TransactionPanelViewModel.cs" />
@@ -368,6 +373,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customs\Dialogs\POSProductItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\POSSettingsReceiptDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

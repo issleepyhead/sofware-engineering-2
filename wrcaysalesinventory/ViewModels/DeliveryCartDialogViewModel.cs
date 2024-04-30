@@ -99,21 +99,19 @@ namespace wrcaysalesinventory.ViewModels
                     totalCost += double.Parse(dModel.Total);
                     totalItems += double.Parse(dModel.Quantity);
                 }
-                Model.TotalItems = totalItems.ToString();
                 Model.DueTotal = (totalCost + double.Parse(Model.AdditionalFee)).ToString();
 
 
                 sqlCommand = new(@"INSERT INTO tbldeliveryheaders (
                                        supplier_id, user_id, invoice_number, additional_fee,
-                                       total_items, due_total, note
+                                       due_total, note
                                     ) VALUES (
-                                        @supid, @uid, @in, @af, @ti, @dt, @n
+                                        @supid, @uid, @in, @af, @dt, @n
                                     )", sqlConnection, sqlTransaction);
                 sqlCommand.Parameters.AddWithValue("@supid", Model.SupplierID);
                 sqlCommand.Parameters.AddWithValue("@uid", 1);
                 sqlCommand.Parameters.AddWithValue("@in", Model.ReferenceNumber);
                 sqlCommand.Parameters.AddWithValue("@af", Model.AdditionalFee);
-                sqlCommand.Parameters.AddWithValue("@ti", Model.TotalItems);
                 sqlCommand.Parameters.AddWithValue("@dt", Model.DueTotal);
                 sqlCommand.Parameters.AddWithValue("@n", string.IsNullOrEmpty(Model.Note) ? DBNull.Value : Model.Note);
                 if(sqlCommand.ExecuteNonQuery() > 0)

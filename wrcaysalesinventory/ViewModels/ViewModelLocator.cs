@@ -27,6 +27,8 @@ namespace wrcaysalesinventory.ViewModels
             SimpleIoc.Default.Register<StocksPanelViewModel>();
             SimpleIoc.Default.Register<POSPanelViewModel>();
             SimpleIoc.Default.Register<TransactionPanelViewModel>();
+            SimpleIoc.Default.Register<POSSettingsPanelViewModel>();
+            SimpleIoc.Default.Register<POSSettingsReceiptDialogViewModel>();
         }
 
         public static ViewModelLocator Instance = new Lazy<ViewModelLocator>(() =>
@@ -49,5 +51,7 @@ namespace wrcaysalesinventory.ViewModels
         public StocksPanelViewModel StocksPanelView => new(SimpleIoc.Default.GetInstance<DataService>());
         public POSPanelViewModel POSPanelView => new(SimpleIoc.Default.GetInstance<DataService>());
         public TransactionPanelViewModel TransactionlView => new(SimpleIoc.Default.GetInstance<DataService>());
+        public POSSettingsPanelViewModel POSSettingsView => SimpleIoc.Default.GetInstance<POSSettingsPanelViewModel>();
+        public POSSettingsReceiptDialogViewModel POSSettingsReceiptView => SimpleIoc.Default.GetInstance<POSSettingsReceiptDialogViewModel>();
     }
 }
