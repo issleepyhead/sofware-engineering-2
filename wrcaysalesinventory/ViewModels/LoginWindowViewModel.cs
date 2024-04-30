@@ -59,5 +59,13 @@ namespace wrcaysalesinventory.ViewModels
                 sqlConnection?.Close();
             }
         }
+
+
+
+        public RelayCommand<Window> CloseCmd => new(CloseCommand);
+        private void CloseCommand(Window window)
+        {
+            window.Close();
+        }
     }
 }

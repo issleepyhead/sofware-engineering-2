@@ -8,6 +8,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using wrcaysalesinventory.Forms;
+using wrcaysalesinventory.Properties;
 
 namespace wrcaysalesinventory.ViewModels
 {
@@ -39,16 +41,62 @@ namespace wrcaysalesinventory.ViewModels
         public DataTable DatabaseSource { get => _dataSource; set => Set(ref _dataSource, value); }
         public string TestContextText { get => _testContextText; set => Set(ref _testContextText, value); }
 
-        public RelayCommand<object> ConnectCmd => new(ConnectCommand);
-        private void ConnectCommand(object obj)
+        public RelayCommand<Window> CloseCmd => new(CloseCommand);
+        private void CloseCommand(Window window)
         {
+            window.Close();
+        }
 
+        public RelayCommand<Window> ConnectCmd => new(ConnectCommand);
+        private void ConnectCommand(Window obj)
+        {
+            ServerError = string.Empty;
+            DatabaseError = string.Empty;
+            UserNameError = string.Empty;
+            PasswordError = string.Empty;
+            if (string.IsNullOrEmpty(UserName))
+            {
+                UserNameError = "Please provide a username!";
+                return;
+            }
+
+            if(string.IsNullOrEmpty(Password))
+            {
+                PasswordError = "Please provide a password!";
+                return;
+            }
+            SqlConnection sqlConnection = null;
+            try
+            {
+                sqlConnection = new($"Server={ServerName};Initial Catalog={Database};Persist Security Info=True;User ID={UserName};Password={Password}");
+                sqlConnection.Open();
+                Settings.Default.connStr = $"Server={ServerName};Initial Catalog={Database};Trusted_Connection=True;User ID={UserName};Password={Password}";
+                Settings.Default.Save();
+                ServerError = string.Empty;
+                DatabaseError = string.Empty;
+                UserNameError = string.Empty;
+                PasswordError = string.Empty;
+                LogInWindow logInWindow = new();
+                logInWindow.Show();
+                obj.Close();
+            }
+            catch
+            {
+                UserNameError = "Incorrect username or password!";
+            } finally
+            {
+                sqlConnection?.Close();
+            }
         }
 
         public RelayCommand<object> TestCmd => new(TestCommand);
         private async void TestCommand(object obj)
         {
-            if(string.IsNullOrEmpty(ServerName))
+            ServerError = string.Empty;
+            DatabaseError = string.Empty;
+            UserNameError = string.Empty;
+            PasswordError = string.Empty;
+            if (string.IsNullOrEmpty(ServerName))
             {
                 ServerError = "Please provide a server name.";
                 return;

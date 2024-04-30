@@ -12,7 +12,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         hc:WindowAttach.IsDragElement="True">
-    <Grid Background="#FFE0E0E0">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
