@@ -11,10 +11,14 @@ namespace wrcaysalesinventory.ViewModels
     public class LoginWindowViewModel : ViewModelBase
     {
         private string _userName;
+        private string _userNameError;
+        private string _passwordError;
         private string _password;
         private bool  _rememberMe;
 
         public string UserName { get => _userName; set => Set(ref _userName, value); }
+        public string UserNameError { get => _userNameError; set => Set(ref _userNameError, value); }
+        public string PasswordError { get => _passwordError; set => Set(ref _passwordError, value); }
         public string Password { get => _password; set => Set(ref _password, value); }
         public bool   RememberMe { get => _rememberMe; set => Set(ref _rememberMe, value); }
 

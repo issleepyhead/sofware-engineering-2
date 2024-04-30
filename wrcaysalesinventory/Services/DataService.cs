@@ -16,7 +16,7 @@ namespace wrcaysalesinventory.Services
         private DataTable _dataTable;
         internal ObservableCollection<ProductModel> GetProductList()
         {
-            ObservableCollection<ProductModel> pList = [];
+            ObservableCollection<ProductModel> pList = new();
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -69,7 +69,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<ProductModel> SearchProductList(string query)
         {
-            ObservableCollection<ProductModel> pList = [];
+            ObservableCollection<ProductModel> pList = new();
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -123,7 +123,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<CategoryModel> GetGategoryList()
         {
-            ObservableCollection<CategoryModel> cList = [];
+            ObservableCollection<CategoryModel> cList = new();
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
@@ -151,7 +151,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<CategoryModel> GetGategoryPanelList()
         {
-            ObservableCollection<CategoryModel> cList = [];
+            ObservableCollection<CategoryModel> cList = new();
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
@@ -181,7 +181,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<CategoryModel> SearchGategoryPanelList(string query)
         {
-            ObservableCollection<CategoryModel> cList = [];
+            ObservableCollection<CategoryModel> cList = new();
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
@@ -212,7 +212,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<SupplierModel> GetSupplierList()
         {
-            ObservableCollection<SupplierModel> sList = [];
+            ObservableCollection<SupplierModel> sList = new();
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -259,7 +259,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<StatusModel> GetStatusList()
         {
-            ObservableCollection<StatusModel> sList = [];
+            ObservableCollection<StatusModel> sList = new();
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -286,7 +286,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<RoleModel> GetRoleList()
         {
-            ObservableCollection<RoleModel> sList = [];
+            ObservableCollection<RoleModel> sList = new();
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
@@ -313,7 +313,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<UserModel> GetUsersList()
         {
-            ObservableCollection<UserModel> sList = [];
+            ObservableCollection<UserModel> sList = new();
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -367,7 +367,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<DeliveryModel> GetDeliveryList()
         {
-            ObservableCollection<DeliveryModel> sList = [];
+            ObservableCollection<DeliveryModel> sList = new();
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -421,7 +421,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<StocksModel> GetStocksList()
         {
-            ObservableCollection<StocksModel> sList = [];
+            ObservableCollection<StocksModel> sList = new();
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -469,7 +469,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<StocksModel> SearchStocksList(string query)
         {
-            ObservableCollection<StocksModel> sList = [];
+            ObservableCollection<StocksModel> sList = new();
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -517,7 +517,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<SupplierModel> SearchSupplierList(string query)
         {
-            ObservableCollection<SupplierModel> sList = [];
+            ObservableCollection<SupplierModel> sList = new();
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
@@ -567,7 +567,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<UserModel> SearchUsersList(string query)
         {
-            ObservableCollection<UserModel> sList = [];
+            ObservableCollection<UserModel> sList = new();
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
@@ -623,7 +623,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<TransactionModel> GetTransactionList()
         {
-            ObservableCollection<TransactionModel> sList = [];
+            ObservableCollection<TransactionModel> sList = new();
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
@@ -673,7 +673,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<CustomerModel> GetCustomerList()
         {
-            ObservableCollection<CustomerModel> sList = [];
+            ObservableCollection<CustomerModel> sList = new();
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
@@ -702,7 +702,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<DeliveryModel> SearchDeliveryList(string query = "%")
         {
-            ObservableCollection<DeliveryModel> sList = [];
+            ObservableCollection<DeliveryModel> sList = new();
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
@@ -758,7 +758,7 @@ namespace wrcaysalesinventory.Services
         }
         internal ObservableCollection<ProductModel> GetProductByCategoryList(string cid)
         {
-            ObservableCollection<ProductModel> pList = [];
+            ObservableCollection<ProductModel> pList = new();
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);

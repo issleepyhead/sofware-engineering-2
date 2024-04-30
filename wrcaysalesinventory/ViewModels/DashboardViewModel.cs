@@ -15,38 +15,18 @@ namespace wrcaysalesinventory.ViewModels
     public class DashboardViewModel : ViewModelBase
     {
         private static readonly SolidColorPaint[] paints =
-             [
+             {
                 new (SKColors.Red),
                 new (SKColors.Green),
                 new (SKColors.Blue),
                 new (SKColors.Yellow)
-             ];
+        };
 
     public ISeries[] Series { get; set; } =
             {
             new ColumnSeries<DateTimePoint>
             {
-                Values =
-                [
-                    new DateTimePoint(new DateTime(2021, 1, 1), 3),
-                    new DateTimePoint(new DateTime(2021, 1, 2), 6),
-                    new DateTimePoint(new DateTime(2021, 1, 3), 5),
-                    new DateTimePoint(new DateTime(2021, 1, 4), 3),
-                    new DateTimePoint(new DateTime(2021, 1, 5), 5),
-                    new DateTimePoint(new DateTime(2021, 1, 6), 8),
-                    new DateTimePoint(new DateTime(2021, 1, 8), 42),
-                    new DateTimePoint(new DateTime(2021, 1, 9), 23),
-                    new DateTimePoint(new DateTime(2021, 1, 10), 213),
-                    new DateTimePoint(new DateTime(2021, 1, 11),326),
-                    new DateTimePoint(new DateTime(2021, 1, 12), 632),
-                    new DateTimePoint(new DateTime(2021, 1, 13), 6312),
-                    new DateTimePoint(new DateTime(2021, 1, 14), 6321),
-                    new DateTimePoint(new DateTime(2021, 1, 15), 6112),
-                    new DateTimePoint(new DateTime(2021, 1, 16), 2136),
-                    new DateTimePoint(new DateTime(2021, 1, 17), 3216),
-                    new DateTimePoint(new DateTime(2021, 1, 18), 31256),
-                    new DateTimePoint(new DateTime(2021, 1, 19), 74746)
-                ]
+                Values = null
             }        .OnPointMeasured(point =>
             {
                 // this method is called for each point in the series

@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:wrcaysalesinventory.Forms"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Height="300"
-        Width="400"
+        Height="400"
+        Width="500"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -30,37 +30,44 @@
                       JustifyContent="Center">
             <StackPanel>
                 <TextBlock Text="Username:"
-                           FontSize="16"
+                           FontSize="18"
                            Margin="30 0"
                            FontWeight="SemiBold"
                            Padding="0 4"/>
                 <hc:TextBox x:Name="UsernameTextBox"
                             Margin="30 0"
-                            hc:InfoElement.Placeholder="Enter username"
+                            FontSize="18"
+                            hc:InfoElement.Placeholder="Enter Username"
                             hc:BorderElement.CornerRadius="0"
                             Padding="10"/>
                 <TextBlock Margin="30 0"
-                           FontSize="10"
+                           FontSize="14"
                            Foreground="Red"
                            x:Name="UsernameError"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Password:"
-                           FontSize="16"
+                           FontSize="18"
                            Margin="30 0"
                            FontWeight="SemiBold"
                            Padding="0 4"/>
                 <hc:PasswordBox x:Name="PasswordTextBox"
-                                hc:InfoElement.Placeholder="Enter password"
+                                hc:InfoElement.Placeholder="Enter Password"
                                 hc:BorderElement.CornerRadius="0"
                                 Margin="30 0"
+                                FontSize="18"
                                 Padding="10"
                                 ShowEyeButton="True"
                                 hc:PasswordBoxAttach.IsMonitoring="True"/>
                 <TextBlock Margin="30 0"
-                           FontSize="10"
+                           FontSize="14"
                            Foreground="Red"
                            x:Name="PasswordError"/>
+                <StackPanel Orientation="Horizontal"
+                            Margin="30 0">
+                    <CheckBox Content="Remember Me"
+                              FontSize="18"/>
+                </StackPanel>
             </StackPanel>
             <Grid Margin="30 8">
                 <Grid.ColumnDefinitions>
@@ -70,15 +77,17 @@
                 <Button x:Name="CancelButton"
                         Grid.Column="0"
                         Content="Cancel"
-                        Background="{DynamicResource Button.Disabled.Border}"
+                        FontSize="18"
                         BorderThickness="0"
                         Margin="0 0 4 0"
+                        Command="hc:ControlCommands.Close"
                         Height="40"
                         hc:BorderElement.CornerRadius="0"
                         HorizontalAlignment="Stretch"/>
                 <Button x:Name="LoginButton"
                         Grid.Column="1"
-                        Content="Log In"
+                        FontSize="18"
+                        Content="Login"
                         Background="{StaticResource PrimaryBrush}"
                         BorderThickness="0"
                         Height="40"

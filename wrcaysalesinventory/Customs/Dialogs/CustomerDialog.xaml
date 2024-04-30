@@ -24,12 +24,12 @@
                       Background="{DynamicResource DarkMaskBrush}">
             <StackPanel Orientation="Horizontal"
                         Margin="18 0">
-                <!--<TextBlock Text="&#xF2C7;"
+                <TextBlock Text="&#xE77B;"
                            Style="{StaticResource TextBlockFabricIcons}"
                            FontSize="22"
                            Padding="0"
                            VerticalAlignment="Center"
-                           TextAlignment="Center"/>-->
+                           TextAlignment="Center"/>
                 <TextBlock Text="Customer"
                            FontSize="18"
                            Padding="5 0 0 0"
@@ -51,12 +51,12 @@
         <StackPanel Margin="18 14"
                     Grid.Row="1">
             <StackPanel>
-                <TextBlock Text="Fullname:"
+                <TextBlock Text="Full Name:"
                            Padding="0 5"
                            FontSize="14"/>
                 <hc:TextBox HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            hc:InfoElement.Placeholder="Enter fullname"
+                            hc:InfoElement.Placeholder="Enter Full Name"
                             Text="{Binding Model.CategoryName,UpdateSourceTrigger=PropertyChanged}"
                             Height="40"/>
                 <TextBlock Name="CategoryNameError"
@@ -73,7 +73,7 @@
                             MinHeight="40"
                             Height="Auto"
                             Text="{Binding Model.CategoryDescription, UpdateSourceTrigger=PropertyChanged}"
-                            hc:InfoElement.Placeholder="Enter phone number"
+                            hc:InfoElement.Placeholder="Enter Phone Number"
                             AcceptsReturn="True"/>
                 <TextBlock Name="DescriptionError"
                            FontSize="13"
@@ -89,7 +89,7 @@
                             MinHeight="40"
                             Height="Auto"
                             Text="{Binding Model.CategoryDescription, UpdateSourceTrigger=PropertyChanged}"
-                            hc:InfoElement.Placeholder="Enter email"
+                            hc:InfoElement.Placeholder="Enter Email"
                             AcceptsReturn="True"/>
                 <TextBlock FontSize="13"
                            Text="{Binding DescriptionError, UpdateSourceTrigger=PropertyChanged}"

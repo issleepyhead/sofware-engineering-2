@@ -6,13 +6,14 @@
         xmlns:local="clr-namespace:wrcaysalesinventory.Forms"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Height="450"
-        Width="500"
+        DataContext="{Binding Path=ServerWindowView,Source={StaticResource Locator}}"
+        Height="600"
+        Width="600"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         hc:WindowAttach.IsDragElement="True">
-    <Grid  Background="#FFE0E0E0">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
@@ -29,107 +30,111 @@
                       JustifyContent="Center">
             <StackPanel>
                 <TextBlock Text="Server Name:"
-                           FontSize="14"
+                           FontSize="18"
                            Margin="30 0"
                            FontWeight="SemiBold"
                            Padding="0 4"/>
                 <Grid Margin="30 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
                     <hc:TextBox x:Name="TextBoxServer"
-                                hc:InfoElement.Placeholder="Enter server name"
+                                hc:InfoElement.Placeholder="Enter Server Name"
                                 hc:BorderElement.CornerRadius="0"
                                 Grid.Column="0"
-                                Height="35"
+                                Height="40"
+                                FontSize="18"
                                 Padding="10"
+                                Text="{Binding ServerName}"
                                 BorderThickness="0"/>
                     <Button Grid.Column="1"
-                            Content="Test Connection"
+                            Content="{Binding TestContextText}"
+                            Command="{Binding TestCmd}"
                             Background="{StaticResource PrimaryBrush}"
+                            IsEnabled="{Binding IsEnable}"
                             BorderThickness="0"
-                            FontSize="8"
+                            FontSize="14"
                             Margin="4 0 0 0"
-                            Height="35"
+                            Height="40"
                             VerticalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             HorizontalAlignment="Stretch"/>
                 </Grid>
-                <TextBlock Text="Server not found."
-                           Margin="30 0"
-                           FontSize="10"
+                <TextBlock Margin="30 0"
+                           FontSize="14"
                            Foreground="Red"
-                           x:Name="ServerError"
-                           Visibility="Collapsed"/>
+                           Text="{Binding ServerError}"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Database Name:"
-                           FontSize="14"
+                           FontSize="18"
                            Margin="30 0"
                            FontWeight="SemiBold"
                            Padding="0 4"/>
                 <hc:ComboBox x:Name="ComboboxDatabase"
                             Margin="30 0"
-                            hc:InfoElement.Placeholder="Select database"
+                            FontSize="18"
+                            ItemsSource="{Binding DatabaseSource}"
+                            DisplayMemberPath="name"
+                            Text="{Binding Database}"
+                            hc:InfoElement.Placeholder="Select Database"
                             hc:BorderElement.CornerRadius="0"
                             Padding="10"
                              BorderThickness="0"/>
-                <TextBlock Text="The selected database is incorrect."
-                           Margin="30 0"
-                           FontSize="10"
+                <TextBlock Margin="30 0"
+                           FontSize="14"
                            Foreground="Red"
-                           x:Name="DatabaseError"
-                           Visibility="Collapsed"/>
+                           Text="{Binding DatabaseError}"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Username:"
-                           FontSize="14"
+                           FontSize="18"
                            Margin="30 0"
                            FontWeight="SemiBold"
                            Padding="0 4"/>
                 <hc:TextBox x:Name="UsernameTextBox"
+                            FontSize="18"
                             Margin="30 0"
-                            hc:InfoElement.Placeholder="Enter username"
+                            hc:InfoElement.Placeholder="Enter Username"
                             hc:BorderElement.CornerRadius="0"
                             Padding="10"
+                            Text="{Binding UserName}"
                             BorderThickness="0"/>
-                <TextBlock Text="Username does not exists."
-                           Margin="30 0"
-                           FontSize="10"
+                <TextBlock Margin="30 0"
+                           FontSize="14"
                            Foreground="Red"
-                           x:Name="UsernameError"
-                           Visibility="Collapsed"/>
+                           Text="{Binding UserNameError}"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Password:"
-                           FontSize="14"
+                           FontSize="18"
                            Margin="30 0"
                            FontWeight="SemiBold"
                            Padding="0 4"/>
                 <hc:PasswordBox x:Name="PasswordTextBox"
-                                hc:InfoElement.Placeholder="Enter password"
+                                hc:InfoElement.Placeholder="Enter Password"
                                 hc:BorderElement.CornerRadius="0"
                                 Margin="30 0"
                                 Padding="10"
+                                FontSize="18"
                                 ShowEyeButton="True"
                                 BorderThickness="0"
+                                UnsafePassword="{Binding Password}"
                                 hc:PasswordBoxAttach.IsMonitoring="True"/>
-                <TextBlock Text="Invalid password."
-                           Margin="30 0"
-                           FontSize="10"
+                <TextBlock Margin="30 0"
+                           FontSize="14"
                            Foreground="Red"
-                           x:Name="PasswordError"
-                           Visibility="Collapsed"/>
+                           Text="{Binding PasswordError}"/>
             </StackPanel>
             <Grid Margin="30 8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="CancelButton"
-                        Grid.Column="0"
+                <Button Grid.Column="0"
                         Content="Close"
+                        FontSize="18"
                         Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
                         Foreground="Black"
                         BorderThickness="0"
@@ -137,13 +142,15 @@
                         Height="40"
                         hc:BorderElement.CornerRadius="0"
                         HorizontalAlignment="Stretch"/>
-                <Button x:Name="ConnectButton"
-                        Grid.Column="1"
+                <Button Grid.Column="1"
+                        FontSize="18"
                         Content="Connect"
                         Background="{StaticResource PrimaryBrush}"
                         BorderThickness="0"
                         Height="40"
+                        Command="{Binding ConnectCmd}"
                         Margin="4 0 0 0"
+                        IsEnabled="{Binding IsEnable}"
                         hc:BorderElement.CornerRadius="0"
                         HorizontalAlignment="Stretch"/>
             </Grid>

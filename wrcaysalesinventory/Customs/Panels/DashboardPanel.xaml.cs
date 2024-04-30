@@ -2,6 +2,7 @@
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
 namespace wrcaysalesinventory.Customs.Panels
@@ -20,16 +21,7 @@ namespace wrcaysalesinventory.Customs.Panels
     {
             new ColumnSeries<DateTimePoint>
             {
-                Values =
-                [
-                    new DateTimePoint(new DateTime(2021, 1, 1), 3),
-                    new DateTimePoint(new DateTime(2021, 1, 2), 6),
-                    new DateTimePoint(new DateTime(2021, 1, 3), 5),
-                    new DateTimePoint(new DateTime(2021, 1, 4), 3),
-                    new DateTimePoint(new DateTime(2021, 1, 5), 5),
-                    new DateTimePoint(new DateTime(2021, 1, 6), 8),
-                    new DateTimePoint(new DateTime(2021, 1, 7), 6)
-                ]
+                Values = null
             }
         };
 
@@ -45,3 +37,13 @@ namespace wrcaysalesinventory.Customs.Panels
         };
     }
 }
+
+//[
+//                    new DateTimePoint(new DateTime(2021, 1, 1), 3),
+//                    new DateTimePoint(new DateTime(2021, 1, 2), 6),
+//                    new DateTimePoint(new DateTime(2021, 1, 3), 5),
+//                    new DateTimePoint(new DateTime(2021, 1, 4), 3),
+//                    new DateTimePoint(new DateTime(2021, 1, 5), 5),
+//                    new DateTimePoint(new DateTime(2021, 1, 6), 8),
+//                    new DateTimePoint(new DateTime(2021, 1, 7), 6)
+//                ]

@@ -24,7 +24,7 @@ namespace wrcaysalesinventory.ViewModels
             DataList = _dataService.GetProductList();
             SupplierList = _dataService.GetSupplierList();
             mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            deliveryCartModels = [];
+            deliveryCartModels = new();
         }
 
         private Button _btn;
@@ -33,10 +33,10 @@ namespace wrcaysalesinventory.ViewModels
         private DeliveryModel _model = new();
         public DeliveryModel Model { get => _model; set => Set(ref _model, value); }
 
-        private ObservableCollection<ProductCartItem> deliveryCartModels = [];
+        private ObservableCollection<ProductCartItem> deliveryCartModels = new();
         public ObservableCollection<ProductCartItem> DeliveryCartList { get => deliveryCartModels; set => Set(ref deliveryCartModels, value);}
 
-        public ObservableCollection<SupplierModel> supplierList = [];
+        public ObservableCollection<SupplierModel> supplierList = new();
         public ObservableCollection<SupplierModel> SupplierList { get => supplierList; set => Set(ref supplierList, value);}    
 
         private string _searchQuery;
@@ -67,7 +67,7 @@ namespace wrcaysalesinventory.ViewModels
 
                 if (!pexists)
                 {
-                    DeliveryCartModel deliveryCartModel = new DeliveryCartModel
+                    DeliveryCartModel deliveryCartModel = new()
                     {
                         ProductID = pModel.ID,
                         Cost = pModel.ProductCost,

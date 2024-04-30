@@ -32,7 +32,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
             mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         }
 
-        private ObservableCollection<POSCartModel> _data = [];
+        private ObservableCollection<POSCartModel> _data = new();
         public ObservableCollection<POSCartModel> CartList { get => _data; set => Set(ref _data, value); }
         private ObservableCollection<CustomerModel> _customerList;
         public ObservableCollection<CustomerModel> CustomerList { get => _customerList; set => Set(ref _customerList, value); }
@@ -236,7 +236,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
 
                 if (!pexists)
                 {
-                    POSCartModel deliveryCartModel = new POSCartModel
+                    POSCartModel deliveryCartModel = new()
                     {
                         ID = pModel.ProductID,
                         Cost = pModel.Cost,
