@@ -68,10 +68,10 @@ namespace wrcaysalesinventory.ViewModels
                     DatabaseSource = dataTable;
                 } catch
                 {
-
+                    ServerError = "Unable to connect to the server.";
                 } finally
                 {
-
+                    sqlConnection?.Close();
                 }
             }
             else
