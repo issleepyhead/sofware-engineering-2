@@ -12,6 +12,24 @@ namespace wrcaysalesinventory.Data.Models
         public string ProductName { get; set; }
         public string Quantity { get; set; } = "0";
         public string Cost { get; set; } = "0";
-        public string Total { get => (double.Parse(Quantity ?? "0") * double.Parse(Cost ?? "0")).ToString() ; }
+        public string Stocks { get; set; } = "0";
+        public string Total {
+            get
+            {
+                try
+                {
+                    if (double.Parse(Quantity) < 1)
+                    {
+                        return (double.Parse(Quantity) / 1 * double.Parse(Cost)).ToString();
+                    }
+                    return (double.Parse(Quantity) * double.Parse(Cost)).ToString();
+                }
+                catch
+                {
+                    return "0";
+                }
+            }
+        }
+        public bool AllowedDecimal { get; set; } = false;
     }
 }

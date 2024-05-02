@@ -37,6 +37,7 @@
                               IsRealTime="True"
                               hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchProduct}"
                               Width="280"
+                              FontSize="16"
                               Height="35"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left"
@@ -45,6 +46,7 @@
                     <hc:Pagination Name="Pagination"
                                    MaxPageCount="50"
                                    PageIndex="1"
+                                   FontSize="16"
                                    MaxPageInterval="3"
                                    DataCountPerPage="50"
                                    VerticalAlignment="Center"
@@ -61,27 +63,34 @@
                   AutoGenerateColumns="False"
                   Grid.Row="1"
                   Padding="0"
+                  FontSize="16"
                   ItemsSource="{Binding DataList}"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
                   Margin="0 15 0 0">
             <DataGrid.Columns>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Product Name"
                                     Binding="{Binding ProductName}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Status"
                                     Binding="{Binding StatusName}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                                    Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{Binding StatusColor}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn FontSize="15"
                                     Header="Stocks"
                                     Binding="{Binding Stocks}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Sold"
                                     Binding="{Binding Sold}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Defective"
                                     Binding="{Binding Defective}"
                                     Width="*"/>

@@ -17,8 +17,8 @@
            ShowIcon="False"
            ShowMaxButton="False"
            ShowTitle="False"
-           Width="1000"
-           Height="800"
+           d:DesignWidth="1200"
+           d:DesignHeight="800"
            WindowState="Maximized"
            hc:WindowAttach.IsDragElement="True">
     <hc:Window.NonClientAreaContent>
@@ -29,97 +29,97 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <hc:SideMenu Width="250" Grid.Column="0">
+        <hc:SideMenu Width="300" Grid.Column="0">
             <hc:Interaction.Triggers>
                 <hc:EventTrigger EventName="SelectionChanged">
                     <hc:EventToCommand Command="{Binding SwitchItemCmd}" PassEventArgsToCommand="True" />
                 </hc:EventTrigger>
             </hc:Interaction.Triggers>
-            <hc:SideMenuItem Padding="15 25" FontSize="14" Header="{x:Static langs:Lang.LabelDashboard}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+            <hc:SideMenuItem Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelDashboard}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                 <hc:SideMenuItem.Icon>
                     <Image Source="{StaticResource ic_dashboard}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
-            <hc:SideMenuItem Padding="15 25" FontSize="14" Header="{x:Static langs:Lang.LabelMaintenance}">
+            <hc:SideMenuItem Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelMaintenance}">
                 <hc:SideMenuItem.Icon>
                     <Image Source="{StaticResource ic_maintenance}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelProducts}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Padding="10 25" FontSize="18" Header="{x:Static langs:Lang.LabelProducts}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xECDC;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelCategories}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Padding="10 25" FontSize="18" Header="{x:Static langs:Lang.LabelCategories}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xF2C7;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelSuppliers}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Padding="10 25" FontSize="18" Header="{x:Static langs:Lang.LabelSuppliers}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xEEBD;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelUsers}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Padding="10 25" FontSize="18" Header="{x:Static langs:Lang.LabelUsers}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xE77B;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
             </hc:SideMenuItem>
-            <hc:SideMenuItem Padding="15 25" FontSize="14" Header="{x:Static langs:Lang.LabelTransactions}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+            <hc:SideMenuItem Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelTransactions}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                 <hc:SideMenuItem.Icon>
                     <Image Source="{StaticResource ic_pos}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelPOS}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Padding="10 25" FontSize="18" Header="{x:Static langs:Lang.LabelPOS}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xEAED;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelTransactonHistory}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <!--<hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelTransactonHistory}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xEEBE;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
+                </hc:SideMenuItem>-->
             </hc:SideMenuItem>
-            <hc:SideMenuItem Padding="15 25" FontSize="14" Header="{x:Static langs:Lang.LabelInventory}">
+            <hc:SideMenuItem Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelInventory}">
                 <hc:SideMenuItem.Icon>
                     <Image Source="{StaticResource ic_inventory}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelStocks}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Padding="10 25" FontSize="18" Header="{x:Static langs:Lang.LabelStocks}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xF03F;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelDeliveries}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Padding="10 25" FontSize="18" Header="{x:Static langs:Lang.LabelDeliveries}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xEBF4;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
             </hc:SideMenuItem>
-            <hc:SideMenuItem Padding="15 25" FontSize="14" Header="{x:Static langs:Lang.LabelReports}">
+            <hc:SideMenuItem Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelReports}">
                 <hc:SideMenuItem.Icon>
                     <Image Source="{StaticResource ic_reports}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelTransactionReport}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Padding="10 25" FontSize="18" Header="{x:Static langs:Lang.LabelTransactionReport}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xE9E6;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelExpensesReport}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Padding="10 25" FontSize="18" Header="{x:Static langs:Lang.LabelExpensesReport}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xF830;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
             </hc:SideMenuItem>
-            <hc:SideMenuItem Padding="15 25" FontSize="14" Header="{x:Static langs:Lang.LabelSettings}">
+            <hc:SideMenuItem Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelSettings}">
                 <hc:SideMenuItem.Icon>
                     <Image Source="{StaticResource ic_settings}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelGenSettings}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <!--<hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelGenSettings}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xE713;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelPOSSettings}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                </hc:SideMenuItem>-->
+                <hc:SideMenuItem Padding="10 25" FontSize="18" Header="{x:Static langs:Lang.LabelPOSSettings}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xF7C1;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
@@ -129,7 +129,7 @@
                         <TextBlock Text="&#xF34E;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>-->
-                <hc:SideMenuItem Padding="10 25" FontSize="14" Header="{x:Static langs:Lang.LabelAuditTrail}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Padding="10 25" FontSize="18" Header="{x:Static langs:Lang.LabelAuditTrail}" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xE3B6;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>

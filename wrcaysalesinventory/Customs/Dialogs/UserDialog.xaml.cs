@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Resources.Langs;
 using wrcaysalesinventory.ViewModels;
@@ -16,6 +17,7 @@ namespace wrcaysalesinventory.Customs.Dialogs
             InitializeComponent();
             if (user != null)
             {
+                user.Password = string.Empty;
                 ((UsersDialogViewModel)DataContext).Model = user;
                 AddButton.Content = Lang.LabelUpdate;
                 DeleteButton.Visibility = Visibility.Visible;

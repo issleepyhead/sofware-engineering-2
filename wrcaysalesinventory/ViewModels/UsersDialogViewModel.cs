@@ -69,11 +69,15 @@ namespace wrcaysalesinventory.ViewModels
                 SqlCommand sqlCommand = new("DELETE FROM tblusers WHERE id = @id", sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                 if (sqlCommand.ExecuteNonQuery() > 0)
+                {
                     Growl.Success("Account has been deleted successfully!");
+                    WinHelper.CloseDialog(_btn);
+                    WinHelper.AuditActivity("DELETED", "ACCOUNT");
+                }
                 else
                     Growl.Info("Failed deleting the supplier.");
                 mw?.UpdateAll();
-                WinHelper.CloseDialog(_btn);
+                
             }
             catch (SqlException ex)
             {
@@ -197,7 +201,7 @@ namespace wrcaysalesinventory.ViewModels
                     sqlCommand.Parameters.AddWithValue("@address", vm.Model.Address);
                     sqlCommand.Parameters.AddWithValue("@contact", vm.Model.Contact);
                     sqlCommand.Parameters.AddWithValue("@username", vm.Model.Username);
-                    sqlCommand.Parameters.AddWithValue("@password", vm.Model.Password);
+                    sqlCommand.Parameters.AddWithValue("@password", BCrypt.Net.BCrypt.HashPassword(vm.Model.Password));
                     sqlCommand.Parameters.AddWithValue("@roleid", vm.Model.RoleID);
                     if (sqlCommand.ExecuteNonQuery() > 0)
                     {
@@ -206,6 +210,7 @@ namespace wrcaysalesinventory.ViewModels
                         else
                             Growl.Success("Account has been updated successfully!");
                         mw?.UpdateAll();
+                        WinHelper.AuditActivity(string.IsNullOrEmpty(Model.ID) ? "ADDED" : "UPDATED", "ACCOUNT");
                         WinHelper.CloseDialog(_btn);
                     }
                     else

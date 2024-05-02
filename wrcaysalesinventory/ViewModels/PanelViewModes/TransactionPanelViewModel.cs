@@ -1,6 +1,10 @@
-﻿using HandyControl.Tools.Command;
+﻿using HandyControl.Controls;
+using HandyControl.Tools.Command;
 using Microsoft.Reporting.WinForms;
 using System.Data.SqlClient;
+using System.Windows.Controls;
+using wrcaysalesinventory.Customs;
+using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.DataSet;
 using wrcaysalesinventory.Data.Models;
@@ -53,6 +57,23 @@ namespace wrcaysalesinventory.ViewModels
             rp.ReportViewer.LocalReport.Refresh();
             rp.ReportViewer.RefreshReport();
             rp.ShowDialog();
+        }
+
+
+        public RelayCommand<DataGrid> SelectedCommand => new(SelectionChanged);
+        private void SelectionChanged(DataGrid obj)
+        {
+            DataGrid pdataGrid;
+            if (obj.GetType() == typeof(DataGrid))
+            {
+                pdataGrid = (DataGrid)obj;
+                if (pdataGrid.SelectedItems.Count > 0)
+                {
+                    TransactionModel model = (TransactionModel)pdataGrid.SelectedItem;
+                    TransactionDetailsDialog d = new TransactionDetailsDialog(model.ID);
+                    Dialog.Show(d);
+                }
+            }
         }
     }
 }

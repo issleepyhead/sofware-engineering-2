@@ -24,7 +24,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
 
         public int TotalData { get => _alldata.Count; }
         public DataService DataService { get => _dataService; } 
-        public ObservableCollection<ProductModel> AllData { set { _alldata = value;  DataList = new ObservableCollection<ProductModel>(_alldata.Take(30).ToList()); } }
+        public ObservableCollection<ProductModel> AllData { set { Set(ref _alldata,value);  DataList = new ObservableCollection<ProductModel>(_alldata.Take(30).ToList()); } }
 
         public RelayCommand<object> OpenDialog => new(OpenProductDialog);
 

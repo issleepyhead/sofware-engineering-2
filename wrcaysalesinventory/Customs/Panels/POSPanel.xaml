@@ -67,13 +67,13 @@
                         Width="48"
                         Padding="0"
                         FontSize="22"/>-->
-                <Button Content="&#xF2B6;"
+                <!--<Button Content="&#xF2B6;"
                         Grid.Column="2"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
                         Padding="0"
-                        FontSize="22"/>
+                        FontSize="22"/>-->
                 <Button Content="&#xE616;"
                         Grid.Column="3"
                         FontFamily="{StaticResource FabricIcons}"
@@ -137,6 +137,7 @@
                       AutoGenerateColumns="False"
                       Grid.Row="1"
                       Padding="0"
+                      FontSize="16"
                       ItemsSource="{Binding DataList}"
                       hc:DataGridAttach.ApplyDefaultStyle="True"
 >
@@ -146,11 +147,11 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <DataGrid.Columns>
-                        <DataGridTextColumn FontSize="13"
+                        <DataGridTextColumn FontSize="15"
                                         Header="Product Name"
                                         Binding="{Binding ProductName}"
                                         Width="*"/>
-                        <DataGridTextColumn FontSize="13"
+                        <DataGridTextColumn FontSize="15"
                                         Header="Stocks Available"
                                         Binding="{Binding StoksUnit}"
                                         Width="*"/>
@@ -205,21 +206,27 @@
                                                     Margin="10 0"
                                                     FontSize="15"
                                                     FontWeight="Medium"
-                                                    x:Name="ProductName"/>
+                                                    Foreground="{Binding ElementName=PPanel, Path=DataContext.ForeColor}"/>
                                         <TextBlock Text="{Binding Cost}"
                                                     VerticalAlignment="Center"
                                                     Margin="10 0"
                                                     FontSize="15"
                                                     FontWeight="Medium"
-                                                    x:Name="ProductPrice"/>
+                                                    Foreground="{Binding ElementName=PPanel, Path=DataContext.ForeColor}"/>
                                     </StackPanel>
                                     <hc:NumericUpDown Grid.Column="1"
                                                     Height="40"
                                                     hc:BorderElement.CornerRadius="0"
                                                     Value="{Binding Quantity}"
                                                     Margin="10 0"
-                                                    Minimum="1"
-                                                      ValueChanged="NumericUpDown_ValueChanged"/>
+                                                    Minimum=".1"
+                                                    >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="ValueChanged">
+                                                <i:InvokeCommandAction Command="{Binding ElementName=PPanel, Path=DataContext.TextInput}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type hc:NumericUpDown}}}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </hc:NumericUpDown>
                                     <Grid Grid.Column="2">
                                         <Button x:Name="DeleteProduct"
                                                 hc:BorderElement.CornerRadius="0"
@@ -269,7 +276,7 @@
                         <TextBlock Text="Sub Total"
                                    FontSize="22"
                                    FontWeight="Light"/>
-                        <TextBlock Text="{Binding SubTotal}"
+                        <TextBlock Text="{Binding SubTotal, UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -289,7 +296,7 @@
                                     VerticalAlignment="Center"
                                     FontFamily="{StaticResource FabricIcons}"/>
                         </StackPanel>
-                        <TextBlock Text="{Binding Header.Discount, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"

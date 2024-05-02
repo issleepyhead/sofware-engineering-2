@@ -57,6 +57,12 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
             DataList = _dataService.SearchGategoryPanelList(string.IsNullOrEmpty(searchBar.Text) ? "%" : searchBar.Text);
         }
 
+        public RelayCommand<SearchBar> RefreshData => new(R);
+        public void R(SearchBar searchBar)
+        {
+            DataList = _dataService.GetGategoryList();
+        }
+
         public void PageUpdated(int offset)
         {
             DataList = new ObservableCollection<CategoryModel>(_allCategories.Skip(offset * 30).Take(30).ToList());

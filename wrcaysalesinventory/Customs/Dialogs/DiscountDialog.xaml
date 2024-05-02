@@ -22,14 +22,14 @@
                       Background="{DynamicResource DarkMaskBrush}">
             <StackPanel Orientation="Horizontal"
                         Margin="18 0">
-                <!--<TextBlock Text="&#xF2C7;"
+                <TextBlock Text="&#xE94C;"
                            Style="{StaticResource TextBlockFabricIcons}"
                            FontSize="22"
                            Padding="0"
                            VerticalAlignment="Center"
-                           TextAlignment="Center"/>-->
+                           TextAlignment="Center"/>
                 <TextBlock Text="Discount"
-                           FontSize="18"
+                           FontSize="20"
                            Padding="5 0 0 0"
                            VerticalAlignment="Center"
                            FontWeight="SemiBold"/>
@@ -51,35 +51,18 @@
             <StackPanel>
                 <TextBlock Text="Discount(%):"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
                 <hc:TextBox Name="DiscountTextBox"
                             HorizontalAlignment="Stretch"
+                            FontSize="18"
                             hc:BorderElement.CornerRadius="0"
-                            hc:InfoElement.Placeholder="Enter discount percent"
-                            Text="{Binding Header.Discount,UpdateSourceTrigger=PropertyChanged}"
+                            hc:InfoElement.Placeholder="Enter Discount Percent"
+                            Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}"
                             Height="40"/>
-                <TextBlock Name="CategoryNameError"
-                           FontSize="13"
-                           Text=""
+                <TextBlock FontSize="14"
+                           Text="{Binding DiscountError,UpdateSourceTrigger=PropertyChanged}"
                            Foreground="Red"/>
             </StackPanel>
-            <!--<StackPanel Margin="0 8 0 0">
-                <TextBlock Text="Description:"
-                           Padding="0 5"
-                           FontSize="14"/>
-                <hc:TextBox Name="CategoryDescriptionTextBox"
-                            HorizontalAlignment="Stretch"
-                            hc:BorderElement.CornerRadius="0"
-                            MinHeight="40"
-                            Height="Auto"
-                            Text="{Binding Model.CategoryDescription, UpdateSourceTrigger=PropertyChanged}"
-                            hc:InfoElement.Placeholder="Enter description"
-                            AcceptsReturn="True"/>
-                <TextBlock Name="DescriptionError"
-                           FontSize="13"
-                           Text="{Binding DescriptionError, UpdateSourceTrigger=PropertyChanged}"
-                           Foreground="Red"/>
-            </StackPanel>-->
         </StackPanel>
         <hc:FlexPanel Grid.Row="2"
                       JustifyContent="FlexEnd"
@@ -89,19 +72,6 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <!--<Button Name="DeleteButton"
-                        Margin="0 0 14 0"
-                        FontSize="16"
-                        hc:BorderElement.CornerRadius="0"
-                        BorderThickness="1"
-                        BorderBrush="{StaticResource DarkMaskBrush}"
-                        Content="{x:Static langs:Lang.LabelDelete}"
-                        Height="35"
-                        Command="{Binding DeleteCmd}"
-                        CommandParameter="{Binding}"
-                        Width="130"
-                        Grid.Column="0"
-                        VerticalAlignment="Top"/>-->
                 <Button Name="AddButton"
                         FontSize="16"
                         hc:BorderElement.CornerRadius="0"
@@ -110,7 +80,6 @@
                         Content="Save"
                         Height="35"
                         Width="130"
-                        CommandParameter="{Binding}"
                         VerticalAlignment="Top"
                         Grid.Column="1" Click="AddButton_Click"/>
             </Grid>

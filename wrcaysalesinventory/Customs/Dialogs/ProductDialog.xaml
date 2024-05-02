@@ -52,7 +52,7 @@
             <StackPanel>
                 <TextBlock Text="Product Name:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
                 <hc:TextBox Name="CategoryNameTextBox"
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
@@ -60,26 +60,27 @@
                             Text="{Binding Model.ProductName, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource TextBoxExtend}"
                             Height="40"
+                            FontSize="16"
                             Background="{StaticResource RegionBrush}"/>
                 <TextBlock Text="{Binding ProductNameError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="11"
+                           FontSize="14"
                            Foreground="Red"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Product Category:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
                 <hc:ComboBox HorizontalAlignment="Stretch"
                              hc:BorderElement.CornerRadius="0"
                              MinHeight="40"
+                             FontSize="16"
                              ItemsSource="{Binding CategoryDataList}"
                              SelectedValuePath="ID"
                              DisplayMemberPath="CategoryName"
                              hc:InfoElement.Placeholder="Select Category"
                              SelectedIndex="0"
                              SelectedValue="{Binding Model.CategoryID,UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Visibility="Collapsed"
-                           FontSize="11"
+                <TextBlock FontSize="14"
                            Foreground="Red"/>
             </StackPanel>
             <Grid Margin="0 14 0 0">
@@ -90,21 +91,22 @@
                 <StackPanel>
                     <TextBlock Text="Selling Price:"
                                Padding="0 5"
-                               FontSize="14"/>
+                               FontSize="18"/>
                     <hc:TextBox Text="{Binding Model.ProductPrice,UpdateSourceTrigger=PropertyChanged}"
                                 HorizontalAlignment="Stretch"
                                 hc:BorderElement.CornerRadius="0"
                                 Height="40"
                                 hc:InfoElement.Placeholder="Enter product's selling price"/>
-                    <TextBlock FontSize="11"
+                    <TextBlock FontSize="16"
                                Text="{Binding ProductPriceError, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="Red"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
-                    <TextBlock Text="Cost Price:" Padding="0 5" FontSize="14"/>
+                    <TextBlock Text="Cost Price:" Padding="0 5" FontSize="18"/>
                     <hc:TextBox Name="ProductCostTextBox"
                                 Text="{Binding Model.ProductCost,UpdateSourceTrigger=PropertyChanged}"
                                 HorizontalAlignment="Stretch"
+                                FontSize="16"
                                 hc:BorderElement.CornerRadius="0"
                                 hc:InfoElement.Placeholder="Enter product's cost price"
                                 Height="40"/>
@@ -114,63 +116,79 @@
                 </StackPanel>
             </Grid>
             <StackPanel Margin="0 15 0 0">
-                <TextBlock Text="Description:" Padding="0 5" FontSize="14"/>
+                <TextBlock Text="Description:" Padding="0 5" FontSize="18"/>
                 <hc:TextBox Name="ProductDescription"
                             Text="{Binding Model.ProductDescription,UpdateSourceTrigger=PropertyChanged}"
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
+                            FontSize="16"
                             hc:InfoElement.Placeholder="Enter product's description (optional)"
                             Height="40"/>
                 <TextBlock Text="{Binding ProductDescriptionError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="11"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
             <StackPanel Margin="0 15 0 0">
-                <TextBlock Text="Measurement Unit:" Padding="0 5" FontSize="14"/>
+                <TextBlock Text="Measurement Unit:" Padding="0 5" FontSize="18"/>
                 <hc:TextBox HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             MinHeight="40"
                             Height="Auto"
+                            FontSize="16"
                             hc:InfoElement.Placeholder="Enter measurement unit (e.g kg, g, mg...)"
                             Text="{Binding Model.ProductUnit, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock FontSize="11"
                            Foreground="Red"
                            Text="{Binding ProductUnitError, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <StackPanel Visibility="{Binding StatusVisibility}">
+            <StackPanel>
                 <TextBlock Text="Product Status:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
                 <hc:ComboBox HorizontalAlignment="Stretch"
                              hc:BorderElement.CornerRadius="0"
                              MinHeight="40"
+                             FontSize="16"
                              ItemsSource="{Binding StatusDataList}"
                              SelectedValuePath="ID"
                              DisplayMemberPath="StatusName"
                              hc:InfoElement.Placeholder="Select product status"
                              SelectedIndex="0"
                              SelectedValue="{Binding Model.StatusID,UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock FontSize="11"
+                <TextBlock FontSize="14"
                            Foreground="Red"/>
             </StackPanel>
+            <!--<StackPanel>
+                <TextBlock Text="Critical Level"
+                           Padding="0 5"
+                           FontSize="16"/>
+                <hc:TextBox HorizontalAlignment="Stretch"
+                            hc:BorderElement.CornerRadius="0"
+                            MinHeight="40"
+                            FontSize="16"
+                            Height="Auto"
+                            hc:InfoElement.Placeholder="Enter Critical Level"
+                            Text=""/>
+                <TextBlock FontSize="14"
+                           Foreground="Red"
+                           Text="{Binding ProductUnitError, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>-->
             <StackPanel Margin="0 8 0 0">
                 <TextBlock Text="Selling Unit:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="16"/>
                 <hc:ButtonGroup Style="{StaticResource ButtonGroupSolid}"
                             hc:BorderElement.CornerRadius="0">
-                    <RadioButton x:Name="ByUnit"
-                             hc:BorderElement.CornerRadius="0"
+                    <RadioButton  hc:BorderElement.CornerRadius="0"
                              Height="60"
-                             FontSize="10"
-                             Content="Sell By Unit"
-                             IsChecked="{Binding NotAllowDecimal, UpdateSourceTrigger=PropertyChanged}"/>
-                    <RadioButton x:Name="ByFraction"
-                             hc:BorderElement.CornerRadius="0"
+                             FontSize="16"
+                             IsChecked="True"
+                             Content="Sell By Unit" Checked="RadioButton_Checked_1" Unchecked="RadioButton_Unchecked"
+                             x:Name="notallowed"/>
+                    <RadioButton hc:BorderElement.CornerRadius="0"
                              Height="60"
-                             FontSize="10"
-                             Content="Sell By Fraction"
-                             IsChecked="{Binding AllowDecimal, UpdateSourceTrigger=PropertyChanged}"/>
+                             FontSize="16" x:Name="allowed"
+                             Content="Sell By Fraction" Checked="RadioButton_Checked" Unchecked="RadioButton_Unchecked_1"/>
                 </hc:ButtonGroup>
             </StackPanel>
         </StackPanel>
@@ -184,7 +202,7 @@
                 </Grid.ColumnDefinitions>
                 <Button Name="DeleteButton"
                         Margin="0 0 14 0"
-                        FontSize="16"
+                        FontSize="18"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
@@ -196,7 +214,7 @@
                         VerticalAlignment="Top"
                         Grid.Column="0"/>
                 <Button Name="AddButton"
-                        FontSize="16"
+                        FontSize="18"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"

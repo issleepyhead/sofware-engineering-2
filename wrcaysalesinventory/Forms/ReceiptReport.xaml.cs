@@ -10,13 +10,14 @@ namespace wrcaysalesinventory.Forms
     /// </summary>
     public partial class ReceiptReport : Window
     {
-        
+           
         public ReceiptReport(FixedDocumentSequence fv)
         {
             InitializeComponent();
             DViewer.Document = fv;
             DViewer.FitToHeight();
             DViewer.FitToWidth();
+            DViewer.Print();
         }
     }
 }

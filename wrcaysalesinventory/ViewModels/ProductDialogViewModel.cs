@@ -36,11 +36,11 @@ namespace wrcaysalesinventory.ViewModels
         public Visibility StatusVisibility { get => string.IsNullOrEmpty(Model.ID) ? Visibility.Collapsed : Visibility.Collapsed; set => Set(ref _statusVisibility, value); }
 
         private ProductModel _productModel = new();
-        public ProductModel Model { get => _productModel; set { Set(ref _productModel, value); _notAllowedDecimal = Model.NotAllowDecimal; } }
+        public ProductModel Model { get => _productModel; set { Set(ref _productModel, value);} }
 
-        private bool _notAllowedDecimal = true;
-        public bool AllowDecimal { get => !_notAllowedDecimal; set => Set(ref _notAllowedDecimal, !value); } 
-        public bool NotAllowDecimal { get => _notAllowedDecimal; set => Set(ref _notAllowedDecimal, value); }
+        //private bool _allowedDecimal = false;
+        //public bool AllowedDecimal { get => _allowedDecimal; set => Set(ref _allowedDecimal, value); }
+        //public bool NotAllowedDecimal { get => !_allowedDecimal; set => Set(ref _allowedDecimal, !value); }
 
         private string _pNameError;
         public string ProductNameError { get => _pNameError; set => Set(ref _pNameError, value); }
@@ -66,11 +66,15 @@ namespace wrcaysalesinventory.ViewModels
                 SqlCommand sqlCommand = new("DELETE FROM tblproducts WHERE id = @id", sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                 if (sqlCommand.ExecuteNonQuery() > 0)
+                {
                     Growl.Success("Product has been deleted successfully!");
+                    WinHelper.AuditActivity("DELETED", "PRODUCT");
+                    WinHelper.CloseDialog(_btn);
+                }
                 else
                     Growl.Info("Failed deleting the product.");
                 mw?.UpdateAll();
-                WinHelper.CloseDialog(_btn);
+                
             }
             catch(SqlException ex)
             {
@@ -109,6 +113,7 @@ namespace wrcaysalesinventory.ViewModels
                             break;
                     }
                 }
+
 
                 List<string> failureproplist = new();
                 foreach (var failure in result.Errors)
@@ -149,6 +154,18 @@ namespace wrcaysalesinventory.ViewModels
                 ProductCostError = null;
                 ProductUnitError = null;
 
+                try
+                {
+                    if (double.Parse(vm.Model.ProductPrice) < double.Parse(vm.Model.ProductCost))
+                    {
+                        ProductPriceError = "Selling price can't be less than the cost";
+                    }
+                }
+                catch
+                {
+
+                }
+
                 SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
                 SqlCommand sqlCommand;
                 try
@@ -171,7 +188,7 @@ namespace wrcaysalesinventory.ViewModels
                     sqlCommand.Parameters.AddWithValue("@pcost", vm.Model.ProductCost);
                     sqlCommand.Parameters.AddWithValue("@punit", vm.Model.ProductUnit);
                     sqlCommand.Parameters.AddWithValue("@cid", vm.Model.CategoryID);
-                    sqlCommand.Parameters.AddWithValue("@sunit", AllowDecimal);
+                    sqlCommand.Parameters.AddWithValue("@sunit", Model.AllowDecimal);
                     if (sqlCommand.ExecuteNonQuery() > 0)
                     {
                         if (string.IsNullOrEmpty(Model.ID))
@@ -179,6 +196,7 @@ namespace wrcaysalesinventory.ViewModels
                         else
                             Growl.Success("Product has been updated successfully!");
                         mw?.UpdateAll();
+                        WinHelper.AuditActivity(string.IsNullOrEmpty(Model.ID) ? "ADDED" : "UPDATED", "PRODUCT");
                         WinHelper.CloseDialog(_btn);
                     }
                     else

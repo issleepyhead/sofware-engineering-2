@@ -11,5 +11,7 @@
         public string Sold { get; set; }
         public string Cost { get; set; }
         public string Defective { get; set; }
+        public bool AllowedDecimal { get; set; }
+        public string StatusColor { get => StatusName.ToLower() == "active" ? "Green" : "Red"; }
     }
 }

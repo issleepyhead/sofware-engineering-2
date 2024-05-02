@@ -8,6 +8,7 @@
         xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:pitem="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
+        xmlns:data="clr-namespace:wrcaysalesinventory.Data.Models"
         mc:Ignorable="d" 
         Height="900"
         Width="1400"
@@ -15,7 +16,8 @@
         Background="{StaticResource RegionBrush}"
         CornerRadius="10"
         BorderBrush="{StaticResource SecondaryBorderBrush}"
-        BorderThickness="1.5">
+        BorderThickness="1.5"
+        Name="DPanel">
     <Grid hc:BorderElement.CornerRadius="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -102,7 +104,7 @@
                                Margin="0 0 12 0"
                                FontSize="15"
                                FontWeight="Light"/>
-                    <TextBlock Text="John Doe"
+                    <TextBlock Text="{Binding FullName}"
                                VerticalAlignment="Center"
                                Margin="0 0 12 0"
                                FontSize="15"
@@ -154,7 +156,7 @@
                                         Width="*"/>
                     <DataGridTextColumn FontSize="13"
                                         Header="Product Cost"
-                                        Binding="{Binding ProductCost}"
+                                        Binding="{Binding ProductCost,StringFormat='₱ {0:N}'}"
                                         Width="*"/>
                     <DataGridTextColumn FontSize="13"
                                         Header="Measurement"
@@ -188,8 +190,74 @@
                                  IsInertiaEnabled="True"
                                  Grid.Row="1">
                     <ListBox HorizontalContentAlignment="Center"
-                             ItemsSource="{Binding DeliveryCartList}"
-                             />
+                             ItemsSource="{Binding DeliveryCartList}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type data:DeliveryCartModel}">
+                                <Border BorderBrush="Gray" BorderThickness="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical"
+                                                        VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding ProductName}"
+                                                    VerticalAlignment="Center"
+                                                    Margin="10 0"
+                                                    FontSize="15"
+                                                    FontWeight="Medium"
+                                                       Foreground="{Binding ElementName=DPanel, Path=DataContext.ForeColor}"/>
+                                            <TextBlock Text="{Binding Cost, StringFormat='₱ {0:N}'}"
+                                                    VerticalAlignment="Center"
+                                                    Margin="10 0"
+                                                    FontSize="15"
+                                                    FontWeight="Medium"
+                                                    Foreground="{Binding ElementName=DPanel, Path=DataContext.ForeColor}"/>
+                                        </StackPanel>
+                                        <hc:NumericUpDown Grid.Column="1"
+                                                    Height="40"
+                                                    hc:BorderElement.CornerRadius="0"
+                                                    Value="{Binding Quantity}"
+                                                    Margin="10 0"
+                                                    Minimum=".1">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="ValueChanged">
+                                                    <i:InvokeCommandAction Command="{Binding ElementName=DPanel, Path=DataContext.TextInput}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type hc:NumericUpDown}}}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </hc:NumericUpDown>
+                                        <Grid Grid.Column="2">
+                                            <Button x:Name="DeleteProduct"
+                                                hc:BorderElement.CornerRadius="0"
+                                                hc:IconElement.Height="20"
+                                                hc:IconElement.Width="20"
+                                                hc:IconElement.Geometry="{StaticResource ic_delete}"
+                                                Height="80"
+                                                BorderThickness="0"
+                                                Background="#FFFF0808" 
+                                                Command="{Binding ElementName=DPanel, Path=DataContext.RemoveCommand}"
+                                                CommandParameter="{Binding}"/>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0 8"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="{x:Null}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{x:Null}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
                 </hc:ScrollViewer>
                 <StackPanel Grid.Row="2"
                             Margin="0 0 0 20">
@@ -199,7 +267,7 @@
                             <TextBlock Text="Sub Total:"
                                    FontSize="20"
                                    FontWeight="Light"/>
-                            <TextBlock Text="0"
+                            <TextBlock Text="{Binding SubTotal, UpdateSourceTrigger=PropertyChanged, StringFormat='₱ {0:N2}'}"
                                    FontSize="20"/>
                         </hc:FlexPanel>
                         <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -207,7 +275,7 @@
                             <TextBlock Text="Grand Total: "
                                    FontSize="20"
                                    FontWeight="Light"/>
-                            <TextBlock Text="0"
+                            <TextBlock Text="{Binding GrandTotal, UpdateSourceTrigger=PropertyChanged, StringFormat='₱ {0:N2}'}"
                                    FontSize="20"/>
                         </hc:FlexPanel>
                         <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -217,7 +285,7 @@
                                    FontWeight="Light"/>
                             <hc:TextBox FontSize="18"
                                         Width="150"
-                                        Text="{Binding Model.AdditionalFee}"
+                                        Text="{Binding AdditionalFee, UpdateSourceTrigger=PropertyChanged}"
                                         hc:InfoElement.Placeholder="Additional Fee"/>
                         </hc:FlexPanel>
                     </StackPanel>

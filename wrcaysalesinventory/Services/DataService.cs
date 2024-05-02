@@ -56,8 +56,7 @@ namespace wrcaysalesinventory.Services
                         DateUpdated = row["date_updated"].ToString(),
                         StatusID = row["product_status"].ToString(),
                         StatusName = row["status_name"].ToString(),
-                        NotAllowDecimal = row["selling_unit"].ToString() == "1",
-
+                        AllowDecimal = row["selling_unit"].ToString() == "True"
                     };
                     pList.Add(pModel);
                 }
@@ -147,6 +146,7 @@ namespace wrcaysalesinventory.Services
             {
                 Growl.Warning("An error occured while fetching category list");
             }
+            cList.Add(new CategoryModel() { ID="-1",CategoryName="All"});
             return cList;
         }
         internal ObservableCollection<CategoryModel> GetGategoryPanelList()
@@ -290,7 +290,8 @@ namespace wrcaysalesinventory.Services
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
-                _sqlCmd = new(@"SELECT id, role_name FROM tblroles", _sqlConn);
+                _sqlCmd = new(@"SELECT id, role_name FROM tblroles WHERE id > @id", _sqlConn);
+                _sqlCmd.Parameters.AddWithValue("@id", GlobalData.Config.UserRole);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
                 _sqlAdapter.Fill(_dataTable);
@@ -427,8 +428,10 @@ namespace wrcaysalesinventory.Services
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
                 _sqlCmd = new(@"SELECT i.id,
 	                                   p.product_name,
+                                       p.product_unit,
 	                                   st.status_name,
 	                                   stocks,
+                                       selling_unit,
 	                                   sold,
 	                                   defective,
                                        p.product_unit,
@@ -454,9 +457,10 @@ namespace wrcaysalesinventory.Services
                         Stocks = row["stocks"].ToString(),
                         Sold = row["sold"].ToString(),
                         Defective = row["defective"].ToString(),
-                        StoksUnit = row["stocks"].ToString() +" "+ row["product_unit"].ToString(),
+                        StoksUnit = row["stocks"].ToString() + " " + row["product_unit"].ToString(),
                         Cost = row["product_cost"].ToString(),
-                        ProductID = row["product_id"].ToString()
+                        ProductID = row["product_id"].ToString(),
+                        AllowedDecimal = row["selling_unit"].ToString() == "True"
                     };
                     sList.Add(sModel);
                 }
@@ -811,5 +815,38 @@ namespace wrcaysalesinventory.Services
             }
             return pList;
         }
+
+        internal ObservableCollection<AuditLogModel> GetAuditLogList()
+        {
+            ObservableCollection<AuditLogModel> cList = new();
+            try
+            {
+                _sqlConn = SqlBaseConnection.GetInstance();
+                _sqlCmd = new("SELECT t.id,concat(first_name, ' ', last_name) name, event, description, FORMAT(date_performed, 'dd/MM/yyyy') date_performed, FORMAT(date_performed, 'hh:mm:ss tt') time_performed FROM tlbauditlogs t JOIN tblusers u on t.actor_id = u.id", _sqlConn);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    AuditLogModel model = new()
+                    {
+                        ID = row["id"].ToString(),
+                        Name = row["name"].ToString(),
+                        Event = row["event"].ToString(),
+                        Description = row["description"].ToString(),
+                        DatePerformed = row["date_performed"].ToString(),
+                        TimePerformed = row["time_performed"].ToString()
+                    };
+                    cList.Add(model);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching audit trail.");
+            }
+            return cList;
+        }
     }
+
 }

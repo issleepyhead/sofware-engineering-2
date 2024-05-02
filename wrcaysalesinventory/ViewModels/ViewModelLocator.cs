@@ -31,6 +31,7 @@ namespace wrcaysalesinventory.ViewModels
             SimpleIoc.Default.Register<POSSettingsReceiptDialogViewModel>();
             SimpleIoc.Default.Register<ServerWindowViewModel>();
             SimpleIoc.Default.Register<LoginWindowViewModel>();
+            SimpleIoc.Default.Register<AuditTrailPanelViewModel>();
         }
 
         public static ViewModelLocator Instance = new Lazy<ViewModelLocator>(() =>
@@ -56,5 +57,6 @@ namespace wrcaysalesinventory.ViewModels
         public POSSettingsReceiptDialogViewModel POSSettingsReceiptView => SimpleIoc.Default.GetInstance<POSSettingsReceiptDialogViewModel>();
         public ServerWindowViewModel ServerWindowView => SimpleIoc.Default.GetInstance<ServerWindowViewModel>();
         public LoginWindowViewModel LoginWindowView => SimpleIoc.Default.GetInstance<LoginWindowViewModel>();
+        public AuditTrailPanelViewModel AuditTrailView => SimpleIoc.Default.GetInstance<AuditTrailPanelViewModel>();
     }
 }

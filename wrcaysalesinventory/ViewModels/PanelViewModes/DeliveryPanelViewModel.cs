@@ -37,6 +37,13 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
             DataList = new ObservableCollection<DeliveryModel>(_alldata.Take(30).ToList());
         }
 
+        public RelayCommand<object> RefreshData => new(R);
+        private void R(object query)
+        {
+            _alldata = _dataService.GetDeliveryList();
+            DataList = new ObservableCollection<DeliveryModel>(_alldata.Take(30).ToList());
+        }
+
 
         public void PageUpdated(int offset)
         {

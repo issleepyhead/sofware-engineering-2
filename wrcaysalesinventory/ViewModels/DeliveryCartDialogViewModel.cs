@@ -1,10 +1,12 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using HandyControl.Controls;
 using System;
+using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using wrcaysalesinventory.Customs.Dialogs;
@@ -33,20 +35,80 @@ namespace wrcaysalesinventory.ViewModels
         private DeliveryModel _model = new();
         public DeliveryModel Model { get => _model; set => Set(ref _model, value); }
 
-        private ObservableCollection<ProductCartItem> deliveryCartModels = new();
-        public ObservableCollection<ProductCartItem> DeliveryCartList { get => deliveryCartModels; set => Set(ref deliveryCartModels, value);}
+        private ObservableCollection<DeliveryCartModel> deliveryCartModels = new();
+        public ObservableCollection<DeliveryCartModel> DeliveryCartList { get => deliveryCartModels; set => Set(ref deliveryCartModels, value);}
 
         public ObservableCollection<SupplierModel> supplierList = new();
-        public ObservableCollection<SupplierModel> SupplierList { get => supplierList; set => Set(ref supplierList, value);}    
+        public ObservableCollection<SupplierModel> SupplierList { get => supplierList; set => Set(ref supplierList, value);}
+
+        private string _subtotal = "0";
+        public string  SubTotal { get => _subtotal; set => Set(ref _subtotal, value); }
+
+        private string _grandtotal = "0";
+        public string GrandTotal { get => _grandtotal; set => Set(ref _grandtotal, value); }
 
         private string _searchQuery;
         public string SearchQuery { get => _searchQuery; set => Set(ref _searchQuery, value); }
+
+        private string _additionalFee;
+        public string AdditionalFee { get => _additionalFee; set {
+                if (Regex.IsMatch(value,"^(\\d+)?\\.?(\\d+)$"))
+                {
+                    Set(ref _additionalFee, value);
+                    ValueChanged();
+                } else
+                {
+                    Set(ref _additionalFee, "0");
+                }
+                Model.AdditionalFee = _additionalFee;
+            } }
+
+        public void ValueChanged()
+        {
+            try
+            {
+                double total = 0;
+                foreach (DeliveryCartModel model in deliveryCartModels)
+                {
+                    total += double.Parse(model.Total);
+                }
+                SubTotal = total.ToString();
+                GrandTotal = (total + double.Parse(AdditionalFee ?? "0")).ToString();
+            }
+            catch
+            {
+
+            }
+        }
+
+        //private string _numericValue;
+        //public string NumericValue{ get => _numericValue; set => Set(ref _numericValue, value); }
 
         public RelayCommand<SearchBar> SearchCommand => new(SearchProduct);
         private void SearchProduct(SearchBar searchBar)
         {
             DataList = _dataService.SearchProductList(searchBar.Text);
         }
+
+        public RelayCommand<NumericUpDown> TextInput => new(TextInputCmd);
+        private void TextInputCmd(NumericUpDown upDown)
+        {
+            DeliveryCartModel context = (DeliveryCartModel)upDown.DataContext;
+            if(context is DeliveryCartModel)
+            {
+                if(context.AllowedDecimal && Regex.IsMatch(upDown.Value.ToString(), "[a-zA-Z\\s\\p{P}]+"))
+                {
+                    //Growl.Info("RAWAWR");
+                    upDown.Value = 1;
+                    context.Quantity = "1";
+                }
+            }
+            ValueChanged();
+        }
+
+
+        public string ForeColor { get => GlobalData.Config.Theme == HandyControl.Themes.ApplicationTheme.Light ? "Black" : "White"; }
+        public string FullName { get => GlobalData.Config.UserName;  }
 
         public RelayCommand<DataGrid> SelectedCommand => new(AddToCart);
         private void AddToCart(DataGrid obj)
@@ -55,9 +117,9 @@ namespace wrcaysalesinventory.ViewModels
             {
                 ProductModel pModel = (ProductModel)obj.SelectedItem;
                 bool pexists = false;
-                for(int i = 0; i < deliveryCartModels.Count; i++)
+                foreach(DeliveryCartModel dModel in deliveryCartModels)
                 {
-                    DeliveryCartModel pCartModel = (DeliveryCartModel)deliveryCartModels[i].DataContext;
+                    DeliveryCartModel pCartModel = dModel;
                     if (pCartModel.ProductID == pModel.ID)
                     {
                         pexists = true;
@@ -72,34 +134,51 @@ namespace wrcaysalesinventory.ViewModels
                         ProductID = pModel.ID,
                         Cost = pModel.ProductCost,
                         ProductName = pModel.ProductName,
-                        Quantity = "1"
+                        Quantity = "1",
+                        AllowedDecimal = pModel.AllowDecimal
                     };
-                    ProductCartItem pitem = new(deliveryCartModel);
-                    pitem.Padding = new Thickness(0);
-                    pitem.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-                    deliveryCartModels.Add(pitem);
+                    deliveryCartModels.Add(deliveryCartModel);
                 }
+                ValueChanged();
             }
+        }
+
+        public RelayCommand<DeliveryCartModel> RemoveCommand => new(RemoveProduct);
+        private void RemoveProduct(DeliveryCartModel cartItem)
+        {
+            deliveryCartModels.Remove(cartItem);
+            ValueChanged();
         }
 
         public RelayCommand AddInventory => new(InsertInventory);
         private void InsertInventory()
         {
+            if(string.IsNullOrEmpty(Model.ReferenceNumber))
+            {
+                Growl.Info("Please provide a reference number.");
+                return;
+            }
             SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
             SqlTransaction sqlTransaction = sqlConnection.BeginTransaction();
             SqlCommand sqlCommand;
             try
             {
+                sqlCommand = new("SELECT COUNT(*) FROM tbldeliveryheaders WHERE invoice_number LIKE @in", sqlConnection, sqlTransaction);
+                sqlCommand.Parameters.AddWithValue("@in", Model.ReferenceNumber);
+                if((int)sqlCommand.ExecuteScalar() > 0)
+                {
+                    Growl.Info("Reference number exists!.");
+                    return;
+                }
                 double totalItems = 0d;
                 double totalCost = 0d;
 
-                foreach (ProductCartItem pitem in deliveryCartModels)
+                foreach(DeliveryCartModel dModel in deliveryCartModels)
                 {
-                    DeliveryCartModel dModel = ((DeliveryCartModel)pitem.DataContext);
                     totalCost += double.Parse(dModel.Total);
                     totalItems += double.Parse(dModel.Quantity);
                 }
-                Model.DueTotal = (totalCost + double.Parse(Model.AdditionalFee)).ToString();
+                Model.DueTotal = (totalCost + double.Parse(Model.AdditionalFee ?? "0")).ToString();
 
 
                 sqlCommand = new(@"INSERT INTO tbldeliveryheaders (
@@ -109,16 +188,15 @@ namespace wrcaysalesinventory.ViewModels
                                         @supid, @uid, @in, @af, @dt, @n
                                     )", sqlConnection, sqlTransaction);
                 sqlCommand.Parameters.AddWithValue("@supid", Model.SupplierID);
-                sqlCommand.Parameters.AddWithValue("@uid", 1);
+                sqlCommand.Parameters.AddWithValue("@uid", GlobalData.Config.UserID);
                 sqlCommand.Parameters.AddWithValue("@in", Model.ReferenceNumber);
-                sqlCommand.Parameters.AddWithValue("@af", Model.AdditionalFee);
+                sqlCommand.Parameters.AddWithValue("@af", Model.AdditionalFee ?? "0");
                 sqlCommand.Parameters.AddWithValue("@dt", Model.DueTotal);
                 sqlCommand.Parameters.AddWithValue("@n", string.IsNullOrEmpty(Model.Note) ? DBNull.Value : Model.Note);
                 if(sqlCommand.ExecuteNonQuery() > 0)
                 {
-                    foreach(ProductCartItem pitem in deliveryCartModels)
+                    foreach(DeliveryCartModel dModel in deliveryCartModels)
                     {
-                        DeliveryCartModel dModel = ((DeliveryCartModel)pitem.DataContext);
                         sqlCommand = new(@"INSERT INTO tbldeliveryproducts VALUES (
                                             (SELECT TOP 1 id FROM tbldeliveryheaders ORDER BY id DESC), 
                                             @pid,
@@ -132,9 +210,8 @@ namespace wrcaysalesinventory.ViewModels
                         }
                     }
 
-                    foreach(ProductCartItem pitem in deliveryCartModels)
+                    foreach(DeliveryCartModel dModel in deliveryCartModels)
                     {
-                        DeliveryCartModel dModel = ((DeliveryCartModel)pitem.DataContext);
                         sqlCommand = new(@"SELECT COUNT(*) FROM tblinventory WHERE product_id = @pid", sqlConnection, sqlTransaction);
                         sqlCommand.Parameters.AddWithValue("@pid", dModel.ProductID);
                         if((int)sqlCommand.ExecuteScalar() > 0)
@@ -154,7 +231,8 @@ namespace wrcaysalesinventory.ViewModels
 
                     sqlTransaction.Commit();
                     Growl.Success("Delivery has been added to the inventory.");
-                    mw.UpdateAll();
+                    mw?.UpdateAll();
+                    WinHelper.AuditActivity("ADDED", "DELIVERY");
                     WinHelper.CloseDialog(_btn);
                 } else
                 {

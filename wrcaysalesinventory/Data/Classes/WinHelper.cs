@@ -1,6 +1,7 @@
 ﻿using HandyControl.Controls;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -31,19 +32,41 @@ namespace wrcaysalesinventory.Data.Classes
 
         public static void PaginationPageCount(Pagination pagination, int total)
         {
-            if (total <= 30) {
-                pagination.MaxPageCount = 1;
-                return;
+            if(pagination != null)
+            {
+                if (total <= 30)
+                {
+                    pagination.MaxPageCount = 1;
+                    return;
+                }
+
+                if (30 / total > 0)
+                {
+                    pagination.MaxPageCount = total / 30 + 1;
+                }
+                else
+                {
+                    pagination.MaxPageCount = total / 30;
+                }
             }
 
-            if (30 / total > 0 )
-            {
-                pagination.MaxPageCount = total / 30 + 1;
-            } else
-            {
-                pagination.MaxPageCount = total / 30;
-            }
+        }
 
+        public static void AuditActivity(string e, string d)
+        {
+            try
+            {
+                SqlConnection con = SqlBaseConnection.GetInstance();
+                SqlCommand sqlCommand = new("INSERT INTO tlbauditlogs (actor_id, event, description) VALUES (@uid, @e, @d)", con);
+                sqlCommand.Parameters.AddWithValue("@uid", GlobalData.Config.UserID);
+                sqlCommand.Parameters.AddWithValue("@e",e );
+                sqlCommand.Parameters.AddWithValue("@d", d);
+
+                sqlCommand.ExecuteNonQuery();
+            } catch
+            {
+
+            }
         }
     }
 }

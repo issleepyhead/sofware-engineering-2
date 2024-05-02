@@ -8,8 +8,24 @@ namespace wrcaysalesinventory.Data.Models
         public string ProductID { get; set; }
         public string ProductName { get; set; }
         public string Quantity { get; set;}
-
+        public bool AllowedDecimal { get; set; } = false;
         public string Cost { get; set; }
-        public string Total { get => (double.Parse(Quantity) * double.Parse(Cost)).ToString(); }
+        public string Total {
+            get
+            {
+                try
+                {
+                    if(double.Parse(Quantity) < 1)
+                    {
+                        return (double.Parse(Quantity) / 1 * double.Parse(Cost)).ToString();
+                    }
+                    return (double.Parse(Quantity) * double.Parse(Cost)).ToString();
+                }
+                catch
+                {
+                    return "0";
+                }
+            }
+        }
     }
 }

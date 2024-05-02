@@ -8,7 +8,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:vms="clr-namespace:wrcaysalesinventory.ViewModels"
              xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
-             StartupUri="Forms/LoginWindow.xaml">
+             StartupUri="Forms/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

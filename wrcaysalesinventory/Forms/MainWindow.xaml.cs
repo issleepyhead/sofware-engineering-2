@@ -87,7 +87,11 @@ namespace wrcaysalesinventory
             ((SupplierPanelViewModel)SupplierPanel.DataContext).DataList = loc.DService.GetSupplierList();
             ((StocksPanelViewModel)StockPanel.DataContext).DataList = loc.DService.GetStocksList();
             ((UsersPanelViewModel)UsersPanel.DataContext).DataList = loc.DService.GetUsersList();
-            ((TransactionPanelViewModel)TransactionPanel.DataContext).DataList = loc.DService.GetTransactionList(); 
+            ((TransactionPanelViewModel)TransactionPanel.DataContext).DataList = loc.DService.GetTransactionList();
+            ((DeliveryPanelViewModel)DeliveryPanel.DataContext).DataList = loc.DService.GetDeliveryList();
+            ((AuditTrailPanelViewModel)AuditPanel.DataContext).DataList = loc.DService.GetAuditLogList();
+            ((POSPanelViewModel)POSPanel.DataContext).CustomerList = loc.DService.GetCustomerList();
+
         }
     }
 }

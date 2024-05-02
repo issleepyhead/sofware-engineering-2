@@ -12,6 +12,9 @@ namespace wrcaysalesinventory.Data.Classes
         public string Lang { get; set; } = "en-US";
 
         public int UserRole { get; set; } = 3;
+        public int UserID { get; set; }
+        public string UserName { get; set; }
+        public string Role { get; set; }
 
         public ApplicationTheme Theme { get; set; }
         public string TransactionVAT { get; set; } = "0";
@@ -34,6 +37,12 @@ namespace wrcaysalesinventory.Data.Classes
             {"address", "Taguig City" },
             {"cashier", string.Empty },
             {"note", string.Empty }
+        };
+
+        public Dictionary<string, List<string>> UserPreviledges { get; set; } = new Dictionary<string, List<string>>()
+        {
+            { "admin", new List<string>() { "reports" } },
+            { "staff", new List<string>() { "maintenance", "reports", "audit trail" } }
         };
     }
 }

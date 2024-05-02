@@ -61,11 +61,15 @@ namespace wrcaysalesinventory.ViewModels
                 SqlCommand sqlCommand = new("DELETE FROM tblsuppliers WHERE id = @id", sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                 if (sqlCommand.ExecuteNonQuery() > 0)
+                {
                     Growl.Success("Supplier has been deleted successfully!");
+                    WinHelper.AuditActivity("DELETED", "SUPPLIER");
+                    WinHelper.CloseDialog(_btn);
+                } 
                 else
                     Growl.Info("Failed deleting the supplier.");
                 mw?.UpdateAll();
-                WinHelper.CloseDialog(_btn);
+
             }
             catch(SqlException ex)
             {
@@ -213,6 +217,7 @@ namespace wrcaysalesinventory.ViewModels
                         else
                             Growl.Success("Supplier has been updated succesfully!");
                         mw?.UpdateAll();
+                        WinHelper.AuditActivity(string.IsNullOrEmpty(Model.ID) ? "ADDED" : "UPDATED", "SUPPLIER");
                         WinHelper.CloseDialog(_btn);
                     }
                     else

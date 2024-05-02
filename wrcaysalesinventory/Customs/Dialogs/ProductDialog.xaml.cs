@@ -16,12 +16,35 @@ namespace wrcaysalesinventory.Customs.Dialogs
             {
                 ((ProductDialogViewModel)DataContext).Model = model;
                 AddButton.Content = Lang.LabelUpdate;
+                allowed.IsChecked = !model.AllowDecimal;
+                notallowed.IsChecked = model.AllowDecimal;
             }
             else
             {
                 DeleteButton.Visibility = Visibility.Collapsed;
+                ((ProductDialogViewModel)DataContext).Model.AllowDecimal = false;
             }
             
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            ((ProductDialogViewModel)DataContext).Model.AllowDecimal = false;
+        }
+
+        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
+        {
+            ((ProductDialogViewModel)DataContext).Model.AllowDecimal = true;
+        }
+
+        private void RadioButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ((ProductDialogViewModel)DataContext).Model.AllowDecimal = false;
+        }
+
+        private void RadioButton_Unchecked_1(object sender, RoutedEventArgs e)
+        {
+            ((ProductDialogViewModel)DataContext).Model.AllowDecimal = true;
         }
     }
 }

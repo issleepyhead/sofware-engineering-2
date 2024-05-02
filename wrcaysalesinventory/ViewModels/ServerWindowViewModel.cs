@@ -72,10 +72,23 @@ namespace wrcaysalesinventory.ViewModels
                 sqlConnection.Open();
                 Settings.Default.connStr = $"Server={ServerName};Initial Catalog={Database};Trusted_Connection=True;User ID={UserName};Password={Password}";
                 Settings.Default.Save();
+
                 ServerError = string.Empty;
                 DatabaseError = string.Empty;
                 UserNameError = string.Empty;
                 PasswordError = string.Empty;
+
+                SqlCommand sqlCmd = new("SELECT COUNT(*) FROM tblusers", sqlConnection);
+                if((int)sqlCmd.ExecuteScalar() == 0)
+                {
+                    string password = BCrypt.Net.BCrypt.HashPassword("SA");
+                    sqlCmd = new("INSERT INTO tblusers (status_id, role_id, first_name, last_name, address, contact, username, password) VALUES (1, 1, 'SA', 'SA', 'SA', '0912 345 678', 'SA', @pwd)", sqlConnection);
+                    sqlCmd.Parameters.AddWithValue("@pwd", password);
+                    if(sqlCmd.ExecuteNonQuery() <= 0)
+                    {
+                        MessageBox.Warning("Database Error.");
+                    }
+                }
                 LogInWindow logInWindow = new();
                 logInWindow.Show();
                 obj.Close();

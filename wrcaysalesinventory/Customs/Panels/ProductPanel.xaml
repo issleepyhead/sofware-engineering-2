@@ -39,6 +39,7 @@
                                   hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
                                   Width="280"
                                   Height="35"
+                                  FontSize="16"
                                   Command="{Binding SearchCmd}"
                                   CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                                   VerticalAlignment="Center"
@@ -48,6 +49,7 @@
                                  hc:BorderElement.CornerRadius="0"
                                  Height="35"
                                  Width="150"
+                                 FontSize="16"
                                  ItemsSource="{Binding CategoryDataList}"
                                  SelectedValuePath="ID"
                                  DisplayMemberPath="CategoryName"
@@ -58,6 +60,7 @@
                     <Viewbox Height="35">
                         <hc:Pagination MaxPageCount="5"
                                        PageIndex="1"
+                                       FontSize="16"
                                        MaxPageInterval="3"
                                        DataCountPerPage="30"
                                        VerticalAlignment="Center"
@@ -72,6 +75,7 @@
                             BorderBrush="{StaticResource DarkMaskBrush}"
                             Content="{x:Static langs:Lang.LabelAdd}"
                             Height="35"
+                            FontSize="16"
                             Width="130"
                             Command="{Binding OpenDialog}"
                             VerticalAlignment="Center"/>
@@ -90,34 +94,41 @@
                   Padding="0"
                   ItemsSource="{Binding DataList, UpdateSourceTrigger=PropertyChanged}"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
-                  Margin="0 15 0 0" >
+                  Margin="0 15 0 0"
+                  FontSize="16">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <DataGrid.Columns>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Product Name"
                                     Binding="{Binding ProductName}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Status"
                                     Binding="{Binding StatusName}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                                    Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{Binding StatusColor}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn FontSize="15"
                                     Header="Selling Price"
-                                    Binding="{Binding ProductPrice}"
+                                    Binding="{Binding ProductPrice,StringFormat='₱ {0:N}'}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
-                                    Header="Purchase Cost"
-                                    Binding="{Binding ProductCost}"
+                <DataGridTextColumn FontSize="15"
+                                    Header="Cost"
+                                    Binding="{Binding ProductCost, StringFormat='₱ {0:N}'}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Date Created"
                                     Binding="{Binding DateAdded}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Date Updated"
                                     Binding="{Binding DateUpdated}"
                                     Width="*"/>

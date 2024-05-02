@@ -10,8 +10,7 @@
              Width="550"
              CornerRadius="5"
              x:Name="Categ"
-             Background="{DynamicResource DefaultBrush}"
-             DataContext="{Binding Path=CategoryDialogView, Source={StaticResource Locator}}">
+             Background="{DynamicResource DefaultBrush}">
     <Grid hc:BorderElement.CornerRadius="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -54,44 +53,43 @@
                 <TextBlock Text="Full Name:"
                            Padding="0 5"
                            FontSize="14"/>
-                <hc:TextBox HorizontalAlignment="Stretch"
+                <hc:TextBox Name="FN"
+                            HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             hc:InfoElement.Placeholder="Enter Full Name"
-                            Text="{Binding Model.CategoryName,UpdateSourceTrigger=PropertyChanged}"
                             Height="40"/>
                 <TextBlock Name="CategoryNameError"
                            FontSize="13"
-                           Text="{Binding CategoryNameError, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="Red"/>
             </StackPanel>
             <StackPanel Margin="0 8 0 0">
                 <TextBlock Text="Phone Number:"
                            Padding="0 5"
                            FontSize="14"/>
-                <hc:TextBox HorizontalAlignment="Stretch"
+                <hc:TextBox Name="PN"
+                            HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             MinHeight="40"
                             Height="Auto"
-                            Text="{Binding Model.CategoryDescription, UpdateSourceTrigger=PropertyChanged}"
                             hc:InfoElement.Placeholder="Enter Phone Number"
                             AcceptsReturn="True"/>
                 <TextBlock Name="DescriptionError"
                            FontSize="13"
-                           Text="{Binding DescriptionError, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="Red"/>
             </StackPanel>
             <StackPanel Margin="0 8 0 0">
                 <TextBlock Text="Email:"
                            Padding="0 5"
                            FontSize="14"/>
-                <hc:TextBox HorizontalAlignment="Stretch"
+                <hc:TextBox Name="EM"
+                            HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             MinHeight="40"
                             Height="Auto"
-                            Text="{Binding Model.CategoryDescription, UpdateSourceTrigger=PropertyChanged}"
                             hc:InfoElement.Placeholder="Enter Email"
                             AcceptsReturn="True"/>
-                <TextBlock FontSize="13"
+                <TextBlock Name="EMR"
+                            FontSize="13"
                            Text="{Binding DescriptionError, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="Red"/>
             </StackPanel>
@@ -104,19 +102,6 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="DeleteButton"
-                        Margin="0 0 14 0"
-                        FontSize="16"
-                        hc:BorderElement.CornerRadius="0"
-                        BorderThickness="1"
-                        BorderBrush="{StaticResource DarkMaskBrush}"
-                        Content="{x:Static langs:Lang.LabelDelete}"
-                        Height="35"
-                        Command="{Binding DeleteCmd}"
-                        CommandParameter="{Binding}"
-                        Width="130"
-                        Grid.Column="0"
-                        VerticalAlignment="Top"/>
                 <Button Name="AddButton"
                         FontSize="16"
                         hc:BorderElement.CornerRadius="0"
@@ -128,7 +113,7 @@
                         Width="130"
                         CommandParameter="{Binding}"
                         VerticalAlignment="Top"
-                        Grid.Column="1"/>
+                        Grid.Column="1" Click="AddButton_Click"/>
             </Grid>
         </hc:FlexPanel>
     </Grid>

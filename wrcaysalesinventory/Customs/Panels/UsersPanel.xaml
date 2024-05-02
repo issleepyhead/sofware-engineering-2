@@ -38,6 +38,7 @@
                               hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
                               Width="280"
                               Height="35"
+                              FontSize="16"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left"
                               Style="{StaticResource SearchBarExtend}"
@@ -52,6 +53,7 @@
                                        VerticalAlignment="Center"
                                        hc:BorderElement.CornerRadius="0"
                                        Margin="0 0 12 0"
+                                       FontSize="16"
                                        AutoHiding="True"
                                        x:Name="PagerPagination"
                                        PageUpdated="PagerPagination_PageUpdated"/>
@@ -61,6 +63,7 @@
                             BorderBrush="{StaticResource DarkMaskBrush}"
                             Content="{x:Static langs:Lang.LabelAdd}"
                             Height="35"
+                            FontSize="16"
                             Width="130"
                             Command="{Binding OpenUser}"
                             VerticalAlignment="Center"/>
@@ -76,6 +79,7 @@
                   AutoGenerateColumns="False"
                   Grid.Row="1"
                   Padding="0"
+                  FontSize="16"
                   ItemsSource="{Binding DataList}"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
                   Margin="0 15 0 0">
@@ -85,27 +89,33 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <DataGrid.Columns>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="First Name"
                                     Binding="{Binding FirstName}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Last Name"
                                     Binding="{Binding LastName}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Phone"
                                     Binding="{Binding Contact}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Role"
                                     Binding="{Binding RoleName}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Status"
                                     Binding="{Binding StatusName}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                                    Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{Binding StatusColor}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn FontSize="15"
                                     Header="Date Created"
                                     Binding="{Binding DateAdded}"
                                     Width="*"/>

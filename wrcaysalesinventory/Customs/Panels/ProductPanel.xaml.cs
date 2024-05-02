@@ -26,12 +26,12 @@ namespace wrcaysalesinventory.Customs.Panels
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox cmb = (ComboBox)sender;
-            if (cmb.SelectedIndex != -1)
+            if (cmb.SelectedIndex != -1 && cmb.SelectedValue != "-1")
             {
                 ((ProductPanelViewModel)DataContext).AllData = ((ProductPanelViewModel)DataContext).DataService.GetProductByCategoryList(cmb.SelectedValue.ToString());
             } else
             {
-                ((ProductPanelViewModel)DataContext).AllData = ViewModelLocator.Instance.DService.GetProductList();
+                ((ProductPanelViewModel)DataContext).AllData = ((ProductPanelViewModel)DataContext).DataService.GetProductList();
             }
             WinHelper.PaginationPageCount(PagerPagination, ((ProductPanelViewModel)DataContext).TotalData);
         }

@@ -57,6 +57,7 @@
                     <Viewbox Height="35">
                         <hc:Pagination MaxPageCount="10"
                                        PageIndex="1"
+                                       FontSize="16"
                                        MaxPageInterval="3"
                                        DataCountPerPage="15"
                                        VerticalAlignment="Center"
@@ -67,10 +68,11 @@
                             BorderThickness="1"
                             BorderBrush="{StaticResource DarkMaskBrush}"
                             Content="View Report"
+                            FontSize="16"
                             Height="32"
                             Width="130"
-                            Command="{Binding OpenCategory}"
-                            VerticalAlignment="Center"/>
+                           
+                            VerticalAlignment="Center" Click="Button_Click"/>
                 </StackPanel>
             </hc:FlexPanel>
         </Border>
@@ -83,18 +85,19 @@
                   AutoGenerateColumns="False"
                   Grid.Row="1"
                   Padding="0"
+                  FontSize="16"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
                   Margin="0 15 0 0">
             <DataGrid.Columns>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Reference Number"
                                     Binding="{Binding CategoryName}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Items"
                                     Binding="{Binding CategoryDescription}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Cost"
                                     Binding="{Binding CategoryDescription}"
                                     Width="*"/>

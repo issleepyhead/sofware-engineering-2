@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="wrcaysalesinventory.Customs.TransactionDetailsDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:wrcaysalesinventory.Customs"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+            xmlns:pitem="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
+            xmlns:data="clr-namespace:wrcaysalesinventory.Data.Models"
+            mc:Ignorable="d" 
+            Loaded="Grid_Loaded"
+            Height="700"
+            Width="1000"
+            DataContext="{Binding RelativeSource={RelativeSource Self}}"
+            Background="{StaticResource RegionBrush}"
+            BorderBrush="{StaticResource SecondaryBorderBrush}"
+            BorderThickness="1.5"
+            Name="DPanel">
+    <Grid hc:BorderElement.CornerRadius="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+                BorderBrush="{StaticResource SecondaryBorderBrush}"
+                BorderThickness="0 0 0 1"
+                Background="{StaticResource DarkDefaultBrush}">
+            <hc:FlexPanel JustifyContent="SpaceBetween"
+                          AlignContent="Center">
+                <StackPanel Orientation="Horizontal"
+                            Margin="18 0">
+                    <!--<TextBlock Text="&#xEBF4;"
+                               Style="{StaticResource TextBlockFabricIcons}"
+                               FontSize="28"
+                               Padding="0"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center"/>-->
+                    <TextBlock Text="Transaction Details"
+                               FontSize="18"
+                               VerticalAlignment="Center"
+                               FontWeight="SemiBold"/>
+                </StackPanel>
+                <Button Name="CloseBtn"
+                        Height="22"
+                        Width="22"
+                        Style="{StaticResource ButtonIcon}"
+                        hc:IconElement.Geometry="{StaticResource ErrorGeometry}"
+                        Command="hc:ControlCommands.Close"
+                        Margin="0 0 18 0"
+                        Padding="0"
+                        IsEnabled="True"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"/>
+            </hc:FlexPanel>
+        </Border>
+        <Grid Grid.Row="1" >
+            <DataGrid hc:Empty.ShowEmpty="True"
+                  BorderThickness="0"
+                  BorderBrush="{x:Null}"
+                  IsReadOnly="True"
+                  CanUserResizeColumns="False"
+                  AutoGenerateColumns="False"
+                  Grid.Row="1"
+                  FontSize="16"
+                  ItemsSource="{Binding tlist}"
+                  Padding="0"
+                  hc:DataGridAttach.ApplyDefaultStyle="True"
+                  Margin="20"
+                      x:Name="xdw">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <DataGrid.Columns>
+                    <DataGridTextColumn FontSize="15"
+                                    Header="Product Name"
+                                    Binding="{Binding pname}"
+                                    Width="*"/>
+                    <DataGridTextColumn FontSize="15"
+                                    Header="Quantity"
+                                    Binding="{Binding q}"
+                                    Width="*"/>
+                    <DataGridTextColumn FontSize="15"
+                                    Header="Total"
+                                    Binding="{Binding t, StringFormat='₱ {0:N1}'}"
+                                    Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+
+</UserControl>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Text.RegularExpressions;
+using System.Windows.Controls;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.ViewModels.PanelViewModes;
@@ -18,8 +19,22 @@ namespace wrcaysalesinventory.Customs.Dialogs
 
         private void AddButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            ((POSPanelViewModel)DataContext).ValueChanged();
-            WinHelper.CloseDialog(CloseBtn);
+            if (Regex.IsMatch(DiscountTextBox.Text, "^(\\d+)?\\.?(\\d+)$"))
+            {
+                if (int.Parse(DiscountTextBox.Text) > 20)
+                {
+                    ((POSPanelViewModel)DataContext).DiscountError = "Discount can't be higher than 20%.";
+                    ((POSPanelViewModel)DataContext).Discount = "20";
+                    return;
+                }
+                ((POSPanelViewModel)DataContext).Discount = DiscountTextBox.Text;
+                WinHelper.CloseDialog(CloseBtn);
+            }
+            else
+            {
+                ((POSPanelViewModel)DataContext).DiscountError = "Invalid Discount.";
+                ((POSPanelViewModel)DataContext).Discount = "0";
+            }
         }
     }
 }

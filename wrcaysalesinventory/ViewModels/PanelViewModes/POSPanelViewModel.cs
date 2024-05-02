@@ -3,9 +3,12 @@ using HandyControl.Tools.Command;
 using System;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
@@ -39,11 +42,13 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         private TransactionHeaderModel _header = new();
         public TransactionHeaderModel Header { get => _header; set => Set(ref _header, value); }
 
-        private string _subtotal;
+        private string _subtotal = "0";
         public string SubTotal { get => _subtotal; set => Set(ref _subtotal, value); }
-        private string _totalPay;
+        private string _totalPay = "0";
         public string TotalAmount { get => _totalPay; set { Set(ref _totalPay, value); Header.TotalAmount = _totalPay; } }
-        public double TotalItems { get
+        public double TotalItems
+        {
+            get
             {
                 double _totalItems = 0;
                 foreach (POSCartModel model in CartList)
@@ -51,34 +56,13 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                     _totalItems += double.Parse(model.Quantity);
                 }
                 return _totalItems;
-            } }
+            }
+        }
 
-        //public string Discount { get {
-        //        if (Regex.IsMatch(Header.Discount, "^(\\d+)?\\.?(\\d+)$"))
-        //        {
-        //            return _discount;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    } set {  Set(ref _discount, value); ValueChanged(); } }
-        //private string _additional = "0";
-        //public string AdditionalFee { get
-        //    {
-        //        if (Regex.IsMatch(_additional, "^(\\d+)?\\.?(\\d+)$"))
-        //        {
-        //            return _additional;
-        //        } else
-        //        {
-        //            return null;
-        //        }
-        //    } set
-        //    {
-        //        Set(ref _additional, value);
-        //        ValueChanged();
-        //    }
-        //}
+        private string _discountError;
+        public string DiscountError { get => _discountError; set => Set(ref _discountError, value); }
+        private string _discount = "0";
+        public string Discount { get => _discount; set { Set(ref _discount, value); } }
 
         public RelayCommand<SearchBar> SearchCommand => new(SearchProduct);
         private void SearchProduct(SearchBar searchBar)
@@ -92,6 +76,29 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
             CartList.Remove(cartItem);
             ValueChanged();
         }
+
+        public RelayCommand<NumericUpDown> TextInput => new(TextInputCmd);
+        private void TextInputCmd(NumericUpDown upDown)
+        {
+            POSCartModel context = (POSCartModel)upDown.DataContext;
+            if(double.Parse(context.Quantity) > double.Parse(context.Stocks))
+            {
+                Growl.Info("Insufficient stocks.");
+                return;
+            }
+
+            if (context is POSCartModel)
+            {
+                if (context.AllowedDecimal && Regex.IsMatch(upDown.Value.ToString(), "[a-zA-Z\\s\\p{P}]+"))
+                {
+                    upDown.Value = 1;
+                    context.Quantity = "1";
+                }
+            }
+            ValueChanged();
+        }
+
+        public string ForeColor { get => GlobalData.Config.Theme == HandyControl.Themes.ApplicationTheme.Light ? "Black" : "White"; }
 
         public RelayCommand<POSCartModel> PreviewReceiptCommand => new(ViewReceipt);
         private void ViewReceipt(POSCartModel cartItem)
@@ -150,9 +157,15 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
             try
             {
                 SqlCommand cmd;
+
+                cmd = new("SELECT COUNT(*) FROM tbltransactionheaders", conn, sqlTransaction);
+                string refer = cmd.ExecuteScalar().ToString();
+                Header.ReferenceNumber = refer.ToString().PadLeft(8 - refer.Length, '0') + refer;
+
+                Header.Discount = _discount;
                 cmd = new("INSERT INTO tbltransactionheaders (user_id, customer_id, reference_number, note, total_amount, additional_fee, discount, vat) VALUES(@user_id, @cid, @invoice_number, @note, @total_amount, @af, @d, @v)", conn, sqlTransaction);
-                cmd.Parameters.AddWithValue("@user_id", 1);
-                cmd.Parameters.AddWithValue("@invoice_number", "12213131");
+                cmd.Parameters.AddWithValue("@user_id", GlobalData.Config.UserID);
+                cmd.Parameters.AddWithValue("@invoice_number", Header.ReferenceNumber);
                 cmd.Parameters.AddWithValue("@total_amount", string.IsNullOrEmpty(Header.TotalAmount) ? DBNull.Value : Header.TotalAmount);
                 cmd.Parameters.AddWithValue("@af", string.IsNullOrEmpty(Header.AdditionalFee) ? DBNull.Value : Header.AdditionalFee);
                 cmd.Parameters.AddWithValue("@d", string.IsNullOrEmpty(Header.Discount) ? DBNull.Value : Header.Discount);
@@ -190,8 +203,20 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                     ReceiptDocument rd = new();
                     FlowDocument fd = rd.FD;
                     GenReceipt(pd, fd, rd);
+
+
+                    if (File.Exists("printPreview.xps")) File.Delete("printPreview.xps");
+                    var xpsDocument = new XpsDocument("printPreview.xps", FileAccess.ReadWrite);
+                    XpsDocumentWriter writer = XpsDocument.CreateXpsDocumentWriter(xpsDocument);
+                    writer.Write(((IDocumentPaginatorSource)fd).DocumentPaginator);
+                    FixedDocumentSequence fixedDocumentSequence = xpsDocument.GetFixedDocumentSequence();
+                    xpsDocument.Close();
+                    
+
                     mw?.UpdateAll();
+                    DataList = _dataService.GetStocksList();
                     DiscardCommand(null);
+                    WinHelper.AuditActivity("ADDED", "TRANSACTION");
                 }
 
             }
@@ -214,7 +239,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                 total += double.Parse(model.Total);
             }
             SubTotal = total.ToString();
-            TotalAmount = (total + double.Parse(Header.AdditionalFee ?? "0") - (total * (double.Parse(Header.Discount ?? "0") / 100)) + double.Parse(Header.VAT)).ToString();
+            TotalAmount = (total + double.Parse(Header.AdditionalFee ?? "0") - (total * (double.Parse(Discount ?? "0") / 100)) + double.Parse(Header.VAT)).ToString();
         }
 
         public RelayCommand<DataGrid> SelectedCommand => new(AddToCart);
@@ -241,20 +266,15 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                         ID = pModel.ProductID,
                         Cost = pModel.Cost,
                         ProductName = pModel.ProductName,
-                        Quantity = "1"
+                        Quantity = "1",
+                        AllowedDecimal = pModel.AllowedDecimal,
+                        Stocks = pModel.Stocks
                     };
                     //POSProductItem pitem = new(deliveryCartModel);
                     //pitem.HorizontalAlignment = HorizontalAlignment.Stretch;
                     CartList.Add(deliveryCartModel);
                 }
-
-                double total = 0;
-                foreach(POSCartModel model in CartList)
-                {
-                    total += double.Parse(model.Total);
-                }
-                SubTotal = total.ToString();
-                TotalAmount = (total + double.Parse(Header.AdditionalFee ?? "0") - (total * (double.Parse(Header.Discount ?? "0") / 100)) + double.Parse(Header.VAT)).ToString();
+                ValueChanged();
             }
         }
 
@@ -298,6 +318,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
             Header = new();
             SubTotal = "0";
             TotalAmount = "0";
+            Discount = "0";
         }
     }
 }

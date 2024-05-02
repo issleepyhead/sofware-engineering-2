@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wrcaysalesinventory.Forms"
         xmlns:hc="https://handyorg.github.io/handycontrol"
+        DataContext="{Binding Path=LoginWindowView ,Source={StaticResource Locator}}"
         mc:Ignorable="d"
         Height="400"
         Width="500"
@@ -37,13 +38,14 @@
                 <hc:TextBox x:Name="UsernameTextBox"
                             Margin="30 0"
                             FontSize="18"
+                            Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
                             hc:InfoElement.Placeholder="Enter Username"
                             hc:BorderElement.CornerRadius="0"
                             Padding="10"/>
                 <TextBlock Margin="30 0"
                            FontSize="14"
                            Foreground="Red"
-                           x:Name="UsernameError"/>
+                           Text="{Binding UserNameError}"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Password:"
@@ -58,11 +60,13 @@
                                 FontSize="18"
                                 Padding="10"
                                 ShowEyeButton="True"
+                                IsSafeEnabled="False"
+                                UnsafePassword="{Binding Password,UpdateSourceTrigger=PropertyChanged}"
                                 hc:PasswordBoxAttach.IsMonitoring="True"/>
                 <TextBlock Margin="30 0"
                            FontSize="14"
                            Foreground="Red"
-                           x:Name="PasswordError"/>
+                           Text="{Binding PasswordError}"/>
                 <StackPanel Orientation="Horizontal"
                             Margin="30 0">
                     <CheckBox Content="Remember Me"
@@ -74,8 +78,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="CancelButton"
-                        Grid.Column="0"
+                <Button Grid.Column="0"
                         Content="Cancel"
                         FontSize="18"
                         BorderThickness="0"
@@ -84,13 +87,15 @@
                         Height="40"
                         hc:BorderElement.CornerRadius="0"
                         HorizontalAlignment="Stretch"/>
-                <Button x:Name="LoginButton"
-                        Grid.Column="1"
+                <Button Grid.Column="1"
                         FontSize="18"
-                        Content="Login"
+                        Content="{Binding LoginContent, UpdateSourceTrigger=PropertyChanged}"
+                        IsEnabled="{Binding IsLoginEnable, UpdateSourceTrigger=PropertyChanged}"
                         Background="{StaticResource PrimaryBrush}"
                         BorderThickness="0"
                         Height="40"
+                        Command="{Binding LoginCmd}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type hc:Window}}}"
                         Margin="4 0 0 0"
                         hc:BorderElement.CornerRadius="0"
                         HorizontalAlignment="Stretch"/>

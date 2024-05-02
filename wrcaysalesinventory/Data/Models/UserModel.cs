@@ -14,5 +14,6 @@
         public string DateAdded { get; set; }
         public string RoleName { get; set; }
         public string StatusName { get; set; }
+        public string StatusColor { get => StatusName.ToLower() == "active" ? "Green" : "Red"; }
     }
 }

@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Panels"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
-             mc:Ignorable="d" 
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      mc:Ignorable="d" 
              DataContext="{Binding  TransactionlView, Source={StaticResource Locator}}"
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -34,30 +34,32 @@
                 BorderThickness="0 0 0 1">
             <hc:FlexPanel JustifyContent="SpaceBetween">
                 <hc:SearchBar x:Name="ProductSearch"
-                              IsRealTime="True"
                               hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
                               Width="280"
                               Height="35"
+                              FontSize="16"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left"
-                              Style="{StaticResource SearchBarExtend}"/>
+                              Style="{StaticResource SearchBarExtend}" SearchStarted="ProductSearch_SearchStarted"/>
                 <StackPanel Orientation="Horizontal">
-                    <Viewbox Height="35">
+                    <!--<Viewbox Height="35">
                         <hc:Pagination Name="Pagination"
                                    MaxPageCount="50"
                                    PageIndex="1"
+                                   FontSize="16"
                                    MaxPageInterval="3"
                                    DataCountPerPage="50"
                                    VerticalAlignment="Center"
                                    hc:BorderElement.CornerRadius="0"
                                    Margin="0 0 10 0"/>
-                    </Viewbox>
+                    </Viewbox>-->
                     <Button hc:BorderElement.CornerRadius="0"
                             BorderThickness="1"
                             BorderBrush="{StaticResource DarkMaskBrush}"
                             Content="Print Report"
                             Height="32"
                             Width="130"
+                            FontSize="16"
                             Command="{Binding OpenReportCmd}"
                             CommandParameter="{Binding}"
                             VerticalAlignment="Center"/>
@@ -71,28 +73,30 @@
                   CanUserResizeColumns="False"
                   AutoGenerateColumns="False"
                   Grid.Row="1"
+                  FontSize="16"
                   ItemsSource="{Binding DataList}"
                   Padding="0"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
                   Margin="0 15 0 0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <DataGrid.Columns>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Reference Number"
                                     Binding="{Binding ReferenceNumber}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Cashier"
                                     Binding="{Binding CashierName}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
-                                    Header="Total Items"
-                                    Binding="{Binding TotalItems}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Amount Due"
-                                    Binding="{Binding TotalCost}"
+                                    Binding="{Binding TotalCost, StringFormat='₱ {0:N1}'}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Date Created"
                                     Binding="{Binding DateAdded}"
                                     Width="*"/>

@@ -8,6 +8,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+             DataContext="{Binding Path=DashboardView, Source={StaticResource Locator}}"
              mc:Ignorable="d"
              d:DesignWidth="1400"
              d:DesignHeight="700"
@@ -85,30 +86,136 @@
                         <Border CornerRadius="10"
                                 Background="{DynamicResource RegionBrush}"
                                 Margin="0 0 5 10">
-                            
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="80"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Bottom"
+                                            Margin="20 4">
+                                    <TextBlock Text="&#xECDC;"
+                                               Style="{StaticResource TextBlockFabricIcons}"
+                                               FontSize="42"
+                                               Padding="0"
+                                               FontWeight="Light"
+                                               VerticalAlignment="Center"
+                                               TextAlignment="Center"/>
+                                    <TextBlock Text="Products"
+                                               FontSize="28"
+                                               Padding="8 0 0 0"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Light"/>  
+                                </StackPanel>
+                                <StackPanel Grid.Row="1"
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Top"
+                                            Margin="20 0">
+                                    <TextBlock Text="{Binding TotalProducts,StringFormat={}{0:N0}}"
+                                               FontSize="28"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Light"/>
+                                </StackPanel>
+                            </Grid>
                         </Border>
                         <Border CornerRadius="10"
                                 Background="{DynamicResource RegionBrush}"
                                 Margin="5 0 5 10">
-
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="80"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Bottom"
+                                            Margin="20 4">
+                                    <TextBlock Text="&#xEAED;"
+                                               Style="{StaticResource TextBlockFabricIcons}"
+                                               FontSize="40"
+                                               Padding="0"
+                                               FontWeight="Light"
+                                               VerticalAlignment="Center"
+                                               TextAlignment="Center"/>
+                                    <TextBlock Text="Revenue"
+                                               FontSize="28"
+                                               Padding="8 0 0 0"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Light"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1"
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Top"
+                                            Margin="20 0">
+                                    <TextBlock Text="{Binding TotalRevenue, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N2}}"
+                                               FontSize="28"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Light"/>
+                                </StackPanel>
+                            </Grid>
                         </Border>
                         <Border CornerRadius="10"
                                 Background="{DynamicResource RegionBrush}"
                                 Margin="5 0 0 10">
-
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="80"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Bottom"
+                                            Margin="20 4">
+                                    <TextBlock Text="&#xEAFD;"
+                                               Style="{StaticResource TextBlockFabricIcons}"
+                                               FontSize="42"
+                                               Padding="0"
+                                               FontWeight="Light"
+                                               VerticalAlignment="Center"
+                                               TextAlignment="Center"/>
+                                    <TextBlock Text="Expenses"
+                                               FontSize="28"
+                                               Padding="8 0 0 0"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Light"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1"
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Top"
+                                            Margin="20 0">
+                                    <TextBlock Text="{Binding TotalExpenses, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N2}}"
+                                               FontSize="28"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Light"/>
+                                </StackPanel>
+                            </Grid>
                         </Border>
                     </UniformGrid>
                 </Grid>
                 <Border Grid.Row="1"
                         Background="{DynamicResource RegionBrush}"
                         CornerRadius="10"
-                        Padding="40">
-                    
-                    <lvc:CartesianChart Series="{Binding Series}"
+                        Padding="30">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <!--<Button Height="40" Width="150" Command="{Binding Weekly}" Margin="8 0" FontSize="16">Weekly</Button>
+                            <Button Height="40" Width="150" Command="{Binding Monthly}" Margin="8 0" FontSize="16">Montly</Button>
+                            <Button Height="40" Width="150" Command="{Binding Yearly}" Margin="8 0" FontSize="16">Yearly</Button>-->
+                            <TextBlock Text="Past 7 days transactions"
+                                               FontSize="20"
+                                               VerticalAlignment="Top"
+                                               FontWeight="Light"/>
+                        </Grid>
+                        <lvc:CartesianChart Series="{Binding Series}"
                                         XAxes="{Binding XAxes}"
-                                        ZoomMode="X">
-                        
-                    </lvc:CartesianChart>
+                                        ZoomMode="X"
+                                        Grid.Row="1">
+
+                        </lvc:CartesianChart>
+                    </Grid>
                 </Border>
             </Grid>
         </Border>

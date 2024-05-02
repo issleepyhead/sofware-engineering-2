@@ -38,6 +38,7 @@
                               hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
                               Width="280"
                               Height="35"
+                              FontSize="16"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Left"
                               Style="{StaticResource SearchBarExtend}"
@@ -48,6 +49,7 @@
                         <hc:Pagination MaxPageCount="5"
                                        PageIndex="1"
                                        MaxPageInterval="3"
+                                       FontSize="16"
                                        DataCountPerPage="30"
                                        VerticalAlignment="Center"
                                        hc:BorderElement.CornerRadius="0"
@@ -58,6 +60,7 @@
                     </Viewbox>
                     <Button hc:BorderElement.CornerRadius="0"
                             BorderThickness="1"
+                            FontSize="16"
                             BorderBrush="{StaticResource DarkMaskBrush}"
                             Content="{x:Static langs:Lang.LabelAdd}"
                             Height="32"
@@ -76,6 +79,7 @@
                   AutoGenerateColumns="False"
                   Grid.Row="1"
                   Padding="0"
+                  FontSize="16"
                   ItemsSource="{Binding DataList}"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
                   Margin="0 15 0 0">
@@ -85,27 +89,33 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <DataGrid.Columns>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Supplier Name"
                                     Binding="{Binding SupplierName}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Phone Number"
                                     Binding="{Binding PhoneNumber}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Address"
                                     Binding="{Binding Address}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Status"
                                     Binding="{Binding Status}"
-                                    Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                                    Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{Binding StatusColor}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn FontSize="15"
                                     Header="Date Created"
                                     Binding="{Binding DateAdded}"
                                     Width="*"/>
-                <DataGridTextColumn FontSize="13"
+                <DataGridTextColumn FontSize="15"
                                     Header="Date Updated"
                                     Binding="{Binding DateUpdated}"
                                     Width="*"/>

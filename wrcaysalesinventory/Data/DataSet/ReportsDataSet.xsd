@@ -21,7 +21,7 @@
               <xs:element name="additional_fee" msprop:Generator_ColumnPropNameInTable="additional_feeColumn" msprop:Generator_ColumnPropNameInRow="additional_fee" msprop:Generator_UserColumnName="additional_fee" msprop:Generator_ColumnVarNameInTable="columnadditional_fee" type="xs:string" minOccurs="0" />
               <xs:element name="vat" msprop:Generator_ColumnPropNameInTable="vatColumn" msprop:Generator_ColumnPropNameInRow="vat" msprop:Generator_UserColumnName="vat" msprop:Generator_ColumnVarNameInTable="columnvat" type="xs:string" minOccurs="0" />
               <xs:element name="date_added" msprop:Generator_ColumnPropNameInTable="date_addedColumn" msprop:Generator_ColumnPropNameInRow="date_added" msprop:Generator_UserColumnName="date_added" msprop:Generator_ColumnVarNameInTable="columndate_added" type="xs:string" minOccurs="0" />
-              <xs:element name="cashier_name" msprop:Generator_UserColumnName="cashier_name" msprop:Generator_ColumnPropNameInTable="cashier_nameColumn" msprop:Generator_ColumnPropNameInRow="cashier_name" msprop:Generator_ColumnVarNameInTable="columncashier_name" type="xs:string" minOccurs="0" />
+              <xs:element name="cashier_name" msprop:Generator_ColumnPropNameInTable="cashier_nameColumn" msprop:Generator_ColumnPropNameInRow="cashier_name" msprop:Generator_UserColumnName="cashier_name" msprop:Generator_ColumnVarNameInTable="columncashier_name" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -45,6 +45,18 @@
             <xs:sequence>
               <xs:element name="product_name" msprop:Generator_ColumnPropNameInTable="product_nameColumn" msprop:Generator_ColumnPropNameInRow="product_name" msprop:Generator_UserColumnName="product_name" msprop:Generator_ColumnVarNameInTable="columnproduct_name" type="xs:string" minOccurs="0" />
               <xs:element name="quantity" msprop:Generator_ColumnPropNameInTable="quantityColumn" msprop:Generator_ColumnPropNameInRow="quantity" msprop:Generator_UserColumnName="quantity" msprop:Generator_ColumnVarNameInTable="columnquantity" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ExpensesReport" msprop:Generator_RowClassName="ExpensesReportRow" msprop:Generator_RowEvHandlerName="ExpensesReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ExpensesReportRowDeleted" msprop:Generator_RowDeletingName="ExpensesReportRowDeleting" msprop:Generator_RowEvArgName="ExpensesReportRowChangeEvent" msprop:Generator_TablePropName="ExpensesReport" msprop:Generator_RowChangedName="ExpensesReportRowChanged" msprop:Generator_UserTableName="ExpensesReport" msprop:Generator_RowChangingName="ExpensesReportRowChanging" msprop:Generator_TableClassName="ExpensesReportDataTable" msprop:Generator_TableVarName="tableExpensesReport">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="cashier_name" msprop:Generator_UserColumnName="cashier_name" msprop:Generator_ColumnPropNameInTable="cashier_nameColumn" msprop:Generator_ColumnPropNameInRow="cashier_name" msprop:Generator_ColumnVarNameInTable="columncashier_name" type="xs:string" minOccurs="0" />
+              <xs:element name="supplier_name" msprop:Generator_UserColumnName="supplier_name" msprop:Generator_ColumnPropNameInTable="supplier_nameColumn" msprop:Generator_ColumnPropNameInRow="supplier_name" msprop:Generator_ColumnVarNameInTable="columnsupplier_name" type="xs:string" minOccurs="0" />
+              <xs:element name="invoice_number" msprop:Generator_UserColumnName="invoice_number" msprop:Generator_ColumnPropNameInTable="invoice_numberColumn" msprop:Generator_ColumnPropNameInRow="invoice_number" msprop:Generator_ColumnVarNameInTable="columninvoice_number" type="xs:string" minOccurs="0" />
+              <xs:element name="additional_fee" msprop:Generator_UserColumnName="additional_fee" msprop:Generator_ColumnPropNameInTable="additional_feeColumn" msprop:Generator_ColumnPropNameInRow="additional_fee" msprop:Generator_ColumnVarNameInTable="columnadditional_fee" type="xs:string" minOccurs="0" />
+              <xs:element name="delivery_date" msprop:Generator_UserColumnName="delivery_date" msprop:Generator_ColumnPropNameInTable="delivery_dateColumn" msprop:Generator_ColumnPropNameInRow="delivery_date" msprop:Generator_ColumnVarNameInTable="columndelivery_date" type="xs:string" minOccurs="0" />
+              <xs:element name="due_total" msprop:Generator_ColumnPropNameInRow="due_total" msprop:Generator_ColumnPropNameInTable="due_totalColumn" msprop:Generator_ColumnVarNameInTable="columndue_total" msprop:Generator_UserColumnName="due_total" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

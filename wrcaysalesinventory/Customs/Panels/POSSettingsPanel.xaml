@@ -30,7 +30,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>-->
-        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+        <!--<Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
             <hc:FlexPanel JustifyContent="SpaceBetween"
                           AlignItems="Center"
                           AlignContent="Center"
@@ -47,8 +47,8 @@
                         Height="35"
                         Width="130"/>
             </hc:FlexPanel>
-        </Border>
-        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+        </Border>-->
+        <!--<Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
             <hc:FlexPanel JustifyContent="SpaceBetween"
                           AlignItems="Center"
                           AlignContent="Center"
@@ -66,7 +66,7 @@
                         Height="35"
                         Width="130"/>
             </hc:FlexPanel>
-        </Border>
+        </Border>-->
         <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
             <hc:FlexPanel JustifyContent="SpaceBetween"
                           AlignItems="Center"
@@ -106,7 +106,7 @@
                             AcceptsReturn="True"/>
             </hc:FlexPanel>
         </Border>
-        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+        <!--<Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
             <hc:FlexPanel JustifyContent="SpaceBetween"
                           AlignItems="Center"
                           AlignContent="Center"
@@ -126,7 +126,7 @@
                     </i:Interaction.Triggers>
                 </ToggleButton>
             </hc:FlexPanel>
-        </Border>
+        </Border>-->
     </StackPanel>
     <hc:FlexPanel JustifyContent="FlexEnd"
                   Grid.Row="2">

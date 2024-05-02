@@ -13,7 +13,8 @@
         public string ProductCost { get; set; }
         public string DateAdded { get; set; }
         public string DateUpdated { get; set; }
-        public bool NotAllowDecimal { get; set; } = true;
+        public bool AllowDecimal { get; set; } = false;
         public string   StatusName { get; set; }
+        public string StatusColor { get => StatusName.ToLower() == "active" ? "Green" : "Red"; }
     }
 }

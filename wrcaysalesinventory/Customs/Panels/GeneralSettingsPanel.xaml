@@ -34,7 +34,7 @@
                           AlignContent="Center"
                           Margin="10 0"
                           VerticalAlignment="Center">
-                <TextBlock Text="Key Bindings"
+                <TextBlock Text="Shortcut Keys"
                            FontSize="18"
                            VerticalAlignment="Center"/>
                 <Button FontSize="16"
@@ -112,7 +112,7 @@
                         Width="130"/>
             </hc:FlexPanel>
         </Border>
-        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+        <!--<Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
             <hc:FlexPanel JustifyContent="SpaceBetween"
                           AlignItems="Center"
                           AlignContent="Center"
@@ -129,8 +129,8 @@
                         Height="35"
                         Width="130"/>
             </hc:FlexPanel>
-        </Border>
-        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+        </Border>-->
+        <!--<Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
             <hc:FlexPanel JustifyContent="SpaceBetween"
                           AlignItems="Center"
                           AlignContent="Center"
@@ -141,8 +141,8 @@
                            VerticalAlignment="Center"/>
                 <ToggleButton Style="{StaticResource ToggleButtonSwitch}"/>
             </hc:FlexPanel>
-        </Border>
-        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+        </Border>-->
+        <!--<Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
             <hc:FlexPanel JustifyContent="SpaceBetween"
                           AlignItems="Center"
                           AlignContent="Center"
@@ -159,8 +159,8 @@
                             hc:InfoElement.Placeholder="Enter quota"
                             AcceptsReturn="True"/>
             </hc:FlexPanel>
-        </Border>
-        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+        </Border>-->
+        <!--<Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
             <hc:FlexPanel JustifyContent="SpaceBetween"
                           AlignItems="Center"
                           AlignContent="Center"
@@ -177,6 +177,6 @@
                         Height="35"
                         Width="130"/>
             </hc:FlexPanel>
-        </Border>
+        </Border>-->
     </StackPanel>
 </Grid>
