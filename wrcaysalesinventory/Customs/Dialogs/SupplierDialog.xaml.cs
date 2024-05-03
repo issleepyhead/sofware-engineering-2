@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 using wrcaysalesinventory.Data.Models;
-using wrcaysalesinventory.Resources.Langs;
+using wrcaysalesinventory.Properties.Langs;
 
 namespace wrcaysalesinventory.Customs.Dialogs
 {

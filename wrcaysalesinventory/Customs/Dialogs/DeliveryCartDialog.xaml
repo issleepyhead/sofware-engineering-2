@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
         xmlns:hc="https://handyorg.github.io/handycontrol"
-        xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
+        xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:pitem="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
         xmlns:data="clr-namespace:wrcaysalesinventory.Data.Models"
@@ -81,18 +81,19 @@
                               CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                               Style="{StaticResource SearchBarExtend}"/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Ref #: "
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ref #: "
                                VerticalAlignment="Center"
-                               Margin="0 0 12 0"
-                               FontSize="15"
-                               FontWeight="Light"
-                               Name="ReferenceTextBox"/>
+                               FontSize="18"
+                               FontWeight="Light"/>
+                        <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="0 0 12 0"/>
+                    </StackPanel>
                     <hc:TextBox HorizontalAlignment="Stretch"
-                                Height="35"
+                                Height="40"
                                 Width="280"
                                 Text="{Binding Model.ReferenceNumber}"
                                 hc:BorderElement.CornerRadius="0"
-                                hc:InfoElement.Placeholder="Enter reference"/>
+                                hc:InfoElement.Placeholder="Enter Reference Number"/>
                 </StackPanel>
             </hc:FlexPanel>
             <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -114,11 +115,11 @@
                     <TextBlock Text="Supplier:"
                                VerticalAlignment="Center"
                                Margin="0 0 12 0"
-                               FontSize="15"
+                               FontSize="18"
                                FontWeight="Light"/>
                     <hc:ComboBox HorizontalAlignment="Stretch"
                                  x:Name="SupplierNameComboBox"
-                                 Height="35"
+                                 Height="40"
                                  Width="280"
                                  ItemsSource="{Binding SupplierList}"
                                  SelectedValuePath="ID"
@@ -137,6 +138,7 @@
                       AutoGenerateColumns="False"
                       Grid.Row="1"
                       Padding="0"
+                      FontSize="18"
                       ItemsSource="{Binding DataList}"
                       hc:DataGridAttach.ApplyDefaultStyle="True"
                       Margin="18 20">
@@ -146,21 +148,27 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <DataGrid.Columns>
-                    <DataGridTextColumn FontSize="13"
+                    <DataGridTextColumn FontSize="16"
                                         Header="Product Name"
                                         Binding="{Binding ProductName}"
                                         Width="*"/>
-                    <DataGridTextColumn FontSize="13"
-                                        Header="Category"
-                                        Binding="{Binding CategoryName}"
+                    <DataGridTextColumn FontSize="16"
+                                    Header="Status"
+                                    Binding="{Binding StatusName}"
+                                    Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{Binding StatusColor}" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn FontSize="16"
+                                        Header="Stocks Available"
+                                        Binding="{Binding Quantity}"
                                         Width="*"/>
-                    <DataGridTextColumn FontSize="13"
+                    <DataGridTextColumn FontSize="16"
                                         Header="Product Cost"
                                         Binding="{Binding ProductCost,StringFormat='₱ {0:N}'}"
-                                        Width="*"/>
-                    <DataGridTextColumn FontSize="13"
-                                        Header="Measurement"
-                                        Binding="{Binding ProductUnit}"
                                         Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>

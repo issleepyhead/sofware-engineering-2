@@ -220,9 +220,6 @@
     <Compile Include="Customs\Dialogs\ProductDialog.xaml.cs">
       <DependentUpon>ProductDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Customs\Dialogs\SubcategoryDialog.xaml.cs">
-      <DependentUpon>SubcategoryDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Customs\Dialogs\SupplierDialog.xaml.cs">
       <DependentUpon>SupplierDialog.xaml</DependentUpon>
     </Compile>
@@ -237,6 +234,9 @@
     </Compile>
     <Compile Include="Customs\Panels\CategoriesPanel.xaml.cs">
       <DependentUpon>CategoriesPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customs\Panels\CustomersPanel.xaml.cs">
+      <DependentUpon>CustomersPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Customs\Panels\DashboardPanel.xaml.cs">
       <DependentUpon>DashboardPanel.xaml</DependentUpon>
@@ -274,9 +274,6 @@
     <Compile Include="Customs\Panels\UsersPanel.xaml.cs">
       <DependentUpon>UsersPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Customs\TransactionDetailsDialog.xaml.cs">
-      <DependentUpon>TransactionDetailsDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Data\Classes\AppConfig.cs" />
     <Compile Include="Data\Classes\GlobalData.cs" />
     <Compile Include="Data\Classes\SqlBaseConnection.cs" />
@@ -305,6 +302,7 @@
     <Compile Include="Data\Models\TransactionModel.cs" />
     <Compile Include="Data\Models\UserModel.cs" />
     <Compile Include="Data\Models\Validations\CategoryValidator.cs" />
+    <Compile Include="Data\Models\Validations\CustomerValidator.cs" />
     <Compile Include="Data\Models\Validations\DelivieryValidator.cs" />
     <Compile Include="Data\Models\Validations\ProductValidator.cs" />
     <Compile Include="Data\Models\Validations\SupplierValidator.cs" />
@@ -325,7 +323,7 @@
     <Compile Include="Forms\ServerWindow.xaml.cs">
       <DependentUpon>ServerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Langs\Lang.Designer.cs">
+    <Compile Include="Properties\Langs\Lang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang.resx</DependentUpon>
@@ -333,10 +331,12 @@
     <Compile Include="Services\DataService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CategoryDialogViewModel.cs" />
+    <Compile Include="ViewModels\CustomerDialogViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\DeliveryCartDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\AuditTrailPanelViewModel.cs" />
+    <Compile Include="ViewModels\PanelViewModes\CustomerPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\CategoryPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\DeliveryPanelViewModel.cs" />
@@ -405,10 +405,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Customs\Dialogs\SubcategoryDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Customs\Dialogs\SupplierDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -426,6 +422,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customs\Panels\CategoriesPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Panels\CustomersPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -474,10 +474,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customs\Panels\UsersPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Customs\TransactionDetailsDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -542,7 +538,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Langs\Lang.resx">
+    <EmbeddedResource Include="Properties\Langs\Lang.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Lang.Designer.cs</LastGenOutput>
     </EmbeddedResource>

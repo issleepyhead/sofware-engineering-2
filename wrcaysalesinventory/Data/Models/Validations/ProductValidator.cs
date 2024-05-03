@@ -24,7 +24,7 @@ namespace wrcaysalesinventory.Data.Models.Validations
             RuleFor(productModel => productModel.ProductCost)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
-                .WithMessage("Please provide a cost price.")
+                .WithMessage("Please provide a cost post.")
                 .Matches(@"^(\d+)?\.?(\d+)$")
                 .WithMessage("Please enter a valid product cost.");
 

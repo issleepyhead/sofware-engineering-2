@@ -82,7 +82,7 @@ namespace wrcaysalesinventory
         public void UpdateAll()
         {
             ViewModelLocator loc = new();
-            ((CategoryPanelViewModel)CategoryPanel.DataContext).DataList = loc.DService.GetGategoryPanelList();
+            ((CategoryPanelViewModel)CategoryPanel.DataContext).DataList = loc.DService.GetCategoryPanelList();
             ((ProductPanelViewModel)ProductPanel.DataContext).DataList = loc.DService.GetProductList();
             ((SupplierPanelViewModel)SupplierPanel.DataContext).DataList = loc.DService.GetSupplierList();
             ((StocksPanelViewModel)StockPanel.DataContext).DataList = loc.DService.GetStocksList();

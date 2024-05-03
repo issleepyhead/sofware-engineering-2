@@ -19,7 +19,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         public CategoryPanelViewModel(DataService dataService)
         {
             _dataService = dataService;
-            _allCategories = _dataService.GetGategoryPanelList();
+            _allCategories = _dataService.GetCategoryPanelList();
             DataList = new ObservableCollection<CategoryModel>(_allCategories.Take(30).ToList());
         }
 
@@ -54,13 +54,13 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         public RelayCommand<SearchBar> SearchCmd => new(SearchCommand);
         public void SearchCommand(SearchBar searchBar)
         {
-            DataList = _dataService.SearchGategoryPanelList(string.IsNullOrEmpty(searchBar.Text) ? "%" : searchBar.Text);
+            DataList = _dataService.SearchCategoryPanelList(string.IsNullOrEmpty(searchBar.Text) ? "%" : searchBar.Text);
         }
 
         public RelayCommand<SearchBar> RefreshData => new(R);
         public void R(SearchBar searchBar)
         {
-            DataList = _dataService.GetGategoryList();
+            DataList = _dataService.GetCategoryListComboBox();
         }
 
         public void PageUpdated(int offset)

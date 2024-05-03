@@ -239,7 +239,8 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                 total += double.Parse(model.Total);
             }
             SubTotal = total.ToString();
-            TotalAmount = (total + double.Parse(Header.AdditionalFee ?? "0") - (total * (double.Parse(Discount ?? "0") / 100)) + double.Parse(Header.VAT)).ToString();
+            total += (total * (double.Parse(Header.VAT) / 100)) - (total * (double.Parse(Discount ?? "0") / 100));
+            TotalAmount = (total + double.Parse(Header.AdditionalFee ?? "0")).ToString();
         }
 
         public RelayCommand<DataGrid> SelectedCommand => new(AddToCart);

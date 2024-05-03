@@ -85,10 +85,18 @@ namespace wrcaysalesinventory.ViewModels
             {
                 CategoryNameError = null;
                 DescriptionError = null;
+                SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
+                SqlCommand sqlCommand;
                 try
                 {
-                    SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
-                    SqlCommand sqlCommand;
+                    sqlCommand = new("SELECT COUNT(*) FROM tblcategories WHERE category_name = @cname", sqlConnection);
+                    if((int)sqlCommand.ExecuteScalar() > 0)
+                    {
+                        Growl.Info("Category exists!");
+                        return;
+                    }
+                    
+
                     if (string.IsNullOrEmpty(Model.ID))
                     {
                         sqlCommand = new("INSERT INTO tblcategories (category_name, category_description) VALUES (@cname, @cdescript)", sqlConnection);

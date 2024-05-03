@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Panels"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-      mc:Ignorable="d" 
-             d:DesignHeight="450"
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
              DataContext="{Binding Path=UserPanelView, Source={StaticResource Locator}}"
+             d:DesignHeight="450"
              d:DesignWidth="800"
              Margin="30 10">
     <Grid.RowDefinitions>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
              mc:Ignorable="d" 
              Width="550"
              CornerRadius="5"
@@ -13,9 +13,9 @@
              Background="{DynamicResource DefaultBrush}">
     <Grid hc:BorderElement.CornerRadius="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <hc:FlexPanel JustifyContent="SpaceBetween"
                       AlignContent="Center"
@@ -29,7 +29,7 @@
                            Padding="0"
                            VerticalAlignment="Center"
                            TextAlignment="Center"/>
-                <TextBlock Text="Customer"
+                <TextBlock Text="Customers"
                            FontSize="18"
                            Padding="5 0 0 0"
                            VerticalAlignment="Center"
@@ -50,46 +50,58 @@
         <StackPanel Margin="18 14"
                     Grid.Row="1">
             <StackPanel>
-                <TextBlock Text="Full Name:"
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Full Name:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
                 <hc:TextBox Name="FN"
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             hc:InfoElement.Placeholder="Enter Full Name"
-                            Height="40"/>
+                            FontSize="16"
+                            Height="50"/>
                 <TextBlock Name="CategoryNameError"
-                           FontSize="13"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
             <StackPanel Margin="0 8 0 0">
-                <TextBlock Text="Phone Number:"
-                           Padding="0 5"
-                           FontSize="14"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Phone Number:"
+                               Padding="0 5"
+                               FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
                 <hc:TextBox Name="PN"
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            MinHeight="40"
+                            MinHeight="50"
+                            FontSize="16"
                             Height="Auto"
                             hc:InfoElement.Placeholder="Enter Phone Number"
                             AcceptsReturn="True"/>
                 <TextBlock Name="DescriptionError"
-                           FontSize="13"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
             <StackPanel Margin="0 8 0 0">
-                <TextBlock Text="Email:"
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Email:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
                 <hc:TextBox Name="EM"
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            MinHeight="40"
+                            MinHeight="50"
+                            FontSize="16"
                             Height="Auto"
                             hc:InfoElement.Placeholder="Enter Email"
                             AcceptsReturn="True"/>
                 <TextBlock Name="EMR"
-                            FontSize="13"
+                            FontSize="16"
                            Text="{Binding DescriptionError, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="Red"/>
             </StackPanel>
@@ -102,18 +114,29 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="AddButton"
-                        FontSize="16"
+                <Button FontSize="18"
+                        hc:BorderElement.CornerRadius="0"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource DarkMaskBrush}"
+                        Command="{Binding ValidateCategory}"
+                        Content="Delete"
+                        Margin="10 0"
+                        Height="40"
+                        Width="150"
+                        CommandParameter="{Binding}"
+                        VerticalAlignment="Top"
+                        Grid.Column="0"/>
+                <Button FontSize="18"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{DynamicResource DarkMaskBrush}"
                         Command="{Binding ValidateCategory}"
                         Content="{x:Static langs:Lang.LabelAdd}"
-                        Height="35"
-                        Width="130"
+                        Height="40"
+                        Width="150"
                         CommandParameter="{Binding}"
                         VerticalAlignment="Top"
-                        Grid.Column="1" Click="AddButton_Click"/>
+                        Grid.Column="1"/>
             </Grid>
         </hc:FlexPanel>
     </Grid>

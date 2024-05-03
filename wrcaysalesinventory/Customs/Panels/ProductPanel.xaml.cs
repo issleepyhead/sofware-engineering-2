@@ -35,5 +35,19 @@ namespace wrcaysalesinventory.Customs.Panels
             }
             WinHelper.PaginationPageCount(PagerPagination, ((ProductPanelViewModel)DataContext).TotalData);
         }
+
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cmb = (ComboBox)sender;
+            if (cmb.SelectedIndex != -1 && cmb.SelectedValue != "-1")
+            {
+                ((ProductPanelViewModel)DataContext).AllData = ((ProductPanelViewModel)DataContext).DataService.GetProductByStatusList(cmb.SelectedValue.ToString());
+            }
+            else
+            {
+                ((ProductPanelViewModel)DataContext).AllData = ((ProductPanelViewModel)DataContext).DataService.GetProductList();
+            }
+            WinHelper.PaginationPageCount(PagerPagination, ((ProductPanelViewModel)DataContext).TotalData);
+        }
     }
 }

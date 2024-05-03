@@ -70,8 +70,8 @@ namespace wrcaysalesinventory.ViewModels
                 if (pdataGrid.SelectedItems.Count > 0)
                 {
                     TransactionModel model = (TransactionModel)pdataGrid.SelectedItem;
-                    TransactionDetailsDialog d = new TransactionDetailsDialog(model.ID);
-                    Dialog.Show(d);
+                    //TransactionDetailsDialog d = new TransactionDetailsDialog(model.ID);
+                    //Dialog.Show(d);
                 }
             }
         }

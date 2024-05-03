@@ -6,6 +6,7 @@ using wrcaysalesinventory.Services;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 
 namespace wrcaysalesinventory.ViewModels.PanelViewModes
 {
@@ -20,7 +21,8 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
             DataList = new ObservableCollection<ProductModel>(_alldata.Take(30).ToList());
         }
 
-        public ObservableCollection<CategoryModel> CategoryDataList { get => _dataService.GetGategoryList(); }
+        public ObservableCollection<CategoryModel> CategoryDataList { get => _dataService.GetCategoryPanelList(); }
+        public ObservableCollection<StatusModel> StatusDataList { get => _dataService.GetStatusList(); }
 
         public int TotalData { get => _alldata.Count; }
         public DataService DataService { get => _dataService; } 
@@ -33,6 +35,14 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
             var d = new ProductDialog();
             ((ProductDialogViewModel)d.DataContext).BTN = d.CloseBtn;
             Dialog.Show(d);
+        }
+
+        public RelayCommand<object> RefreshCmd=> new(RefreshCommand);
+
+        private void RefreshCommand(object obj)
+        {
+            _alldata = _dataService.GetProductList();
+            DataList = new ObservableCollection<ProductModel>(_alldata.Take(30).ToList());
         }
 
         public RelayCommand<object> SelectedCommand => new(SelectionChanged);
@@ -48,6 +58,9 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                     var d = new ProductDialog(model);
                     ((ProductDialogViewModel)d.DataContext).BTN = d.CloseBtn;
                     Dialog.Show(d);
+                    Thread.Sleep(1000);
+                    pdataGrid.SelectedItems.Clear();
+                    pdataGrid.SelectedCells.Clear();
                 }
             }
         }

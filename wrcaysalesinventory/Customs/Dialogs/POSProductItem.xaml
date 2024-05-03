@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
              mc:Ignorable="d" 
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
              Effect="{DynamicResource EffectShadow2}"
              Margin="8"
              HorizontalAlignment="Stretch">

@@ -35,6 +35,7 @@ namespace wrcaysalesinventory.Customs.Dialogs
                 ((POSPanelViewModel)DataContext).DiscountError = "Invalid Discount.";
                 ((POSPanelViewModel)DataContext).Discount = "0";
             }
+            ((POSPanelViewModel)DataContext).ValueChanged();
         }
     }
 }

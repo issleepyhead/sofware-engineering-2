@@ -14,7 +14,7 @@
                           PageWidth="210"
                       PagePadding="30 0">
         <Paragraph Padding="0" Margin="0" TextAlignment="Center">
-            <Run x:Name="StoreName" FontSize="10" FontWeight="DemiBold">WRCay Hardware Store</Run>
+            <Run x:Name="StoreName" FontSize="10" FontWeight="DemiBold" Text="{Binding StoreName}"/>
             <LineBreak/>
             <Run x:Name="StoreAddress" FontSize="8">Address: Taguig City</Run>
             <LineBreak/>

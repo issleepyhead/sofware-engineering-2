@@ -16,5 +16,6 @@
         public bool AllowDecimal { get; set; } = false;
         public string   StatusName { get; set; }
         public string StatusColor { get => StatusName.ToLower() == "active" ? "Green" : "Red"; }
+        public string CriticalLevel { get; set; }
     }
 }

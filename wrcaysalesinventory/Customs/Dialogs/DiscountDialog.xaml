@@ -5,16 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
              mc:Ignorable="d" 
              Width="550"
              CornerRadius="5"
              Background="{DynamicResource DefaultBrush}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <hc:FlexPanel JustifyContent="SpaceBetween"
                       AlignContent="Center"
@@ -43,6 +43,7 @@
                     Margin="0 0 18 0"
                     Padding="0"
                     IsEnabled="True"
+                    Visibility="Hidden"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"/>
         </hc:FlexPanel>
@@ -72,8 +73,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="AddButton"
-                        FontSize="16"
+                <Button FontSize="18"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{DynamicResource DarkMaskBrush}"

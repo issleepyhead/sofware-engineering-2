@@ -138,6 +138,9 @@
   <data name="LabelClose" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="LabelCustomers" xml:space="preserve">
+    <value>Customer</value>
+  </data>
   <data name="LabelDashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>

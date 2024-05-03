@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace wrcaysalesinventory.Resources.Langs {
+namespace wrcaysalesinventory.Properties.Langs {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace wrcaysalesinventory.Resources.Langs {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("wrcaysalesinventory.Resources.Langs.Lang", typeof(Lang).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("wrcaysalesinventory.Properties.Langs.Lang", typeof(Lang).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -120,6 +120,15 @@ namespace wrcaysalesinventory.Resources.Langs {
         public static string LabelClose {
             get {
                 return ResourceManager.GetString("LabelClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer.
+        /// </summary>
+        public static string LabelCustomers {
+            get {
+                return ResourceManager.GetString("LabelCustomers", resourceCulture);
             }
         }
         

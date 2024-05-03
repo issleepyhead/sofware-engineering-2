@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Markup;
 using wrcaysalesinventory.Data.Models;
-using wrcaysalesinventory.Resources.Langs;
+using wrcaysalesinventory.Properties.Langs;
 using wrcaysalesinventory.ViewModels;
 
 namespace wrcaysalesinventory.Customs.Dialogs

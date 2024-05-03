@@ -13,12 +13,12 @@ FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dial
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\POSSettingsReceiptDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\ProductCartItem.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\ProductDialog.xaml;;
-FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\SubcategoryDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\SupplierDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\UserDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\NonClientArea\NonClientArea.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\AuditTrailPanel.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\CategoriesPanel.xaml;;
+FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\CustomersPanel.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\DashboardPanel.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\DeliveryPanel.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\ExpensesPanel.xaml;;
@@ -31,7 +31,6 @@ FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Pane
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\TransactionHistoryPanel.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\TransactionPanel.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\UsersPanel.xaml;;
-FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\TransactionDetailsDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Forms\LogInWindow.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Forms\MainWindow.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Forms\ReceiptDocument.xaml;;

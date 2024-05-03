@@ -29,18 +29,15 @@ namespace wrcaysalesinventory.ViewModels
         private Button _btn;
         public Button BTN { get => _btn; set => Set(ref _btn, value); }
 
-        public ObservableCollection<CategoryModel> CategoryDataList => _dataService.GetGategoryList();
+        public ObservableCollection<CategoryModel> CategoryDataList => _dataService.GetCategoryPanelList();
         public ObservableCollection<StatusModel> StatusDataList => _dataService.GetStatusList();
 
-        private Visibility _statusVisibility = Visibility.Collapsed;
-        public Visibility StatusVisibility { get => string.IsNullOrEmpty(Model.ID) ? Visibility.Collapsed : Visibility.Collapsed; set => Set(ref _statusVisibility, value); }
+        private bool _allowed;
+        public bool AllowedDecimal { get => _allowed; set => Set(ref _allowed, value); }
+        public bool NotAllowed { get => !_allowed; set => Set(ref _allowed, !value); }
 
         private ProductModel _productModel = new();
-        public ProductModel Model { get => _productModel; set { Set(ref _productModel, value);} }
-
-        //private bool _allowedDecimal = false;
-        //public bool AllowedDecimal { get => _allowedDecimal; set => Set(ref _allowedDecimal, value); }
-        //public bool NotAllowedDecimal { get => !_allowedDecimal; set => Set(ref _allowedDecimal, !value); }
+        public ProductModel Model { get => _productModel; set { Set(ref _productModel, value); AllowedDecimal = _productModel.AllowDecimal; } }
 
         private string _pNameError;
         public string ProductNameError { get => _pNameError; set => Set(ref _pNameError, value); }
@@ -63,16 +60,26 @@ namespace wrcaysalesinventory.ViewModels
             try
             {
                 SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
-                SqlCommand sqlCommand = new("DELETE FROM tblproducts WHERE id = @id", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
-                if (sqlCommand.ExecuteNonQuery() > 0)
+                if (vm.Model.StatusName.ToLower() == "Inactive".ToLower())
                 {
-                    Growl.Success("Product has been deleted successfully!");
-                    WinHelper.AuditActivity("DELETED", "PRODUCT");
-                    WinHelper.CloseDialog(_btn);
+                    SqlCommand sqlCommand = new(@"
+                            ALTER tblproducts nocheck constraint all
+        
+                            ALTER tblproducts check constaint all", sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                } else
+                {
+                    SqlCommand sqlCommand = new("UPDATE tblproducts SET product_status = (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Inactive') WHERE id = @id", sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                    if (sqlCommand.ExecuteNonQuery() > 0)
+                    {
+                        Growl.Success("Product has been deleted successfully!");
+                        WinHelper.AuditActivity("UPDATED", "PRODUCT");
+                        WinHelper.CloseDialog(_btn);
+                    }
+                    else
+                        Growl.Info("Failed deleting the product.");
                 }
-                else
-                    Growl.Info("Failed deleting the product.");
                 mw?.UpdateAll();
                 
             }
@@ -156,9 +163,16 @@ namespace wrcaysalesinventory.ViewModels
 
                 try
                 {
+                    if (string.IsNullOrEmpty(vm.Model.CategoryID))
+                    {
+                        Growl.Info("Please select a category first.");
+                        return;
+                    }
+
                     if (double.Parse(vm.Model.ProductPrice) < double.Parse(vm.Model.ProductCost))
                     {
-                        ProductPriceError = "Selling price can't be less than the cost";
+                        ProductPriceError = "Selling price can't be less than the cost.";
+                        return;
                     }
                 }
                 catch
@@ -170,6 +184,16 @@ namespace wrcaysalesinventory.ViewModels
                 SqlCommand sqlCommand;
                 try
                 {
+                    sqlCommand = new("SELECT COUNT(*) FROM tblproducts WHERE product_name = @product_name;", sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@product_name", vm.Model.ProductName);
+                    if ((int)sqlCommand.ExecuteNonQuery() > 0)
+                    {
+                        Growl.Info("Product exists!");
+                        return;
+                    }
+
+
+
                     if (string.IsNullOrEmpty(vm.Model.ID))
                     {
                         sqlCommand = new(@"INSERT INTO tblproducts (product_name, product_description, product_price, product_cost, product_unit, selling_unit, category_id)
@@ -178,9 +202,8 @@ namespace wrcaysalesinventory.ViewModels
                     else
                     {
                         sqlCommand = new(@"UPDATE tblproducts SET product_name = @pname, product_description = @pdesc, product_price = @pprice, product_cost = @pcost,
-                                               product_unit = @punit, product_status = @pstatus, selling_unit = @sunit, date_updated = getdate(), category_id = @cid WHERE id = @id", sqlConnection);
+                                               product_unit = @punit, selling_unit = @sunit, date_updated = getdate(), category_id = @cid WHERE id = @id", sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
-                        sqlCommand.Parameters.AddWithValue("@pstatus", vm.Model.StatusID);
                     }
                     sqlCommand.Parameters.AddWithValue("@pname", vm.Model.ProductName);
                     sqlCommand.Parameters.AddWithValue("@pdesc", string.IsNullOrEmpty(vm.Model.ProductDescription) ? DBNull.Value : vm.Model.ProductDescription);

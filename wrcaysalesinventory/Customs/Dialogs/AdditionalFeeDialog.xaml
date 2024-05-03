@@ -5,16 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
              mc:Ignorable="d" 
              Width="550"
              CornerRadius="5"
              Background="{DynamicResource DefaultBrush}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <hc:FlexPanel JustifyContent="SpaceBetween"
                       AlignContent="Center"
@@ -30,7 +30,6 @@
                            TextAlignment="Center"/>-->
                 <TextBlock Text="Additional Fee"
                            FontSize="18"
-                           Padding="5 0 0 0"
                            VerticalAlignment="Center"
                            FontWeight="SemiBold"/>
             </StackPanel>
@@ -43,6 +42,7 @@
                     Margin="0 0 18 0"
                     Padding="0"
                     IsEnabled="True"
+                    Visibility="Hidden"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"/>
         </hc:FlexPanel>
@@ -51,13 +51,13 @@
             <StackPanel>
                 <TextBlock Text="Additional Fee:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
                 <hc:TextBox Name="CategoryNameTextBox"
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            hc:InfoElement.Placeholder="Enter additional fee"
+                            hc:InfoElement.Placeholder="Enter Additional Fee"
                             Text="{Binding Header.AdditionalFee,UpdateSourceTrigger=PropertyChanged}"
-                            Height="40"/>
+                            Height="40" FontSize="16"/>
             </StackPanel>
             <!--<StackPanel Margin="0 8 0 0">
                 <TextBlock Text="Description:"
@@ -103,7 +103,7 @@
                         BorderThickness="1"
                         BorderBrush="{DynamicResource DarkMaskBrush}"
                         Content="Save"
-                        Height="35"
+                        Height="40"
                         Width="130"
                         CommandParameter="{Binding}"
                         VerticalAlignment="Top"

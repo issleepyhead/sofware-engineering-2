@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Panels"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Resources.Langs"
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
@@ -113,6 +113,7 @@
                                             Margin="20 0">
                                     <TextBlock Text="{Binding TotalProducts,StringFormat={}{0:N0}}"
                                                FontSize="28"
+                                               Margin="50 0 0 0"
                                                VerticalAlignment="Center"
                                                FontWeight="Light"/>
                                 </StackPanel>
@@ -131,7 +132,7 @@
                                             Margin="20 4">
                                     <TextBlock Text="&#xEAED;"
                                                Style="{StaticResource TextBlockFabricIcons}"
-                                               FontSize="40"
+                                               FontSize="37"
                                                Padding="0"
                                                FontWeight="Light"
                                                VerticalAlignment="Center"
@@ -148,6 +149,7 @@
                                             Margin="20 0">
                                     <TextBlock Text="{Binding TotalRevenue, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N2}}"
                                                FontSize="28"
+                                               Margin="50 0 0 0"
                                                VerticalAlignment="Center"
                                                FontWeight="Light"/>
                                 </StackPanel>
@@ -183,6 +185,7 @@
                                             Margin="20 0">
                                     <TextBlock Text="{Binding TotalExpenses, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N2}}"
                                                FontSize="28"
+                                               Margin="50 0 0 0"
                                                VerticalAlignment="Center"
                                                FontWeight="Light"/>
                                 </StackPanel>
@@ -200,19 +203,16 @@
                             <RowDefinition Height="40"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <!--<Button Height="40" Width="150" Command="{Binding Weekly}" Margin="8 0" FontSize="16">Weekly</Button>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <!--<Button Height="40" Width="150" Command="{Binding Daily}" Margin="8 0" FontSize="16">Daily</Button>-->
+                            <Button Height="40" Width="150" Command="{Binding Weekly}" Margin="8 0" FontSize="16">Weekly</Button>
                             <Button Height="40" Width="150" Command="{Binding Monthly}" Margin="8 0" FontSize="16">Montly</Button>
-                            <Button Height="40" Width="150" Command="{Binding Yearly}" Margin="8 0" FontSize="16">Yearly</Button>-->
-                            <TextBlock Text="Past 7 days transactions"
-                                               FontSize="20"
-                                               VerticalAlignment="Top"
-                                               FontWeight="Light"/>
-                        </Grid>
+                            <Button Height="40" Width="150" Command="{Binding Yearly}" Margin="8 0" FontSize="16">Yearly</Button>
+                        </StackPanel>
                         <lvc:CartesianChart Series="{Binding Series}"
-                                        XAxes="{Binding XAxes}"
-                                        ZoomMode="X"
-                                        Grid.Row="1">
+                                            XAxes="{Binding XAxes}"
+                                            ZoomMode="X"
+                                            Grid.Row="1">
 
                         </lvc:CartesianChart>
                     </Grid>

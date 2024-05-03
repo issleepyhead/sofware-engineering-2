@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,5 +69,30 @@ namespace wrcaysalesinventory.Data.Classes
 
             }
         }
+
+        public static string CapitalizeData(string input)
+        {
+            if (!string.IsNullOrEmpty(input))
+            {
+                int len = input.Split(' ').Length;
+                if (len > 1)
+                {
+                    string[] tokens = input.Split(' ');
+                    string temp = "";
+                    foreach(string token in tokens)
+                    {
+                        temp += token[0].ToString().ToUpper() + token.Substring(1, token.Length-1) + " ";
+                    }
+                    return temp.Trim(' ');
+                } else
+                {
+                    return input[0].ToString().ToUpper() + input.Substring(1, input.Length - 1);
+                }
+            } else
+            {
+                return input;
+            }
+        }
+
     }
 }

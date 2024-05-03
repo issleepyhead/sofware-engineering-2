@@ -1,23 +1,25 @@
-﻿using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore;
-using GalaSoft.MvvmLight;
-using LiveChartsCore.SkiaSharpView.VisualElements;
-using LiveChartsCore.Defaults;
-using System.Collections.ObjectModel;
-using System;
-using LiveChartsCore.SkiaSharpView.Painting;
-using SkiaSharp;
-using LiveChartsCore.Measure;
-using LiveChartsCore.ConditionalDraw;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using LiveChartsCore.Kernel.Sketches;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using wrcaysalesinventory.Data.Classes;
-using System.Data;
+using HandyControl.Controls;
 using HandyControl.Tools.Extension;
+using LiveChartsCore;
+using LiveChartsCore.ConditionalDraw;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.Drawing;
+using LiveChartsCore.Kernel.Sketches;
+using LiveChartsCore.Measure;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.VisualElements;
+using SkiaSharp;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
 using System.Windows.Documents;
+using wrcaysalesinventory.Data.Classes;
 
 namespace wrcaysalesinventory.ViewModels
 {
@@ -30,39 +32,76 @@ namespace wrcaysalesinventory.ViewModels
 
         public void GenerateSeries()
         {
-            ColumnSeries<DateTimePoint> weekly = new();
+            ColumnSeries<DateTimePoint> serie= new();
+            //ColumnSeries<DateTimePoint> weekly = new();
             //ColumnSeries<DateTimePoint> monthlyy = new();
             //ColumnSeries<DateTimePoint> yearly = new();
 
-            ObservableCollection<DateTimePoint> sweekly = new();
+
+            ObservableCollection<DateTimePoint> values = new();
             //ObservableCollection<DateTimePoint> smonthly = new();
             //ObservableCollection<DateTimePoint> syearly = new();
 
-
-            SqlConnection conn = SqlBaseConnection.GetInstance();
-            DateTime d = DateTime.Now;
-            for (int i = 7; i > 0; i--)
+            try
             {
-                SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE FORMAT(date_added,'dd/MM/yyyy') = FORMAT(@date_added, 'dd/MM/yyyy')", conn);
+                SqlConnection conn = SqlBaseConnection.GetInstance();
+                DateTime today = DateTime.Now;
+                
+                for(int i = 1; i <= 24; i++)
+                {
+                    SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE CAST(date_added AS TIME) BETWEEN CAST(@stime AS TIME) AND CAST(@etime AS TIME)", conn);
+                    cmd.Parameters.AddWithValue("@stime", today.AddHours(-1)).SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.AddWithValue("@etime", today).SqlDbType = SqlDbType.DateTime;
+                    double res = double.Parse(cmd.ExecuteScalar().ToString());
+                    values.Add(new DateTimePoint(today, res));
+                    today = DateTime.Now.AddHours(-i);
+                }
 
-                cmd.Parameters.AddWithValue("@date_added", d).SqlDbType = SqlDbType.DateTime;
+                //serie.Values = values;
+                //Series.Add(serie);
+                //values.Clear();
 
-                double res = double.Parse(cmd.ExecuteScalar().ToString());
-                sweekly.Add(new DateTimePoint(d, res));
-                d = DateTime.Now.AddDays(-i);
+                //serie = new();
+                //today = DateTime.Now;
+                //for (int i = 1; i <= 7; i++)
+                //{
+                //    SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE date_added = @date_added", conn);
+                //    cmd.Parameters.AddWithValue("@date_added", today).SqlDbType = SqlDbType.DateTime;
+
+                //    double res = double.Parse(cmd.ExecuteScalar().ToString());
+                //    values.Add(new DateTimePoint(today, res));
+                //    today = DateTime.Now.AddDays(-i);
+                //}
+
+                //serie = new();
+                //serie.Values = values;
+                //Series.Add(serie);
+                //values.Clear();
+
+                //for (int i = 1; i <= 12; i++)
+                //{
+                //    SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE date_added = @date_added", conn);
+                //    cmd.Parameters.AddWithValue("@date_added", today).SqlDbType = SqlDbType.DateTime;
+
+                //    double res = double.Parse(cmd.ExecuteScalar().ToString());
+                //    sweekly.Add(new DateTimePoint(today, res));
+                //    today = DateTime.Now.AddDays(-i);
+                //}
+
+                SqlCommand ncmd = new("SELECT COUNT(*) FROM tblproducts WHERE product_status = (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Active');", conn);
+                TotalProducts = (int)ncmd.ExecuteScalar();
+
+                ncmd = new("SELECT CASE WHEN SUM(total_amount) IS NULL THEN 0 ELSE SUM(total_amount) END AS revenue FROM tbltransactionheaders", conn);
+                TotalRevenue = double.Parse(ncmd.ExecuteScalar().ToString());
+
+                ncmd = new("SELECT CASE WHEN SUM(due_total) IS NULL THEN 0 ELSE SUM(due_total) END AS expenses FROM tbldeliveryheaders", conn);
+                TotalExpenses = double.Parse(ncmd.ExecuteScalar().ToString());
+
+                
+            } catch
+            {
+                Growl.Info("Unable to fetch data.");
             }
-
-            SqlCommand ncmd = new("SELECT COUNT(*) FROM tblproducts", conn);
-            TotalProducts = (int)ncmd.ExecuteScalar();
-
-            ncmd = new("SELECT CASE WHEN SUM(total_amount) IS NULL THEN 0 ELSE SUM(total_amount) END AS revenue FROM tbltransactionheaders", conn);
-            TotalRevenue = double.Parse(ncmd.ExecuteScalar().ToString());
-
-            ncmd = new("SELECT  CASE WHEN SUM(due_total) IS NULL THEN 0 ELSE SUM(due_total)  END AS expenses FROM tbldeliveryheaders", conn);
-            TotalExpenses = double.Parse(ncmd.ExecuteScalar().ToString());
-
-            weekly.Values = sweekly;
-            Series.Add(weekly);
 
         }
         private int _totalProduct = 0;
@@ -91,7 +130,34 @@ namespace wrcaysalesinventory.ViewModels
 
         public Axis[] XAxes { get; set; } =
         {
-             new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy")),
+            new DateTimeAxis(TimeSpan.FromHours(1), date=>date.ToString("dd/MM/yyyy hh:mm tt"))
+            {
+                CrosshairLabelsBackground = SKColors.DarkOrange.AsLvcColor(),
+                CrosshairLabelsPaint = new SolidColorPaint(SKColors.DarkRed, 1),
+                CrosshairPaint = new SolidColorPaint(SKColors.DarkOrange, 1),
+                IsVisible = true
+            },
+            //new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
+            //{
+            //    CrosshairLabelsBackground = SKColors.DarkOrange.AsLvcColor(),
+            //    CrosshairLabelsPaint = new SolidColorPaint(SKColors.DarkRed, 1),
+            //    CrosshairPaint = new SolidColorPaint(SKColors.DarkOrange, 1),
+            //    IsVisible = false
+            //},
+            //new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
+            //{
+            //    CrosshairLabelsBackground = SKColors.DarkOrange.AsLvcColor(),
+            //    CrosshairLabelsPaint = new SolidColorPaint(SKColors.DarkRed, 1),
+            //    CrosshairPaint = new SolidColorPaint(SKColors.DarkOrange, 1),
+            //    IsVisible = false
+            //},
+            //new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
+            //{
+            //    CrosshairLabelsBackground = SKColors.DarkOrange.AsLvcColor(),
+            //    CrosshairLabelsPaint = new SolidColorPaint(SKColors.DarkRed, 1),
+            //    CrosshairPaint = new SolidColorPaint(SKColors.DarkOrange, 1),
+            //    IsVisible = false
+            //}
         };
 
         //    {
@@ -127,24 +193,28 @@ namespace wrcaysalesinventory.ViewModels
         //public void DailySeries(object obj)
         //{
         //    Series[0].IsVisible = !Series[0].IsVisible;
+        //    XAxes[0].IsVisible = !XAxes[0].IsVisible;
         //}
 
-        //public RelayCommand<object> Weekly => new(WeeklySeries);
-        //public void WeeklySeries(object obj)
-        //{
-        //    Series[0].IsVisible = !Series[1].IsVisible;
-        //}
+        public RelayCommand<object> Weekly => new(WeeklySeries);
+        public void WeeklySeries(object obj)
+        {
+            Series[1].IsVisible = !Series[1].IsVisible;
+            XAxes[1].IsVisible = !XAxes[1].IsVisible;
+        }
 
-        //public RelayCommand<object> Monthly => new(MonthlySeries);
-        //public void MonthlySeries(object obj)
-        //{
-        //    Series[0].IsVisible = !Series[2].IsVisible;
-        //}
+        public RelayCommand<object> Monthly => new(MonthlySeries);
+        public void MonthlySeries(object obj)
+        {
+            Series[2].IsVisible = !Series[2].IsVisible;
+            XAxes[2].IsVisible = !XAxes[2].IsVisible;
+        }
 
-        //public RelayCommand<object> Yearly => new(YearlySeries);
-        //public void YearlySeries(object obj)
-        //{
-        //    Series[0].IsVisible = !Series[3].IsVisible;
-        //}
+        public RelayCommand<object> Yearly => new(YearlySeries);
+        public void YearlySeries(object obj)
+        {
+            Series[3].IsVisible = !Series[3].IsVisible;
+            XAxes[3].IsVisible = !XAxes[3].IsVisible;
+        }
     }
 }
