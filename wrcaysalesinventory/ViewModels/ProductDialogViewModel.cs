@@ -1,4 +1,5 @@
 ﻿using HandyControl.Controls;
+using wrcaysalesinventory.Properties.Langs;
 using HandyControl.Tools.Command;
 using System;
 using System.Collections.Generic;
@@ -20,41 +21,50 @@ namespace wrcaysalesinventory.ViewModels
     {
         private DataService _dataService;
         private readonly MainWindow mw;
+        private Button _btn;
+        private bool _allowed;
+        private ProductModel _productModel = new();
+        private string _pNameError;
+        private string _pCategoryError;
+        private string _pPriceError;
+        private string _pDescriptionError;
+        private string _pCostError;
+        private string _pUnitError;
+        private Visibility _dVisibility = Visibility.Collapsed;
+        private string _dLabel = Lang.LabelAdd;
+
         public ProductDialogViewModel(DataService dataService)
         {
             _dataService = dataService;
             mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         }
 
-        private Button _btn;
+        
         public Button BTN { get => _btn; set => Set(ref _btn, value); }
-
         public ObservableCollection<CategoryModel> CategoryDataList => _dataService.GetCategoryPanelList();
         public ObservableCollection<StatusModel> StatusDataList => _dataService.GetStatusList();
-
-        private bool _allowed;
         public bool AllowedDecimal { get => _allowed; set => Set(ref _allowed, value); }
         public bool NotAllowed { get => !_allowed; set => Set(ref _allowed, !value); }
-
-        private ProductModel _productModel = new();
-        public ProductModel Model { get => _productModel; set { Set(ref _productModel, value); AllowedDecimal = _productModel.AllowDecimal; } }
-
-        private string _pNameError;
+        public ProductModel Model { get => _productModel; set {
+                Set(ref _productModel, value);
+                AllowedDecimal = _productModel.AllowDecimal;
+                DeleteVisibility = string.IsNullOrEmpty(value.ID) ? Visibility.Collapsed : Visibility.Visible;
+                ButtonContent = string.IsNullOrEmpty(value.ID) ?
+                    Lang.LabelAdd : (value.StatusName.ToLower() == "inactive" ? Lang.LabelRestore : Lang.LabelUpdate);
+            } }
         public string ProductNameError { get => _pNameError; set => Set(ref _pNameError, value); }
-
-        private string _pDescriptionError;
+        public string ProductCategoryError { get => _pCategoryError; set => Set(ref _pCategoryError, value); }
         public string ProductDescriptionError { get => _pDescriptionError; set => Set(ref _pDescriptionError, value); }
-
-        private string _pPriceError;
         public string ProductPriceError { get => _pPriceError; set => Set(ref _pPriceError, value); }
-
-        private string _pCostError;
         public string ProductCostError { get => _pPriceError; set => Set(ref _pCostError, value); }
-
-        private string _pUnitError;
         public string ProductUnitError { get => _pUnitError; set => Set(ref _pUnitError, value); }
+        public Visibility DeleteVisibility { get => _dVisibility; set => Set(ref _dVisibility, value); }
+        public string ButtonContent { get => _dLabel; set => Set(ref _dLabel, value); }
 
         public RelayCommand<ProductDialogViewModel> DeleteCmd => new(DeleteCommand);
+        public RelayCommand<ProductDialogViewModel> ValidateProduct => new(ValidateModel);
+
+
         private void DeleteCommand(ProductDialogViewModel vm)
         {
             try
@@ -62,14 +72,8 @@ namespace wrcaysalesinventory.ViewModels
                 SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
                 if (vm.Model.StatusName.ToLower() == "Inactive".ToLower())
                 {
-                    SqlCommand sqlCommand = new(@"
-                            ALTER tblproducts nocheck constraint all
-        
-                            ALTER tblproducts check constaint all", sqlConnection);
-                    sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
-                } else
-                {
-                    SqlCommand sqlCommand = new("UPDATE tblproducts SET product_status = (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Inactive') WHERE id = @id", sqlConnection);
+                    //Dialog.Show("meow");
+                    SqlCommand sqlCommand = new(@"DELETE FROM tblproducts WHERE id = @id", sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                     if (sqlCommand.ExecuteNonQuery() > 0)
                     {
@@ -79,9 +83,20 @@ namespace wrcaysalesinventory.ViewModels
                     }
                     else
                         Growl.Info("Failed deleting the product.");
+                } else
+                {
+                    SqlCommand sqlCommand = new("UPDATE tblproducts SET product_status = (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Inactive') WHERE id = @id", sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                    if (sqlCommand.ExecuteNonQuery() > 0)
+                    {
+                        Growl.Success("Product name is now inactive!");
+                        WinHelper.AuditActivity("UPDATED", "PRODUCT");
+                        WinHelper.CloseDialog(_btn);
+                    }
+                    else
+                        Growl.Info("Failed deleting the product.");
                 }
-                mw?.UpdateAll();
-                
+                mw?.UpdateAll();   
             }
             catch(SqlException ex)
             {
@@ -90,15 +105,16 @@ namespace wrcaysalesinventory.ViewModels
                 else
                     Growl.Warning("An error occured while performing the action.");
             }
-        }
-
-        public RelayCommand<ProductDialogViewModel> ValidateProduct => new(ValidateModel);
+        }      
         private void ValidateModel(ProductDialogViewModel vm)
         {
+            // Initialize the validation then validate the model.
             ProductValidator validator = new();
             FluentValidation.Results.ValidationResult result = validator.Validate(vm.Model);
+
             if (!result.IsValid)
             {
+                // Displays error in Error Labels in the product dialog
                 foreach (var failure in result.Errors)
                 {
                     switch (failure.PropertyName)
@@ -121,15 +137,22 @@ namespace wrcaysalesinventory.ViewModels
                     }
                 }
 
-
+                // List of property of failure.
                 List<string> failureproplist = new();
                 foreach (var failure in result.Errors)
                     failureproplist.Add(failure.PropertyName);
 
+                // Property list of the ProductModel.
                 List<string> proplist = new List<string>
                 {
-                    "ProductName", "ProductDescription", "ProductPrice", "ProductCost", "ProductUnit"
+                    nameof(Model.ProductName),
+                    nameof(Model.ProductDescription),
+                    nameof(vm.Model.ProductPrice),
+                    nameof(vm.Model.ProductCost),
+                    nameof(vm.Model.ProductUnit)
                 };
+
+                // Clear the fields that has been set.
                 foreach(var prop in proplist)
                     if (!failureproplist.Contains(prop))
                     {
@@ -153,46 +176,57 @@ namespace wrcaysalesinventory.ViewModels
                         }
                     }
             }
-            else
+            else // If the result of validation is success,
             {
+                // clear all the errors displayed in the dialog.
                 ProductNameError = null;
                 ProductDescriptionError = null;
                 ProductPriceError = null;
                 ProductCostError = null;
                 ProductUnitError = null;
 
+                SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
+                SqlCommand sqlCommand;
                 try
                 {
-                    if (string.IsNullOrEmpty(vm.Model.CategoryID))
-                    {
-                        Growl.Info("Please select a category first.");
-                        return;
-                    }
-
+                    // check if the price is less than the cost.
                     if (double.Parse(vm.Model.ProductPrice) < double.Parse(vm.Model.ProductCost))
                     {
                         ProductPriceError = "Selling price can't be less than the cost.";
                         return;
                     }
-                }
-                catch
-                {
 
-                }
+                    // Restore the product if it is inactive instead of updating it.
+                    if (!string.IsNullOrEmpty(Model.ID) && Model.StatusName == "Inactive")
+                    {
+                        sqlCommand = new("UPDATE tblproducts SET product_status = (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Active') WHERE id = @id;", sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                        if ((int)sqlCommand.ExecuteNonQuery() > 0)
+                        {
+                            Growl.Success("Product restored successfully.");
+                            mw?.UpdateAll();
+                            WinHelper.AuditActivity(string.IsNullOrEmpty(Model.ID) ? "ADDED" : "UPDATED", "PRODUCT");
+                            WinHelper.CloseDialog(_btn);
+                            return;
+                        }
+                    }
 
-                SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
-                SqlCommand sqlCommand;
-                try
-                {
-                    sqlCommand = new("SELECT COUNT(*) FROM tblproducts WHERE product_name = @product_name;", sqlConnection);
+                    // Check if the product exists.
+                    if (string.IsNullOrEmpty(vm.Model.ID))
+                    {
+                        sqlCommand = new("SELECT COUNT(*) FROM tblproducts WHERE LOWER(product_name) = LOWER(@product_name);", sqlConnection);
+                    }
+                    else
+                    {
+                        sqlCommand = new("SELECT COUNT(*) FROM tblproducts WHERE LOWER(product_name) = LOWER(@product_name) AND id != @id;", sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                    }
                     sqlCommand.Parameters.AddWithValue("@product_name", vm.Model.ProductName);
-                    if ((int)sqlCommand.ExecuteNonQuery() > 0)
+                    if ((int)sqlCommand.ExecuteScalar() > 0)
                     {
                         Growl.Info("Product exists!");
                         return;
                     }
-
-
 
                     if (string.IsNullOrEmpty(vm.Model.ID))
                     {
@@ -205,12 +239,12 @@ namespace wrcaysalesinventory.ViewModels
                                                product_unit = @punit, selling_unit = @sunit, date_updated = getdate(), category_id = @cid WHERE id = @id", sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                     }
-                    sqlCommand.Parameters.AddWithValue("@pname", vm.Model.ProductName);
-                    sqlCommand.Parameters.AddWithValue("@pdesc", string.IsNullOrEmpty(vm.Model.ProductDescription) ? DBNull.Value : vm.Model.ProductDescription);
+                    sqlCommand.Parameters.AddWithValue("@pname", WinHelper.CapitalizeData(vm.Model.ProductName));
+                    sqlCommand.Parameters.AddWithValue("@pdesc", string.IsNullOrEmpty(vm.Model.ProductDescription) ? DBNull.Value : WinHelper.CapitalizeData(vm.Model.ProductDescription));
                     sqlCommand.Parameters.AddWithValue("@pprice", vm.Model.ProductPrice);
                     sqlCommand.Parameters.AddWithValue("@pcost", vm.Model.ProductCost);
                     sqlCommand.Parameters.AddWithValue("@punit", vm.Model.ProductUnit);
-                    sqlCommand.Parameters.AddWithValue("@cid", vm.Model.CategoryID);
+                    sqlCommand.Parameters.AddWithValue("@cid", string.IsNullOrEmpty(vm.Model.CategoryID) ? DBNull.Value : vm.Model.CategoryID);
                     sqlCommand.Parameters.AddWithValue("@sunit", Model.AllowDecimal);
                     if (sqlCommand.ExecuteNonQuery() > 0)
                     {

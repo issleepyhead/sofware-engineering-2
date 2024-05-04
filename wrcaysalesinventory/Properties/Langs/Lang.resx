@@ -183,6 +183,9 @@
   <data name="LabelReports" xml:space="preserve">
     <value>Reports</value>
   </data>
+  <data name="LabelRestore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
   <data name="LabelSearchProduct" xml:space="preserve">
     <value>Search Product</value>
   </data>

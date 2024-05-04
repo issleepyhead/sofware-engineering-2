@@ -35,6 +35,7 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="60"/>
 
                 </Grid.ColumnDefinitions>
                 <hc:SearchBar 
@@ -60,22 +61,22 @@
                              SelectedIndex="-1"
                              Margin="4 0"
                              hc:InfoElement.Placeholder="Select Customer"/>
-                <!--<Button Content="&#xF2B6;"
+                <Button Content="&#xF2B6;"
                         Grid.Column="2"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
                         Padding="0"
-                        FontSize="22"/>-->
-                <!--<Button Content="&#xF2B6;"
-                        Grid.Column="2"
-                        FontFamily="{StaticResource FabricIcons}"
-                        Height="48"
-                        Width="48"
-                        Padding="0"
-                        FontSize="22"/>-->
-                <Button Content="&#xE616;"
+                        FontSize="22"/>
+                <Button Content="&#xF03F;"
                         Grid.Column="3"
+                        FontFamily="{StaticResource FabricIcons}"
+                        Height="48"
+                        Width="48"
+                        Padding="0"
+                        FontSize="22"/>
+                <Button Content="&#xE616;"
+                        Grid.Column="4"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
@@ -83,7 +84,7 @@
                         Command="{Binding OpenNoteCmd}"
                         FontSize="22"/>
                 <Button Content="&#xE749;"
-                        Grid.Column="4"
+                        Grid.Column="5"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
@@ -91,7 +92,7 @@
                         FontSize="22"
                         Command="{Binding PreviewReceiptCommand}"/>
                 <Button Content="&#xE8FA;"
-                        Grid.Column="5"
+                        Grid.Column="6"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"

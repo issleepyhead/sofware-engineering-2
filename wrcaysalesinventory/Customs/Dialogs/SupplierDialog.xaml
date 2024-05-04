@@ -8,14 +8,14 @@
              xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
              mc:Ignorable="d"
              DataContext="{Binding Path=SupplierDialoglView, Source={StaticResource Locator}}"
-             Width="550"
+             Width="600"
              CornerRadius="5"
              Background="{StaticResource DefaultBrush}">
     <Grid hc:BorderElement.CornerRadius="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <hc:FlexPanel JustifyContent="SpaceBetween"
                       AlignContent="Center"
@@ -25,12 +25,12 @@
                         Margin="18 0">
                 <TextBlock Text="&#xEEBD;"
                            Style="{StaticResource TextBlockFabricIcons}"
-                           FontSize="22"
+                           FontSize="25"
                            Padding="0"
                            VerticalAlignment="Center"
                            TextAlignment="Center"/>
                 <TextBlock Text="{x:Static langs:Lang.LabelSupplier}"
-                           FontSize="18"
+                           FontSize="22"
                            Padding="5 0 0 0"
                            VerticalAlignment="Center"
                            FontWeight="SemiBold"/>
@@ -50,55 +50,65 @@
         <StackPanel Margin="18 12"
                     Grid.Row="1">
             <StackPanel>
-                <TextBlock Text="Supplier Name:"
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Supplier Name:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
                 <hc:TextBox HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            hc:InfoElement.Placeholder="Enter supplier name"
-                            Height="40"
+                            hc:InfoElement.Placeholder="Enter Supplier Name"
+                            Height="50"
+                            FontSize="16"
                             Text="{Binding Model.SupplierName, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="{Binding SupplierNameError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
-            <StackPanel Margin="0 8 0 0">
+            <StackPanel Margin="0 4 0 0">
                 <TextBlock Text="First Name:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
                 <hc:TextBox HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            hc:InfoElement.Placeholder="Enter first name (Optional)"
-                            Height="40"
+                            hc:InfoElement.Placeholder="Enter First Name (Optional)"
+                            Height="50"
+                            FontSize="16"
                             Text="{Binding Model.FirstName, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="{Binding FirstNameError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
-            <StackPanel Margin="0 8 0 0">
+            <StackPanel Margin="0 4 0 0">
                 <TextBlock Text="Last Name:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
                 <hc:TextBox HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            hc:InfoElement.Placeholder="Enter last name (Optional)"
-                            Height="40"
+                            hc:InfoElement.Placeholder="Enter Last Name (Optional)"
+                            Height="50"
+                            FontSize="16"
                             Text="{Binding Model.LastName, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="{Binding LastNameError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
-            <StackPanel Margin="0 8 0 0">
-                <TextBlock Text="Address:"
+            <StackPanel Margin="0 4 0 0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Supplier Address:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
                 <hc:TextBox HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            hc:InfoElement.Placeholder="Enter supplier's address"
-                            Height="40"
+                            hc:InfoElement.Placeholder="Enter Address"
+                            Height="50"
+                            FontSize="16"
                             Text="{Binding Model.Address, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock Text="{Binding AddressError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
             <Grid>
@@ -106,46 +116,52 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Margin="0 8 0 0"
+                <StackPanel Margin="0 4 0 0"
                             Grid.Column="0">
                     <TextBlock Text="Supplier Country:"
                                Padding="0 5"
-                               FontSize="14"/>
+                               FontSize="18"/>
                     <hc:TextBox HorizontalAlignment="Stretch"
                                 hc:BorderElement.CornerRadius="0"
-                                hc:InfoElement.Placeholder="Enter supplier's country (Optional)"
-                                Height="40"
+                                hc:InfoElement.Placeholder="Enter Country (Optional)"
+                                Height="50"
+                                FontSize="16"
                                 Text="{Binding Model.Country, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding CountryError, UpdateSourceTrigger=PropertyChanged}"
                                FontSize="12"
                                Foreground="Red"/>
                 </StackPanel>
-                <StackPanel Margin="0 8 0 0"
+                <StackPanel Margin="0 4 0 0"
                             Grid.Column="1">
                     <TextBlock Text="Supplier City:"
                                Padding="0 5"
-                               FontSize="14"/>
+                               FontSize="18"/>
                     <hc:TextBox HorizontalAlignment="Stretch"
                                 hc:BorderElement.CornerRadius="0"
-                                hc:InfoElement.Placeholder="Enter supplier's city (Optional)"
-                                Height="40"
+                                hc:InfoElement.Placeholder="Enter City (Optional)"
+                                Height="50"
+                                FontSize="16"
                                 Text="{Binding Model.City, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding CityError, UpdateSourceTrigger=PropertyChanged}"
-                               FontSize="12"
+                               FontSize="16"
                                Foreground="Red"/>
                 </StackPanel>
             </Grid>
-            <StackPanel Margin="0 8 0 0">
-                <TextBlock Text="Phone Number:"
-                           Padding="0 5"
-                           FontSize="14"/>
+            <StackPanel Margin="0 4 0 0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Phone Number:"
+                               Padding="0 5"
+                               FontSize="16"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
                 <hc:TextBox HorizontalAlignment="Stretch"
-                            hc:InfoElement.Placeholder="Enter phone number"
+                            hc:InfoElement.Placeholder="Enter Phone Number"
                             hc:BorderElement.CornerRadius="0"
-                            Height="40"
+                            Height="50"
+                            FontSize="16"
                             Text="{Binding Model.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="{Binding PhoneError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
         </StackPanel>
@@ -158,27 +174,27 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Margin="0 0 14 0"
-                        FontSize="16"
+                        FontSize="18"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
                         Content="{x:Static langs:Lang.LabelDelete}"
-                        Height="35"
-                        Width="130"
+                        Height="50"
+                        Width="150"
                         Grid.Column="0"
                         VerticalAlignment="Top"
-                        Name="DeleteButton"
+                        Visibility="{Binding DeleteVisibility, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         Command="{Binding DeleteCmd}"
                         CommandParameter="{Binding }"/>
-                <Button FontSize="16"
+                <Button FontSize="18"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
-                        Content="{x:Static langs:Lang.LabelAdd}"
+                        Content="{Binding ButtonContent, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         Command="{Binding ValidateVM}"
-                        Height="35"
+                        Height="50"
                         CommandParameter="{Binding}"
-                        Width="130"
+                        Width="150"
                         VerticalAlignment="Top"
                         Name="AddButton"
                         Grid.Column="1"/>

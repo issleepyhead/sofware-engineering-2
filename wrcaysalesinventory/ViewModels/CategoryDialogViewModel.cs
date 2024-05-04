@@ -89,7 +89,15 @@ namespace wrcaysalesinventory.ViewModels
                 SqlCommand sqlCommand;
                 try
                 {
-                    sqlCommand = new("SELECT COUNT(*) FROM tblcategories WHERE category_name = @cname", sqlConnection);
+                    if(!string.IsNullOrEmpty(Model.ID))
+                    {
+                        sqlCommand = new("SELECT COUNT(*) FROM tblcategories WHERE category_name = @cname AND id != @id", sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@id", Model.ID);
+                    } else
+                    {
+                        sqlCommand = new("SELECT COUNT(*) FROM tblcategories WHERE category_name = @cname", sqlConnection);
+                    }
+                    sqlCommand.Parameters.AddWithValue("@cname", Model.CategoryName);
                     if((int)sqlCommand.ExecuteScalar() > 0)
                     {
                         Growl.Info("Category exists!");
@@ -102,7 +110,7 @@ namespace wrcaysalesinventory.ViewModels
                         sqlCommand = new("INSERT INTO tblcategories (category_name, category_description) VALUES (@cname, @cdescript)", sqlConnection);
                     } else
                     {
-                        sqlCommand = new("UPDATE tblcategories SET category_name = @cname, category_description = @cdescriptW, date_updated = getdate() WHERE id = @id", sqlConnection);
+                        sqlCommand = new("UPDATE tblcategories SET category_name = @cname, category_description = @cdescript, date_updated = getdate() WHERE id = @id", sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@id", Model.ID);
                     }
                     sqlCommand.Parameters.AddWithValue("@cname", Model.CategoryName);

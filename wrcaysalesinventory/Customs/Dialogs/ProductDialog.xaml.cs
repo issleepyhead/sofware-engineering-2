@@ -12,16 +12,16 @@ namespace wrcaysalesinventory.Customs.Dialogs
         public ProductDialog(ProductModel model = null)
         {
             InitializeComponent();
-            if (model != null)
-            {
-                ((ProductDialogViewModel)DataContext).Model = model;
-                AddButton.Content = Lang.LabelUpdate;
-            }
-            else
-            {
-                DeleteButton.Visibility = Visibility.Collapsed;
-                ((ProductDialogViewModel)DataContext).Model.AllowDecimal = false;
-            }
+            //if (model != null)
+            //{
+            //    ((ProductDialogViewModel)DataContext).Model = model;
+            //    AddButton.Content = Lang.LabelUpdate;
+            //}
+            //else
+            //{
+            //    DeleteButton.Visibility = Visibility.Collapsed;
+            //    ((ProductDialogViewModel)DataContext).Model.AllowDecimal = false;
+            //}
             
         }
 

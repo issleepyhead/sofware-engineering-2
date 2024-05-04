@@ -12,16 +12,16 @@ namespace wrcaysalesinventory.Customs.Dialogs
     /// </summary>
     public partial class UserDialog : Border
     {
-        public UserDialog(UserModel user = null)
+        public UserDialog()
         {
             InitializeComponent();
-            if (user != null)
-            {
-                user.Password = string.Empty;
-                ((UsersDialogViewModel)DataContext).Model = user;
-                AddButton.Content = Lang.LabelUpdate;
-                DeleteButton.Visibility = Visibility.Visible;
-            }
+            //if (user != null)
+            //{
+            //    user.Password = string.Empty;
+            //    ((UsersDialogViewModel)DataContext).Model = user;
+            //    AddButton.Content = Lang.LabelUpdate;
+            //    DeleteButton.Visibility = Visibility.Visible;
+            //}
         }
     }
 }

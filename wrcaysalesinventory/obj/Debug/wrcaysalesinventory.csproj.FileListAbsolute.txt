@@ -218,3 +218,5 @@ C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\wrc
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.csproj.CopyComplete
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.exe
 C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\wrcaysalesinventory.pdb
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Customs\Dialogs\AuthDialog.g.cs
+C:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\obj\Debug\Customs\Dialogs\AuthDialog.baml

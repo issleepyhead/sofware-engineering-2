@@ -7,15 +7,15 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
              mc:Ignorable="d" 
-             Width="550"
+             Width="600"
              CornerRadius="5"
              Background="{StaticResource DefaultBrush}"
              DataContext="{Binding Path=UsersDialoglView, Source={StaticResource Locator}}">
     <Grid hc:BorderElement.CornerRadius="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <hc:FlexPanel JustifyContent="SpaceBetween"
                       AlignContent="Center"
@@ -50,104 +50,129 @@
         <StackPanel Margin="18 14"
                     Grid.Row="1">
             <StackPanel>
-                <TextBlock Text="First Name:"
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="First Name:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
                 <hc:TextBox HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            Height="40"
-                            hc:InfoElement.Placeholder="First Name"
+                            Height="50"
+                            FontSize="16"
+                            hc:InfoElement.Placeholder="Enter First Name"
                             Text="{Binding Model.FirstName}"/>
                 <TextBlock Text="{Binding FirstNameError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
-            <StackPanel Margin="0 8 0 0">
-                <TextBlock Text="Last Name:"
+            <StackPanel Margin="0 4 0 0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Last Name:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
                 <hc:TextBox Name="LastNameTextBox"
-                             hc:InfoElement.Placeholder="Last Name"
+                             hc:InfoElement.Placeholder="Enter Last Name"
                              HorizontalAlignment="Stretch"
                              hc:BorderElement.CornerRadius="0"
-                             Height="40"
+                             Height="50"
+                            FontSize="16"
                              Text="{Binding Model.LastName}"/>
                 <TextBlock Text="{Binding LastNameError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
-            <StackPanel Margin="0 8 0 0">
-                <TextBlock Text="Role: "
+            <StackPanel Margin="0 4 0 0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Role: "
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
                 <hc:ComboBox HorizontalAlignment="Stretch"
                              hc:BorderElement.CornerRadius="0"
                              ItemsSource="{Binding RoleList}"
                              DisplayMemberPath="RoleName"
                              SelectedValuePath="ID"
                              SelectedIndex="0"
-                             Height="40"
+                             Height="50"
+                             FontSize="16"
                              SelectedValue="{Binding Model.RoleID}"
                              hc:InfoElement.Placeholder="Select Role"/>
                 <TextBlock Text="{Binding RoleError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
             <StackPanel Margin="0 8 0 0">
-                <TextBlock Text="Phone Number:"
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Phone Number:"
                            Padding="0 5"
-                           FontSize="14"/>
-                <hc:TextBox hc:InfoElement.Placeholder="Enter mobile number (e.g 09XX XXX XXXX)"
+                           FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
+                <hc:TextBox hc:InfoElement.Placeholder="Enter Mobile Number (e.g 09XX XXX XXXX)"
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            Height="40"
+                            Height="50"
+                            FontSize="16"
                             Text="{Binding Model.Contact}"/>
                 <TextBlock Text="{Binding PhoneError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
-            <StackPanel Margin="0 8 0 0">
+            <StackPanel Margin="0 4 0 0">
                 <TextBlock Text="Address:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
                 <hc:TextBox HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            MinHeight="40"
+                            MinHeight="50"
                             MaxHeight="60"
+                            FontSize="16"
                             TextWrapping="Wrap"
-                            hc:InfoElement.Placeholder="Enter user's address"
+                            hc:InfoElement.Placeholder="Enter Address"
                             Height="Auto"
                             Text="{Binding Model.Address}"/>
                 <TextBlock Text="{Binding AddressError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
-            <StackPanel Margin="0 8 0 0">
-                <TextBlock Text="Username:"
+            <StackPanel Margin="0 4 0 0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Username:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
                 <hc:TextBox Name="UsernameTextBox"
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            Height="40"
-                            hc:InfoElement.Placeholder="Enter username"
+                            Height="50"
+                            FontSize="16"
+                            hc:InfoElement.Placeholder="Enter Username"
                             Text="{Binding Model.Username}"/>
                 <TextBlock Text="{Binding UserNameError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
-            <StackPanel Margin="0 8 0 0">
-                <TextBlock Text="Password:"
+            <StackPanel Margin="0 4 0 0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Password:"
                            Padding="0 5"
-                           FontSize="14"/>
+                           FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
                 <hc:PasswordBox HorizontalAlignment="Stretch"
                                 hc:BorderElement.CornerRadius="0"
                                 ShowEyeButton="True"
-                                hc:InfoElement.Placeholder="Enter password."
-                                Height="40" IsSafeEnabled="False"
+                                hc:InfoElement.Placeholder="Enter Password."
+                                Height="50" IsSafeEnabled="False"
+                                FontSize="16"
                                 UnsafePassword="{Binding Model.Password}"/>
                 <TextBlock Text="{Binding PasswordError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
         </StackPanel>
@@ -159,29 +184,27 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="DeleteButton"
-                        Margin="0 0 14 0"
+                <Button Margin="0 0 14 0"
                         FontSize="16"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
                         Content="{x:Static langs:Lang.LabelDelete}"
-                        Height="35"
-                        Width="130"
+                        Height="50"
+                        Width="150"
                         Command="{Binding DeleteCmd}"
                         CommandParameter="{Binding}"
                         Grid.Column="0"
-                        Visibility="Collapsed"
+                        Visibility="{Binding DeleteVisibility, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         VerticalAlignment="Top"/>
-                <Button Name="AddButton"
-                        FontSize="16"
+                <Button FontSize="16"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
                         Command="{Binding ValidateVM}"
-                        Content="{x:Static langs:Lang.LabelAdd}"
-                        Height="35"
-                        Width="130"
+                        Content="{Binding ButtonContent , UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        Height="50"
+                        Width="150"
                         CommandParameter="{Binding}"
                         VerticalAlignment="Top"
                         Grid.Column="1"/>
@@ -189,3 +212,5 @@
         </hc:FlexPanel>
     </Grid>
 </Border>
+
+    

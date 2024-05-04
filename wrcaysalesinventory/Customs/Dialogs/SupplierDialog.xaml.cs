@@ -9,16 +9,16 @@ namespace wrcaysalesinventory.Customs.Dialogs
     /// </summary>
     public partial class SupplierDialog : Border
     {
-        public SupplierDialog(SupplierModel model = null)
+        public SupplierDialog()
         {
             InitializeComponent();
-            if(model != null)
-            {
-                AddButton.Content = Lang.LabelUpdate;
-            } else
-            {
-                DeleteButton.Visibility = System.Windows.Visibility.Collapsed;
-            }
+            //if(model != null)
+            //{
+            //    AddButton.Content = Lang.LabelUpdate;
+            //} else
+            //{
+            //    DeleteButton.Visibility = System.Windows.Visibility.Collapsed;
+            //}
         }
     }
 }

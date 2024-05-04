@@ -25,7 +25,7 @@ namespace wrcaysalesinventory.Services
                 _sqlCmd = new(@"SELECT p.id,
                                    c.id category_id,
                                    p.product_status,
-                                   c.category_name,
+                                   CASE WHEN c.category_name IS NULL THEN 'None' ELSE c.category_name END AS category_name,
                                    product_name,
                                    product_description,
                                    product_price,
@@ -37,7 +37,7 @@ namespace wrcaysalesinventory.Services
                                    FORMAT(p.date_updated, 'dd/MM/yyyy') date_updated
                             FROM tblproducts p
                             JOIN tblstatus s ON p.product_status = s.id
-                            JOIN tblcategories c ON p.category_id = c.id
+                            LEFT JOIN tblcategories c ON p.category_id = c.id
                             WHERE p.product_status = 1;", _sqlConn);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
@@ -78,7 +78,7 @@ namespace wrcaysalesinventory.Services
                 _sqlCmd = new(@"SELECT p.id,
                                    c.id category_id,
                                    p.product_status,
-                                   c.category_name,
+                                   CASE WHEN c.category_name IS NULL THEN 'None' ELSE c.category_name END AS category_name,
                                    product_name,
                                    product_description,
                                    product_price,
@@ -90,7 +90,8 @@ namespace wrcaysalesinventory.Services
                                    FORMAT(p.date_updated, 'dd/MM/yyyy') date_updated
                             FROM tblproducts p
                             JOIN tblstatus s ON p.product_status = s.id
-                            JOIN tblcategories c ON p.category_id = c.id WHERE product_name LIKE @pname AND p.product_status = 1;", _sqlConn);
+                            LEFT JOIN tblcategories c ON p.category_id = c.id
+                            WHERE product_name LIKE @pname AND p.product_status = 1;", _sqlConn);
                 _sqlCmd.Parameters.AddWithValue("@pname", query);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
@@ -132,7 +133,7 @@ namespace wrcaysalesinventory.Services
                 _sqlCmd = new(@"SELECT p.id,
                                    c.id category_id,
                                    p.product_status,
-                                   c.category_name,
+                                   CASE WHEN c.category_name IS NULL THEN 'None' ELSE c.category_name END AS category_name,
                                    product_name,
                                    product_description,
                                    product_price,
@@ -144,7 +145,7 @@ namespace wrcaysalesinventory.Services
                                    FORMAT(p.date_updated, 'dd/MM/yyyy') date_updated
                             FROM tblproducts p
                             JOIN tblstatus s ON p.product_status = s.id
-                            JOIN tblcategories c ON p.category_id = c.id
+                            LEFT JOIN tblcategories c ON p.category_id = c.id
                             WHERE c.id = @cid AND p.product_status = 1;", _sqlConn);
                 _sqlCmd.Parameters.AddWithValue("@cid", cid);
                 _sqlAdapter = new(_sqlCmd);
@@ -187,7 +188,7 @@ namespace wrcaysalesinventory.Services
                 _sqlCmd = new(@"SELECT p.id,
                                    c.id category_id,
                                    p.product_status,
-                                   c.category_name,
+                                   CASE WHEN c.category_name IS NULL THEN 'None' ELSE c.category_name END AS category_name,
                                    product_name,
                                    product_description,
                                    product_price,
@@ -199,7 +200,7 @@ namespace wrcaysalesinventory.Services
                                    FORMAT(p.date_updated, 'dd/MM/yyyy') date_updated
                             FROM tblproducts p
                             JOIN tblstatus s ON p.product_status = s.id
-                            JOIN tblcategories c ON p.category_id = c.id
+                            LEFT JOIN tblcategories c ON p.category_id = c.id
                             WHERE p.product_status = @cid;", _sqlConn);
                 _sqlCmd.Parameters.AddWithValue("@cid", sid);
                 _sqlAdapter = new(_sqlCmd);
@@ -374,7 +375,8 @@ namespace wrcaysalesinventory.Services
                                    FORMAT(s.date_updated, 'dd/MM/yyyy') date_updated,
                                    status_name
                             FROM tblsuppliers s
-                            JOIN tblstatus st ON s.status_id = st.id", _sqlConn);
+                            JOIN tblstatus st ON s.status_id = st.id
+                            WHERE st.status_name = 'Active';", _sqlConn);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
                 _sqlAdapter.Fill(_dataTable);
@@ -398,6 +400,106 @@ namespace wrcaysalesinventory.Services
                     sList.Add(sModel);
                 }
             } catch
+            {
+                Growl.Warning("An error occured while fetching suppliers.");
+            }
+            return sList;
+        }
+        internal ObservableCollection<SupplierModel> SearchSupplierList(string query)
+        {
+            ObservableCollection<SupplierModel> sList = new();
+            try
+            {
+                _sqlConn = SqlBaseConnection.GetInstance();
+                _sqlCmd = new(@"SELECT s.id,
+                                   supplier_name,
+                                   first_name,
+                                   last_name,
+                                   city,
+                                   country,
+                                   address,
+                                   phone_number,
+                                   FORMAT(s.date_added, 'dd/MM/yyyy') date_added,
+                                   FORMAT(s.date_updated, 'dd/MM/yyyy') date_updated,
+                                   status_name
+                            FROM tblsuppliers s
+                            JOIN tblstatus st ON s.status_id = st.id
+                            WHERE supplier_name LIKE @query AND st.status_name = 'Active';", _sqlConn);
+                _sqlCmd.Parameters.AddWithValue("@query", string.IsNullOrEmpty(query) ? "%" : query);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    SupplierModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        SupplierName = row["supplier_name"].ToString(),
+                        FirstName = row["first_name"].ToString(),
+                        LastName = row["last_name"].ToString(),
+                        City = row["city"].ToString(),
+                        Country = row["country"].ToString(),
+                        Address = row["address"].ToString(),
+                        PhoneNumber = row["phone_number"].ToString(),
+                        DateAdded = row["date_added"].ToString(),
+                        DateUpdated = row["date_updated"].ToString(),
+                        Status = row["status_name"].ToString()
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching suppliers.");
+            }
+            return sList;
+        }
+        internal ObservableCollection<SupplierModel> GetSupplierByStatusList(string status)
+        {
+            ObservableCollection<SupplierModel> sList = new();
+            try
+            {
+                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                _sqlCmd = new(@"SELECT s.id,
+                                   supplier_name,
+                                   first_name,
+                                   last_name,
+                                   city,
+                                   country,
+                                   address,
+                                   phone_number,
+                                   FORMAT(s.date_added, 'dd/MM/yyyy') date_added,
+                                   FORMAT(s.date_updated, 'dd/MM/yyyy') date_updated,
+                                   status_name
+                            FROM tblsuppliers s
+                            JOIN tblstatus st ON s.status_id = st.id
+                            WHERE s.status_id = @sid", _sqlConn);
+                _sqlCmd.Parameters.AddWithValue("@sid", status);
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    SupplierModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        SupplierName = row["supplier_name"].ToString(),
+                        FirstName = row["first_name"].ToString(),
+                        LastName = row["last_name"].ToString(),
+                        City = row["city"].ToString(),
+                        Country = row["country"].ToString(),
+                        Address = row["address"].ToString(),
+                        PhoneNumber = row["phone_number"].ToString(),
+                        DateAdded = row["date_added"].ToString(),
+                        DateUpdated = row["date_updated"].ToString(),
+                        Status = row["status_name"].ToString()
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
             {
                 Growl.Warning("An error occured while fetching suppliers.");
             }
@@ -639,56 +741,10 @@ namespace wrcaysalesinventory.Services
             }
             return sList;
         }
-        internal ObservableCollection<SupplierModel> SearchSupplierList(string query)
-        {
-            ObservableCollection<SupplierModel> sList = new();
-            try
-            {
-                _sqlConn = SqlBaseConnection.GetInstance();
-                _sqlCmd = new(@"SELECT s.id,
-                                   supplier_name,
-                                   first_name,
-                                   last_name,
-                                   city,
-                                   country,
-                                   address,
-                                   phone_number,
-                                   FORMAT(s.date_added, 'dd/MM/yyyy') date_added,
-                                   FORMAT(s.date_updated, 'dd/MM/yyyy') date_updated,
-                                   status_name
-                            FROM tblsuppliers s
-                            JOIN tblstatus st ON s.status_id = st.id
-                            WHERE supplier_name LIKE @query", _sqlConn);
-                _sqlCmd.Parameters.AddWithValue("@query", string.IsNullOrEmpty(query) ? "%" : query);
-                _sqlAdapter = new(_sqlCmd);
-                _dataTable = new();
-                _sqlAdapter.Fill(_dataTable);
 
-                foreach (DataRow row in _dataTable.Rows)
-                {
-                    SupplierModel sModel = new()
-                    {
-                        ID = row["id"].ToString(),
-                        SupplierName = row["supplier_name"].ToString(),
-                        FirstName = row["first_name"].ToString(),
-                        LastName = row["last_name"].ToString(),
-                        City = row["city"].ToString(),
-                        Country = row["country"].ToString(),
-                        Address = row["address"].ToString(),
-                        PhoneNumber = row["phone_number"].ToString(),
-                        DateAdded = row["date_added"].ToString(),
-                        DateUpdated = row["date_updated"].ToString(),
-                        Status = row["status_name"].ToString()
-                    };
-                    sList.Add(sModel);
-                }
-            }
-            catch
-            {
-                Growl.Warning("An error occured while fetching suppliers.");
-            }
-            return sList;
-        }
+        
+
+
         internal ObservableCollection<UserModel> SearchUsersList(string query)
         {
             ObservableCollection<UserModel> sList = new();

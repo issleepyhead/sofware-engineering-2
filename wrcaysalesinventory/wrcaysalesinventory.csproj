@@ -184,6 +184,9 @@
     <Compile Include="Customs\Dialogs\AdditionalFeeDialog.xaml.cs">
       <DependentUpon>AdditionalFeeDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Customs\Dialogs\AuthDialog.xaml.cs">
+      <DependentUpon>AuthDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Customs\Dialogs\CategoryDialog.xaml.cs">
       <DependentUpon>CategoryDialog.xaml</DependentUpon>
     </Compile>
@@ -276,6 +279,7 @@
     </Compile>
     <Compile Include="Data\Classes\AppConfig.cs" />
     <Compile Include="Data\Classes\GlobalData.cs" />
+    <Compile Include="Data\Classes\IUpdateData.cs" />
     <Compile Include="Data\Classes\SqlBaseConnection.cs" />
     <Compile Include="Data\Classes\UserPreviledges.cs" />
     <Compile Include="Data\Classes\WinHelper.cs" />
@@ -329,6 +333,7 @@
       <DependentUpon>Lang.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="ViewModels\AuthenticationDialogViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CategoryDialogViewModel.cs" />
     <Compile Include="ViewModels\CustomerDialogViewModel.cs" />
@@ -354,6 +359,10 @@
     <Compile Include="ViewModels\UsersDialogViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Page Include="Customs\Dialogs\AdditionalFeeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\AuthDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,7 +7,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
              mc:Ignorable="d" 
-             Width="600"
+             Width="650"
              CornerRadius="5"
              DataContext="{Binding Path=ProductDialogView, Source={StaticResource Locator}}"
              Background="{StaticResource DefaultBrush}">
@@ -65,7 +65,7 @@
                             FontSize="16"
                             Background="{StaticResource RegionBrush}"/>
                 <TextBlock Text="{Binding ProductNameError, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="14"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
             <StackPanel>
@@ -83,9 +83,9 @@
                              SelectedValuePath="ID"
                              DisplayMemberPath="CategoryName"
                              hc:InfoElement.Placeholder="Select Category"
-                             SelectedIndex="0"
                              SelectedValue="{Binding Model.CategoryID,UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock FontSize="14"
+                <TextBlock Text="{Binding ProductCategoryError, UpdateSourceTrigger=PropertyChanged}"
+                           FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
             <Grid Margin="0 14 0 0">
@@ -202,7 +202,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="DeleteButton"
+                <Button Visibility="{Binding DeleteVisibility, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         Margin="0 0 14 0"
                         FontSize="18"
                         hc:BorderElement.CornerRadius="0"
@@ -215,15 +215,14 @@
                         Width="140"
                         VerticalAlignment="Top"
                         Grid.Column="0"/>
-                <Button Name="AddButton"
-                        FontSize="18"
+                <Button FontSize="18"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
-                        Content="{x:Static langs:Lang.LabelAdd}"
+                        Content="{Binding ButtonContent}"
                         Height="50"
                         Width="140"
-                        Command="{Binding ValidateProduct}"
+                        Command="{Binding ValidateProduct, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         CommandParameter="{Binding}"
                         VerticalAlignment="Top"
                         Grid.Column="1"/>

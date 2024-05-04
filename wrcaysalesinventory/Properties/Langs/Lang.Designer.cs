@@ -259,6 +259,15 @@ namespace wrcaysalesinventory.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore.
+        /// </summary>
+        public static string LabelRestore {
+            get {
+                return ResourceManager.GetString("LabelRestore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search Product.
         /// </summary>
         public static string LabelSearchProduct {

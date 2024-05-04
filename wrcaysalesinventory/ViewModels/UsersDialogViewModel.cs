@@ -16,6 +16,7 @@ using System.Windows.Controls;
 using wrcaysalesinventory.Services;
 using System.Collections.ObjectModel;
 using MessageBox = HandyControl.Controls.MessageBox;
+using wrcaysalesinventory.Properties.Langs;
 
 namespace wrcaysalesinventory.ViewModels
 {
@@ -23,6 +24,8 @@ namespace wrcaysalesinventory.ViewModels
     {
         private DataService _dataService;
         private MainWindow mw;
+        private Visibility _dVisibility = Visibility.Collapsed;
+        private string _dLabel = Lang.LabelAdd;
         public UsersDialogViewModel(DataService dataService)
         {
             _dataService = dataService;
@@ -33,7 +36,15 @@ namespace wrcaysalesinventory.ViewModels
         public ObservableCollection<RoleModel> RoleList { get => _dataService.GetRoleList(); }
 
         private UserModel _userModel = new();
-        public UserModel Model { get => _userModel; set => Set(ref _userModel, value); }
+        public UserModel Model { get => _userModel;
+            set
+            { 
+                Set(ref _userModel, value);
+                DeleteVisibility = string.IsNullOrEmpty(value.ID) ? Visibility.Collapsed : Visibility.Visible;
+                ButtonContent = string.IsNullOrEmpty(value.ID) ?
+                    Lang.LabelAdd : (value.StatusName.ToLower() == "inactive" ? Lang.LabelRestore : Lang.LabelUpdate);
+            }
+        }
 
         private Button _btn;
         public Button BTN { get => _btn; set => Set(ref _btn, value); }
@@ -58,6 +69,10 @@ namespace wrcaysalesinventory.ViewModels
 
         private string _passwordError;
         public string PasswordError { get => _passwordError; set => Set(ref _passwordError, value); }
+
+
+        public Visibility DeleteVisibility { get => _dVisibility; set => Set(ref _dVisibility, value); }
+        public string ButtonContent { get => _dLabel; set => Set(ref _dLabel, value); }
 
         public RelayCommand<UsersDialogViewModel> DeleteCmd => new(DeleteCommand);
         private void DeleteCommand(UsersDialogViewModel vm)

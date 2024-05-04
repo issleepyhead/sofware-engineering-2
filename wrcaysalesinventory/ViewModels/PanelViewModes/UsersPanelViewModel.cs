@@ -38,8 +38,10 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
             if (dataGrid.SelectedItems.Count > 0)
             {
                 UserModel model = (UserModel)dataGrid.SelectedItem;
-                UserDialog d = new(model);
+                UserDialog d = new();
                 ((UsersDialogViewModel)d.DataContext).BTN = d.CloseBtn;
+                model.Password = string.Empty;
+                ((UsersDialogViewModel)d.DataContext).Model = model;
                 Dialog.Show(d);
             }
         }

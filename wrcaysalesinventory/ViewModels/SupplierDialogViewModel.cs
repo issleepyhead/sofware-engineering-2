@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Data.Models.Validations;
+using wrcaysalesinventory.Properties.Langs;
 using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace wrcaysalesinventory.ViewModels
@@ -19,13 +20,23 @@ namespace wrcaysalesinventory.ViewModels
     public class SupplierDialogViewModel : ViewModelBase
     {
         private readonly MainWindow mw;
+        private Visibility _dVisibility = Visibility.Collapsed;
+        private string _dLabel = Lang.LabelAdd;
         public SupplierDialogViewModel()
         {
             mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         }
 
         private SupplierModel _model = new();
-        public SupplierModel Model { get => _model; set => Set(ref _model, value); }
+        public SupplierModel Model { get => _model;
+            set 
+            {
+                Set(ref _model, value);
+                DeleteVisibility = string.IsNullOrEmpty(value.ID) ? Visibility.Collapsed : Visibility.Visible;
+                ButtonContent = string.IsNullOrEmpty(value.ID) ?
+                    Lang.LabelAdd : (value.Status.ToLower() == "inactive" ? Lang.LabelRestore : Lang.LabelUpdate);
+            } 
+        }
 
         private Button _btn;
         public Button BTN { get => _btn; set => Set(ref _btn, value); }
@@ -51,6 +62,9 @@ namespace wrcaysalesinventory.ViewModels
         private string _phoneError;
         public string PhoneError { get => _phoneError; set => Set(ref _phoneError, value); }
 
+        public Visibility DeleteVisibility { get => _dVisibility; set => Set(ref _dVisibility, value); }
+        public string ButtonContent { get => _dLabel; set => Set(ref _dLabel, value); }
+
         public RelayCommand<SupplierDialogViewModel> DeleteCmd => new(DeleteCommand);
         private void DeleteCommand(SupplierDialogViewModel vm)
         {
@@ -58,16 +72,33 @@ namespace wrcaysalesinventory.ViewModels
             {
 
                 SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
-                SqlCommand sqlCommand = new("DELETE FROM tblsuppliers WHERE id = @id", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
-                if (sqlCommand.ExecuteNonQuery() > 0)
+                SqlCommand sqlCommand;
+                if (vm.Model.Status == "Inactive")
                 {
-                    Growl.Success("Supplier has been deleted successfully!");
-                    WinHelper.AuditActivity("DELETED", "SUPPLIER");
-                    WinHelper.CloseDialog(_btn);
-                } 
+                    sqlCommand = new("DELETE FROM tblsuppliers WHERE id = @id", sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                    if (sqlCommand.ExecuteNonQuery() > 0)
+                    {
+                        Growl.Success("Supplier has been deleted successfully!");
+                        WinHelper.AuditActivity("DELETED", "SUPPLIER");
+                    }
+                    else
+                        Growl.Info("Failed deleting the supplier.");
+                }
                 else
-                    Growl.Info("Failed deleting the supplier.");
+                {
+                    sqlCommand = new("UPDATE tblsuppliers SET status_id = (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Inactive') WHERE id = @id", sqlConnection);
+
+                    if (sqlCommand.ExecuteNonQuery() > 0)
+                    {
+                        Growl.Success("Supplier has been set to Inactive");
+                        WinHelper.AuditActivity("DELETED", "SUPPLIER");
+                        
+                    }
+                    else
+                        Growl.Info("Failed deleting the supplier.");
+                }
+                WinHelper.CloseDialog(_btn);
                 mw?.UpdateAll();
 
             }
@@ -121,8 +152,15 @@ namespace wrcaysalesinventory.ViewModels
 
                 List<string> proplist = new List<string>
                 {
-                    "SupplierName", "LastName", "FirstName", "Country", "City", "Address", "PhoneNumber"
+                    nameof(Model.SupplierName),
+                    nameof(Model.LastName),
+                    nameof(Model.FirstName),
+                    nameof(Model.Country),
+                    nameof(Model.City),
+                    nameof(Model.Address),
+                    nameof(Model.PhoneNumber)
                 };
+
                 foreach (var prop in proplist)
                     if (!failureproplist.Contains(prop))
                     {
@@ -224,6 +262,7 @@ namespace wrcaysalesinventory.ViewModels
                     {
                         Growl.Warning("An error occured while performing an action.");
                     }
+
                 }
                 catch (Exception ex)
                 {
