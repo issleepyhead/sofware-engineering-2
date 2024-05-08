@@ -47,6 +47,20 @@ namespace wrcaysalesinventory.ViewModels
             panels.Add(_mainWin.UsersPanel);
             panels.Add(_mainWin.GenSettingsPanel);
             panels.Add(_mainWin.POSSettingsPanel);
+
+            if((UserPreviledges)GlobalData.Config.RoleID == UserPreviledges.Admin)
+            {
+                _mainWin.ReportsPanelButton.Visibility = Visibility.Collapsed;
+            } else if((UserPreviledges)GlobalData.Config.RoleID == UserPreviledges.Staff)
+            {
+                _mainWin.ReportsPanelButton.Visibility = Visibility.Collapsed;
+                //_mainWin.
+            }
+            //{
+
+            //_mainWin.MaintenancePanelButton.Visibility = Visibility.Collapsed;
+
+            //}
         }
 
         public RelayCommand<object> SelectCmd => new(Select);

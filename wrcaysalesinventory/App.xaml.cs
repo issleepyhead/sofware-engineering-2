@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using wrcaysalesinventory.Data.Classes;
+using wrcaysalesinventory.Properties;
 
 namespace wrcaysalesinventory
 {
@@ -49,6 +50,14 @@ namespace wrcaysalesinventory
                 if (GlobalData.Config.Theme != ApplicationTheme.Light)
                 {
                     UpdateSkin(GlobalData.Config.Theme);
+                }
+                if (string.IsNullOrEmpty(Settings.Default.connStr))
+                {
+                    StartupUri = new System.Uri("Forms/ServerWindow.xaml", System.UriKind.Relative);
+                }
+                else
+                {
+                    StartupUri = new System.Uri("Forms/LoginWindow.xaml", System.UriKind.Relative);
                 }
             }
         }

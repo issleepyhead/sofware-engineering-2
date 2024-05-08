@@ -512,8 +512,8 @@ namespace wrcaysalesinventory.Services
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
-                _sqlCmd = new(@"SELECT id, role_name FROM tblroles WHERE id > @id", _sqlConn);
-                _sqlCmd.Parameters.AddWithValue("@id", GlobalData.Config.UserRole);
+                _sqlCmd = new(@"SELECT id, role_name FROM tblroles WHERE id >= @id", _sqlConn);
+                _sqlCmd.Parameters.AddWithValue("@id", GlobalData.Config.RoleID);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
                 _sqlAdapter.Fill(_dataTable);
@@ -543,7 +543,7 @@ namespace wrcaysalesinventory.Services
                 _sqlCmd = new(@"SELECT a.id,
 	                                   s.id status_id,
 	                                   s.status_name,
-	                                   r.id role_id,
+	                                   a.role_id,
 	                                   r.role_name,
 	                                   first_name,
 	                                   last_name,
@@ -557,7 +557,9 @@ namespace wrcaysalesinventory.Services
                                 JOIN
 	                                tblstatus s ON a.status_id = s.id
                                 JOIN
-	                                tblroles r ON a.role_id = r.id", _sqlConn);
+	                                tblroles r ON a.role_id = r.id
+                                WHERE a.role_id >= @id", _sqlConn);
+                _sqlCmd.Parameters.AddWithValue("@id", GlobalData.Config.RoleID);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
                 _sqlAdapter.Fill(_dataTable);

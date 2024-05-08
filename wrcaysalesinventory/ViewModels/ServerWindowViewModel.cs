@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Forms;
 using wrcaysalesinventory.Properties;
 
@@ -54,44 +55,50 @@ namespace wrcaysalesinventory.ViewModels
             DatabaseError = string.Empty;
             UserNameError = string.Empty;
             PasswordError = string.Empty;
-            if (string.IsNullOrEmpty(UserName))
+            if (string.IsNullOrEmpty(UserName) ||
+                string.IsNullOrEmpty(Password) ||
+                string.IsNullOrEmpty(ServerName) ||
+                string.IsNullOrEmpty(Database))
             {
-                UserNameError = "Please provide a username!";
-                return;
-            }
-
-            if(string.IsNullOrEmpty(Password))
-            {
-                PasswordError = "Please provide a password!";
+                if (string.IsNullOrEmpty(Password))
+                    PasswordError = "Please provide a password!";
+                if (string.IsNullOrEmpty(UserName))
+                    UserNameError = "Please provide a username!";
+                if (string.IsNullOrEmpty(ServerName))
+                    ServerError = "Please provide a server name.";
+                if (string.IsNullOrEmpty(Database))
+                    DatabaseError = "Please select a database.";
                 return;
             }
             SqlConnection sqlConnection = null;
             try
             {
-                sqlConnection = new($"Server={ServerName};Initial Catalog={Database};Persist Security Info=True;User ID={UserName};Password={Password}");
-                sqlConnection.Open();
-                Settings.Default.connStr = $"Server={ServerName};Initial Catalog={Database};Trusted_Connection=True;User ID={UserName};Password={Password}";
-                Settings.Default.Save();
-
-                ServerError = string.Empty;
-                DatabaseError = string.Empty;
-                UserNameError = string.Empty;
-                PasswordError = string.Empty;
-
-                SqlCommand sqlCmd = new("SELECT COUNT(*) FROM tblusers", sqlConnection);
-                if((int)sqlCmd.ExecuteScalar() == 0)
+                if(DatabaseConfig.CheckDatabase($"Server={ServerName};Initial Catalog={Database};Persist Security Info=True;User ID={UserName};Password={Password}"))
                 {
-                    string password = BCrypt.Net.BCrypt.HashPassword("SA");
-                    sqlCmd = new("INSERT INTO tblusers (status_id, role_id, first_name, last_name, address, contact, username, password) VALUES (1, 1, 'SA', 'SA', 'SA', '0912 345 678', 'SA', @pwd)", sqlConnection);
-                    sqlCmd.Parameters.AddWithValue("@pwd", password);
-                    if(sqlCmd.ExecuteNonQuery() <= 0)
+                    
+                    Settings.Default.connStr = $"Server={ServerName};Initial Catalog={Database};Trusted_Connection=True;User ID={UserName};Password={Password}";
+                    Settings.Default.Save();
+
+                    sqlConnection = new(Settings.Default.connStr);
+                    sqlConnection.Open();
+                    SqlCommand sqlCmd = new("SELECT COUNT(*) FROM tblusers", sqlConnection);
+                    if ((int)sqlCmd.ExecuteScalar() == 0)
                     {
-                        MessageBox.Warning("Database Error.");
+                        string password = BCrypt.Net.BCrypt.HashPassword("SA");
+                        sqlCmd = new("INSERT INTO tblusers (status_id, role_id, first_name, last_name, address, contact, username, password) VALUES (1, 1, 'SA', 'SA', 'SA', '0912 345 678', 'SA', @pwd)", sqlConnection);
+                        sqlCmd.Parameters.AddWithValue("@pwd", password);
+                        if (sqlCmd.ExecuteNonQuery() <= 0)
+                        {
+                            MessageBox.Warning("Database Error.");
+                        }
                     }
-                }
-                LogInWindow logInWindow = new();
-                logInWindow.Show();
-                obj.Close();
+                    LogInWindow logInWindow = new();
+                    logInWindow.Show();
+                    obj.Close();
+                } else
+                {
+                    DatabaseError = "The selected database is incorrect.";
+                }  
             }
             catch
             {
@@ -109,16 +116,22 @@ namespace wrcaysalesinventory.ViewModels
             DatabaseError = string.Empty;
             UserNameError = string.Empty;
             PasswordError = string.Empty;
-            if (string.IsNullOrEmpty(ServerName))
+
+            if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(ServerName))
             {
-                ServerError = "Please provide a server name.";
+                if(string.IsNullOrEmpty(Password))
+                    PasswordError = "Please provide a password!";
+                if(string.IsNullOrEmpty(UserName))
+                    UserNameError = "Please provide a username!";
+                if(string.IsNullOrEmpty(ServerName))
+                    ServerError = "Please provide a server name.";
                 return;
             }
 
             if((await ConnectServer()))
             {
                 ServerError = string.Empty;
-                SqlConnection sqlConnection = new($"Server={ServerName};Trusted_Connection=True;");
+                SqlConnection sqlConnection = new($"Server={ServerName};Persist Security Info=True;User ID={UserName};Password={Password};");
                 try
                 {
                     sqlConnection.Open();
@@ -127,6 +140,7 @@ namespace wrcaysalesinventory.ViewModels
                     SqlDataAdapter sqlDataAdapter = new(sqlCommand);
                     sqlDataAdapter.Fill(dataTable);
                     DatabaseSource = dataTable;
+                    
                 } catch
                 {
                     ServerError = "Unable to connect to the server.";
@@ -146,14 +160,14 @@ namespace wrcaysalesinventory.ViewModels
         public async Task<bool> ConnectServer()
         {
             IsEnable = false;
-            TestContextText = "...";
+            TestContextText = "Connecting...";
             bool result = false;
             await Task.Run(() => {
-                SqlConnection sqlConnection = new($"Server={ServerName};Trusted_Connection=True;");
+                SqlConnection sqlConnection = new($"Server={ServerName};Persist Security Info=True;User ID={UserName};Password={Password};");
                 try
                 {
                     sqlConnection.Open();
-                    result = true;
+                        result = true;
                 }
                 catch
                 {

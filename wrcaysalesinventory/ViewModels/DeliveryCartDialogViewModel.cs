@@ -108,7 +108,7 @@ namespace wrcaysalesinventory.ViewModels
 
 
         public string ForeColor { get => GlobalData.Config.Theme == HandyControl.Themes.ApplicationTheme.Light ? "Black" : "White"; }
-        public string FullName { get => GlobalData.Config.UserName;  }
+        public string FullName { get => GlobalData.Config.FullName;  }
 
         public RelayCommand<DataGrid> SelectedCommand => new(AddToCart);
         private void AddToCart(DataGrid obj)

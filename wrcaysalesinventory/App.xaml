@@ -7,8 +7,7 @@
              d1P1:Ignorable="d"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:vms="clr-namespace:wrcaysalesinventory.ViewModels"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
-             StartupUri="Forms/MainWindow.xaml">
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

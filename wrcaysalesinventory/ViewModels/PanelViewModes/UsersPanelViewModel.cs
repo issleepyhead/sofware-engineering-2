@@ -43,6 +43,8 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                 model.Password = string.Empty;
                 ((UsersDialogViewModel)d.DataContext).Model = model;
                 Dialog.Show(d);
+                dataGrid.SelectedItems.Clear();
+                dataGrid.SelectedCells.Clear();
             }
         }
 

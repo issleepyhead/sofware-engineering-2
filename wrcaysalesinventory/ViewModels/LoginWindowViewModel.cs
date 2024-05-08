@@ -47,14 +47,14 @@ namespace wrcaysalesinventory.ViewModels
             bool res = true;
             await Task.Run(() =>
             {
-                LoginContent = "...";
+                LoginContent = "Logging in...";
                 IsLoginEnable = false;
                 SqlConnection sqlConnection = null;
                 SqlCommand sqlCommand = null;
                 try
                 {
                     sqlConnection = SqlBaseConnection.GetInstance();
-                    sqlCommand = new("SELECT u.id, concat(first_name, ' ', last_name) fullname, password, role_id, status_name FROM tblusers u JOIN tblstatus s ON u.status_id = s.id WHERE username = @username", sqlConnection);
+                    sqlCommand = new("SELECT u.id, concat(first_name, ' ', last_name) fullname, password, role_id, s.id status_id, s.status_name FROM tblusers u JOIN tblstatus s ON u.status_id = s.id WHERE username = @username", sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@username", UserName);
                     SqlDataAdapter adapter = new(sqlCommand);
                     DataTable dataTable = new();
@@ -66,10 +66,10 @@ namespace wrcaysalesinventory.ViewModels
                         {
                             if (dataTable.Rows[0]["status_name"].ToString().ToLower() == "active")
                             {
-                                GlobalData.Config.UserRole = (int)dataTable.Rows[0]["role_id"];
+                                GlobalData.Config.RoleID = (int)dataTable.Rows[0]["role_id"];
                                 GlobalData.Config.UserID = (int)dataTable.Rows[0]["id"];
-                                GlobalData.Config.UserName = dataTable.Rows[0]["fullname"].ToString();
-                                GlobalData.Config.Role = dataTable.Rows[0]["status_name"].ToString();
+                                GlobalData.Config.StatusID = (int)dataTable.Rows[0]["status_id"];
+                                GlobalData.Config.FullName = dataTable.Rows[0]["fullname"].ToString();
                                 GlobalData.Save();
                                 // TO-DO Fix some things here pa para sa accs
                                 res = true;

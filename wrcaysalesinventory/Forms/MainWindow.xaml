@@ -44,7 +44,7 @@
                     <Image Source="{StaticResource ic_dashboard}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
-            <hc:SideMenuItem Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelMaintenance}">
+            <hc:SideMenuItem x:Name="MaintenancePanelButton" Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelMaintenance}">
                 <hc:SideMenuItem.Icon>
                     <Image Source="{StaticResource ic_maintenance}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
@@ -78,7 +78,7 @@
                         <TextBlock Text="&#xF03F;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelDeliveries}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=DeliveryPanel}">
+                <hc:SideMenuItem x:Name="DeliveryButton" Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelDeliveries}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=DeliveryPanel}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xEBF4;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
@@ -100,7 +100,7 @@
                 </hc:SideMenuItem>
             </hc:SideMenuItem>
 
-            <hc:SideMenuItem Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelReports}">
+            <hc:SideMenuItem x:Name="ReportsPanelButton" Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelReports}">
                 <hc:SideMenuItem.Icon>
                     <Image Source="{StaticResource ic_reports}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
@@ -119,7 +119,7 @@
                 <hc:SideMenuItem.Icon>
                     <Image Source="{StaticResource ic_settings}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
-                <hc:SideMenuItem Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelGenSettings}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=GenSettingsPanel}">
+                <hc:SideMenuItem x:Name="GeneralSettingsButton" Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelGenSettings}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=GenSettingsPanel}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xE713;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
@@ -129,12 +129,12 @@
                         <TextBlock Text="&#xF7C1;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelDatabaseBackup}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=POSSettingsPanel}">
+                <hc:SideMenuItem x:Name="DatababseBackupButton" Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelDatabaseBackup}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=POSSettingsPanel}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xF34E;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelAuditTrail}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=AuditPanel}">
+                <hc:SideMenuItem x:Name="AuditTrailBackupButton" Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelAuditTrail}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=AuditPanel}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xE3B6;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>

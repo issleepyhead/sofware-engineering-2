@@ -79,20 +79,44 @@ namespace wrcaysalesinventory.ViewModels
         {
             try
             {
-
-                SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
-                SqlCommand sqlCommand = new("DELETE FROM tblusers WHERE id = @id", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
-                if (sqlCommand.ExecuteNonQuery() > 0)
+                if(GlobalData.Config.RoleID < int.Parse(vm.Model.RoleID))
                 {
-                    Growl.Success("Account has been deleted successfully!");
-                    WinHelper.CloseDialog(_btn);
-                    WinHelper.AuditActivity("DELETED", "ACCOUNT");
+                    SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
+                    if(!string.IsNullOrEmpty(vm.Model.StatusName) && vm.Model.StatusName.ToLower() == "Inactive".ToLower())
+                    {
+                        SqlCommand sqlCmd = new("UPDATE tblusers SET status_id = (SELECT TOP 1 FROM tblstatus WHERE status_name = 'Inactive') WHERE id = @id;", sqlConnection);
+                        sqlCmd.Parameters.AddWithValue("@id", vm.Model.ID);
+                        if (sqlCmd.ExecuteNonQuery() > 0)
+                        {
+                            Growl.Success("Account has been archived successfully!");
+                            WinHelper.CloseDialog(_btn);
+                            WinHelper.AuditActivity("ARCHIVED", "USER");
+                        }
+                        else
+                        {
+                            Growl.Info("Failed archiving the user.");
+                        }
+                    } else
+                    {
+                        SqlCommand sqlCmd = new("DELETE FROM tblusers WHERE id = @id;", sqlConnection);
+                        sqlCmd.Parameters.AddWithValue("@id", vm.Model.ID);
+                        if (sqlCmd.ExecuteNonQuery() > 0)
+                        {
+                            Growl.Success("Account has been deleted successfully!");
+                            WinHelper.CloseDialog(_btn);
+                            WinHelper.AuditActivity("DELETED", "USER");
+                        }
+                        else
+                        {
+                            Growl.Info("Failed deleting the user.");
+                        }
+                    }
+
+                } else
+                {
+                    Growl.Info("You are not allowed to perform this action.");
                 }
-                else
-                    Growl.Info("Failed deleting the supplier.");
                 mw?.UpdateAll();
-                
             }
             catch (SqlException ex)
             {
@@ -142,7 +166,12 @@ namespace wrcaysalesinventory.ViewModels
 
                 List<string> proplist = new List<string>
                 {
-                    "FirstName", "LastName", "", "Address", "Contact", "Username", "Password"
+                    nameof(UserModel.FirstName),
+                    nameof(UserModel.LastName),
+                    nameof(UserModel.Address),
+                    nameof(UserModel.Contact),
+                    nameof(UserModel.Username),
+                    nameof(UserModel.Password)
                 };
                 foreach (var prop in proplist)
                     if (!failureproplist.Contains(prop))
@@ -183,6 +212,27 @@ namespace wrcaysalesinventory.ViewModels
                 SqlCommand sqlCommand;
                 try
                 {
+                    //sqlCommand = new("SELECT role_id FROM tblusers WHERE id = @id", sqlConnection);
+                    //sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
+                    //if((int)sqlCommand.ExecuteScalar() > int.Parse(vm.Model.RoleID))
+                    //{
+                    //    Growl.Info("");
+                    //    return;
+                    //}
+
+                    if(!string.IsNullOrEmpty(vm.Model.RoleID) && GlobalData.Config.RoleID == int.Parse(vm.Model.RoleID))
+                    {
+                        //if (GlobalData.Config.RoleID == int.Parse(vm.Model.RoleID))
+                        //{
+                        Growl.Info("You can't update an account with this role.");
+                        return;
+                        //}
+                    } else if(string.IsNullOrEmpty(vm.Model.RoleID) && GlobalData.Config.RoleID == int.Parse(vm.Model.RoleID))
+                    {
+                        Growl.Info("You can't create an account with this role.");
+                        return;
+                    }
+
                     if (string.IsNullOrEmpty(vm.Model.ID))
                     {
                         sqlCommand = new("SELECT COUNT(*) FROM tblusers WHERE username = @usrname", sqlConnection);
@@ -192,6 +242,7 @@ namespace wrcaysalesinventory.ViewModels
                         sqlCommand = new("SELECT COUNT(*) FROM tblusers WHERE username = @usrname AND id != @id", sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                     }
+
                     sqlCommand.Parameters.AddWithValue("@usrname", vm.Model.Username);
                     if ((int)sqlCommand.ExecuteScalar() > 0)
                     {
@@ -230,7 +281,7 @@ namespace wrcaysalesinventory.ViewModels
                     }
                     else
                     {
-                        Growl.Info("An error occured while performing an action.");
+                        Growl.Info("An error occured while performing the action.");
                     }
                 }
                 catch (Exception ex)

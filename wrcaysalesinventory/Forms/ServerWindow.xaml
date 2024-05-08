@@ -43,7 +43,7 @@
                                 hc:InfoElement.Placeholder="Enter Server Name"
                                 hc:BorderElement.CornerRadius="0"
                                 Grid.Column="0"
-                                Height="40"
+                                Height="50"
                                 FontSize="18"
                                 Padding="10"
                                 Text="{Binding ServerName}"
@@ -54,15 +54,15 @@
                             Background="{StaticResource PrimaryBrush}"
                             IsEnabled="{Binding IsEnable}"
                             BorderThickness="0"
-                            FontSize="14"
+                            FontSize="16"
                             Margin="4 0 0 0"
-                            Height="40"
+                            Height="50"
                             VerticalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
                             HorizontalAlignment="Stretch"/>
                 </Grid>
                 <TextBlock Margin="30 0"
-                           FontSize="14"
+                           FontSize="16"
                            Foreground="Red"
                            Text="{Binding ServerError}"/>
             </StackPanel>
@@ -81,9 +81,11 @@
                             hc:InfoElement.Placeholder="Select Database"
                             hc:BorderElement.CornerRadius="0"
                             Padding="10"
-                             BorderThickness="0"/>
+                            SelectedIndex="0"
+                            Height="50"
+                            BorderThickness="0"/>
                 <TextBlock Margin="30 0"
-                           FontSize="14"
+                           FontSize="16"
                            Foreground="Red"
                            Text="{Binding DatabaseError}"/>
             </StackPanel>
@@ -99,10 +101,11 @@
                             hc:InfoElement.Placeholder="Enter Username"
                             hc:BorderElement.CornerRadius="0"
                             Padding="10"
+                            Height="50"
                             Text="{Binding UserName}"
                             BorderThickness="0"/>
                 <TextBlock Margin="30 0"
-                           FontSize="14"
+                           FontSize="16"
                            Foreground="Red"
                            Text="{Binding UserNameError}"/>
             </StackPanel>
@@ -118,13 +121,14 @@
                                 Margin="30 0"
                                 Padding="10"
                                 FontSize="18"
+                                Height="50"
                                 ShowEyeButton="True"
                                 BorderThickness="0"
                                 UnsafePassword="{Binding Password}"
                                 IsSafeEnabled="False"
                                 hc:PasswordBoxAttach.IsMonitoring="True"/>
                 <TextBlock Margin="30 0"
-                           FontSize="14"
+                           FontSize="16"
                            Foreground="Red"
                            Text="{Binding PasswordError}"/>
             </StackPanel>
@@ -140,7 +144,7 @@
                         Foreground="Black"
                         BorderThickness="0"
                         Margin="0 0 4 0"
-                        Height="40"
+                        Height="50"
                         Command="{Binding CloseCmd}"
                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type hc:Window}}}"
                         hc:BorderElement.CornerRadius="0"
@@ -150,7 +154,7 @@
                         Content="Connect"
                         Background="{StaticResource PrimaryBrush}"
                         BorderThickness="0"
-                        Height="40"
+                        Height="50"
                         Command="{Binding ConnectCmd}"
                         Margin="4 0 0 0"
                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type hc:Window}}}"

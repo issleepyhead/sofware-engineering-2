@@ -25,8 +25,7 @@ namespace wrcaysalesinventory.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=wrcaydb;Persist Security Info=True;User ID=clancy;P" +
-            "assword=0x0305")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string connStr {
             get {
                 return ((string)(this["connStr"]));

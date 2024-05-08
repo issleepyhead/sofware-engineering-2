@@ -4,6 +4,6 @@
     {
         SuperAdmin = 1,
         Admin = 2,
-        Cashier = 3
+        Staff = 3
     }
 }

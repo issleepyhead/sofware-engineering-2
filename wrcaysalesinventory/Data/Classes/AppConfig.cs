@@ -11,10 +11,10 @@ namespace wrcaysalesinventory.Data.Classes
 
         public string Lang { get; set; } = "en-US";
 
-        public int UserRole { get; set; } = 3;
+        public int RoleID { get; set; }
         public int UserID { get; set; }
-        public string UserName { get; set; }
-        public string Role { get; set; }
+        public int StatusID { get; set; }
+        public string FullName { get; set; }
 
         public ApplicationTheme Theme { get; set; }
         public string TransactionVAT { get; set; } = "0";

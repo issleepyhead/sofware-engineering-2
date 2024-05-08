@@ -88,7 +88,7 @@ namespace wrcaysalesinventory.ViewModels
                 else
                 {
                     sqlCommand = new("UPDATE tblsuppliers SET status_id = (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Inactive') WHERE id = @id", sqlConnection);
-
+                    sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                     if (sqlCommand.ExecuteNonQuery() > 0)
                     {
                         Growl.Success("Supplier has been set to Inactive");

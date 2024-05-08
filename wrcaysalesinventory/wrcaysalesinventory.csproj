@@ -58,6 +58,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BCrypt.Net-Core, Version=1.6.0.0, Culture=neutral, PublicKeyToken=4d63bfbfdfd3c6e4, processorArchitecture=MSIL">
       <HintPath>..\packages\BCrypt.Net-Core.1.6.0\lib\net452\BCrypt.Net-Core.dll</HintPath>
@@ -278,6 +281,7 @@
       <DependentUpon>UsersPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Classes\AppConfig.cs" />
+    <Compile Include="Data\Classes\DatabaseConfig.cs" />
     <Compile Include="Data\Classes\GlobalData.cs" />
     <Compile Include="Data\Classes\IUpdateData.cs" />
     <Compile Include="Data\Classes\SqlBaseConnection.cs" />
@@ -550,6 +554,7 @@
     <EmbeddedResource Include="Properties\Langs\Lang.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Data\DataSet\ReportsDataSet.xsc">
       <DependentUpon>ReportsDataSet.xsd</DependentUpon>
