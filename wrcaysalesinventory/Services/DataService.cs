@@ -290,7 +290,6 @@ namespace wrcaysalesinventory.Services
             {
                 Growl.Warning("An error occured while fetching category list");
             }
-            cList.Add(new CategoryModel() { ID="-1",CategoryName="All"});
             return cList;
         }
         internal ObservableCollection<CategoryModel> GetCategoryPanelList()
@@ -512,7 +511,7 @@ namespace wrcaysalesinventory.Services
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
-                _sqlCmd = new(@"SELECT id, role_name FROM tblroles WHERE id >= @id", _sqlConn);
+                _sqlCmd = new(@"SELECT id, role_name FROM tblroles WHERE id > @id", _sqlConn);
                 _sqlCmd.Parameters.AddWithValue("@id", GlobalData.Config.RoleID);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
@@ -540,7 +539,9 @@ namespace wrcaysalesinventory.Services
             try
             {
                 _sqlConn = new SqlConnection(Settings.Default.connStr);
-                _sqlCmd = new(@"SELECT a.id,
+                if ((UserPreviledges)GlobalData.Config.RoleID == UserPreviledges.SuperAdmin)
+                {
+                    _sqlCmd = new(@"SELECT a.id,
 	                                   s.id status_id,
 	                                   s.status_name,
 	                                   a.role_id,
@@ -558,8 +559,32 @@ namespace wrcaysalesinventory.Services
 	                                tblstatus s ON a.status_id = s.id
                                 JOIN
 	                                tblroles r ON a.role_id = r.id
-                                WHERE a.role_id >= @id", _sqlConn);
-                _sqlCmd.Parameters.AddWithValue("@id", GlobalData.Config.RoleID);
+                                WHERE a.id != @uid AND a.status_id != (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Inactive')", _sqlConn);
+                    _sqlCmd.Parameters.AddWithValue("@uid", GlobalData.Config.UserID);
+                } else if((UserPreviledges)GlobalData.Config.RoleID == UserPreviledges.Admin)
+                {
+                    _sqlCmd = new(@"SELECT a.id,
+	                                   s.id status_id,
+	                                   s.status_name,
+	                                   a.role_id,
+	                                   r.role_name,
+	                                   first_name,
+	                                   last_name,
+	                                   address,
+	                                   contact,
+	                                   username,
+	                                   password,
+	                                   FORMAT(date_added, 'dd/MM/yyyy') date_added
+                                FROM
+	                                tblusers a
+                                JOIN
+	                                tblstatus s ON a.status_id = s.id
+                                JOIN
+	                                tblroles r ON a.role_id = r.id
+                                WHERE a.role_id > @id AND a.id != @uid AND a.status_id != (SELECT OP 1 id FROM tblstatus WHERE status_name = 'Inactive')", _sqlConn);
+                    _sqlCmd.Parameters.AddWithValue("@id", GlobalData.Config.RoleID);
+                    _sqlCmd.Parameters.AddWithValue("@uid", GlobalData.Config.UserID);
+                }
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
                 _sqlAdapter.Fill(_dataTable);
@@ -590,6 +615,92 @@ namespace wrcaysalesinventory.Services
             }
             return sList;
         }
+        internal ObservableCollection<UserModel> GetUsersListByStatus(string sid)
+        {
+            ObservableCollection<UserModel> sList = new();
+            try
+            {
+                _sqlConn = new SqlConnection(Settings.Default.connStr);
+                if ((UserPreviledges)GlobalData.Config.RoleID == UserPreviledges.SuperAdmin)
+                {
+                    _sqlCmd = new(@"SELECT a.id,
+	                                   s.id status_id,
+	                                   s.status_name,
+	                                   a.role_id,
+	                                   r.role_name,
+	                                   first_name,
+	                                   last_name,
+	                                   address,
+	                                   contact,
+	                                   username,
+	                                   password,
+	                                   FORMAT(date_added, 'dd/MM/yyyy') date_added
+                                FROM
+	                                tblusers a
+                                JOIN
+	                                tblstatus s ON a.status_id = s.id
+                                JOIN
+	                                tblroles r ON a.role_id = r.id
+                                WHERE a.id != @uid AND a.status_id = @sid", _sqlConn);
+                    _sqlCmd.Parameters.AddWithValue("@uid", GlobalData.Config.UserID);
+                    _sqlCmd.Parameters.AddWithValue("@sid", sid);
+                }
+                else if ((UserPreviledges)GlobalData.Config.RoleID == UserPreviledges.Admin)
+                {
+                    _sqlCmd = new(@"SELECT a.id,
+	                                   s.id status_id,
+	                                   s.status_name,
+	                                   a.role_id,
+	                                   r.role_name,
+	                                   first_name,
+	                                   last_name,
+	                                   address,
+	                                   contact,
+	                                   username,
+	                                   password,
+	                                   FORMAT(date_added, 'dd/MM/yyyy') date_added
+                                FROM
+	                                tblusers a
+                                JOIN
+	                                tblstatus s ON a.status_id = s.id
+                                JOIN
+	                                tblroles r ON a.role_id = r.id
+                                WHERE a.role_id > @id AND a.id != @uid AND a.status_id = @sid", _sqlConn);
+                    _sqlCmd.Parameters.AddWithValue("@id", GlobalData.Config.RoleID);
+                    _sqlCmd.Parameters.AddWithValue("@uid", GlobalData.Config.UserID);
+                    _sqlCmd.Parameters.AddWithValue("@sid", sid);
+                }
+                _sqlAdapter = new(_sqlCmd);
+                _dataTable = new();
+                _sqlAdapter.Fill(_dataTable);
+
+                foreach (DataRow row in _dataTable.Rows)
+                {
+                    UserModel sModel = new()
+                    {
+                        ID = row["id"].ToString(),
+                        StatusName = row["status_name"].ToString(),
+                        StatusID = row["status_id"].ToString(),
+                        RoleID = row["role_id"].ToString(),
+                        RoleName = row["role_name"].ToString(),
+                        FirstName = row["first_name"].ToString(),
+                        LastName = row["last_name"].ToString(),
+                        Address = row["address"].ToString(),
+                        Contact = row["contact"].ToString(),
+                        Username = row["username"].ToString(),
+                        Password = row["password"].ToString(),
+                        DateAdded = row["date_added"].ToString()
+                    };
+                    sList.Add(sModel);
+                }
+            }
+            catch
+            {
+                Growl.Warning("An error occured while fetching users.");
+            }
+            return sList;
+        }
+
         internal ObservableCollection<DeliveryModel> GetDeliveryList()
         {
             ObservableCollection<DeliveryModel> sList = new();
@@ -666,7 +777,8 @@ namespace wrcaysalesinventory.Services
                                 JOIN
 	                                tblproducts p ON i.product_id = p.id
                                 JOIN
-	                                tblstatus st ON p.product_status = st.id", _sqlConn);
+	                                tblstatus st ON p.product_status = st.id
+                                WHERE stocks > 0 AND p.product_status = (SELECT TOP 1 id FROM tblstatus WHERE status_name LIKE 'Active')", _sqlConn);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
                 _sqlAdapter.Fill(_dataTable);

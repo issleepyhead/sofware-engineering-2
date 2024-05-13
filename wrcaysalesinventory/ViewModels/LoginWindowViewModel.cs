@@ -42,6 +42,13 @@ namespace wrcaysalesinventory.ViewModels
             LoginContent = "Login";
         }
 
+
+        public RelayCommand<Window> LogOutCmd => new(LogOutCommand);
+        private async void LogOutCommand(Window obj)
+        {
+            obj.Close();
+        }
+
         private async Task<bool> ProcessLogin()
         {
             bool res = true;

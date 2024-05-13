@@ -54,13 +54,13 @@ namespace wrcaysalesinventory.ViewModels
             } else if((UserPreviledges)GlobalData.Config.RoleID == UserPreviledges.Staff)
             {
                 _mainWin.ReportsPanelButton.Visibility = Visibility.Collapsed;
-                //_mainWin.
+                _mainWin.MaintenancePanelButton.Visibility = Visibility.Collapsed;
+                _mainWin.DeliveryButton.Visibility = Visibility.Collapsed;
+                _mainWin.AuditTrailBackupButton.Visibility = Visibility.Collapsed;
+                //_mainWin.DatababseBackupButton.Visibility = Visibility.Collapsed;
+                _mainWin.DashboardButton.Visibility = Visibility.Collapsed;
+                //_mainWin.GeneralSettingsButton.Visibility = Visibility.Collapsed; 
             }
-            //{
-
-            //_mainWin.MaintenancePanelButton.Visibility = Visibility.Collapsed;
-
-            //}
         }
 
         public RelayCommand<object> SelectCmd => new(Select);
@@ -70,6 +70,12 @@ namespace wrcaysalesinventory.ViewModels
                 ((Grid)grid).Visibility = Visibility.Collapsed;
 
             ((Grid)obj).Visibility = Visibility.Visible;
+        }
+
+        public RelayCommand<object> SelectInputBinding => new(SelectInputBindingCommand);
+        private void SelectInputBindingCommand(object obj)
+        {
+            Growl.Info("F5 PRESSED!");
         }
     } 
 }

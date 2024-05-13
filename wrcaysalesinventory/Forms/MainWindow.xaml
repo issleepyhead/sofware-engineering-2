@@ -28,6 +28,9 @@
     <hc:Window.NonClientAreaContent>
         <titlebar:NonClientArea/>
     </hc:Window.NonClientAreaContent>
+    <hc:Window.InputBindings>
+        <KeyBinding Command="{Binding SelectInputBinding}" Key="F5"/>
+    </hc:Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -39,7 +42,7 @@
                     <hc:EventToCommand Command="{Binding SwitchItemCmd}" PassEventArgsToCommand="True" />
                 </hc:EventTrigger>
             </hc:Interaction.Triggers>-->
-            <hc:SideMenuItem Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelDashboard}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=DashboardPanel}">
+            <hc:SideMenuItem x:Name="DashboardButton" Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelDashboard}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=DashboardPanel}">
                 <hc:SideMenuItem.Icon>
                     <Image Source="{StaticResource ic_dashboard}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
@@ -119,21 +122,21 @@
                 <hc:SideMenuItem.Icon>
                     <Image Source="{StaticResource ic_settings}" Margin="0" Height="28" Width="28"/>
                 </hc:SideMenuItem.Icon>
-                <hc:SideMenuItem x:Name="GeneralSettingsButton" Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelGenSettings}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=GenSettingsPanel}">
+                <!--<hc:SideMenuItem x:Name="GeneralSettingsButton" Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelGenSettings}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=GenSettingsPanel}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xE713;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
+                </hc:SideMenuItem>-->
                 <hc:SideMenuItem Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelPOSSettings}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=POSSettingsPanel}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xF7C1;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem x:Name="DatababseBackupButton" Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelDatabaseBackup}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=POSSettingsPanel}">
+                <!--<hc:SideMenuItem x:Name="DatababseBackupButton" Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelDatabaseBackup}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=POSSettingsPanel}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xF34E;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
+                </hc:SideMenuItem>-->
                 <hc:SideMenuItem x:Name="AuditTrailBackupButton" Padding="30 25" FontSize="18" Header="{x:Static langs:Lang.LabelAuditTrail}" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=AuditPanel}">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xE3B6;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>

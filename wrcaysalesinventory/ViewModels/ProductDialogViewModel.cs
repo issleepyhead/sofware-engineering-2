@@ -14,6 +14,7 @@ using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Data.Models.Validations;
 using wrcaysalesinventory.Services;
 using MessageBox = HandyControl.Controls.MessageBox;
+using System.Text.RegularExpressions;
 
 namespace wrcaysalesinventory.ViewModels
 {
@@ -31,6 +32,7 @@ namespace wrcaysalesinventory.ViewModels
         private string _pCostError;
         private string _pUnitError;
         private Visibility _dVisibility = Visibility.Collapsed;
+        private string _criticalLevelError;
         private string _dLabel = Lang.LabelAdd;
 
         public ProductDialogViewModel(DataService dataService)
@@ -60,6 +62,7 @@ namespace wrcaysalesinventory.ViewModels
         public string ProductUnitError { get => _pUnitError; set => Set(ref _pUnitError, value); }
         public Visibility DeleteVisibility { get => _dVisibility; set => Set(ref _dVisibility, value); }
         public string ButtonContent { get => _dLabel; set => Set(ref _dLabel, value); }
+        public string CriticalLevelError { get => _criticalLevelError; set => Set(ref _criticalLevelError, value); }
 
         public RelayCommand<ProductDialogViewModel> DeleteCmd => new(DeleteCommand);
         public RelayCommand<ProductDialogViewModel> ValidateProduct => new(ValidateModel);
@@ -189,10 +192,16 @@ namespace wrcaysalesinventory.ViewModels
                 SqlCommand sqlCommand;
                 try
                 {
-                    // check if the price is less than the cost.
-                    if (double.Parse(vm.Model.ProductPrice) < double.Parse(vm.Model.ProductCost))
+                    if (!Model.AllowDecimal && !Regex.IsMatch(Model.CriticalLevel, "\\d+"))
                     {
-                        ProductPriceError = "Selling price can't be less than the cost.";
+                        CriticalLevelError = "Decimal is not allowed here.";
+                        return;
+                    }
+
+                    // check if the price is less than the cost.
+                    if (double.Parse(vm.Model.ProductPrice) <= double.Parse(vm.Model.ProductCost))
+                    {
+                        ProductPriceError = "Can't be less than or equal to cost.";
                         return;
                     }
 
@@ -230,13 +239,13 @@ namespace wrcaysalesinventory.ViewModels
 
                     if (string.IsNullOrEmpty(vm.Model.ID))
                     {
-                        sqlCommand = new(@"INSERT INTO tblproducts (product_name, product_description, product_price, product_cost, product_unit, selling_unit, category_id)
-                                            VALUES (@pname, @pdesc, @pprice, @pcost, @punit, @sunit, @cid)", sqlConnection);
+                        sqlCommand = new(@"INSERT INTO tblproducts (product_name, product_description, product_price, product_cost, product_unit, selling_unit, category_id,critical_level)
+                                            VALUES (@pname, @pdesc, @pprice, @pcost, @punit, @sunit, @cid, @clevel)", sqlConnection);
                     }
                     else
                     {
                         sqlCommand = new(@"UPDATE tblproducts SET product_name = @pname, product_description = @pdesc, product_price = @pprice, product_cost = @pcost,
-                                               product_unit = @punit, selling_unit = @sunit, date_updated = getdate(), category_id = @cid WHERE id = @id", sqlConnection);
+                                               product_unit = @punit, selling_unit = @sunit, date_updated = getdate(), category_id = @cid, critical_level = @clevel WHERE id = @id", sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@id", vm.Model.ID);
                     }
                     sqlCommand.Parameters.AddWithValue("@pname", WinHelper.CapitalizeData(vm.Model.ProductName));
@@ -246,6 +255,7 @@ namespace wrcaysalesinventory.ViewModels
                     sqlCommand.Parameters.AddWithValue("@punit", vm.Model.ProductUnit);
                     sqlCommand.Parameters.AddWithValue("@cid", string.IsNullOrEmpty(vm.Model.CategoryID) ? DBNull.Value : vm.Model.CategoryID);
                     sqlCommand.Parameters.AddWithValue("@sunit", Model.AllowDecimal);
+                    sqlCommand.Parameters.AddWithValue("@clevel", Model.CriticalLevel);
                     if (sqlCommand.ExecuteNonQuery() > 0)
                     {
                         if (string.IsNullOrEmpty(Model.ID))

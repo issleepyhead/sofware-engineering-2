@@ -3,6 +3,7 @@ using HandyControl.Tools.Command;
 using System;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
@@ -81,11 +82,20 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         private void TextInputCmd(NumericUpDown upDown)
         {
             POSCartModel context = (POSCartModel)upDown.DataContext;
-            if(double.Parse(context.Quantity) > double.Parse(context.Stocks))
+            try
             {
-                Growl.Info("Insufficient stocks.");
-                return;
+                if (double.Parse(context.Quantity) > double.Parse(context.Stocks))
+                {
+                    Growl.Info("Insufficient stocks.");
+                    upDown.Value = double.Parse(context.Stocks);
+                    context.Quantity = context.Stocks;
+                    return;
+                }
+            } catch
+            {
+                Debug.WriteLine("Invalid Format");
             }
+
 
             if (context is POSCartModel)
             {
@@ -159,7 +169,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                 SqlCommand cmd;
 
                 cmd = new("SELECT COUNT(*) FROM tbltransactionheaders", conn, sqlTransaction);
-                string refer = cmd.ExecuteScalar().ToString();
+                string refer = ((int)cmd.ExecuteScalar() + 1).ToString();
                 Header.ReferenceNumber = refer.ToString().PadLeft(8 - refer.Length, '0') + refer;
 
                 Header.Discount = _discount;
@@ -271,12 +281,12 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                         AllowedDecimal = pModel.AllowedDecimal,
                         Stocks = pModel.Stocks
                     };
-                    //POSProductItem pitem = new(deliveryCartModel);
-                    //pitem.HorizontalAlignment = HorizontalAlignment.Stretch;
                     CartList.Add(deliveryCartModel);
                 }
                 ValueChanged();
             }
+            dataGrid.SelectedItems.Clear();
+            dataGrid.SelectedCells.Clear();
         }
 
         public RelayCommand<object> OpenDiscountCmd => new(OpenDiscount);

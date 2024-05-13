@@ -41,6 +41,7 @@ namespace wrcaysalesinventory.ViewModels
             GlobalData.Config.TransactionVAT = VAT;
             GlobalData.Config.TransactionQuota = Quota;
             GlobalData.Save();
+            Growl.Success("Settings Saved Successsfully!");
         }
     }
 }

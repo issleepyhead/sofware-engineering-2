@@ -211,6 +211,9 @@
     <Compile Include="Customs\Dialogs\FreebieDialog.xaml.cs">
       <DependentUpon>FreebieDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Customs\Dialogs\KeyBindingDialog.xaml.cs">
+      <DependentUpon>KeyBindingDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Customs\Dialogs\NoteDialog.xaml.cs">
       <DependentUpon>NoteDialog.xaml</DependentUpon>
     </Compile>
@@ -346,6 +349,7 @@
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\AuditTrailPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\CustomerPanelViewModel.cs" />
+    <Compile Include="ViewModels\PanelViewModes\GenSettingsPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\CategoryPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\DeliveryPanelViewModel.cs" />
@@ -395,6 +399,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customs\Dialogs\FreebieDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\KeyBindingDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

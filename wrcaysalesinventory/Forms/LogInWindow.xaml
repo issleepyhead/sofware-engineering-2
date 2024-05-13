@@ -67,11 +67,6 @@
                            FontSize="14"
                            Foreground="Red"
                            Text="{Binding PasswordError}"/>
-                <StackPanel Orientation="Horizontal"
-                            Margin="30 0">
-                    <CheckBox Content="Remember Me"
-                              FontSize="18"/>
-                </StackPanel>
             </StackPanel>
             <Grid Margin="30 8">
                 <Grid.ColumnDefinitions>
@@ -83,8 +78,9 @@
                         FontSize="18"
                         BorderThickness="0"
                         Margin="0 0 4 0"
-                        Command="hc:ControlCommands.Close"
                         Height="40"
+                        Command="{Binding LogOutCmd}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type hc:Window}}}"
                         hc:BorderElement.CornerRadius="0"
                         HorizontalAlignment="Stretch"/>
                 <Button Grid.Column="1"

@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Panels"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
+             DataContext="{Binding Path=GenSettingsView,Source={StaticResource Locator}}"
              mc:Ignorable="d" 
              d:DesignHeight="700"
              d:DesignWidth="800"
@@ -28,7 +29,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>-->
-        <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
+        <!--<Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
             <hc:FlexPanel JustifyContent="SpaceBetween"
                           AlignItems="Center"
                           AlignContent="Center"
@@ -42,10 +43,11 @@
                         BorderThickness="1"
                         BorderBrush="{StaticResource DarkMaskBrush}"
                         Content="Change"
+                        Command="{Binding OpenKeyBinding}"
                         Height="35"
                         Width="130"/>
             </hc:FlexPanel>
-        </Border>
+        </Border>-->
         <Border CornerRadius="8" Height="60" Margin="0 5" Background="{DynamicResource RegionBrush}">
             <hc:FlexPanel JustifyContent="SpaceBetween"
                           AlignItems="Center"

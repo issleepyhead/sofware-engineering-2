@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using wrcaysalesinventory.Data.Classes;
 using wrcaysalesinventory.Data.Models;
@@ -19,23 +20,29 @@ namespace wrcaysalesinventory.Customs.Dialogs
 
         private void AddButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (Regex.IsMatch(DiscountTextBox.Text, "^(\\d+)?\\.?(\\d+)$"))
+            try
             {
-                if (int.Parse(DiscountTextBox.Text) > 20)
+                if (Regex.IsMatch(DiscountTextBox.Text, "^(\\d+)?\\.?(\\d+)$"))
                 {
-                    ((POSPanelViewModel)DataContext).DiscountError = "Discount can't be higher than 20%.";
-                    ((POSPanelViewModel)DataContext).Discount = "20";
-                    return;
-                }
+                    if (double.Parse(DiscountTextBox.Text) > 20)
+                    {
+                        ((POSPanelViewModel)DataContext).DiscountError = "Discount can't be higher than 20%.";
+                        ((POSPanelViewModel)DataContext).Discount = "20";
+                        return;
+                    }
                 ((POSPanelViewModel)DataContext).Discount = DiscountTextBox.Text;
-                WinHelper.CloseDialog(CloseBtn);
-            }
-            else
+                    WinHelper.CloseDialog(CloseBtn);
+                }
+                else
+                {
+                    ((POSPanelViewModel)DataContext).DiscountError = "Invalid Discount.";
+                    ((POSPanelViewModel)DataContext).Discount = "0";
+                }
+                ((POSPanelViewModel)DataContext).ValueChanged();
+            } catch
             {
-                ((POSPanelViewModel)DataContext).DiscountError = "Invalid Discount.";
-                ((POSPanelViewModel)DataContext).Discount = "0";
+                Debug.WriteLine("Invalid Format");
             }
-            ((POSPanelViewModel)DataContext).ValueChanged();
         }
     }
 }

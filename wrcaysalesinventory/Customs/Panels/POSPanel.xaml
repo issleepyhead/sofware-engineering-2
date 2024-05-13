@@ -218,7 +218,7 @@
                                     <hc:NumericUpDown Grid.Column="1"
                                                     Height="40"
                                                     hc:BorderElement.CornerRadius="0"
-                                                    Value="{Binding Quantity}"
+                                                    Value="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     Margin="10 0"
                                                     Minimum=".1"
                                                     >

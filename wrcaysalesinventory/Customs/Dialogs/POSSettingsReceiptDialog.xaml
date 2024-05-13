@@ -154,13 +154,6 @@
                                 Text="{Binding CashierData}"
                                 FontSize="18"
                                 Margin="0 4"/>
-                    <hc:TextBox HorizontalAlignment="Stretch"
-                                hc:BorderElement.CornerRadius="0"
-                                hc:InfoElement.Placeholder="Enter Transaction Note"
-                                Height="40"
-                                Text="{Binding NoteData}"
-                                FontSize="18"
-                                Margin="0 4"/>
                 </StackPanel>
             
                 <hc:FlexPanel JustifyContent="FlexEnd"
@@ -173,11 +166,12 @@
                             Background="{DynamicResource SuccessBrush}"
                             Content="Save"
                             Command="{Binding SaveCmd}"
+                            CommandParameter="{Binding ElementName=CloseBtn}"
                             Height="40"
                             Width="130"/>
                 </hc:FlexPanel>
             </Grid>
         </Border>
-        
+
     </Grid>
 </Border>

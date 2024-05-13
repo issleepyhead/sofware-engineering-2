@@ -82,9 +82,9 @@ namespace wrcaysalesinventory.ViewModels
                 if(GlobalData.Config.RoleID < int.Parse(vm.Model.RoleID))
                 {
                     SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
-                    if(!string.IsNullOrEmpty(vm.Model.StatusName) && vm.Model.StatusName.ToLower() == "Inactive".ToLower())
+                    if(!string.IsNullOrEmpty(vm.Model.StatusName) && vm.Model.StatusName.ToLower() == "active".ToLower())
                     {
-                        SqlCommand sqlCmd = new("UPDATE tblusers SET status_id = (SELECT TOP 1 FROM tblstatus WHERE status_name = 'Inactive') WHERE id = @id;", sqlConnection);
+                        SqlCommand sqlCmd = new("UPDATE tblusers SET status_id = (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Inactive') WHERE id = @id;", sqlConnection);
                         sqlCmd.Parameters.AddWithValue("@id", vm.Model.ID);
                         if (sqlCmd.ExecuteNonQuery() > 0)
                         {
@@ -220,14 +220,14 @@ namespace wrcaysalesinventory.ViewModels
                     //    return;
                     //}
 
-                    if(!string.IsNullOrEmpty(vm.Model.RoleID) && GlobalData.Config.RoleID == int.Parse(vm.Model.RoleID))
+                    if(!string.IsNullOrEmpty(vm.Model.ID) && GlobalData.Config.RoleID == int.Parse(vm.Model.RoleID))
                     {
                         //if (GlobalData.Config.RoleID == int.Parse(vm.Model.RoleID))
                         //{
                         Growl.Info("You can't update an account with this role.");
                         return;
                         //}
-                    } else if(string.IsNullOrEmpty(vm.Model.RoleID) && GlobalData.Config.RoleID == int.Parse(vm.Model.RoleID))
+                    } else if(string.IsNullOrEmpty(vm.Model.ID) && GlobalData.Config.RoleID == int.Parse(vm.Model.RoleID))
                     {
                         Growl.Info("You can't create an account with this role.");
                         return;

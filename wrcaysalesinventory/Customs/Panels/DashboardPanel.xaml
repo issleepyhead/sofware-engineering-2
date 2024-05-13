@@ -204,7 +204,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <!--<Button Height="40" Width="150" Command="{Binding Daily}" Margin="8 0" FontSize="16">Daily</Button>-->
+                            <Button Height="40" Width="150" Command="{Binding Daily}" Margin="8 0" FontSize="16">Daily</Button>
                             <Button Height="40" Width="150" Command="{Binding Weekly}" Margin="8 0" FontSize="16">Weekly</Button>
                             <Button Height="40" Width="150" Command="{Binding Monthly}" Margin="8 0" FontSize="16">Montly</Button>
                             <Button Height="40" Width="150" Command="{Binding Yearly}" Margin="8 0" FontSize="16">Yearly</Button>

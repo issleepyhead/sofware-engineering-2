@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.Services;
+using ComboBox = HandyControl.Controls.ComboBox;
 using DataGrid = System.Windows.Controls.DataGrid;
 
 namespace wrcaysalesinventory.ViewModels.PanelViewModes
@@ -23,6 +24,8 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         }
 
         public int TotalData { get => _alldata.Count; }
+
+        public ObservableCollection<StatusModel> StatusDataList { get => _dataService.GetStatusList(); }
 
         public RelayCommand<object> OpenUser => new(OpenUserDialog);
         private void OpenUserDialog(object obj)
@@ -57,6 +60,30 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         public void PageUpdated(int offset)
         {
             DataList = new ObservableCollection<UserModel>(_alldata.Skip(offset * 30).Take(30).ToList());
+        }
+
+        public RelayCommand<object> FilterStatusCmd => new(FilterStatusCommand);
+        private void FilterStatusCommand(object obj)
+        {
+            try
+            {
+                ComboBox cmbBox = (ComboBox)obj;
+                if (cmbBox.SelectedIndex != -1 && cmbBox.SelectedValue.ToString() != "-1")
+                {
+                    _alldata = _dataService.GetUsersListByStatus(cmbBox.SelectedValue.ToString());
+                    DataList = new ObservableCollection<UserModel>(_alldata.Take(30).ToList());
+                }
+                else
+                {
+                    _alldata = _dataService.GetUsersList();
+                    DataList = new ObservableCollection<UserModel>(_alldata.Take(30).ToList());
+                }
+            }
+            catch
+            {
+
+            }
+
         }
     }
 }

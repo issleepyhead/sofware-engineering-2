@@ -29,17 +29,28 @@
             Margin="10 0"
             Padding="8 0"
             CornerRadius="5"
-            Width="100"
+            Width="120"
             Background="{DynamicResource RegionBrush}">
         <hc:FlexPanel JustifyContent="SpaceBetween">
-            <TextBlock Text="&#xE793;"
+            <hc:FlexPanel JustifyContent="SpaceBetween">
+                <TextBlock Text="&#xE793;"
                    FontFamily="{StaticResource FabricIcons}"
                    FontSize="18"
                    Padding="0"
                    VerticalAlignment="Center"/>
-            <hc:Divider Orientation="Vertical" Margin="4 8"/>
-            <ToggleButton Style="{StaticResource ToggleButtonSwitch}" x:Name="ToggleBtn"
+                <hc:Divider Orientation="Vertical" Margin="4 8"/>
+                <ToggleButton Style="{StaticResource ToggleButtonSwitch}" x:Name="ToggleBtn"
                       Height="15" Checked="ToggleButton_Checked" IsChecked="{Binding IsDarkTheme, UpdateSourceTrigger=PropertyChanged}" Unchecked="ToggleBtn_Unchecked"/>
+            </hc:FlexPanel>
+            <Button Margin="10 0 0 0"
+                    Width="24"
+                    Height="24"
+                    Padding="0"
+                    hc:BorderElement.CornerRadius="100"
+                    Content="&#xE77B;"
+                    FontFamily="{StaticResource FabricIcons}">
+                
+            </Button>
         </hc:FlexPanel>
     </Border>
 </Grid>

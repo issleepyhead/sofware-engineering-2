@@ -168,11 +168,11 @@
                             MinHeight="50"
                             FontSize="16"
                             Height="Auto"
-                            hc:InfoElement.Placeholder="Enter Critical Level"
-                            Text=""/>
+                            Text="{Binding Model.CriticalLevel, UpdateSourceTrigger=PropertyChanged}"
+                            hc:InfoElement.Placeholder="Enter Critical Level"/>
                 <TextBlock FontSize="16"
                            Foreground="Red"
-                           Text="{Binding ProductUnitError, UpdateSourceTrigger=PropertyChanged}"/>
+                           Text="{Binding CriticalLevelError, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Margin="0 8 0 0">
                 <TextBlock Text="Selling Unit:"

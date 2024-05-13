@@ -35,8 +35,7 @@ namespace wrcaysalesinventory.Data.Classes
             {"phone","0923 324 4235" },
             {"email", string.Empty },
             {"address", "Taguig City" },
-            {"cashier", string.Empty },
-            {"note", string.Empty }
+            {"cashier", string.Empty }
         };
 
         public Dictionary<string, List<string>> UserPreviledges { get; set; } = new Dictionary<string, List<string>>()

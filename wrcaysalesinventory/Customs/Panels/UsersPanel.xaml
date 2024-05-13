@@ -35,7 +35,8 @@
                 BorderThickness="0 0 0 1">
             <hc:FlexPanel 
                           JustifyContent="SpaceBetween">
-                <hc:SearchBar IsRealTime="True"
+                <StackPanel Orientation="Horizontal">
+                    <hc:SearchBar IsRealTime="True"
                               hc:InfoElement.Placeholder="{x:Static langs:Lang.LabelSearchRecord}"
                               Width="280"
                               Height="50"
@@ -45,6 +46,24 @@
                               Style="{StaticResource SearchBarExtend}"
                               Command="{Binding SearchCmd}"
                               CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                    <hc:ComboBox HorizontalAlignment="Stretch"
+                                 hc:BorderElement.CornerRadius="0"
+                                 Height="50"
+                                 Width="200"
+                                 IsEditable="True"
+                                 FontSize="16"
+                                 ItemsSource="{Binding StatusDataList}"
+                                 SelectedValuePath="ID"
+                                 DisplayMemberPath="StatusName"
+                                 hc:InfoElement.Placeholder="Filter By Status"
+                                 Margin="10 0 0 0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding FilterStatusCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=hc:ComboBox}}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </hc:ComboBox>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Viewbox Height="50">
                         <hc:Pagination MaxPageCount="5"

@@ -141,6 +141,8 @@ namespace wrcaysalesinventory.ViewModels
                 }
                 ValueChanged();
             }
+            obj.SelectedItems.Clear();
+            obj.SelectedCells.Clear();
         }
 
         public RelayCommand<DeliveryCartModel> RemoveCommand => new(RemoveProduct);
@@ -163,6 +165,11 @@ namespace wrcaysalesinventory.ViewModels
             SqlCommand sqlCommand;
             try
             {
+                if(string.IsNullOrEmpty(Model.SupplierID))
+                {
+                    Growl.Info("Please select a supplier.");
+                    return;
+                }
                 sqlCommand = new("SELECT COUNT(*) FROM tbldeliveryheaders WHERE invoice_number LIKE @in", sqlConnection, sqlTransaction);
                 sqlCommand.Parameters.AddWithValue("@in", Model.ReferenceNumber);
                 if((int)sqlCommand.ExecuteScalar() > 0)
@@ -244,10 +251,7 @@ namespace wrcaysalesinventory.ViewModels
             {
                 sqlTransaction.Rollback();
                 Growl.Warning("An error occured while performing the action");
-            } 
-
-            
-
+            }
         }
     }
 }

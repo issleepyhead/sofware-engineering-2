@@ -33,13 +33,13 @@ namespace wrcaysalesinventory.ViewModels
         public void GenerateSeries()
         {
             ColumnSeries<DateTimePoint> serie= new();
-            //ColumnSeries<DateTimePoint> weekly = new();
+            ColumnSeries<DateTimePoint> cweekly = new();
             //ColumnSeries<DateTimePoint> monthlyy = new();
             //ColumnSeries<DateTimePoint> yearly = new();
 
 
             ObservableCollection<DateTimePoint> values = new();
-            //ObservableCollection<DateTimePoint> smonthly = new();
+            ObservableCollection<DateTimePoint> vweekly = new();
             //ObservableCollection<DateTimePoint> syearly = new();
 
             try
@@ -47,9 +47,9 @@ namespace wrcaysalesinventory.ViewModels
                 SqlConnection conn = SqlBaseConnection.GetInstance();
                 DateTime today = DateTime.Now;
                 
-                for(int i = 1; i <= 24; i++)
+                for(int i = 1; i < 24; i++)
                 {
-                    SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE CAST(date_added AS TIME) BETWEEN CAST(@stime AS TIME) AND CAST(@etime AS TIME)", conn);
+                    SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE date_added BETWEEN @stime AND @etime", conn);
                     cmd.Parameters.AddWithValue("@stime", today.AddHours(-1)).SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.AddWithValue("@etime", today).SqlDbType = SqlDbType.DateTime;
                     double res = double.Parse(cmd.ExecuteScalar().ToString());
@@ -57,21 +57,23 @@ namespace wrcaysalesinventory.ViewModels
                     today = DateTime.Now.AddHours(-i);
                 }
 
-                //serie.Values = values;
-                //Series.Add(serie);
-                //values.Clear();
+                serie.Values = values;
+                Series.Add(serie);
 
-                //serie = new();
-                //today = DateTime.Now;
-                //for (int i = 1; i <= 7; i++)
-                //{
-                //    SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE date_added = @date_added", conn);
-                //    cmd.Parameters.AddWithValue("@date_added", today).SqlDbType = SqlDbType.DateTime;
+                today = DateTime.Now;
+                for (int i = 1; i < 7; i++)
+                {
+                    SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE date_added = @date_added", conn);
+                    cmd.Parameters.AddWithValue("@date_added", today).SqlDbType = SqlDbType.DateTime;
 
-                //    double res = double.Parse(cmd.ExecuteScalar().ToString());
-                //    values.Add(new DateTimePoint(today, res));
-                //    today = DateTime.Now.AddDays(-i);
-                //}
+                    double res = double.Parse(cmd.ExecuteScalar().ToString());
+                    vweekly.Add(new DateTimePoint(today, res));
+                    today = DateTime.Now.AddDays(-i);
+                }
+
+                cweekly.Values = vweekly;
+                cweekly.IsVisible = false;
+                Series.Add(cweekly);
 
                 //serie = new();
                 //serie.Values = values;
@@ -130,34 +132,22 @@ namespace wrcaysalesinventory.ViewModels
 
         public Axis[] XAxes { get; set; } =
         {
-            new DateTimeAxis(TimeSpan.FromHours(1), date=>date.ToString("dd/MM/yyyy hh:mm tt"))
+            new DateTimeAxis(TimeSpan.FromHours(1), date => date.ToString("dd/MM/yyyy hh:mm tt"))
             {
-                CrosshairLabelsBackground = SKColors.DarkOrange.AsLvcColor(),
-                CrosshairLabelsPaint = new SolidColorPaint(SKColors.DarkRed, 1),
-                CrosshairPaint = new SolidColorPaint(SKColors.DarkOrange, 1),
                 IsVisible = true
             },
-            //new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
-            //{
-            //    CrosshairLabelsBackground = SKColors.DarkOrange.AsLvcColor(),
-            //    CrosshairLabelsPaint = new SolidColorPaint(SKColors.DarkRed, 1),
-            //    CrosshairPaint = new SolidColorPaint(SKColors.DarkOrange, 1),
-            //    IsVisible = false
-            //},
-            //new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
-            //{
-            //    CrosshairLabelsBackground = SKColors.DarkOrange.AsLvcColor(),
-            //    CrosshairLabelsPaint = new SolidColorPaint(SKColors.DarkRed, 1),
-            //    CrosshairPaint = new SolidColorPaint(SKColors.DarkOrange, 1),
-            //    IsVisible = false
-            //},
-            //new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
-            //{
-            //    CrosshairLabelsBackground = SKColors.DarkOrange.AsLvcColor(),
-            //    CrosshairLabelsPaint = new SolidColorPaint(SKColors.DarkRed, 1),
-            //    CrosshairPaint = new SolidColorPaint(SKColors.DarkOrange, 1),
-            //    IsVisible = false
-            //}
+            new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
+            {
+                IsVisible = false
+            },
+            new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
+            {
+                IsVisible = false
+            },
+            new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
+            {
+                IsVisible = false
+            }
         };
 
         //    {
@@ -189,16 +179,20 @@ namespace wrcaysalesinventory.ViewModels
         //    new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy")),
         //};
 
-        //public RelayCommand<object> Daily => new(DailySeries);
-        //public void DailySeries(object obj)
-        //{
-        //    Series[0].IsVisible = !Series[0].IsVisible;
-        //    XAxes[0].IsVisible = !XAxes[0].IsVisible;
-        //}
+        public RelayCommand<object> Daily => new(DailySeries);
+        public void DailySeries(object obj)
+        {
+            foreach (ColumnSeries<DateTimePoint> x in Series) x.IsVisible = false;
+            foreach (DateTimeAxis x in XAxes) x.IsVisible = false;
+            Series[0].IsVisible = !Series[0].IsVisible;
+            XAxes[0].IsVisible = !XAxes[0].IsVisible;
+        }
 
         public RelayCommand<object> Weekly => new(WeeklySeries);
         public void WeeklySeries(object obj)
         {
+            foreach (ColumnSeries<DateTimePoint> x in Series) x.IsVisible = false;
+            foreach (DateTimeAxis x in XAxes) x.IsVisible = false;
             Series[1].IsVisible = !Series[1].IsVisible;
             XAxes[1].IsVisible = !XAxes[1].IsVisible;
         }
@@ -206,6 +200,8 @@ namespace wrcaysalesinventory.ViewModels
         public RelayCommand<object> Monthly => new(MonthlySeries);
         public void MonthlySeries(object obj)
         {
+            foreach (ColumnSeries<DateTimePoint> x in Series) x.IsVisible = false;
+            foreach (DateTimeAxis x in XAxes) x.IsVisible = false;
             Series[2].IsVisible = !Series[2].IsVisible;
             XAxes[2].IsVisible = !XAxes[2].IsVisible;
         }
@@ -213,6 +209,8 @@ namespace wrcaysalesinventory.ViewModels
         public RelayCommand<object> Yearly => new(YearlySeries);
         public void YearlySeries(object obj)
         {
+            foreach (ColumnSeries<DateTimePoint> x in Series) x.IsVisible = false;
+            foreach (DateTimeAxis x in XAxes) x.IsVisible = false;
             Series[3].IsVisible = !Series[3].IsVisible;
             XAxes[3].IsVisible = !XAxes[3].IsVisible;
         }

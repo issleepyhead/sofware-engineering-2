@@ -32,6 +32,7 @@ namespace wrcaysalesinventory.ViewModels
             SimpleIoc.Default.Register<ServerWindowViewModel>();
             SimpleIoc.Default.Register<LoginWindowViewModel>();
             SimpleIoc.Default.Register<AuditTrailPanelViewModel>();
+            SimpleIoc.Default.Register<GenSettingsPanelViewModel>();
         }
 
         public static ViewModelLocator Instance = new Lazy<ViewModelLocator>(() =>
@@ -58,5 +59,6 @@ namespace wrcaysalesinventory.ViewModels
         public ServerWindowViewModel ServerWindowView => SimpleIoc.Default.GetInstance<ServerWindowViewModel>();
         public LoginWindowViewModel LoginWindowView => SimpleIoc.Default.GetInstance<LoginWindowViewModel>();
         public AuditTrailPanelViewModel AuditTrailView => SimpleIoc.Default.GetInstance<AuditTrailPanelViewModel>();
+        public GenSettingsPanelViewModel GenSettingsView => SimpleIoc.Default.GetInstance<GenSettingsPanelViewModel>();
     }
 }
