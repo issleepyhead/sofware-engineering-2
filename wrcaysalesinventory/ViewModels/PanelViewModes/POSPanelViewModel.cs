@@ -43,6 +43,15 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         private TransactionHeaderModel _header = new();
         public TransactionHeaderModel Header { get => _header; set => Set(ref _header, value); }
 
+        private string _addfeeerr;
+        public string AdditionalFeeError { get => _addfeeerr; set => Set(ref _addfeeerr, value); }
+
+        private string _cashAmount;
+        public string CashAmount { get => _cashAmount; set { Set(ref _cashAmount, value);  ValueChanged(); } }
+
+        private string _changeAmount;
+        public string ChangeAmount { get => _changeAmount; set => Set(ref _changeAmount, value); }
+
         private string _subtotal = "0";
         public string SubTotal { get => _subtotal; set => Set(ref _subtotal, value); }
         private string _totalPay = "0";
@@ -64,6 +73,18 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         public string DiscountError { get => _discountError; set => Set(ref _discountError, value); }
         private string _discount = "0";
         public string Discount { get => _discount; set { Set(ref _discount, value); } }
+
+        public RelayCommand<object> SaveAddFees => new(SaveAddCmd);
+        private void SaveAddCmd(object obj)
+        {
+            if(!Regex.IsMatch(Header.AdditionalFee, @"^(\d+)?\.?(\d+)$"))
+            {
+                AdditionalFeeError = "Please provide a valid value";
+                return;
+            }
+            ValueChanged();
+            WinHelper.CloseDialog((Button)obj);
+        }
 
         public RelayCommand<SearchBar> SearchCommand => new(SearchProduct);
         private void SearchProduct(SearchBar searchBar)
@@ -113,11 +134,17 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         public RelayCommand<POSCartModel> PreviewReceiptCommand => new(ViewReceipt);
         private void ViewReceipt(POSCartModel cartItem)
         {
+            SqlConnection conn = SqlBaseConnection.GetInstance();
+            SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders", conn);
+            string refer = ((int)cmd.ExecuteScalar() + 1).ToString();
+            Header.ReferenceNumber = refer.ToString().PadLeft(8 - refer.Length, '0') + refer;
             //Fix the size of the document
             PrintDialog pd = new();
             ReceiptDocument rd = new();
             FlowDocument fd = rd.FD;
-            
+            ((ReceiptViewModel)rd.DataContext).Header = Header;
+            ((ReceiptViewModel)rd.DataContext).SubTotal = SubTotal;
+            ((ReceiptViewModel)rd.DataContext).AmountReceived = "0";
             GenReceipt(pd,fd, rd);
 
             if (File.Exists("printPreview.xps")) File.Delete("printPreview.xps");
@@ -166,6 +193,24 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
             SqlTransaction sqlTransaction = conn.BeginTransaction();
             try
             {
+                if(string.IsNullOrEmpty(CashAmount))
+                {
+                    Growl.Info("Please provide a cash amount.");
+                    return;
+                }
+
+                if (!Regex.IsMatch(CashAmount, "^(\\d+)?\\.?(\\d+)$"))
+                {
+                    Growl.Info("Please provide a valid cash amount");
+                    return;
+                }
+
+                if (double.Parse(CashAmount) - double.Parse(TotalAmount) < 0)
+                {
+                    Growl.Info("Insufficient cash amount.");
+                    return;
+                }
+
                 SqlCommand cmd;
 
                 cmd = new("SELECT COUNT(*) FROM tbltransactionheaders", conn, sqlTransaction);
@@ -211,6 +256,9 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
                     Growl.Success("Transaction added successfully");
                     PrintDialog pd = new();
                     ReceiptDocument rd = new();
+                    ((ReceiptViewModel)rd.DataContext).Header = Header;
+                    ((ReceiptViewModel)rd.DataContext).SubTotal = SubTotal;
+                    ((ReceiptViewModel)rd.DataContext).AmountReceived = "0";
                     FlowDocument fd = rd.FD;
                     GenReceipt(pd, fd, rd);
 
@@ -251,6 +299,16 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
             SubTotal = total.ToString();
             total += (total * (double.Parse(Header.VAT) / 100)) - (total * (double.Parse(Discount ?? "0") / 100));
             TotalAmount = (total + double.Parse(Header.AdditionalFee ?? "0")).ToString();
+            if (string.IsNullOrEmpty(CashAmount))
+            {
+                return;
+            }
+            if (!string.IsNullOrEmpty(CashAmount) && !Regex.IsMatch(CashAmount, "^(\\d+)?\\.?(\\d+)$"))
+            {
+                Growl.Info("Please provide a valid cash amount");
+                return;
+            }
+            ChangeAmount = (double.Parse(CashAmount ?? "0") - double.Parse(TotalAmount)).ToString();
         }
 
         public RelayCommand<DataGrid> SelectedCommand => new(AddToCart);
@@ -309,7 +367,7 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
 
         private void OpenCustomer(object obj)
         {
-            CustomerDialog d = new(this);
+            CustomerDialog d = new();
             Dialog.Show(d);
         }
 

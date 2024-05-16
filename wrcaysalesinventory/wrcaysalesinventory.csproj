@@ -217,6 +217,9 @@
     <Compile Include="Customs\Dialogs\NoteDialog.xaml.cs">
       <DependentUpon>NoteDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Customs\Dialogs\NotifItem.xaml.cs">
+      <DependentUpon>NotifItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Customs\Dialogs\POSProductItem.xaml.cs">
       <DependentUpon>POSProductItem.xaml</DependentUpon>
     </Compile>
@@ -228,6 +231,9 @@
     </Compile>
     <Compile Include="Customs\Dialogs\ProductDialog.xaml.cs">
       <DependentUpon>ProductDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customs\Dialogs\ProfileDialog.xaml.cs">
+      <DependentUpon>ProfileDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Customs\Dialogs\SupplierDialog.xaml.cs">
       <DependentUpon>SupplierDialog.xaml</DependentUpon>
@@ -243,6 +249,9 @@
     </Compile>
     <Compile Include="Customs\Panels\CategoriesPanel.xaml.cs">
       <DependentUpon>CategoriesPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Customs\Panels\CustomerPanel.xaml.cs">
+      <DependentUpon>CustomerPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Customs\Panels\CustomersPanel.xaml.cs">
       <DependentUpon>CustomersPanel.xaml</DependentUpon>
@@ -303,6 +312,7 @@
     <Compile Include="Data\Models\CustomerModel.cs" />
     <Compile Include="Data\Models\DeliveryCartModel.cs" />
     <Compile Include="Data\Models\DeliveryModel.cs" />
+    <Compile Include="Data\Models\NotifItemModle.cs" />
     <Compile Include="Data\Models\POSCartModel.cs" />
     <Compile Include="Data\Models\ProductModel.cs" />
     <Compile Include="Data\Models\RoleModel.cs" />
@@ -346,6 +356,7 @@
     <Compile Include="ViewModels\CustomerDialogViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\DeliveryCartDialogViewModel.cs" />
+    <Compile Include="ViewModels\DeliveryDetailsDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\AuditTrailPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\CustomerPanelViewModel.cs" />
@@ -355,12 +366,14 @@
     <Compile Include="ViewModels\PanelViewModes\DeliveryPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\POSPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\ProductPanelViewModel.cs" />
+    <Compile Include="ViewModels\PanelViewModes\ReceiptViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\StocksPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\SupplierPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\UsersPanelViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\POSSettingsPanelViewModel.cs" />
     <Compile Include="ViewModels\POSSettingsReceiptDialogViewModel.cs" />
     <Compile Include="ViewModels\ProductDialogViewModel.cs" />
+    <Compile Include="ViewModels\ProfileDialogViewModel.cs" />
     <Compile Include="ViewModels\ServerWindowViewModel.cs" />
     <Compile Include="ViewModels\SupplierDialogViewModel.cs" />
     <Compile Include="ViewModels\PanelViewModes\TransactionPanelViewModel.cs" />
@@ -410,6 +423,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Customs\Dialogs\NotifItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Customs\Dialogs\POSProductItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -423,6 +440,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customs\Dialogs\ProductDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Dialogs\ProfileDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -443,6 +464,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customs\Panels\CategoriesPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Customs\Panels\CustomerPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

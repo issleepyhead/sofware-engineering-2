@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="ReportPreview" Height="450" Width="800" Loaded="Window_Loaded">
     <WindowsFormsHost>
-        <rv:ReportViewer x:Name="ReportViewer" />
+        <rv:ReportViewer x:Name="ReportViewer" ZoomMode="PageWidth"  />
     </WindowsFormsHost>
 
 </hc:Window>

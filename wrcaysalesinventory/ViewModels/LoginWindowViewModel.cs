@@ -24,7 +24,6 @@ namespace wrcaysalesinventory.ViewModels
         public string UserNameError { get => _userNameError; set => Set(ref _userNameError, value); }
         public string PasswordError { get => _passwordError; set => Set(ref _passwordError, value); }
         public string Password { get => _password; set => Set(ref _password, value); }
-        public bool   RememberMe { get => _rememberMe; set => Set(ref _rememberMe, value); }
         public bool IsLoginEnable { get => _isLoginEnable; set => Set(ref _isLoginEnable, value); }
 
         public RelayCommand<Window> LoginCmd => new(LoginCommand);
@@ -36,7 +35,10 @@ namespace wrcaysalesinventory.ViewModels
             {
                 MainWindow mainWindow = new();
                 mainWindow.Show();
+                UserName = string.Empty;
+                Password = string.Empty;
                 obj.Close();
+                
             }
             IsLoginEnable = true;
             LoginContent = "Login";

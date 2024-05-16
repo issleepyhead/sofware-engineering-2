@@ -9,6 +9,7 @@
              mc:Ignorable="d" 
              Width="550"
              CornerRadius="5"
+             DataContext="{Binding Path=CustomerDialogView,Source={StaticResource Locator}}"
              x:Name="Categ"
              Background="{DynamicResource DefaultBrush}">
     <Grid hc:BorderElement.CornerRadius="5">
@@ -51,7 +52,7 @@
                     Grid.Row="1">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Full Name:"
+                    <TextBlock Text="First Name:"
                            Padding="0 5"
                            FontSize="18"/>
                     <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
@@ -59,10 +60,26 @@
                 <hc:TextBox Name="FN"
                             HorizontalAlignment="Stretch"
                             hc:BorderElement.CornerRadius="0"
-                            hc:InfoElement.Placeholder="Enter Full Name"
+                            hc:InfoElement.Placeholder="Enter First Name"
                             FontSize="16"
                             Height="50"/>
-                <TextBlock Name="CategoryNameError"
+                <TextBlock Text="{Binding FirstNameError, UpdateSourceTrigger=PropertyChanged}"
+                           FontSize="16"
+                           Foreground="Red"/>
+            </StackPanel>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Last Name:"
+                           Padding="0 5"
+                           FontSize="18"/>
+                    <TextBlock Text="*" Foreground="Red" VerticalAlignment="Center" FontSize="20" Padding="2 0"/>
+                </StackPanel>
+                <hc:TextBox HorizontalAlignment="Stretch"
+                            hc:BorderElement.CornerRadius="0"
+                            hc:InfoElement.Placeholder="Enter Last Name"
+                            FontSize="16"
+                            Height="50"/>
+                <TextBlock Text="{Binding LastNameError, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
@@ -81,8 +98,8 @@
                             Height="Auto"
                             hc:InfoElement.Placeholder="Enter Phone Number"
                             AcceptsReturn="True"/>
-                <TextBlock Name="DescriptionError"
-                           FontSize="16"
+                <TextBlock Text="{Binding PhoneError, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="16"
                            Foreground="Red"/>
             </StackPanel>
             <StackPanel Margin="0 8 0 0">
@@ -102,7 +119,7 @@
                             AcceptsReturn="True"/>
                 <TextBlock Name="EMR"
                             FontSize="16"
-                           Text="{Binding DescriptionError, UpdateSourceTrigger=PropertyChanged}"
+                           Text="{Binding EmailError, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="Red"/>
             </StackPanel>
         </StackPanel>
@@ -123,14 +140,14 @@
                         Margin="10 0"
                         Height="40"
                         Width="150"
-                        CommandParameter="{Binding}"
+                        CommandParameter="{Binding Model}"
                         VerticalAlignment="Top"
                         Grid.Column="0"/>
                 <Button FontSize="18"
                         hc:BorderElement.CornerRadius="0"
                         BorderThickness="1"
                         BorderBrush="{DynamicResource DarkMaskBrush}"
-                        Command="{Binding ValidateCategory}"
+                        Command="{Binding AddCustomer}"
                         Content="{x:Static langs:Lang.LabelAdd}"
                         Height="40"
                         Width="150"

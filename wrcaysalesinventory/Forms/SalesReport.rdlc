@@ -884,7 +884,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=CountRows(Fields!total_amount.Value, "TransactionReport")</Value>
+                <Value>=RowNumber("TransactionReporting")</Value>
                 <Style>
                   <FontFamily>Segoe UI</FontFamily>
                   <FontSize>14pt</FontSize>

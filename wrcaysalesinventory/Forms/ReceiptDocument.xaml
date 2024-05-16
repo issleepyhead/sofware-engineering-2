@@ -8,13 +8,14 @@
              mc:Ignorable="d"
              Width="219"
              Margin="0"
+             DataContext="{Binding Path=ReceiptView, Source={StaticResource Locator}}"
              Padding="0"
              HorizontalAlignment="Center">
     <FlowDocument x:Name="FD" FontFamily="Segoe UI" MaxPageWidth="210"
                           PageWidth="210"
                       PagePadding="30 0">
         <Paragraph Padding="0" Margin="0" TextAlignment="Center">
-            <Run x:Name="StoreName" FontSize="10" FontWeight="DemiBold" Text="{Binding StoreName}"/>
+            <Run x:Name="StoreName" FontSize="10" FontWeight="DemiBold" Text="WRCay Hardware"/>
             <LineBreak/>
             <Run x:Name="StoreAddress" FontSize="8">Address: Taguig City</Run>
             <LineBreak/>
@@ -38,7 +39,7 @@
                     </TableCell>
                     <TableCell TextAlignment="Right" Padding="0 0 .5 0">
                         <Paragraph>
-                            <Run  x:Name="ReceiptNumber" Text="-"/>
+                            <Run  x:Name="ReceiptNumber" Text="{Binding Header.ReferenceNumber,UpdateSourceTrigger=PropertyChanged}"/>
                         </Paragraph>
                     </TableCell>
                 </TableRow>
@@ -52,7 +53,7 @@
                     </TableCell>
                     <TableCell TextAlignment="Right" Padding="0 0 .5 0">
                         <Paragraph>
-                            <Run x:Name="CashierName" Text="-"/>
+                            <Run x:Name="CashierName" Text="{Binding CashierName, UpdateSourceTrigger=PropertyChanged}"/>
                         </Paragraph>
                     </TableCell>
                 </TableRow>
@@ -125,5 +126,80 @@
                 </TableRow>
             </TableRowGroup>
         </Table>
+        <Paragraph Margin="0" Padding="0" TextAlignment="Center">
+            <Span>
+                <Border BorderThickness=".5" Margin="0" Padding="0" BorderBrush="SlateGray" Width="175"/>
+            </Span>
+        </Paragraph>
+        <Table Margin="2 5 2 0" FontSize="8">
+            <Table.Columns>
+                <TableColumn Width="*"/>
+                <TableColumn Width="*"/>
+            </Table.Columns>
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell TextAlignment="Left" Padding=".5 0 0 0">
+                        <Paragraph>
+                            Sub Total :
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right" Padding="0 0 .5 0">
+                        <Paragraph>
+                            <Run Text="{Binding SubTotal, UpdateSourceTrigger=PropertyChanged, StringFormat='₱ {0:N}'}"/>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell TextAlignment="Left" Padding=".5 0 0 0">
+                        <Paragraph>
+                            Additional Fee :
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right" Padding="0 0 .5 0">
+                        <Paragraph>
+                            <Run Text="{Binding Header.AdditionalFee, UpdateSourceTrigger=PropertyChanged ,StringFormat='₱ {0:N}'}"/>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell TextAlignment="Left" Padding=".5 0 0 0">
+                        <Paragraph>
+                            Amount Received :
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right" Padding="0 0 .5 0">
+                        <Paragraph>
+                            <Run Text="-"/>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell TextAlignment="Left" Padding=".5 0 0 0">
+                        <Paragraph>
+                            Total Amount :
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell TextAlignment="Right" Padding="0 0 .5 0">
+                        <Paragraph>
+                            <Run Text="{Binding Header.TotalAmount, UpdateSourceTrigger=PropertyChanged,StringFormat='₱ {0:N}'}"/>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+        <Paragraph Margin="0" Padding="0" TextAlignment="Center">
+            <Span>
+                <Border BorderThickness=".5" Margin="0" Padding="0" BorderBrush="SlateGray" Width="175"/>
+            </Span>
+        </Paragraph>
+        <Paragraph Margin="0" Padding="6" TextAlignment="Center">
+            <Span FontSize="8">Thanks for buying.</Span>
+        </Paragraph>
     </FlowDocument>
 </FlowDocumentScrollViewer>

@@ -9,16 +9,19 @@ FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dial
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\DiscountDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\DraftDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\FreebieDialog.xaml;;
+FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\KeyBindingDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\NoteDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\POSProductItem.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\POSSettingsReceiptDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\ProductCartItem.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\ProductDialog.xaml;;
+FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\ProfileDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\SupplierDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\UserDialog.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\NonClientArea\NonClientArea.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\AuditTrailPanel.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\CategoriesPanel.xaml;;
+FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\CustomerPanel.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\CustomersPanel.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\DashboardPanel.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Panels\DeliveryPanel.xaml;;
@@ -38,5 +41,5 @@ FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Forms\Receip
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Forms\ReceiptReport.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Forms\ReportPreview.xaml;;
 FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Forms\ServerWindow.xaml;;
-FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\KeyBindingDialog.xaml;;
+FC:\Users\Acer\source\repos\wrcaysalesinventory\wrcaysalesinventory\Customs\Dialogs\NotifItem.xaml;;
 

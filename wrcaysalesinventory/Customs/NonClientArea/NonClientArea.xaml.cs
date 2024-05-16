@@ -1,8 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
+using HandyControl.Controls;
 using HandyControl.Themes;
 using HarfBuzzSharp;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Data.Classes;
 
 namespace wrcaysalesinventory.Customs.NonClientArea
@@ -54,6 +56,12 @@ namespace wrcaysalesinventory.Customs.NonClientArea
             }
             ThemeManager.Current.ApplicationTheme = GlobalData.Config.Theme;
             GlobalData.Save();
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ProfileDialog profile = new();
+            Dialog.Show(profile);
         }
     }
 }

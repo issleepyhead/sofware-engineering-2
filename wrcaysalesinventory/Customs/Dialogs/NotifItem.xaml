@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="wrcaysalesinventory.Customs.Dialogs.NotifItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
+             mc:Ignorable="d"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             BorderBrush="{StaticResource SecondaryBorderBrush}"
+             BorderThickness="1"
+             Width="314"
+             Margin="0 8 0 8">
+    <StackPanel>
+        <TextBlock Name="ProductName" Text="Product Name XD" FontSize="18" Foreground="Red"/>
+        <TextBlock Text="This product is running out of stocks." FontSize="14"/>
+    </StackPanel>
+</UserControl>

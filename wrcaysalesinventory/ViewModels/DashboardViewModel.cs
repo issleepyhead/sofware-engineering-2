@@ -17,9 +17,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using System.Windows.Media.Animation;
+using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Data.Classes;
+using wrcaysalesinventory.Data.Models;
 
 namespace wrcaysalesinventory.ViewModels
 {
@@ -28,19 +32,52 @@ namespace wrcaysalesinventory.ViewModels
         public DashboardViewModel()
         {
             GenerateSeries();
+            GenerateNotifok();
+        }
+
+        private ObservableCollection<NotifItemModle> notifItemModles = new();
+        public ObservableCollection<NotifItemModle> CardList { get => notifItemModles; set => Set(ref notifItemModles, value); }
+
+        public void GenerateNotifok()
+        {
+            try
+            {
+                SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
+                SqlCommand sqlCommand = new("SELECT product_name FROM tblinventory i JOIN tblproducts p ON i.product_id = p.id WHERE stocks <= p.critical_level", sqlConnection);
+                SqlDataAdapter adapter = new(sqlCommand);
+                DataTable dataTable = new();
+                adapter.Fill(dataTable);
+
+                ObservableCollection<NotifItemModle> temp = new();
+
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    NotifItemModle notifItems = new()
+                    {
+                        ProductName = row["product_name"].ToString()
+                    };
+                    temp.Add(notifItems);
+                }
+                CardList = temp;
+            } catch
+            {
+                Debug.WriteLine("An error occured in notif");
+            }
         }
 
         public void GenerateSeries()
         {
+            Series.Clear();
             ColumnSeries<DateTimePoint> serie= new();
             ColumnSeries<DateTimePoint> cweekly = new();
-            //ColumnSeries<DateTimePoint> monthlyy = new();
+            ColumnSeries<DateTimePoint> monthlyy = new();
             //ColumnSeries<DateTimePoint> yearly = new();
 
 
             ObservableCollection<DateTimePoint> values = new();
             ObservableCollection<DateTimePoint> vweekly = new();
-            //ObservableCollection<DateTimePoint> syearly = new();
+            ObservableCollection<DateTimePoint> vmonthly = new();
+            ObservableCollection<DateTimePoint> syearly = new();
 
             try
             {
@@ -63,7 +100,7 @@ namespace wrcaysalesinventory.ViewModels
                 today = DateTime.Now;
                 for (int i = 1; i < 7; i++)
                 {
-                    SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE date_added = @date_added", conn);
+                    SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE FORMAT(date_added, 'dd/MM/yyyy') = FORMAT(@date_added, 'dd/MM/yyyy')", conn);
                     cmd.Parameters.AddWithValue("@date_added", today).SqlDbType = SqlDbType.DateTime;
 
                     double res = double.Parse(cmd.ExecuteScalar().ToString());
@@ -80,15 +117,21 @@ namespace wrcaysalesinventory.ViewModels
                 //Series.Add(serie);
                 //values.Clear();
 
-                //for (int i = 1; i <= 12; i++)
-                //{
-                //    SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE date_added = @date_added", conn);
-                //    cmd.Parameters.AddWithValue("@date_added", today).SqlDbType = SqlDbType.DateTime;
 
-                //    double res = double.Parse(cmd.ExecuteScalar().ToString());
-                //    sweekly.Add(new DateTimePoint(today, res));
-                //    today = DateTime.Now.AddDays(-i);
-                //}
+                today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                for (int i = 1; i <= 12; i++)
+                {
+                    SqlCommand cmd = new("SELECT COUNT(*) FROM tbltransactionheaders WHERE MONTH(date_added) = MONTH(@date_added)", conn);
+                    cmd.Parameters.AddWithValue("@date_added", today).SqlDbType = SqlDbType.DateTime;
+
+                    double res = double.Parse(cmd.ExecuteScalar().ToString());
+                    vmonthly.Add(new DateTimePoint(today, res));
+                    today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-i);
+                }
+
+                monthlyy.Values = vmonthly;
+                monthlyy.IsVisible = false;
+                Series.Add(monthlyy);
 
                 SqlCommand ncmd = new("SELECT COUNT(*) FROM tblproducts WHERE product_status = (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Active');", conn);
                 TotalProducts = (int)ncmd.ExecuteScalar();
@@ -132,20 +175,24 @@ namespace wrcaysalesinventory.ViewModels
 
         public Axis[] XAxes { get; set; } =
         {
-            new DateTimeAxis(TimeSpan.FromHours(1), date => date.ToString("dd/MM/yyyy hh:mm tt"))
+            new Axis
             {
-                IsVisible = true
+                Labeler = val => new DateTime((long)val).ToString("dd/MM/yyyy hh:mm:ss tt"),
+                IsVisible = true,
             },
-            new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
+            new Axis
             {
+                Labeler = val => new DateTime((long)val).ToString("dd/MM/yyyy"),
+                IsVisible = false,
+            },
+            new Axis
+            {
+                Labeler = val => new DateTime((long)val).ToString("dd/MM/yyyy"),
                 IsVisible = false
             },
-            new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
+                                                                     new Axis
             {
-                IsVisible = false
-            },
-            new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd/MM/yyyy"))
-            {
+                Labeler = val => new DateTime((long)val).ToString("dd/MM/yyyy"),
                 IsVisible = false
             }
         };
@@ -183,7 +230,7 @@ namespace wrcaysalesinventory.ViewModels
         public void DailySeries(object obj)
         {
             foreach (ColumnSeries<DateTimePoint> x in Series) x.IsVisible = false;
-            foreach (DateTimeAxis x in XAxes) x.IsVisible = false;
+            foreach (Axis x in XAxes) x.IsVisible = false;
             Series[0].IsVisible = !Series[0].IsVisible;
             XAxes[0].IsVisible = !XAxes[0].IsVisible;
         }
@@ -192,7 +239,7 @@ namespace wrcaysalesinventory.ViewModels
         public void WeeklySeries(object obj)
         {
             foreach (ColumnSeries<DateTimePoint> x in Series) x.IsVisible = false;
-            foreach (DateTimeAxis x in XAxes) x.IsVisible = false;
+            foreach (Axis x in XAxes) x.IsVisible = false;
             Series[1].IsVisible = !Series[1].IsVisible;
             XAxes[1].IsVisible = !XAxes[1].IsVisible;
         }
@@ -201,7 +248,7 @@ namespace wrcaysalesinventory.ViewModels
         public void MonthlySeries(object obj)
         {
             foreach (ColumnSeries<DateTimePoint> x in Series) x.IsVisible = false;
-            foreach (DateTimeAxis x in XAxes) x.IsVisible = false;
+            foreach (Axis x in XAxes) x.IsVisible = false;
             Series[2].IsVisible = !Series[2].IsVisible;
             XAxes[2].IsVisible = !XAxes[2].IsVisible;
         }
@@ -210,9 +257,9 @@ namespace wrcaysalesinventory.ViewModels
         public void YearlySeries(object obj)
         {
             foreach (ColumnSeries<DateTimePoint> x in Series) x.IsVisible = false;
-            foreach (DateTimeAxis x in XAxes) x.IsVisible = false;
+            //foreach (DateTimeAxis x in XAxes) x.IsVisible = false;
             Series[3].IsVisible = !Series[3].IsVisible;
-            XAxes[3].IsVisible = !XAxes[3].IsVisible;
+            //XAxes[3].IsVisible = !XAxes[3].IsVisible;
         }
     }
 }

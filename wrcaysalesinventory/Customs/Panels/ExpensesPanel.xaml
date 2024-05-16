@@ -66,6 +66,16 @@
                     </Viewbox>
                     <Button hc:BorderElement.CornerRadius="0"
                             BorderThickness="1"
+                            FontSize="16"
+                            BorderBrush="{StaticResource DarkMaskBrush}"
+                            Content="Refresh"
+                            Command="{Binding RefreshData}"
+                            Height="50"
+                            Margin="0 0 10 0"
+                            Width="130"
+                            VerticalAlignment="Center"/>
+                    <Button hc:BorderElement.CornerRadius="0"
+                            BorderThickness="1"
                             BorderBrush="{StaticResource DarkMaskBrush}"
                             Content="View Report"
                             FontSize="16"

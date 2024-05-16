@@ -12,6 +12,7 @@ namespace wrcaysalesinventory.Data.Models
         public string StatusColor { get => StatusName.ToString() == "active" ? "Green" : "Red"; }
         public bool AllowedDecimal { get; set; } = false;
         public string Cost { get; set; }
+        public string TotalDue { get; set; }
         public string Total {
             get
             {

@@ -41,15 +41,21 @@ namespace wrcaysalesinventory.ViewModels
             mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         }
 
+        public RelayCommand<object> LoadedCmd => new(LoadedCommand);
+        private void LoadedCommand(object obj)
+        {
+            AllowedDecimal = Model.AllowDecimal;
+        }
         
         public Button BTN { get => _btn; set => Set(ref _btn, value); }
         public ObservableCollection<CategoryModel> CategoryDataList => _dataService.GetCategoryPanelList();
         public ObservableCollection<StatusModel> StatusDataList => _dataService.GetStatusList();
         public bool AllowedDecimal { get => _allowed; set => Set(ref _allowed, value); }
-        public bool NotAllowed { get => !_allowed; set => Set(ref _allowed, !value); }
+        public bool NotAllowed { get => !_allowed; set => Set(ref _allowed, value);  }
         public ProductModel Model { get => _productModel; set {
                 Set(ref _productModel, value);
-                AllowedDecimal = _productModel.AllowDecimal;
+                AllowedDecimal = value.AllowDecimal;
+                
                 DeleteVisibility = string.IsNullOrEmpty(value.ID) ? Visibility.Collapsed : Visibility.Visible;
                 ButtonContent = string.IsNullOrEmpty(value.ID) ?
                     Lang.LabelAdd : (value.StatusName.ToLower() == "inactive" ? Lang.LabelRestore : Lang.LabelUpdate);
@@ -67,6 +73,17 @@ namespace wrcaysalesinventory.ViewModels
         public RelayCommand<ProductDialogViewModel> DeleteCmd => new(DeleteCommand);
         public RelayCommand<ProductDialogViewModel> ValidateProduct => new(ValidateModel);
 
+        public RelayCommand<object> CheckedDecimalCmd => new(CheckDecimalCommand);
+        private void CheckDecimalCommand(object obj)
+        {
+            AllowedDecimal = true;
+        }
+
+        public RelayCommand<object> UncheckedDecimalCmd => new(UncheckedDecimalCommand);
+        private void UncheckedDecimalCommand(object obj)
+        {
+            AllowedDecimal = false;
+        }
 
         private void DeleteCommand(ProductDialogViewModel vm)
         {
@@ -187,14 +204,15 @@ namespace wrcaysalesinventory.ViewModels
                 ProductPriceError = null;
                 ProductCostError = null;
                 ProductUnitError = null;
+                CriticalLevelError = string.Empty;
 
                 SqlConnection sqlConnection = SqlBaseConnection.GetInstance();
                 SqlCommand sqlCommand;
                 try
                 {
-                    if (!Model.AllowDecimal && !Regex.IsMatch(Model.CriticalLevel, "\\d+"))
+                    if (!string.IsNullOrEmpty(Model.CriticalLevel) && !_allowed && Regex.IsMatch(Model.CriticalLevel, @"[\p{L}\p{P}\s]"))
                     {
-                        CriticalLevelError = "Decimal is not allowed here.";
+                        CriticalLevelError = "Please provide a valid  value.";
                         return;
                     }
 
@@ -254,7 +272,7 @@ namespace wrcaysalesinventory.ViewModels
                     sqlCommand.Parameters.AddWithValue("@pcost", vm.Model.ProductCost);
                     sqlCommand.Parameters.AddWithValue("@punit", vm.Model.ProductUnit);
                     sqlCommand.Parameters.AddWithValue("@cid", string.IsNullOrEmpty(vm.Model.CategoryID) ? DBNull.Value : vm.Model.CategoryID);
-                    sqlCommand.Parameters.AddWithValue("@sunit", Model.AllowDecimal);
+                    sqlCommand.Parameters.AddWithValue("@sunit", _allowed);
                     sqlCommand.Parameters.AddWithValue("@clevel", Model.CriticalLevel);
                     if (sqlCommand.ExecuteNonQuery() > 0)
                     {

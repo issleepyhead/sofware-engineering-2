@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Dialogs"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
-             mc:Ignorable="d" 
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d" 
              Width="650"
              CornerRadius="5"
              DataContext="{Binding Path=ProductDialogView, Source={StaticResource Locator}}"
@@ -184,13 +184,22 @@
                              Height="60"
                              FontSize="16"
                              IsChecked="True"
-                             Content="Sell By Unit"
-                             />
+                             Content="Sell By Unit"/>
                     <RadioButton hc:BorderElement.CornerRadius="0"
                              Height="60"
                              FontSize="16" x:Name="allowed"
-                             Content="Sell By Fraction"
-                             IsChecked="{Binding AllowedDecimal}"/>
+                             Content="Sell By Fraction"       
+                             IsChecked="{Binding AllowedDecimal}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding CheckedDecimalCmd}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="UnChecked">
+                                <i:InvokeCommandAction Command="{Binding UncheckedDecimalCmd}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                     
+                    </RadioButton>
                 </hc:ButtonGroup>
             </StackPanel>
         </StackPanel>

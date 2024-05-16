@@ -207,10 +207,12 @@ namespace wrcaysalesinventory.ViewModels
                         sqlCommand = new(@"INSERT INTO tbldeliveryproducts VALUES (
                                             (SELECT TOP 1 id FROM tbldeliveryheaders ORDER BY id DESC), 
                                             @pid,
-                                            @quantity
+                                            @quantity,
+                                            @total
                                          )", sqlConnection, sqlTransaction);
                         sqlCommand.Parameters.AddWithValue("@pid", dModel.ProductID);
                         sqlCommand.Parameters.AddWithValue("@quantity", dModel.Quantity);
+                        sqlCommand.Parameters.AddWithValue("@total", (double.Parse(dModel.Cost) * double.Parse(dModel.Quantity)).ToString());
                         if(sqlCommand.ExecuteNonQuery() == 0)
                         {
                             throw new Exception();

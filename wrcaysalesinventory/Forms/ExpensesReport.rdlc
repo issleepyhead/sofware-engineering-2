@@ -45,7 +45,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -261,7 +261,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox2</rd:DefaultName>
@@ -476,7 +478,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox30</rd:DefaultName>
@@ -592,7 +596,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>="TOTAL" + SUM(Cint(Fields!additional_fee.Value))</Value>
+                              <Value>=SUM(Cint(Fields!additional_fee.Value))</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -622,7 +626,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>="TOTAL" + SUM(Cint(Fields!due_total.Value))</Value>
+                              <Value>=SUM(Cint(Fields!due_total.Value))</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -958,7 +962,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Count(RowNumber(Nothing))</Value>
+                <Value>=RowNumber("ExpRep")</Value>
                 <Style>
                   <FontFamily>Segoe UI</FontFamily>
                   <FontSize>14pt</FontSize>
@@ -971,8 +975,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox4</rd:DefaultName>
-        <Top>1.62153in</Top>
-        <Left>1.35155in</Left>
+        <Top>1.60765in</Top>
+        <Left>1.36544in</Left>
         <Height>0.33333in</Height>
         <Width>0.875in</Width>
         <ZIndex>8</ZIndex>

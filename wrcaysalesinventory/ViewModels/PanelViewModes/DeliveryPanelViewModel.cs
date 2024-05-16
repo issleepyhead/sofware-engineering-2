@@ -2,6 +2,7 @@
 using HandyControl.Controls;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Media;
 using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Data.Models;
@@ -48,6 +49,18 @@ namespace wrcaysalesinventory.ViewModels.PanelViewModes
         public void PageUpdated(int offset)
         {
             DataList = new ObservableCollection<DeliveryModel>(_alldata.Skip(offset * 30).Take(30).ToList());
+        }
+
+        public RelayCommand<DataGrid> SelectedCommand => new(SelectionChanged);
+        private void SelectionChanged(DataGrid dataGrid)
+        {
+                if (dataGrid.SelectedItems.Count > 0)
+                {
+                    DeliveryModel model = (DeliveryModel)dataGrid.SelectedItem;
+                    DeliveryDetailsDialog d  = new DeliveryDetailsDialog();
+                    ((DeliveryDetailsDialogViewModel)d.DataContext).Model = model;
+                    Dialog.Show(d);
+                }
         }
 
 

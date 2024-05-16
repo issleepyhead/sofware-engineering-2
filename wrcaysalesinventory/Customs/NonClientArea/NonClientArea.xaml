@@ -48,7 +48,7 @@
                     Padding="0"
                     hc:BorderElement.CornerRadius="100"
                     Content="&#xE77B;"
-                    FontFamily="{StaticResource FabricIcons}">
+                    FontFamily="{StaticResource FabricIcons}" Click="Button_Click">
                 
             </Button>
         </hc:FlexPanel>

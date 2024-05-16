@@ -33,6 +33,11 @@ namespace wrcaysalesinventory.ViewModels
             SimpleIoc.Default.Register<LoginWindowViewModel>();
             SimpleIoc.Default.Register<AuditTrailPanelViewModel>();
             SimpleIoc.Default.Register<GenSettingsPanelViewModel>();
+            SimpleIoc.Default.Register<ProfileDialogViewModel>();
+            SimpleIoc.Default.Register<DeliveryDetailsDialogViewModel>();
+            SimpleIoc.Default.Register<ReceiptViewModel>();
+            SimpleIoc.Default.Register<CustomerDialogViewModel>();
+            SimpleIoc.Default.Register < CustomerPanelViewModel>();
         }
 
         public static ViewModelLocator Instance = new Lazy<ViewModelLocator>(() =>
@@ -60,5 +65,10 @@ namespace wrcaysalesinventory.ViewModels
         public LoginWindowViewModel LoginWindowView => SimpleIoc.Default.GetInstance<LoginWindowViewModel>();
         public AuditTrailPanelViewModel AuditTrailView => SimpleIoc.Default.GetInstance<AuditTrailPanelViewModel>();
         public GenSettingsPanelViewModel GenSettingsView => SimpleIoc.Default.GetInstance<GenSettingsPanelViewModel>();
+        public ProfileDialogViewModel ProfileDialogView => SimpleIoc.Default.GetInstance<ProfileDialogViewModel>();
+        public DeliveryDetailsDialogViewModel DeliveryDetailsDialogView => SimpleIoc.Default.GetInstance<DeliveryDetailsDialogViewModel>();
+        public ReceiptViewModel ReceiptView => SimpleIoc.Default.GetInstance<ReceiptViewModel>();
+        public CustomerDialogViewModel CustomerDialogView => SimpleIoc.Default.GetInstance<CustomerDialogViewModel>();
+        public CustomerPanelViewModel CustomerPanelView => SimpleIoc.Default.GetInstance<CustomerPanelViewModel>();
     }
 }

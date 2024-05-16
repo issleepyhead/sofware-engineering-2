@@ -71,6 +71,11 @@
                         <TextBlock Text="&#xE77B;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
+                <hc:SideMenuItem Padding="30 25" FontSize="18" Header="Customers" Command="{Binding SelectCmd}" CommandParameter="{Binding ElementName=UsersPanel}">
+                    <hc:SideMenuItem.Icon>
+                        <TextBlock Text="&#xF7E5;" FontSize="18" Style="{StaticResource TextBlockFabricIcons}"/>
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
             </hc:SideMenuItem>
             <hc:SideMenuItem Padding="15 25" FontSize="18" Header="{x:Static langs:Lang.LabelInventory}">
                 <hc:SideMenuItem.Icon>

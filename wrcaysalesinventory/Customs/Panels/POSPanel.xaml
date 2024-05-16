@@ -34,8 +34,6 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="60"/>
 
                 </Grid.ColumnDefinitions>
                 <hc:SearchBar 
@@ -61,22 +59,22 @@
                              SelectedIndex="-1"
                              Margin="4 0"
                              hc:InfoElement.Placeholder="Select Customer"/>
-                <Button Content="&#xF2B6;"
+                <!--<Button Content="&#xF2B6;"
                         Grid.Column="2"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
                         Padding="0"
-                        FontSize="22"/>
-                <Button Content="&#xF03F;"
+                        FontSize="22"/>-->
+                <!--<Button Content="&#xF03F;"
                         Grid.Column="3"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
                         Padding="0"
-                        FontSize="22"/>
+                        FontSize="22"/>-->
                 <Button Content="&#xE616;"
-                        Grid.Column="4"
+                        Grid.Column="2"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
@@ -84,7 +82,7 @@
                         Command="{Binding OpenNoteCmd}"
                         FontSize="22"/>
                 <Button Content="&#xE749;"
-                        Grid.Column="5"
+                        Grid.Column="3"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
@@ -92,7 +90,7 @@
                         FontSize="22"
                         Command="{Binding PreviewReceiptCommand}"/>
                 <Button Content="&#xE8FA;"
-                        Grid.Column="6"
+                        Grid.Column="4"
                         FontFamily="{StaticResource FabricIcons}"
                         Height="48"
                         Width="48"
@@ -118,14 +116,14 @@
                                VerticalAlignment="Center"
                                FontSize="22"
                                FontWeight="Light"/>-->
-                    <Viewbox Height="35">
+                    <!--<Viewbox Height="35">
                         <hc:Pagination MaxPageCount="10"
                                    PageIndex="1"
                                    MaxPageInterval="3"
                                    DataCountPerPage="15"
                                    VerticalAlignment="Center"
                                    hc:BorderElement.CornerRadius="0"/>
-                    </Viewbox>
+                    </Viewbox>-->
                 </hc:FlexPanel>
                 <Border BorderBrush="{DynamicResource BorderBrush}"
                         BorderThickness="0 0 0 1"/>
@@ -140,8 +138,7 @@
                       Padding="0"
                       FontSize="16"
                       ItemsSource="{Binding DataList}"
-                      hc:DataGridAttach.ApplyDefaultStyle="True"
->
+                      hc:DataGridAttach.ApplyDefaultStyle="True">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}}" />
@@ -175,7 +172,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="280"/>
+                <RowDefinition Height="AUTO"/>
             </Grid.RowDefinitions>
             <Grid  Grid.Row="0">
                 <TextBlock Grid.Row="0"
@@ -277,7 +274,7 @@
                         <TextBlock Text="Sub Total"
                                    FontSize="22"
                                    FontWeight="Light"/>
-                        <TextBlock Text="{Binding SubTotal, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="{Binding SubTotal, UpdateSourceTrigger=PropertyChanged,StringFormat='₱ {0:N}' }"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -297,7 +294,7 @@
                                     VerticalAlignment="Center"
                                     FontFamily="{StaticResource FabricIcons}"/>
                         </StackPanel>
-                        <TextBlock Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged, StringFormat='% {0:N}'}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -305,7 +302,7 @@
                         <TextBlock Text="Vat(%)"
                                    FontSize="22"
                                    FontWeight="Light"/>
-                        <TextBlock Text="{Binding Header.VAT, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="{Binding Header.VAT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, StringFormat='% {0:N}'}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -325,7 +322,7 @@
                                     VerticalAlignment="Center"
                                     FontFamily="{StaticResource FabricIcons}"/>
                         </StackPanel>
-                        <TextBlock Text="{Binding Header.AdditionalFee, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="{Binding Header.AdditionalFee, UpdateSourceTrigger=PropertyChanged, StringFormat='₱ {0:N}'}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                     <hc:FlexPanel JustifyContent="SpaceBetween"
@@ -333,7 +330,26 @@
                         <TextBlock Text="Total"
                                    FontSize="22"
                                    FontWeight="Light"/>
-                        <TextBlock Text="{Binding TotalAmount, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="{Binding TotalAmount, UpdateSourceTrigger=PropertyChanged, StringFormat='₱ {0:N}'}"
+                                   FontSize="22"/>
+                    </hc:FlexPanel>
+                    <hc:FlexPanel JustifyContent="SpaceBetween"
+                                  Margin="0 0 0 8">
+                        <TextBlock Text="Cash:"
+                                   FontSize="22"
+                                   FontWeight="Light"/>
+                        <TextBox Text="{Binding CashAmount, UpdateSourceTrigger=PropertyChanged}"
+                                   FontSize="22"
+                                 Height="40"
+                                 hc:InfoElement.Placeholder="Enter Cash Amount"
+                                 Width="200"/>
+                    </hc:FlexPanel>
+                    <hc:FlexPanel JustifyContent="SpaceBetween"
+                                  Margin="0 0 0 8">
+                        <TextBlock Text="Change:"
+                                   FontSize="22"
+                                   FontWeight="Light"/>
+                        <TextBlock Text="{Binding ChangeAmount, UpdateSourceTrigger=PropertyChanged, StringFormat='₱ {0:N}'}"
                                    FontSize="22"/>
                     </hc:FlexPanel>
                 </StackPanel>

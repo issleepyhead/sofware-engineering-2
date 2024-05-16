@@ -51,11 +51,11 @@ namespace wrcaysalesinventory.Customs.Panels
 	                                ON dh.user_id = u.id", conn);
             SqlDataAdapter adapter = new(cmd);
             ReportPreview rp = new();
-            ReportsDataSet.TransactionReportDataTable transactionTable = new();
+            ReportsDataSet.ExpensesReportDataTable transactionTable = new();
             adapter.Fill(transactionTable);
             ReportDataSource reportDataSource = new()
             {
-                Name = "TransactionReporting",
+                Name = "ExpRep",
                 Value = transactionTable
             };
 

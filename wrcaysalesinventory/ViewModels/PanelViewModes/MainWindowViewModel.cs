@@ -34,6 +34,7 @@ namespace wrcaysalesinventory.ViewModels
         public RelayCommand<object> LoeaderView => new(LoadedCommand);
         private void LoadedCommand(object obj)
         {
+            _mainWin = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             panels.Add(_mainWin.DashboardPanel);
             panels.Add(_mainWin.ProductPanel);
             panels.Add(_mainWin.CategoryPanel);

@@ -76,11 +76,13 @@ namespace wrcaysalesinventory.ViewModels
                 if(DatabaseConfig.CheckDatabase($"Server={ServerName};Initial Catalog={Database};Persist Security Info=True;User ID={UserName};Password={Password}"))
                 {
                     
-                    Settings.Default.connStr = $"Server={ServerName};Initial Catalog={Database};Trusted_Connection=True;User ID={UserName};Password={Password}";
+                    Settings.Default.connStr = $"Server={ServerName};Initial Catalog={Database};Persist Security Info=True;User ID={UserName};Password={Password}";
                     Settings.Default.Save();
 
                     sqlConnection = new(Settings.Default.connStr);
                     sqlConnection.Open();
+
+                    // dumbest way to initialize a user.
                     SqlCommand sqlCmd = new("SELECT COUNT(*) FROM tblusers", sqlConnection);
                     if ((int)sqlCmd.ExecuteScalar() == 0)
                     {

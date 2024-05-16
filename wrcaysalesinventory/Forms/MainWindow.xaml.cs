@@ -3,6 +3,8 @@ using HandyControl.Tools.Command;
 using System.Windows;
 using System.Windows.Controls;
 using wrcaysalesinventory.Customs.Panels;
+using wrcaysalesinventory.Data.Classes;
+using wrcaysalesinventory.Data.Models;
 using wrcaysalesinventory.ViewModels;
 using wrcaysalesinventory.ViewModels.PanelViewModes;
 using Window = HandyControl.Controls.Window;
@@ -32,8 +34,14 @@ namespace wrcaysalesinventory
             ((TransactionPanelViewModel)TransactionPanel.DataContext).DataList = loc.DService.GetTransactionList();
             ((DeliveryPanelViewModel)DeliveryPanel.DataContext).DataList = loc.DService.GetDeliveryList();
             ((AuditTrailPanelViewModel)AuditPanel.DataContext).DataList = loc.DService.GetAuditLogList();
+            ((POSPanelViewModel)PointOfSalePanel.DataContext).Header = new TransactionHeaderModel()
+            {
+                VAT = GlobalData.Config.TransactionVAT
+            };
+            ((POSPanelViewModel)PointOfSalePanel.DataContext).DataList = loc.DService.GetStocksList();
             ((POSPanelViewModel)PointOfSalePanel.DataContext).CustomerList = loc.DService.GetCustomerList();
-
+            ((DashboardViewModel)DashboardPanel.DataContext).GenerateNotifok();
+            ((DashboardViewModel)DashboardPanel.DataContext).GenerateSeries();
         }
     }
 }

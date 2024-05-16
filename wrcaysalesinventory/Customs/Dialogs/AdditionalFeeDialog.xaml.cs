@@ -16,10 +16,10 @@ namespace wrcaysalesinventory.Customs.Dialogs
             DataContext = vm;
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            ((POSPanelViewModel)DataContext).ValueChanged();
-            WinHelper.CloseDialog(CloseBtn);
-        }
+        //private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        //{
+        //    ((POSPanelViewModel)DataContext).ValueChanged();
+        //    WinHelper.CloseDialog(CloseBtn);
+        //}
     }
 }

@@ -14,7 +14,6 @@ namespace wrcaysalesinventory.Forms
 
         private void Window_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            //ReportViewer.whole
             ReportViewer.LocalReport.Refresh();
             ReportViewer.RefreshReport();
         }

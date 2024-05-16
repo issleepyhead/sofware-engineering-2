@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wrcaysalesinventory.Customs.Panels"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs"
-             DataContext="{Binding Path=DeliveryPanellView, Source= {StaticResource Locator}}"
+             xmlns:langs="clr-namespace:wrcaysalesinventory.Properties.Langs" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      DataContext="{Binding Path=DeliveryPanellView, Source= {StaticResource Locator}}"
              mc:Ignorable="d" 
              d:DesignHeight="800"
              d:DesignWidth="1400"
@@ -92,6 +92,11 @@
                   ItemsSource="{Binding DataList}"
                   hc:DataGridAttach.ApplyDefaultStyle="True"
                   Margin="0 15 0 0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <DataGrid.Columns>
                 <DataGridTextColumn FontSize="15"
                                     Header="Reference Number"

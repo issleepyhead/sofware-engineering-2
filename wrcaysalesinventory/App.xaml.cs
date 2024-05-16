@@ -57,7 +57,13 @@ namespace wrcaysalesinventory
                 }
                 else
                 {
-                    StartupUri = new System.Uri("Forms/LoginWindow.xaml", System.UriKind.Relative);
+                    if (GlobalData.Config.UserID != -1)
+                    {
+                        StartupUri = new System.Uri("Forms/MainWindow.xaml", System.UriKind.Relative);
+                    } else
+                   {
+                        StartupUri = new System.Uri("Forms/LoginWindow.xaml", System.UriKind.Relative);
+                    }
                 }
             }
         }

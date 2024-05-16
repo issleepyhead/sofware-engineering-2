@@ -33,6 +33,7 @@ namespace wrcaysalesinventory.Services
                                    product_unit,
                                    selling_unit,
                                    s.status_name,
+                                   critical_level,
                                    FORMAT(p.date_added, 'dd/MM/yyyy') date_added,
                                    FORMAT(p.date_updated, 'dd/MM/yyyy') date_updated
                             FROM tblproducts p
@@ -59,7 +60,8 @@ namespace wrcaysalesinventory.Services
                         DateUpdated = row["date_updated"].ToString(),
                         StatusID = row["product_status"].ToString(),
                         StatusName = row["status_name"].ToString(),
-                        AllowDecimal = row["selling_unit"].ToString() == "True"
+                        AllowDecimal = row["selling_unit"].ToString() == "True",
+                        CriticalLevel = row["critical_level"].ToString()
                     };
                     pList.Add(pModel);
                 }
@@ -561,7 +563,8 @@ namespace wrcaysalesinventory.Services
 	                                tblroles r ON a.role_id = r.id
                                 WHERE a.id != @uid AND a.status_id != (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Inactive')", _sqlConn);
                     _sqlCmd.Parameters.AddWithValue("@uid", GlobalData.Config.UserID);
-                } else if((UserPreviledges)GlobalData.Config.RoleID == UserPreviledges.Admin)
+                }
+                else if((UserPreviledges)GlobalData.Config.RoleID == UserPreviledges.Admin)
                 {
                     _sqlCmd = new(@"SELECT a.id,
 	                                   s.id status_id,
@@ -581,7 +584,7 @@ namespace wrcaysalesinventory.Services
 	                                tblstatus s ON a.status_id = s.id
                                 JOIN
 	                                tblroles r ON a.role_id = r.id
-                                WHERE a.role_id > @id AND a.id != @uid AND a.status_id != (SELECT OP 1 id FROM tblstatus WHERE status_name = 'Inactive')", _sqlConn);
+                                WHERE a.role_id > @id AND a.id != @uid AND a.status_id != (SELECT TOP 1 id FROM tblstatus WHERE status_name = 'Inactive')", _sqlConn);
                     _sqlCmd.Parameters.AddWithValue("@id", GlobalData.Config.RoleID);
                     _sqlCmd.Parameters.AddWithValue("@uid", GlobalData.Config.UserID);
                 }
@@ -971,7 +974,7 @@ namespace wrcaysalesinventory.Services
             try
             {
                 _sqlConn = SqlBaseConnection.GetInstance();
-                _sqlCmd = new(@"SELECT id, full_name, phone, email FROM tblcustomers", _sqlConn);
+                _sqlCmd = new(@"SELECT id, first_name, last_name, phone, email FROM tblcustomers", _sqlConn);
                 _sqlAdapter = new(_sqlCmd);
                 _dataTable = new();
                 _sqlAdapter.Fill(_dataTable);
@@ -981,7 +984,14 @@ namespace wrcaysalesinventory.Services
                     CustomerModel sModel = new()
                     {
                         ID = row["id"].ToString(),
-                        FullName = row["full_name"].ToString(),
+                        FirstName = row["first_name"].ToString(),
+
+
+
+
+
+
+                        LastName = row["last_name"].ToString(),
                         Phone = row["phone"].ToString(),
                         Email = row["email"].ToString()
                     };

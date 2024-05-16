@@ -1,13 +1,23 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using HandyControl.Controls;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows;
 using wrcaysalesinventory.Customs.Dialogs;
 using wrcaysalesinventory.Data.Classes;
+using wrcaysalesinventory.Data.Models;
+using wrcaysalesinventory.ViewModels.PanelViewModes;
 
 namespace wrcaysalesinventory.ViewModels
 {
     public class POSSettingsPanelViewModel : ViewModelBase
     {
+        private MainWindow mw;
+        public POSSettingsPanelViewModel()
+        {
+            mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+        }
         private string _vat = GlobalData.Config.TransactionVAT;
         public string VAT { get => _vat; set => Set(ref _vat, value); }
 
@@ -38,10 +48,18 @@ namespace wrcaysalesinventory.ViewModels
         public RelayCommand<object> SaveCmd => new(SaveCommand);
         private void SaveCommand(object obj)
         {
+            if(!Regex.IsMatch(VAT, @"^(\d+)?\.?(\d+)$"))
+            {
+                Growl.Info("Please provide a valid vat.");
+                return;
+            }
+
             GlobalData.Config.TransactionVAT = VAT;
             GlobalData.Config.TransactionQuota = Quota;
             GlobalData.Save();
+            mw?.UpdateAll();
             Growl.Success("Settings Saved Successsfully!");
+
         }
     }
 }

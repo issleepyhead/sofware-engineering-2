@@ -57,7 +57,10 @@
                             hc:BorderElement.CornerRadius="0"
                             hc:InfoElement.Placeholder="Enter Additional Fee"
                             Text="{Binding Header.AdditionalFee,UpdateSourceTrigger=PropertyChanged}"
-                            Height="40" FontSize="16"/>
+                            Height="50" FontSize="18"/>
+                <TextBlock FontSize="16"
+                           Text="{Binding AdditionalFeeError, UpdateSourceTrigger=PropertyChanged}"
+                           Foreground="Red"/>
             </StackPanel>
             <!--<StackPanel Margin="0 8 0 0">
                 <TextBlock Text="Description:"
@@ -105,9 +108,10 @@
                         Content="Save"
                         Height="40"
                         Width="130"
-                        CommandParameter="{Binding}"
+                        Command="{Binding SaveAddFees}"
+                        CommandParameter="{Binding ElementName=CloseBtn}"
                         VerticalAlignment="Top"
-                        Grid.Column="1" Click="Button_Click"/>
+                        Grid.Column="1"/>
             </Grid>
         </hc:FlexPanel>
     </Grid>
